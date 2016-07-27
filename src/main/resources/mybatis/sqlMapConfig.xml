@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias alias="User" type="com.demo.domain.User"/>
+        <typeAlias alias="Detail" type="com.demo.domain.Detail"/>
+        <typeAlias alias="Cookies" type="com.demo.domain.Cookies"/>
+        <typeAlias alias="Person" type="com.demo.domain.Person"/>
+        <typeAlias alias="Info" type="com.demo.domain.Info"/>
+        <typeAlias alias="EmailUser" type="com.secureemail.domain.User"/>
+        <typeAlias alias="Email" type="com.secureemail.domain.Email"/>
+        <typeAlias alias="EmailModel" type="com.secureemail.domain.EmailModel"/>
+    </typeAliases>
+    <mappers>
+        <mapper resource="mybatis/user/userSQL.xml"/>
+        <mapper resource="mybatis/detail/detailSQL.xml"/>
+        <mapper resource="mybatis/cookies/cookiesSQL.xml"/>
+        <mapper resource="mybatis/person/personSQL.xml"/>
+        <mapper resource="mybatis/info/infoSQL.xml"/>
+    </mappers>
+</configuration>

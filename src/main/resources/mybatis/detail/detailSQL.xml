@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.impl.DetailDaoImpl">
+<resultMap id="detailResultMap" type="Detail" autoMapping="true">
+    <id property="detailId" column="detail_id"/>
+    <result property="sendPersonId" column="send_person_id" />
+    <result property="sendPersonName" column="send_person_name"/>
+    <result property="acceptPersonId" column="accept_person_id"/>
+    <result property="acceptPersonName" column="accept_person_name"/>
+    <result property="theme" column="theme"/>
+    <result property="information" column="information"/>
+    <result property="sendTime" column="send_time"/>
+    <result property="followId" column="follow_id"/>
+    <result property="isSend" column="is_send"/>
+    <!--<association property="user" javaType="User" resultMap="com.demo.domain.User.userResultMap"/>-->
+</resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO detail(send_person_id,send_person_name,accept_person_id,accept_person_name,theme,information,send_time,follow_id)
+        VALUES (#{sendPersonId},#{sendPersonName},#{acceptPersonId},#{acceptPersonName},#{theme},#{information},#{sendTime},#{followId})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM detail WHERE detail_id=#{id}
+    </delete>
+    <delete id="deleteFollow">
+        DELETE FROM detail WHERE follow_id=#{id}
+    </delete>
+    <select id="findAcceptDetail" resultMap="detailResultMap">
+        SELECT * FROM detail WHERE accept_person_id=#{id};
+    </select>
+    <select id="findSendDetail" resultMap="detailResultMap">
+        SELECT * FROM detail WHERE detail_id=#{id};
+    </select>
+    <select id="findFollowDetail" resultMap="detailResultMap">
+        SELECT * FROM detail WHERE follow_id=#{id};
+    </select>
+    <select id="find" resultType="int">
+        SELECT count(*) FROM detail WHERE user_id=#{userId};
+    </select>
+    <select id="allMessage" resultMap="detailResultMap">
+        SELECT * FROM detail WHERE follow_id=0;
+    </select>
+    <select id="findDetailId" resultMap="detailResultMap">
+        SELECT * FROM detail WHERE send_time=#{sendTime}
+    </select>
+</mapper>

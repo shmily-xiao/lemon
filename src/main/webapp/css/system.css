@@ -1,0 +1,155 @@
+/* CSS Document */
+
+@charset "utf-8";
+/* CAS Portal CSS Document */
+.cas { background-image: url(""); background-color:#B8FADC; }
+
+.cas .square-gradient-bar { height: 10px; background-color: #3bbfee; border-radius: 4px 4px 0 0; font-size: 0; line-height: 0 }
+.cas .square-gradient-bar:before,
+.cas .square-gradient-bar:after { content: " "; display: table; }
+.cas .square-gradient-bar:after { clear: both; }
+.cas .square-gradient-bar:before,
+.cas .square-gradient-bar:after { content: " "; display: table; }
+.cas .square-gradient-bar:after { clear: both; }
+.cas .square-gradient-bar .bar { display: inline-block; float: left; width: 16.666667%; height: 10px; }
+.cas .square-gradient-bar .bar.left { border-top-left-radius: 3px; }
+.cas .square-gradient-bar .bar.right { border-top-right-radius: 3px; }
+.cas .square-gradient-bar .bar.one { background-color: #d8225e; }
+.cas .square-gradient-bar .bar.two { background-color: #b73794; }
+.cas .square-gradient-bar .bar.three { background-color: #7254b6; }
+.cas .square-gradient-bar .bar.four { background-color: #5951ca; }
+.cas .square-gradient-bar .bar.five { background-color: #3981d1; }
+.cas .square-gradient-bar .bar.six { background-color: #3bbfee; }
+
+.cas .login { margin: 20px auto;  }
+.cas .login .heading h2 { color: #f4f4f4; margin-top:30px; display: none; }
+.cas .login .heading h4 { color: #969696; margin-bottom:15px; display: none; }
+
+.cas .login .well-big { padding: 45px 15px 25px 15px; margin-bottom: 25px; border-radius: 3px; box-shadow: 0 2px 0 0 #e1e1e1; background-image:url(../img/w9.png); }
+.cas .login .well-big.square-top { border-top-left-radius: 0; border-top-right-radius: 0; }
+
+.cas .login .well-big .timeCount { display:none; font-size:80px; color:#E5E5E5; text-align:right; margin-left:330px; margin-top:-60px; position:absolute;  width:100px; height:100px; z-index:100; }
+
+.cas .login .well-big form .field { padding-bottom: 30px; }
+.cas .login .well-big form .field:before,
+.cas .login .well-big form .field:after { content: " "; display: table; }
+.cas .login .well-big form .field:after { clear: both; }
+.cas .login .well-big form .field:before,
+.cas .login .well-big form .field:after { content: " "; display: table; }
+.cas .login .well-big form .field:after { clear: both; }
+
+.cas .login .well-big form .button { 
+	display: block; 
+	width: 100%; 
+	margin-bottom: 10px;
+ 	color: white; 
+ 	font-size: 16px; 
+ 	text-decoration: none; 
+ 	font-weight: 300; 
+ 	border: 0; 
+ 	cursor: pointer;
+  	display: inline-block; 
+  	padding: 12px 16px 11px; 
+	border-radius: 3px; 
+	background-color: #479aeb; 
+	box-shadow: inset 0 -1px 0 0 #1776d4, inset 0 0 0 1px #308de8, inset 0 2px 1px 0 rgba(255,255,255,0.32), 0 1px 1px 0 rgba(0,0,0,0.13); 				
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.24); 
+	-webkit-transition: background-color 200ms ease, box-shadow 200ms ease; 
+	transition: background-color 200ms ease, box-shadow 200ms ease 
+}
+.cas .login .well-big form .button:hover { background-color: #308de8; box-shadow: inset 0 -1px 0 0 #125da6, inset 0 0 0 1px #1774cf, inset 0 2px 1px 0 rgba(255,255,255,0.32), 0 1px 2px 0 rgba(0,0,0,0.3) }
+.cas .login .well-big form .button:focus { outline: 0; box-shadow: inset 0 -1px 0 0 #1776d4, inset 0 0 0 1px #308de8, inset 0 2px 1px 0 rgba(255,255,255,0.32), 0 0 6px 1px rgba(0,0,0,0.3) }
+
+.cas .login .well-big .note a { text-decoration: none; color: #afafaf; transition: color 100ms ease, border-bottom 100ms ease; border-bottom: 1px solid rgba(175,175,175,0.5); }
+.cas .login .well-big .note a:hover { color: #479aeb; border-bottom: 1px solid #479aeb; }
+
+.cas .login .well-big .note .tooltip-inner { max-width:25em; padding: 10px; text-align: left; line-height:1.8; }
+
+.cas .login .well-big .systemIcon { margin-top: 20px; margin-bottom: 50px; }
+.cas .login .well-big .systemIcon div { margin: 0 auto; text-align:center; }
+.cas .login .well-big .systemIcon div span.glyphicon { font-size:60px; color:#060; }
+.cas .login .well-big .userIcon { margin-top: 20px; margin-bottom: 50px; }
+.cas .login .well-big .userIcon span { margin: 0 auto; background-color: #000; display: block; height: 135px; width: 135px; 
+background-repeat: no-repeat; background-position: center top; border-radius: 10px; }
+.cas .login .well-big .notify h2, 
+.cas .login .well-big .notify h3 { display:none; }
+.cas .login .well-big .notify p { display:none; margin-bottom:40px; }
+.cas .login .well-big .notify .btn { width:100%; }
+
+/* i18n font-fix */
+.cas.zh .login { font-family: "Microsoft YaHei"; }
+.cas.zh .login .tooltip-inner { text-indent:2em; font-size:10pt; }
+
+/* white theme */
+.cas.white { background-image: url(../graphic/bgw.png); background-color: #e6e6e6; }
+.cas.white .loading { background-image: url(../graphic/b1.png); }
+.cas.white .well-big { background-image: url(../img/w9.png); }
+.cas.white .login .heading h2 { color: #333; }
+.cas.white .login .heading h4 { color: #999; }
+.cas.white .login .well-big .note a { color: #999; }
+.cas.white .login .well-big .note a:hover { color: #479aeb; }
+
+/* IE6 Patch */
+.cas .ie6 { margin: 50px auto 100px auto; width: 490px; }
+.cas .ie6 .heading h2 { color: #f4f4f4; margin-top:30px; display: block; }
+.cas .ie6 .heading h4 { color: #969696; margin-bottom:15px; display: block; }
+
+.cas .ie6 .bar { border-style:none; width:100%; height:10px; border-collapse:collapse; }
+.cas .ie6 .bar td { border-style:none; margin:0; padding:0; }
+.cas .ie6 .bar .one { background-color: #d8225e; }
+.cas .ie6 .bar .two { background-color: #b73794; }
+.cas .ie6 .bar .three { background-color: #7254b6; }
+.cas .ie6 .bar .four { background-color: #5951ca; }
+.cas .ie6 .bar .five { background-color: #3981d1; }
+.cas .ie6 .bar .six { background-color: #3bbfee; }
+
+.cas .ie6 .box { padding: 45px 0 35px 0; margin:0 auto; background-color:#f2f2f2; }
+.cas .ie6 .box table { margin:0 auto; }
+.cas .ie6 .box .inputRow .labler { font-size:14px; width:60px; font-weight:bold; }
+.cas .ie6 .box .inputRow .validField input { width:300px; font-size:24px; padding:5px; margin: 5px 0; }
+.cas .ie6 .box .inputRow .validSubmit input { background-color: #3d7eb6; color: #fff; font-size: 14px; text-decoration: none; border: 0; cursor: pointer; padding:6px 5px; margin:20px 0; }
+.cas .ie6 .box .alert { padding:10px 0 10px 55px; border:none; background-color:#F00; color:#FFF; }
+.cas .ie6 .box .success { padding: 0 40px; }
+.cas .ie6 .box .success h2 { font-size:18px; font-weight:normal; }
+.cas .ie6 .box .success p { font-size:14px; margin-bottom:30px; }
+.cas .ie6 .box .success a { font-size:14px; background-color: #3d7eb6; color: #fff; padding:6px 20px; text-decoration:none; }
+.cas .ie6 .box .success a:hover { background-color:#2d6ca2; }
+
+.cas .ie6 .oldBrowser { background-color:#fcf8e3; color:#000; padding:10px; }
+
+/* Extra small devices (phones, less than 768px) */
+@media screen and (min-width:480px) {
+
+.cas .login { margin: 50px auto 100px auto; width: 390px; }
+.cas .login .well-big { padding: 45px 35px 35px 35px; margin-bottom: 25px; }
+.cas .login .well-big .notify h2,
+.cas .login .well-big .notify h3,
+.cas .login .well-big .notify p { display:block; text-align:center; }
+
+}
+
+/* Small devices (tablets, 768px and up) */
+@media screen and (min-width:768px) {
+
+.cas .login { margin: 50px auto 100px auto; width: 490px; }
+.cas .login .heading h2,
+.cas .login .heading h4 { display:block; }
+.cas .login .well-big .timeCount { display:block; }
+.cas .login .well-big .notify h2,
+.cas .login .well-big .notify h3,
+.cas .login .well-big .notify p { text-align:left; }
+.cas .login .well-big .notify .btn { width:auto; }
+}
+
+@media screen and (min-width:992px) {
+
+.cas .login { margin: 100px auto 100px auto; }
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media(min-width:1200px) {
+
+.cas .login { margin: 150px auto 100px auto; }
+
+}

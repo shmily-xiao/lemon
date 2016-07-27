@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.impl.UserDaoImpl">
+    <resultMap id="userResultMap" type="User" autoMapping="true">
+        <id property="userId" column="user_id" />
+        <result property="userName" column="user_name"/>
+        <result property="salt" column="salt"/>
+        <result property="userPw" column="user_pw"/>
+        <result property="specialRoot" column="special_root"/>
+        <!--<association property="detail" javaType="Detail" resultMap="com.demo.domain.Detail.detailResultMap"/>-->
+    </resultMap>
+    <select id="findRoot" resultType="int">
+        SELECT count(*) FROM "user" WHERE id = #{id} AND special_root = TRUE;
+    </select>
+    <update id="addRoot">
+        UPDATE "user" SET special_root = TRUE WHERE id=#{id};
+    </update>
+    <update id="deleteRoot">
+        UPDATE "user" SET special_root = FALSE WHERE id=#{id};
+    </update>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO demo.public."user"(id,name,salt,password) VALUES (#{id},#{name},#{salt},#{password});
+    </insert>
+    <select id="find" resultType="int">
+        SELECT count(*) FROM demo.public."user" WHERE id=#{id};
+    </select>
+    <select id="list" resultMap="userResultMap">
+        SELECT * FROM demo.public."user";
+    </select>
+    <delete id="deleteUser" >
+        DELETE FROM demo.public."user" WHERE id=#{id};
+    </delete>
+    <select id="findUser" resultType="int">
+        SELECT COUNT(*) FROM "user" WHERE id=#{id} AND password=#{password};
+    </select>
+    <select id="findUserName" resultMap="userResultMap">
+        SELECT * FROM "user" WHERE id =#{id}
+    </select>
+    <select id="findSalt" resultType="int">
+        SELECT salt FROM "user" WHERE id = #{id};
+    </select>
+    <!--<insert id="updateByConditions" useGeneratedKeys="true" keyProperty="id">-->
+        <!--INSERT INTO demo.public.person(id,name,password) VALUES(#{id},#{name},#{password});-->
+    <!--</insert>-->
+    <!--<insert id="insertByConditions" useGeneratedKeys="true" keyProperty="id">-->
+        <!--INSERT INTO demo.public.info(age,mobile) VALUES(#{age},#{mobile});-->
+    <!--</insert>-->
+</mapper>

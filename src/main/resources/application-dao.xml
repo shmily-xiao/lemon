@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+    <!--创建数据源-->
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource"
+          destroy-method="close" scope="singleton">
+        <property name="driverClassName" value="${jdbc.driver}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+        <property name="maxActive" value="100"></property>
+        <property name="maxWait" value="3000"></property>
+        <property name="defaultAutoCommit" value="true"></property>
+        <property name="validationQuery" value="select 1"></property>
+    </bean>
+
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="druidDataSource"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="txManager" />
+
+    <!--创建SqlSessionFactory，同时指定数据源-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="druidDataSource" />
+        <property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml" />
+    </bean>
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+    </bean>
+
+    <bean id="userDao" class="com.demo.dao.impl.UserDaoImpl">
+        <property name="sqlSessionTemplate" ref="sqlSession"/>
+    </bean>
+
+    <bean id="detailDao" class="com.demo.dao.impl.DetailDaoImpl">
+        <property name="sqlSessionTemplate" ref="sqlSession"/>
+    </bean>
+
+    <bean id="cookiesDao" class="com.demo.dao.impl.CookiesDaoImpl">
+        <property name="sqlSessionTemplate" ref="sqlSession"/>
+    </bean>
+    <bean id="personDao" class="com.demo.dao.impl.PersonDaoImpl">
+        <property name="sqlSessionTemplate" ref="sqlSession"/>
+    </bean>
+    <bean id="infoDao" class="com.demo.dao.impl.InfoDaoImpl">
+        <property name="sqlSessionTemplate" ref="sqlSession"/>
+    </bean>
+
+    <!--cache manager-->
+
+    <!--<bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">-->
+        <!--<property name="configLocation" value="classpath:ehcache.xml"/>-->
+        <!--<property name="shared" value="true" />-->
+    <!--</bean>-->
+
+</beans>
