@@ -8,6 +8,6 @@ import java.util.List;
 /**
  * Created by YB on 2015/5/21.
  */
-public interface UserDao extends IDao<User,BaseQuery>{
+public interface IUserDao extends IDao<User,BaseQuery>{
 
 }
