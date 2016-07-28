@@ -1,9 +1,8 @@
 package com.demo.dao.impl;
 
-import com.demo.dao.IDao;
+import com.demo.dao.IBaseDao;
 import com.demo.domain.BaseDomain;
 import com.demo.query.BaseQuery;
-import org.apache.poi.ss.formula.functions.T;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.List;
 /**
  * Created by simpletour_java on 2015/9/9.
  */
-public abstract class BaseDaoImpl<T extends BaseDomain> extends SqlSessionDaoSupport implements IDao<T,BaseQuery>{
+public abstract class BaseDaoImpl<T extends BaseDomain, M extends BaseQuery> extends SqlSessionDaoSupport implements IBaseDao<T,M> {
 
     public String getNameSpace(){
         return this.getClass().getName();
@@ -27,18 +26,18 @@ public abstract class BaseDaoImpl<T extends BaseDomain> extends SqlSessionDaoSup
     }
 
     @Override
-    public T insert(T object) {
-        return this.getSqlSession().insert(this.opof(this.getNameSpace(),"insert"),object) != 0 ? object : null;
+    public Integer insert(T object) {
+        return this.getSqlSession().insert(this.opof(this.getNameSpace(),"insert"),object);
     }
 
     @Override
-    public Integer delete(BaseQuery object) {
+    public Integer delete(M object) {
         return this.getSqlSession().delete(this.opof(this.getNameSpace(),"delete"),object);
     }
 
     @Override
-    public T update(T object) {
-        return this.getSqlSession().update(this.opof(this.getNameSpace(),"update"),object) != 0 ? object : null;
+    public Integer update(T object) {
+        return this.getSqlSession().update(this.opof(this.getNameSpace(),"update"),object);
     }
 
     @Override
@@ -47,12 +46,12 @@ public abstract class BaseDaoImpl<T extends BaseDomain> extends SqlSessionDaoSup
     }
 
     @Override
-    public List<T> findByPage(BaseQuery object) {
+    public List<T> findByPage(M object) {
         return this.getSqlSession().selectList(this.opof(this.getNameSpace(),"findByPage"),object);
     }
 
     @Override
-    public List<T> findEntities(BaseQuery object) {
+    public List<T> findEntities(M object) {
         return this.getSqlSession().selectList(this.opof(this.getNameSpace(),"findEntities"),object);
     }
 }

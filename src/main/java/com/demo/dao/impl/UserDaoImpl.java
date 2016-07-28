@@ -2,10 +2,12 @@ package com.demo.dao.impl;
 
 import com.demo.dao.IUserDao;
 import com.demo.domain.User;
+import com.demo.query.BaseQuery;
+
 /**
- * Created by YB on 2015/5/21.
+ * Created by simpletour_Jenkin on 2016/7/28.
  */
-public class UserDaoImpl extends BaseDaoImpl<User> implements IUserDao {
+public class UserDaoImpl extends BaseDaoImpl<User,BaseQuery> implements IUserDao {
 
 
 }

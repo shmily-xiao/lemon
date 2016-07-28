@@ -9,14 +9,14 @@ import java.util.List;
 /**
  * Created by simpletour_java on 2015/9/8.
  */
-public interface IDao<T extends BaseDomain,M extends BaseQuery> {
+public interface IBaseDao<T extends BaseDomain,M extends BaseQuery> {
 
     /**
      * 添加
      * @param object
      * @return
      */
-    T insert(T object);
+    Integer insert(T object);
 
     /**
      * 根据条件删除
@@ -35,7 +35,7 @@ public interface IDao<T extends BaseDomain,M extends BaseQuery> {
      * @param object
      * @return
      */
-    T update(T object);
+    Integer update(T object);
 
     /**
      * 查找

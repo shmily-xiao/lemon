@@ -6,5 +6,5 @@ import com.demo.query.BaseQuery;
 /**
  * Created by simpletour_Jenkin on 2016/7/28.
  */
-public interface IWechatUserDao extends IDao<WechatUser,BaseQuery> {
+public interface IWechatUserDao extends IBaseDao<WechatUser,BaseQuery> {
 }
