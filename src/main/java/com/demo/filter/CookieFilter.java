@@ -75,7 +75,7 @@ public class CookieFilter implements HandlerInterceptor{
                 //提取数据库的内容
                 User user = userService.findUserName(valuesU[0]);
                 if(user!=null){
-                    int salt = user.getSalt();
+                    String salt = user.getSalt();
                     String pwd = valuesP[0] + salt;
                     String password = Md5.messageDigest(pwd);
                     if(password.equals(user.getPassword())){
