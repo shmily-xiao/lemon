@@ -1,6 +1,6 @@
 package com.demo.domain;
 
-import com.demo.domain.itfc.IWechatUser;
+import com.demo.domain.interfaces.IWechatUser;
 
 /**
  * Created by simpletour_Jenkin on 2016/7/27.

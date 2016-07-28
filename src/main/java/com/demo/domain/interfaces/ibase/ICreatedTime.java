@@ -1,4 +1,4 @@
-package com.demo.domain.itfc.ibase;
+package com.demo.domain.interfaces.ibase;
 
 import java.util.Date;
 

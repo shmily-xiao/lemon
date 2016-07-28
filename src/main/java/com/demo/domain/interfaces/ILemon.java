@@ -1,6 +1,6 @@
-package com.demo.domain.itfc;
+package com.demo.domain.interfaces;
 
-import com.demo.domain.itfc.ibase.IName;
+import com.demo.domain.interfaces.ibase.IName;
 
 import java.util.Date;
 

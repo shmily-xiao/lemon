@@ -1,7 +1,5 @@
 package com.demo.domain;
 
-import com.demo.domain.itfc.ibase.IId;
-
 import java.util.Date;
 
 /**

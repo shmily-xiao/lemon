@@ -1,6 +1,6 @@
 package com.demo.domain;
 
-import com.demo.domain.itfc.ILemon;
+import com.demo.domain.interfaces.ILemon;
 
 import java.util.Date;
 

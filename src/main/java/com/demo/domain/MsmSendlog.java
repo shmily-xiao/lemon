@@ -1,6 +1,6 @@
 package com.demo.domain;
 
-import com.demo.domain.itfc.IMsmSendlog;
+import com.demo.domain.interfaces.IMsmSendlog;
 
 /**
  * Created by simpletour_Jenkin on 2016/7/27.

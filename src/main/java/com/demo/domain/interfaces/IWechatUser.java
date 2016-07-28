@@ -1,6 +1,6 @@
-package com.demo.domain.itfc;
+package com.demo.domain.interfaces;
 
-import com.demo.domain.itfc.ibase.ICreatedTime;
+import com.demo.domain.interfaces.ibase.ICreatedTime;
 
 /**
  * Created by simpletour_Jenkin on 2016/7/27.

@@ -1,6 +1,6 @@
 package com.demo.domain;
 
-import com.demo.domain.itfc.IUser;
+import com.demo.domain.interfaces.IUser;
 
 import java.util.Date;
 
@@ -74,6 +74,10 @@ public class User extends BaseDomain implements IUser {
      */
     private Long score;
 
+    /**
+     * 用户是否公开自己的事件，或者是只能好友可见
+     */
+    private String zoneStatus;
 
     @Override
     public String getAvatar() {
@@ -200,5 +204,14 @@ public class User extends BaseDomain implements IUser {
     @Override
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public String getZoneStatus() {
+        return zoneStatus;
+    }
+    @Override
+    public void setZoneStatus(String zoneStatus) {
+        this.zoneStatus = zoneStatus;
     }
 }

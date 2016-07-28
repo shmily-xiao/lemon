@@ -1,6 +1,6 @@
-package com.demo.domain.itfc;
+package com.demo.domain.interfaces;
 
-import com.demo.domain.itfc.ibase.IName;
+import com.demo.domain.interfaces.ibase.IName;
 
 import java.util.Date;
 
@@ -56,4 +56,9 @@ public interface IUser extends IName{
     // 但是以后可以通过成就值给用户划分等级
     Long getScore();
     void setScore(Long score);
+
+    // 用户是否公开自己的事件，或者是只能好友可见
+    String getZoneStatus();
+    void setZoneStatus(String zoneStatus);
+
 }
