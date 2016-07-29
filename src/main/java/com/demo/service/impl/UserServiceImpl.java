@@ -5,7 +5,7 @@ import com.demo.dao.IUserDao;
 import com.demo.domain.User;
 import com.demo.query.BaseQuery;
 import com.demo.service.IUserService;
-import org.jvnet.hk2.annotations.Service;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 

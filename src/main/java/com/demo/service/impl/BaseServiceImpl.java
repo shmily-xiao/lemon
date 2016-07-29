@@ -12,7 +12,8 @@ import java.util.List;
  */
 public abstract class BaseServiceImpl<T extends BaseDomain, M extends BaseQuery> implements IBaseService<T, M> {
 
-    private IBaseDao<T,M> baseDao;
+    // // TODO: 2016/7/29 启动之后试一试注入baseDao
+//    private IBaseDao<T,M> baseDao;
 
     protected abstract IBaseDao<T, M> getBaseDao();
 
@@ -43,11 +44,11 @@ public abstract class BaseServiceImpl<T extends BaseDomain, M extends BaseQuery>
 
     @Override
     public List<T> findByPage(M object) {
-        return null;
+        return this.getBaseDao().findByPage(object);
     }
 
     @Override
     public List<T> findEntities(M object) {
-        return null;
+        return this.getBaseDao().findEntities(object);
     }
 }
