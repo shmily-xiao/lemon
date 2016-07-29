@@ -33,21 +33,21 @@
         <constructor-arg index="0" ref="sqlSessionFactory" />
     </bean>
 
-    <bean id="userDao" class="com.demo.dao.impl.UserDaoImpl">
+    <bean id="userDao" class="com.lemon.dao.impl.UserDaoImpl">
         <property name="sqlSessionTemplate" ref="sqlSession"/>
     </bean>
 
-    <bean id="detailDao" class="com.demo.dao.impl.DetailDaoImpl">
+    <bean id="detailDao" class="com.lemon.dao.impl.DetailDaoImpl">
         <property name="sqlSessionTemplate" ref="sqlSession"/>
     </bean>
 
-    <bean id="cookiesDao" class="com.demo.dao.impl.CookiesDaoImpl">
+    <bean id="cookiesDao" class="com.lemon.dao.impl.CookiesDaoImpl">
         <property name="sqlSessionTemplate" ref="sqlSession"/>
     </bean>
-    <bean id="personDao" class="com.demo.dao.impl.PersonDaoImpl">
+    <bean id="personDao" class="com.lemon.dao.impl.PersonDaoImpl">
         <property name="sqlSessionTemplate" ref="sqlSession"/>
     </bean>
-    <bean id="infoDao" class="com.demo.dao.impl.InfoDaoImpl">
+    <bean id="infoDao" class="com.lemon.dao.impl.InfoDaoImpl">
         <property name="sqlSessionTemplate" ref="sqlSession"/>
     </bean>
 

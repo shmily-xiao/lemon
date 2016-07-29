@@ -3,22 +3,22 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 
-    <bean id="userService" class="com.demo.service.impl.UserServiceImpl">
+    <bean id="userService" class="com.lemon.service.impl.UserServiceImpl">
         <!--注入，name是属性的名称-->
         <property name="userDao" ref="userDao"/>
         <property name="detailDao" ref="detailDao"/>
         <!--为了降低系统的内存-->
     </bean>
-    <bean id="detailService" class="com.demo.service.impl.DetailServiceImpl">
+    <bean id="detailService" class="com.lemon.service.impl.DetailServiceImpl">
         <!--注入，name是属性的名称-->
         <property name="detailDao" ref ="detailDao"/>
     </bean>
-    <bean id="cookiesService" class="com.demo.service.impl.CookiesServiceImpl">
+    <bean id="cookiesService" class="com.lemon.service.impl.CookiesServiceImpl">
         <!--注入，name是CookiesServiceImpl类里面cookiesDao属性的名称-->
         <property name="cookiesDao" ref="cookiesDao"/>
     </bean>
 
-    <bean id="personService" class="com.demo.service.impl.PersonServiceImpl">
+    <bean id="personService" class="com.lemon.service.impl.PersonServiceImpl">
         <property name="infoDao" ref="infoDao"/>
         <property name="personDao" ref="personDao"/>
     </bean>

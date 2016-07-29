@@ -2,11 +2,11 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias alias="User" type="com.demo.domain.User"/>
-        <typeAlias alias="Detail" type="com.demo.domain.Detail"/>
-        <typeAlias alias="Cookies" type="com.demo.domain.Cookies"/>
-        <typeAlias alias="Person" type="com.demo.domain.Person"/>
-        <typeAlias alias="Info" type="com.demo.domain.Info"/>
+        <typeAlias alias="User" type="com.lemon.domain.User"/>
+        <typeAlias alias="Detail" type="com.lemon.domain.Detail"/>
+        <typeAlias alias="Cookies" type="com.lemon.domain.Cookies"/>
+        <typeAlias alias="Person" type="com.lemon.domain.Person"/>
+        <typeAlias alias="Info" type="com.lemon.domain.Info"/>
         <typeAlias alias="EmailUser" type="com.secureemail.domain.User"/>
         <typeAlias alias="Email" type="com.secureemail.domain.Email"/>
         <typeAlias alias="EmailModel" type="com.secureemail.domain.EmailModel"/>
