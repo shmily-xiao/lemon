@@ -54,4 +54,9 @@ public abstract class BaseDaoImpl<T extends BaseDomain, M extends BaseQuery> ext
     public List<T> findEntities(M object) {
         return this.getSqlSession().selectList(this.opof(this.getNameSpace(),"findEntities"),object);
     }
+
+    @Override
+    public Integer count(M object) {
+        return this.getSqlSession().selectOne(this.opof(this.getNameSpace(),"count"),object);
+    }
 }

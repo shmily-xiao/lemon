@@ -1,6 +1,7 @@
 package com.lemon.dao;
 
 
+import com.alibaba.druid.mock.MockBlob;
 import com.lemon.domain.BaseDomain;
 import com.lemon.query.BaseQuery;
 
@@ -58,5 +59,12 @@ public interface IBaseDao<T extends BaseDomain,M extends BaseQuery> {
      * @return
      */
     List<T> findEntities(M object);
+
+    /**
+     * 用于分页查询统计总数
+     * @param object
+     * @return
+     */
+    Integer count(M object);
 
 }
