@@ -3,47 +3,126 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lemon.dao.impl.UserDaoImpl">
     <resultMap id="userResultMap" type="User" autoMapping="true">
-        <id property="userId" column="user_id" />
-        <result property="userName" column="user_name"/>
-        <result property="salt" column="salt"/>
-        <result property="userPw" column="user_pw"/>
-        <result property="specialRoot" column="special_root"/>
-        <!--<association property="detail" javaType="Detail" resultMap="com.demo.domain.Detail.detailResultMap"/>-->
+        <id property="id" column="id" />
+        <result property="createdTime" column="created_time"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="qqNo" column="qq_no"/>
+        <result property="zoneStatus" column="zone_status"/>
     </resultMap>
-    <select id="findRoot" resultType="int">
-        SELECT count(*) FROM "user" WHERE id = #{id} AND special_root = TRUE;
-    </select>
-    <update id="addRoot">
-        UPDATE "user" SET special_root = TRUE WHERE id=#{id};
-    </update>
-    <update id="deleteRoot">
-        UPDATE "user" SET special_root = FALSE WHERE id=#{id};
-    </update>
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO demo.public."user"(id,name,salt,password) VALUES (#{id},#{name},#{salt},#{password});
-    </insert>
-    <select id="find" resultType="int">
-        SELECT count(*) FROM demo.public."user" WHERE id=#{id};
-    </select>
-    <select id="list" resultMap="userResultMap">
-        SELECT * FROM demo.public."user";
-    </select>
-    <delete id="deleteUser" >
-        DELETE FROM demo.public."user" WHERE id=#{id};
+
+    <delete id="deleteById">
+        DELETE FROM u_user WHERE id = #{id};
     </delete>
-    <select id="findUser" resultType="int">
-        SELECT COUNT(*) FROM "user" WHERE id=#{id} AND password=#{password};
+
+    <delete id="delete">
+        DELETE FROM u_user
+        <where>
+            <if test="avatar != null and avatar != ''">avatar = #{avatar}</if>
+            <if test="gender != null and gender != ''">and gender = #{gender}</if>
+            <if test="name != null and name != ''">and name = #{name}</if>
+            <if test="nickName != null and nickName != ''">and nick_name = #{nickName}</if>
+            <if test="birthday != null and birthday != ''">and birthday = #{birthday}</if>
+            <if test="mobile != null and mobile != ''">and mobile = #{mobile}</if>
+            <if test="qqNo != null and qqNo != ''">and qq_no = #{qqNo}</if>
+            <if test="email != null and email != ''">and email = #{email}</if>
+            <if test="password != null and password != ''">and password = #{password}</if>
+            <if test="salt != null and salt != ''">and salt = #{salt}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+            <if test="type != null and type != ''">and type = #{type}</if>
+            <if test="score != null and score != ''">and score = #{score}</if>
+            <if test="zoneStatus != null and zoneStatus != ''">and zone_status = #{zoneStatus}</if>
+        </where>
+    </delete>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO u_user(created_time, avatar, gender, name, nick_name, birthday, mobile, qq_no, email, password, salt, status, type, score, zone_status)
+        VALUES (#{createdTime}, #{avatar}, #{gender}, #{name}, #{nickName}, #{birthday}, #{mobile}, #{qqNo}, #{email}, #{password}, #{salt}, #{status}, #{type}, #{score}, #{zoneStatus});
+    </insert>
+
+    <update id="update" >
+        UPDATE u_user
+        <set>
+            <if test="avatar != null and avatar != ''">avatar = #{avatar}</if>
+            <if test="gender != null and gender != ''">and gender = #{gender}</if>
+            <if test="name != null and name != ''">and name = #{name}</if>
+            <if test="nickName != null and nickName != ''">and nick_name = #{nickName}</if>
+            <if test="birthday != null and birthday != ''">and birthday = #{birthday}</if>
+            <if test="mobile != null and mobile != ''">and mobile = #{mobile}</if>
+            <if test="qqNo != null and qqNo != ''">and qq_no = #{qqNo}</if>
+            <if test="email != null and email != ''">and email = #{email}</if>
+            <if test="password != null and password != ''">and password = #{password}</if>
+            <if test="salt != null and salt != ''">and salt = #{salt}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+            <if test="type != null and type != ''">and type = #{type}</if>
+            <if test="score != null and score != ''">and score = #{score}</if>
+            <if test="zoneStatus != null and zoneStatus != ''">and zone_status = #{zoneStatus}</if>
+        </set>
+        WHERE id = #{id};
+    </update>
+
+    <select id="findById" resultMap="userResultMap">
+        SELECT * FROM u_user WHERE id = #{id};
     </select>
-    <select id="findUserName" resultMap="userResultMap">
-        SELECT * FROM "user" WHERE id =#{id}
+
+    <select id="findByPage" resultMap="userResultMap">
+        SELECT * FROM u_user
+        <where>
+            <if test="avatar != null and avatar != ''">avatar = #{avatar}</if>
+            <if test="gender != null and gender != ''">and gender = #{gender}</if>
+            <if test="name != null and name != ''">and name = #{name}</if>
+            <if test="nickName != null and nickName != ''">and nick_name = #{nickName}</if>
+            <if test="birthday != null and birthday != ''">and birthday = #{birthday}</if>
+            <if test="mobile != null and mobile != ''">and mobile = #{mobile}</if>
+            <if test="qqNo != null and qqNo != ''">and qq_no = #{qqNo}</if>
+            <if test="email != null and email != ''">and email = #{email}</if>
+            <if test="password != null and password != ''">and password = #{password}</if>
+            <if test="salt != null and salt != ''">and salt = #{salt}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+            <if test="type != null and type != ''">and type = #{type}</if>
+            <if test="score != null and score != ''">and score = #{score}</if>
+            <if test="zoneStatus != null and zoneStatus != ''">and zone_status = #{zoneStatus}</if>
+        </where>
     </select>
-    <select id="findSalt" resultType="int">
-        SELECT salt FROM "user" WHERE id = #{id};
+
+
+    <select id="findEntities" resultMap="userResultMap">
+        SELECT * FROM u_user
+        <where>
+            <if test="avatar != null and avatar != ''">avatar = #{avatar}</if>
+            <if test="gender != null and gender != ''">and gender = #{gender}</if>
+            <if test="name != null and name != ''">and name = #{name}</if>
+            <if test="nickName != null and nickName != ''">and nick_name = #{nickName}</if>
+            <if test="birthday != null and birthday != ''">and birthday = #{birthday}</if>
+            <if test="mobile != null and mobile != ''">and mobile = #{mobile}</if>
+            <if test="qqNo != null and qqNo != ''">and qq_no = #{qqNo}</if>
+            <if test="email != null and email != ''">and email = #{email}</if>
+            <if test="password != null and password != ''">and password = #{password}</if>
+            <if test="salt != null and salt != ''">and salt = #{salt}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+            <if test="type != null and type != ''">and type = #{type}</if>
+            <if test="score != null and score != ''">and score = #{score}</if>
+            <if test="zoneStatus != null and zoneStatus != ''">and zone_status = #{zoneStatus}</if>
+        </where>
     </select>
-    <!--<insert id="updateByConditions" useGeneratedKeys="true" keyProperty="id">-->
-        <!--INSERT INTO demo.public.person(id,name,password) VALUES(#{id},#{name},#{password});-->
-    <!--</insert>-->
-    <!--<insert id="insertByConditions" useGeneratedKeys="true" keyProperty="id">-->
-        <!--INSERT INTO demo.public.info(age,mobile) VALUES(#{age},#{mobile});-->
-    <!--</insert>-->
+
+    <select id="count" resultMap="userResultMap">
+        SELECT count(*) FROM u_user
+        <where>
+            <if test="avatar != null and avatar != ''">avatar = #{avatar}</if>
+            <if test="gender != null and gender != ''">and gender = #{gender}</if>
+            <if test="name != null and name != ''">and name = #{name}</if>
+            <if test="nickName != null and nickName != ''">and nick_name = #{nickName}</if>
+            <if test="birthday != null and birthday != ''">and birthday = #{birthday}</if>
+            <if test="mobile != null and mobile != ''">and mobile = #{mobile}</if>
+            <if test="qqNo != null and qqNo != ''">and qq_no = #{qqNo}</if>
+            <if test="email != null and email != ''">and email = #{email}</if>
+            <if test="password != null and password != ''">and password = #{password}</if>
+            <if test="salt != null and salt != ''">and salt = #{salt}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+            <if test="type != null and type != ''">and type = #{type}</if>
+            <if test="score != null and score != ''">and score = #{score}</if>
+            <if test="zoneStatus != null and zoneStatus != ''">and zone_status = #{zoneStatus}</if>
+        </where>
+    </select>
+
 </mapper>
