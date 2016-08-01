@@ -4,6 +4,7 @@ import com.lemon.domain.BaseDomain;
 import com.lemon.query.BaseQuery;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by simpletour_Jenkin on 2016/7/28.
@@ -14,7 +15,7 @@ public interface IBaseService<T extends BaseDomain, M extends BaseQuery>{
      * @param object
      * @return
      */
-    T insert(T object);
+    Optional<T> insert(T object);
 
     /**
      * 根据条件删除
@@ -33,14 +34,14 @@ public interface IBaseService<T extends BaseDomain, M extends BaseQuery>{
      * @param object
      * @return
      */
-    T update(T object);
+    Optional<T> update(T object);
 
     /**
      * 查找
      * @param id
      * @return
      */
-    T find(Long id);
+    Optional<T> find(Long id);
 
     /**
      * 分页查询

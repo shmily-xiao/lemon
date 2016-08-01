@@ -6,6 +6,7 @@ import com.lemon.query.BaseQuery;
 import com.lemon.service.IBaseService;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by simpletour_Jenkin on 2016/7/28.
@@ -23,8 +24,8 @@ public abstract class BaseServiceImpl<T extends BaseDomain, M extends BaseQuery>
     }
 
     @Override
-    public T insert(T object) {
-        return this.getBaseDao().insert(object) != 0 ? object : null;
+    public Optional<T> insert(T object) {
+        return this.getBaseDao().insert(object) != 0 ? Optional.of(object) : Optional.empty();
     }
 
     @Override

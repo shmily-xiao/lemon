@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lemon.dao.impl.MsmSendlogDaoImpl">
+<resultMap id="msmSendLogResultMap" type="MsmSendlog" autoMapping="true">
+    <id property="id" column="id"/>
+    <result property="createdTime" column="created_time" />
+    <result property="authCode" column="auth_code"/>
+    <!--<association property="user" javaType="User" resultMap="com.demo.domain.User.userResultMap"/>-->
+</resultMap>
+    <delete id="deleteById">
+        DELETE FROM msm_sendlog WHERE id = #{id};
+    </delete>
+
+    <delete id="delete">
+        DELETE FROM msm_sendlog
+        <where>
+            <if test="mobile != null and mobile != ''">mobile = #{mobile}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+        </where>
+    </delete>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO msm_sendlog (created_time, auth_code, mobile, reason, status)
+        VALUES (#{createdTime}, #{authCode}, #{mobile}, #{reason}, #{status});
+    </insert>
+
+    <update id="update" >
+        UPDATE msm_sendlog
+        <set>
+            <if test="mobile != null and mobile != ''">mobile = #{mobile}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+        </set>
+        WHERE id = #{id};
+    </update>
+
+    <select id="findById" resultMap="msmSendLogResultMap">
+        SELECT * FROM msm_sendlog WHERE id = #{id};
+    </select>
+
+    <select id="findByPage" resultMap="msmSendLogResultMap">
+        SELECT * FROM msm_sendlog
+        <where>
+            <if test="mobile != null and mobile != ''">mobile = #{mobile}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+        </where>
+    </select>
+
+
+    <select id="findEntities" resultMap="msmSendLogResultMap">
+        SELECT * FROM msm_sendlog
+        <where>
+            <if test="mobile != null and mobile != ''">mobile = #{mobile}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="count" resultMap="msmSendLogResultMap">
+        SELECT count(*) FROM msm_sendlog
+        <where>
+            <if test="mobile != null and mobile != ''">mobile = #{mobile}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+        </where>
+    </select>
+</mapper>
