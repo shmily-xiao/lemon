@@ -50,7 +50,13 @@ public abstract class BaseServiceImpl<T extends BaseDomain, M extends BaseQuery>
     }
 
     @Override
-    public List<T> findEntities(M object) {
+    public List<T> findList(M object) {
         return this.getBaseDao().findEntities(object);
+    }
+
+    @Override
+    public Optional<T> findOne(M object) {
+        List<T> list = this.findList(object);
+        return list != null && !list.isEmpty() ? Optional.of(list.get(0)) : Optional.empty();
     }
 }

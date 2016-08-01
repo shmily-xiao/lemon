@@ -25,7 +25,7 @@ public class User extends BaseDomain implements IUser {
     private String name;
 
     /**
-     * 昵称
+     * 昵称   用户的登录账户的名字
      */
     private String nickName;
 

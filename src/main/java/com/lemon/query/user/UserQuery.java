@@ -79,6 +79,12 @@ public class UserQuery extends BaseQuery {
      */
     private String zoneStatus;
 
+    public UserQuery(){}
+
+    public UserQuery(String nickName){
+        this.nickName = nickName;
+    }
+
     public String getAvatar() {
         return avatar;
     }

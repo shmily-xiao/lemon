@@ -56,6 +56,13 @@ public interface IBaseService<T extends BaseDomain, M extends BaseQuery>{
      * @param object
      * @return
      */
-    List<T> findEntities(M object);
+    List<T> findList(M object);
+
+    /**
+     * 根据条件查询一条记录
+     * @param object
+     * @return
+     */
+    Optional<T> findOne(M object);
 
 }

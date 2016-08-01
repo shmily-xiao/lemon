@@ -126,13 +126,10 @@
     <!-- 默认的注解映射的支持 -->
     <mvc:annotation-driven enable-matrix-variables="true" validator="beansValidator" />
 
-    <context:component-scan base-package="com.lemon.controller" use-default-filters="true" >
+    <context:component-scan base-package="com.lemon" use-default-filters="true" >
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
-    <context:component-scan base-package="com.secureemail.controller" use-default-filters="true" >
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-    </context:component-scan>
 
     <!--<import resource="classpath:META-INF/kmodule.xml"/>-->
 

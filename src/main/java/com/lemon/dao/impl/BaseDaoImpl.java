@@ -5,6 +5,7 @@ import com.lemon.domain.BaseDomain;
 import com.lemon.query.BaseQuery;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * Created by simpletour_java on 2015/9/9.
  */
+@Component
 public abstract class BaseDaoImpl<T extends BaseDomain, M extends BaseQuery> extends SqlSessionDaoSupport implements IBaseDao<T,M> {
 
 
