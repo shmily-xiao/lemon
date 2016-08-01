@@ -39,11 +39,11 @@
         WHERE id = #{id};
     </update>
 
-    <select id="findById" resultMap="userResultMap">
+    <select id="findById" resultMap="friendshipResultMap">
         SELECT * FROM friendship WHERE id = #{id};
     </select>
 
-    <select id="findByPage" resultMap="userResultMap">
+    <select id="findByPage" resultMap="friendshipResultMap">
         SELECT * FROM friendship
         <where>
             <if test="userId != null and userId != ''">user_id = #{userId}</if>
@@ -54,7 +54,7 @@
     </select>
 
 
-    <select id="findEntities" resultMap="userResultMap">
+    <select id="findEntities" resultMap="friendshipResultMap">
         SELECT * FROM friendship
         <where>
             <if test="userId != null and userId != ''">user_id = #{userId}</if>
@@ -64,7 +64,7 @@
         </where>
     </select>
 
-    <select id="count" resultMap="userResultMap">
+    <select id="count" resultMap="friendshipResultMap">
         SELECT count(*) FROM friendship
         <where>
             <if test="userId != null and userId != ''">user_id = #{userId}</if>
