@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lemon.dao.impl.CookiesDaoImpl">
     <resultMap id="cookiesResultMap" type="Cookies" autoMapping="true">
-        <id property="id" column="id"/>
+        <id property="userId" column="user_id"/>
         <result property="sessionId" column="session_id"/>
         <result property="loginTime" column="login_time"/>
         <result property="lifeTime" column="life_time"/>
@@ -11,14 +11,14 @@
     </resultMap>
 
     <insert id="insertCookies" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO cookies(id,session_id,login_time,life_time) VALUES (#{id},#{sessionId},#{loginTime},#{lifeTime})
+        INSERT INTO cookies(user_id,session_id,login_time,life_time) VALUES (#{userId},#{sessionId},#{loginTime},#{lifeTime});
     </insert>
 
     <select id="findCookies" resultMap="cookiesResultMap">
-        SELECT * FROM cookies WHERE id=#{id}
+        SELECT * FROM cookies WHERE user_id=#{userId};
     </select>
 
     <update id="updateCookies">
-        UPDATE cookies SET session_id = #{sessionId},login_time = #{loginTime},life_time = #{lifeTime} WHERE id=#{id}
+        UPDATE cookies SET session_id = #{sessionId},login_time = #{loginTime},life_time = #{lifeTime} WHERE user_id=#{userId};
     </update>
 </mapper>

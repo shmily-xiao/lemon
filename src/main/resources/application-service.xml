@@ -4,9 +4,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 
 
-    <bean id="cookiesService" class="com.lemon.service.impl.CookiesServiceImpl">
-        <!--注入，name是CookiesServiceImpl类里面cookiesDao属性的名称-->
-        <property name="cookiesDao" ref="cookiesDao"/>
-    </bean>
+    <!--<bean id="cookiesService" class="com.lemon.service.impl.CookiesServiceImpl">-->
+        <!--&lt;!&ndash;注入，name是CookiesServiceImpl类里面cookiesDao属性的名称&ndash;&gt;-->
+        <!--<property name="cookiesDao" ref="cookiesDao"/>-->
+    <!--</bean>-->
 
 </beans>

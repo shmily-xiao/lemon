@@ -2,20 +2,22 @@ package com.lemon.service.impl;
 
 import com.lemon.dao.CookiesDao;
 import com.lemon.domain.Cookies;
-import com.lemon.service.CookiesService;
+import com.lemon.service.ICookiesService;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * Created by simpletour_java on 2015/6/4.
  */
-public class CookiesServiceImpl implements CookiesService{
+@Service
+public class CookiesServiceImpl implements ICookiesService {
+
+    @Resource
     private CookiesDao cookiesDao;
 
-    public void setCookiesDao(CookiesDao cookiesDao) {  //这是application-service里面的依赖注入
-       this.cookiesDao = cookiesDao;
-    }
-
     @Override
-    public Cookies findCookies(String id) {
+    public Cookies findCookiesByUserId(Long id) {
         return cookiesDao.findCookies(id);
     }
 

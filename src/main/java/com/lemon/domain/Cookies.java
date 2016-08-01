@@ -6,8 +6,8 @@ import java.sql.Timestamp;
  * Created by simpletour_java on 2015/6/4.
  */
 public class Cookies {
-    // id
-    private String id;
+    // 用户的id
+    private Long userId;
     // session
     private String sessionId;
     // 登录时间
@@ -31,12 +31,12 @@ public class Cookies {
         this.lifeTime = lifeTime;
     }
 
-    public String getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getSessionId() {

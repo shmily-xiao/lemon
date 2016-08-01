@@ -1,16 +1,16 @@
-package com.lemon.controller;
+package com.lemon.controller.account;
 
 import com.lemon.domain.Cookies;
 import com.lemon.domain.User;
-import com.lemon.service.CookiesService;
-import com.lemon.service.UserService;
+import com.lemon.service.ICookiesService;
+import com.lemon.service.IUserService;
 import com.lemon.utils.Md5;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,11 +24,11 @@ import java.util.Date;
 @Controller
 public class RegisterController {
 
-    @Autowired //和@Resource差不多  但是前者是spring提供的，后者是j2ee提供的
-    private UserService userService;
+    @Resource //  但是@Autowired 是spring提供的，@Resource是j2ee提供的
+    private IUserService userService;
 
-    @Autowired
-    private CookiesService cookiesService;
+    @Resource
+    private ICookiesService cookiesService;
 
     @RequestMapping(value = "/register")  //默认为GET
     public String register(){
@@ -75,7 +75,7 @@ public class RegisterController {
                 cookies.setLoginTime(time);   //设置登陆时间
                 cookies.setLifeTime(cookieTime);   //设置生命周期
 //                System.out.println("register:" + user.getId() + "===" + sessionId);
-                cookiesService.insertCookies(cookies);//登陆成功后就会抛出用户ID和用户名
+                ICookiesService.insertCookies(cookies);//登陆成功后就会抛出用户ID和用户名
                 session.setAttribute("userId", user.getId());
                 session.setAttribute("userName", user.getName());
 //                System.out.println("register:" + sessionId);
@@ -130,7 +130,7 @@ public class RegisterController {
                     cookies.setLoginTime(time);   //设置登陆时间
                     cookies.setLifeTime(cookieTime);   //设置生命周期
 //                    System.out.println("login:"+user.getId()+"==="+sessionId);
-                    cookiesService.updateCookies(cookies);  //更新
+                    ICookiesService.updateCookies(cookies);  //更新
 //                    System.out.println("login:" + sessionId);
                     session.setAttribute("userId",user.getId());
                     session.setAttribute("userName", userTemp.getName());

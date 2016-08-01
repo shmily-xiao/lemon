@@ -2,7 +2,7 @@ package com.lemon.filter;
 
 import com.lemon.domain.Cookies;
 import com.lemon.domain.User;
-import com.lemon.service.CookiesService;
+import com.lemon.service.ICookiesService;
 import com.lemon.service.UserService;
 import com.lemon.utils.Md5;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.Date;
 public class CookieFilter implements HandlerInterceptor{
 
     @Autowired  //注入
-    CookiesService cookiesService;
+            ICookiesService ICookiesService;
 
     @Autowired
     UserService userService;
@@ -59,7 +59,7 @@ public class CookieFilter implements HandlerInterceptor{
         String valuesU[] = autoName.getValue().split("\\:");
         String valuesP[] = autoPassword.getValue().split("\\:");
 
-        Cookies cookies1 = cookiesService.findCookies(valuesU[0]);
+        Cookies cookies1 = ICookiesService.findCookies(valuesU[0]);
         if(cookies1!=null){
             int lifeTime = cookies1.getLifeTime();
             Date loginTime = new Date(cookies1.getLoginTime().getTime());

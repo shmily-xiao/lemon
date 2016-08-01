@@ -3,14 +3,24 @@ package com.lemon.dao.impl;
 import com.lemon.dao.IBaseDao;
 import com.lemon.domain.BaseDomain;
 import com.lemon.query.BaseQuery;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
  * Created by simpletour_java on 2015/9/9.
  */
 public abstract class BaseDaoImpl<T extends BaseDomain, M extends BaseQuery> extends SqlSessionDaoSupport implements IBaseDao<T,M> {
+
+
+    @Resource(name = "sqlSession")
+    private SqlSessionTemplate sqlSessionTemplate;
+
+    {
+        this.setSqlSessionTemplate(sqlSessionTemplate);
+    }
 
     public String getNameSpace(){
         return this.getClass().getName();
