@@ -3,19 +3,18 @@
 <configuration>
     <typeAliases>
         <typeAlias alias="User" type="com.lemon.domain.User"/>
-        <typeAlias alias="Detail" type="com.lemon.domain.Detail"/>
+        <typeAlias alias="Friendship" type="com.lemon.domain.Friendship"/>
         <typeAlias alias="Cookies" type="com.lemon.domain.Cookies"/>
-        <typeAlias alias="Person" type="com.lemon.domain.Person"/>
-        <typeAlias alias="Info" type="com.lemon.domain.Info"/>
-        <typeAlias alias="EmailUser" type="com.secureemail.domain.User"/>
-        <typeAlias alias="Email" type="com.secureemail.domain.Email"/>
-        <typeAlias alias="EmailModel" type="com.secureemail.domain.EmailModel"/>
+        <typeAlias alias="Lemon" type="com.lemon.domain.Lemon"/>
+        <typeAlias alias="MsmSendlog" type="com.lemon.domain.MsmSendlog"/>
+        <typeAlias alias="WechatUser" type="com.lemon.domain.WechatUser"/>
     </typeAliases>
     <mappers>
         <mapper resource="mybatis/user/userSQL.xml"/>
-        <mapper resource="mybatis/detail/detailSQL.xml"/>
+        <mapper resource="mybatis/wechatUser/wechatUserSQL.xml"/>
         <mapper resource="mybatis/cookies/cookiesSQL.xml"/>
-        <mapper resource="mybatis/person/personSQL.xml"/>
-        <mapper resource="mybatis/info/infoSQL.xml"/>
+        <mapper resource="mybatis/lemon/lemonSQL.xml"/>
+        <mapper resource="mybatis/friendship/friendshipSQL.xml"/>
+        <mapper resource="mybatis/msmSendlog/msmSendlogSQL.xml"/>
     </mappers>
 </configuration>
