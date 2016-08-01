@@ -34,13 +34,14 @@ public abstract class BaseServiceImpl<T extends BaseDomain, M extends BaseQuery>
     }
 
     @Override
-    public T update(T object) {
-        return this.getBaseDao().update(object) != 0 ? object : null;
+    public Optional<T> update(T object) {
+        return this.getBaseDao().update(object) != 0 ? Optional.of(object) : Optional.empty();
     }
 
     @Override
-    public T find(Long id) {
-        return this.getBaseDao().find(id);
+    public Optional<T> find(Long id) {
+        T object = this.getBaseDao().find(id);
+        return  object != null ? Optional.of(object):Optional.empty();
     }
 
     @Override

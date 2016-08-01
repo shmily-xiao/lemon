@@ -33,23 +33,29 @@
         <constructor-arg index="0" ref="sqlSessionFactory" />
     </bean>
 
+    <bean id="cookiesDao" class="com.lemon.dao.impl.CookiesDaoImpl">
+        <property name="sqlSessionTemplate" ref="sqlSession"/>
+    </bean>
+
     <bean id="userDao" class="com.lemon.dao.impl.UserDaoImpl">
         <property name="sqlSessionTemplate" ref="sqlSession"/>
     </bean>
 
-    <bean id="detailDao" class="com.lemon.dao.impl.DetailDaoImpl">
+    <bean id="wechatUserDao" class="com.lemon.dao.impl.WechatUserDaoImpl">
         <property name="sqlSessionTemplate" ref="sqlSession"/>
     </bean>
 
-    <bean id="cookiesDao" class="com.lemon.dao.impl.CookiesDaoImpl">
+    <bean id="lemonDao" class="com.lemon.dao.impl.LemonDaoImpl">
         <property name="sqlSessionTemplate" ref="sqlSession"/>
     </bean>
-    <bean id="personDao" class="com.lemon.dao.impl.PersonDaoImpl">
+    <bean id="friendshipDao" class="com.lemon.dao.impl.FriendshipDaoImpl">
         <property name="sqlSessionTemplate" ref="sqlSession"/>
     </bean>
-    <bean id="infoDao" class="com.lemon.dao.impl.InfoDaoImpl">
+
+    <bean id="msmSendlog" class="com.lemon.dao.impl.MsmSendlogDaoImpl">
         <property name="sqlSessionTemplate" ref="sqlSession"/>
     </bean>
+
 
     <!--cache manager-->
 
