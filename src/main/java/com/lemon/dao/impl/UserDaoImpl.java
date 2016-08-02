@@ -12,14 +12,8 @@ import javax.annotation.Resource;
 /**
  * Created by simpletour_Jenkin on 2016/7/28.
  */
-@Repository("userDao")
+@Repository
 public class UserDaoImpl extends BaseDaoImpl<User,BaseQuery> implements IUserDao {
 
 
-    @Resource(name = "sqlSession")
-    protected SqlSessionTemplate sqlSessionTemplate;
-
-    {
-        this.setSqlSessionTemplate(sqlSessionTemplate);
-    }
 }

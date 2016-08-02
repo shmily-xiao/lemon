@@ -5,6 +5,7 @@ import com.lemon.domain.BaseDomain;
 import com.lemon.query.BaseQuery;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -13,16 +14,13 @@ import java.util.List;
 /**
  * Created by simpletour_java on 2015/9/9.
  */
-//@Component
+@Component
 public abstract class BaseDaoImpl<T extends BaseDomain, M extends BaseQuery> extends SqlSessionDaoSupport implements IBaseDao<T,M> {
 
-//
-//    @Resource(name = "sqlSession")
-//    protected SqlSessionTemplate sqlSessionTemplate;
-//
-//    {
-//        this.setSqlSessionTemplate(sqlSessionTemplate);
-//    }
+    @Autowired
+    public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
+        super.setSqlSessionTemplate(sqlSessionTemplate);
+    }
 
     public String getNameSpace(){
         return this.getClass().getName();
