@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 /**
  * Created by simpletour_Jenkin on 2016/7/28.
  */
-//@Repository
+@Repository
 public class WechatUserDaoImpl extends BaseDaoImpl<WechatUser,BaseQuery> implements IWechatUserDao {
 }

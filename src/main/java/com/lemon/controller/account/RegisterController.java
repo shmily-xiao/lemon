@@ -2,19 +2,25 @@ package com.lemon.controller.account;
 
 import com.lemon.domain.Cookies;
 import com.lemon.domain.User;
+import com.lemon.form.AjaxResponse;
+import com.lemon.form.user.UserAccountForm;
 import com.lemon.service.ICookiesService;
 import com.lemon.service.IUserService;
 import com.lemon.utils.Md5;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.BindingResultUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -30,66 +36,77 @@ public class RegisterController {
 //    @Resource
 //    private ICookiesService cookiesService;
 
-    @RequestMapping(value = "account/register")  //默认为GET
+    @RequestMapping(value = "/account/register")  //默认为GET
     public String register(){
         return "/lemon/account/demo";
     }
 
 
-    @RequestMapping(value = "/register",method = RequestMethod.POST)
-    public String register(User user,Model model,HttpServletResponse response,HttpServletRequest request){
-//        System.out.println(user.getId() + " " + user.getName() + " " + user.getPassword());
-//        System.out.println("register: "+user.getPassword());
-        if(user.getId()!=null && !user.getId().equals("")
-                && user.getName()!=null && !user.getName().equals("")
-                && user.getPassword()!=null && !user.getPassword().equals("")){
-            int count = userService.findName(user.getId());
-            if(count!=0){
-                model.addAttribute("message","此用户ID已经被注册！");
-                return "register";
-            }else{
-                int salt = (int)(((Math.random()*100+1)*1000)-1); //生成salt 999--99999
-                user.setSalt(salt);
-                String pwd = user.getPassword()+salt;   //组合
-                String password = Md5.messageDigest(pwd);  //组合之后再生成MD5摘要信息
-                user.setPassword(password);
-                userService.insert(user);
-                int cookieTime = 60*30;
-                HttpSession session = request.getSession();
-                String sessionId = session.getId();
-                Cookie cookie = new Cookie("JSESSIONID",sessionId);//注意key值必须和原来一样，否则服务器无法标识用户
-                Cookie cookie1 = new Cookie("userId",user.getId());
-                Cookie cookie2 = new Cookie("password",user.getPassword());
-                cookie2.setMaxAge(cookieTime);
-                cookie2.setPath("/");
-                cookie1.setMaxAge(cookieTime);
-                cookie1.setPath("/");
-                cookie.setMaxAge(cookieTime);// 设置cookie的生命周期1800s  现在是30s
-                cookie.setPath("/");  // 设置cookie有效路径，
-                response.addCookie(cookie2);
-                response.addCookie(cookie1);
-                response.addCookie(cookie);//cookie添加完毕
-                Cookies cookies = new Cookies(); //在数据库中储存每个id对应一个sessionId
-                cookies.setId(user.getId()); //设置用户ID
-                cookies.setSessionId(sessionId);   //实体里面有一个变量叫做sessionId
-                Date now = new Date();
-                Timestamp time = new Timestamp(now.getTime());
-                cookies.setLoginTime(time);   //设置登陆时间
-                cookies.setLifeTime(cookieTime);   //设置生命周期
-//                System.out.println("register:" + user.getId() + "===" + sessionId);
-                ICookiesService.insertCookies(cookies);//登陆成功后就会抛出用户ID和用户名
-                session.setAttribute("userId", user.getId());
-                session.setAttribute("userName", user.getName());
-//                System.out.println("register:" + sessionId);
-                model.addAttribute("message","注册成功！");
-                return "success";
-            }
-        }else{
-            model.addAttribute("message","所有的内容都需要正确的填写！");
-            return "register";
+    @ResponseBody
+    @RequestMapping(value = "/account/register",method = RequestMethod.POST)
+    public AjaxResponse register(@Valid UserAccountForm user, Model model, HttpServletRequest request, BindingResult result){
+        if (result.hasErrors()){
+            return AjaxResponse.fail().msg("注册失败").reason("用户没有提交数据");
         }
 
+
+        return AjaxResponse.fail();
     }
+
+//    @RequestMapping(value = "/register",method = RequestMethod.POST)
+//    public String register(User user,Model model,HttpServletResponse response,HttpServletRequest request){
+////        System.out.println(user.getId() + " " + user.getName() + " " + user.getPassword());
+////        System.out.println("register: "+user.getPassword());
+//        if(user.getId()!=null && !user.getId().equals("")
+//                && user.getName()!=null && !user.getName().equals("")
+//                && user.getPassword()!=null && !user.getPassword().equals("")){
+//            int count = userService.findName(user.getId());
+//            if(count!=0){
+//                model.addAttribute("message","此用户ID已经被注册！");
+//                return "register";
+//            }else{
+//                int salt = (int)(((Math.random()*100+1)*1000)-1); //生成salt 999--99999
+//                user.setSalt(salt);
+//                String pwd = user.getPassword()+salt;   //组合
+//                String password = Md5.messageDigest(pwd);  //组合之后再生成MD5摘要信息
+//                user.setPassword(password);
+//                userService.insert(user);
+//                int cookieTime = 60*30;
+//                HttpSession session = request.getSession();
+//                String sessionId = session.getId();
+//                Cookie cookie = new Cookie("JSESSIONID",sessionId);//注意key值必须和原来一样，否则服务器无法标识用户
+//                Cookie cookie1 = new Cookie("userId",user.getId());
+//                Cookie cookie2 = new Cookie("password",user.getPassword());
+//                cookie2.setMaxAge(cookieTime);
+//                cookie2.setPath("/");
+//                cookie1.setMaxAge(cookieTime);
+//                cookie1.setPath("/");
+//                cookie.setMaxAge(cookieTime);// 设置cookie的生命周期1800s  现在是30s
+//                cookie.setPath("/");  // 设置cookie有效路径，
+//                response.addCookie(cookie2);
+//                response.addCookie(cookie1);
+//                response.addCookie(cookie);//cookie添加完毕
+//                Cookies cookies = new Cookies(); //在数据库中储存每个id对应一个sessionId
+//                cookies.setId(user.getId()); //设置用户ID
+//                cookies.setSessionId(sessionId);   //实体里面有一个变量叫做sessionId
+//                Date now = new Date();
+//                Timestamp time = new Timestamp(now.getTime());
+//                cookies.setLoginTime(time);   //设置登陆时间
+//                cookies.setLifeTime(cookieTime);   //设置生命周期
+////                System.out.println("register:" + user.getId() + "===" + sessionId);
+//                ICookiesService.insertCookies(cookies);//登陆成功后就会抛出用户ID和用户名
+//                session.setAttribute("userId", user.getId());
+//                session.setAttribute("userName", user.getName());
+////                System.out.println("register:" + sessionId);
+//                model.addAttribute("message","注册成功！");
+//                return "success";
+//            }
+//        }else{
+//            model.addAttribute("message","所有的内容都需要正确的填写！");
+//            return "register";
+//        }
+//
+//    }
 //
 //    @RequestMapping(value = "/login")  //默认是GET方法
 //    public String login(){

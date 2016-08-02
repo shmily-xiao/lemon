@@ -4,6 +4,7 @@ import com.lemon.dao.CookiesDao;
 import com.lemon.domain.Cookies;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -11,15 +12,14 @@ import javax.annotation.Resource;
 /**
  * Created by simpletour_java on 2015/6/4.
  */
-//@Repository
+@Repository
 public class CookiesDaoImpl extends SqlSessionDaoSupport implements CookiesDao {
 
-//    @Resource(name = "sqlSession")
-//    private SqlSessionTemplate sqlSessionTemplate;
-//
-//    {
-//        this.setSqlSessionTemplate(sqlSessionTemplate);
-//    }
+    @Override
+    @Autowired
+    public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
+        super.setSqlSessionTemplate(sqlSessionTemplate);
+    }
 
     public String getNameSpace(){
         return this.getClass().getName();
