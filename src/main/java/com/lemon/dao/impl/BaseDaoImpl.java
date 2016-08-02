@@ -13,16 +13,16 @@ import java.util.List;
 /**
  * Created by simpletour_java on 2015/9/9.
  */
-@Component
+//@Component
 public abstract class BaseDaoImpl<T extends BaseDomain, M extends BaseQuery> extends SqlSessionDaoSupport implements IBaseDao<T,M> {
 
-
-    @Resource(name = "sqlSession")
-    private SqlSessionTemplate sqlSessionTemplate;
-
-    {
-        this.setSqlSessionTemplate(sqlSessionTemplate);
-    }
+//
+//    @Resource(name = "sqlSession")
+//    protected SqlSessionTemplate sqlSessionTemplate;
+//
+//    {
+//        this.setSqlSessionTemplate(sqlSessionTemplate);
+//    }
 
     public String getNameSpace(){
         return this.getClass().getName();

@@ -14,6 +14,7 @@ import javax.annotation.Resource;
  */
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User,BaseQuery> implements IUserService {
+
     @Resource
     private IUserDao userDao;
 

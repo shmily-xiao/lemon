@@ -11,15 +11,15 @@ import javax.annotation.Resource;
 /**
  * Created by simpletour_java on 2015/6/4.
  */
-@Repository
+//@Repository
 public class CookiesDaoImpl extends SqlSessionDaoSupport implements CookiesDao {
 
-    @Resource(name = "sqlSession")
-    private SqlSessionTemplate sqlSessionTemplate;
-
-    {
-        this.setSqlSessionTemplate(sqlSessionTemplate);
-    }
+//    @Resource(name = "sqlSession")
+//    private SqlSessionTemplate sqlSessionTemplate;
+//
+//    {
+//        this.setSqlSessionTemplate(sqlSessionTemplate);
+//    }
 
     public String getNameSpace(){
         return this.getClass().getName();
