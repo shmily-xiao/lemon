@@ -7,22 +7,17 @@
     <meta name="baidu-site-verification" content="H53YfCY2d4" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="这是描述，这是描述">
-    <meta name="keywords" content="比特币,比特币钱包,比特币银行,比特币行情,虚拟货币,比特币交易平台,比特币中国平台,买比特币,比特币价格">
+    <meta name="description" content="这是描述，这是描述，这是描述">
+    <meta name="keywords" content="关键字，关键字，关键字">
     <meta name="author" content="HaoBTC Frontend Team">
 
     <meta http-equiv="content-security-policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.baidu.com; img-src 'self' *.baidu.com data: mp.weixin.qq.com; connect-src 'self' *.haobtc.com ws://*.haobtc.com wss://*.haobtc.com; style-src 'self' 'unsafe-inline'; child-src 'self' *.haobtc.com; frame-src 'self' *.haobtc.com">
 
 
     <title>
-        HaoBTC—好比特币钱包: 使用比特币第一平台
+        从自己想做的第一件事开始
     </title>
-    <link rel="shortcut icon" href="/static3/images/favicon.da93854de718.png" type="image/png">
-    <link rel="apple-touch-icon" href="/static3/images/Icon-60.3d50ef437c83.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/static3/images/Icon-76.b9a751bce30f.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/static3/images/Icon-60@2x.5990764d263f.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/static3/images/Icon-76@2x.dddf1b088e17.png">
-
+    <link rel="shortcut icon" href="/img/gift.jpg" type="image/png">
     <!--  css -->
 
     <link href="/css/bootstrap.2183d05f5a0a.css" rel="stylesheet" />
@@ -32,28 +27,28 @@
     <link href="/css/intlTelInput-reload.32b2d0bf5fb4.css" rel="stylesheet" />
     <link rel="stylesheet" href="/css/footer.a18761b4dee9.css">
 
-    <!--[if lt IE 9]>
-	<script src="/static3/html5shiv/dist/html5shiv.min.40bd440d29b3.js"></script>
-	<script src="/static3/respond/dest/respond.min.afc1984a3d17.js"></script>
-    <![endif]-->
+    <#--<!--[if lt IE 9]>-->
+	<#--<script src="/static3/html5shiv/dist/html5shiv.min.40bd440d29b3.js"></script>-->
+	<#--<script src="/static3/respond/dest/respond.min.afc1984a3d17.js"></script>-->
+    <#--<![endif]&ndash;&gt;-->
 
-    <script src="/static3/jquery/dist/jquery.3d93b072d14f.js"></script>
-    <script src="/static3/jquery.cookie/jquery.cookie.d5528dde0006.js"></script>
-    <script src="/static3/socket.io-client/socket.io.c0bbb14cef9c.js"></script>
-    <script src="/static3/underscore/underscore.f893e294cde6.js"></script>
-    <script src="/static3/bootstrap/dist/js/bootstrap.9cb0532955cf.js"></script>
-    <script src="/static3/countUp.js/countUp.bda4f56c91f0.js"></script>
-    <script src="/static3/js/baidu_analysis.3f84a322787f.js"></script>
-    <![if !(lt IE 9)]>
-    <script src="/static3/js/bitcore.145d63a735d4.js"></script>
-    <![endif]>
-    <script src="/static3/intl-tel-input/build/js/intlTelInput.89e8a715ac04.js"></script>
-    <script src="/static3/jquery-cookie/jquery.cookie.d5528dde0006.js"></script>
-    <script src="/static3/intl-tel-input/lib/libphonenumber/build/utils.5cc9f6b8d97c.js"></script>
-    <script src="/static3/js/haobtc.70e6df07c3b9.js"></script>
-    <script src="/static3/js/views/auth.cfa01a638a12.js"></script>
-    <script src="/static3/js/views/nav.97526d1d0acd.js"></script>
-    <script src="/static3/js/views/index.2545b1de8f0f.js"></script>
+    <#--<script src="/static3/jquery/dist/jquery.3d93b072d14f.js"></script>-->
+    <#--<script src="/static3/jquery.cookie/jquery.cookie.d5528dde0006.js"></script>-->
+    <#--<script src="/static3/socket.io-client/socket.io.c0bbb14cef9c.js"></script>-->
+    <#--<script src="/static3/underscore/underscore.f893e294cde6.js"></script>-->
+    <#--<script src="/static3/bootstrap/dist/js/bootstrap.9cb0532955cf.js"></script>-->
+    <#--<script src="/static3/countUp.js/countUp.bda4f56c91f0.js"></script>-->
+    <#--<script src="/static3/js/baidu_analysis.3f84a322787f.js"></script>-->
+    <#--<![if !(lt IE 9)]>-->
+    <#--<script src="/static3/js/bitcore.145d63a735d4.js"></script>-->
+    <#--<![endif]>-->
+    <#--<script src="/static3/intl-tel-input/build/js/intlTelInput.89e8a715ac04.js"></script>-->
+    <#--<script src="/static3/jquery-cookie/jquery.cookie.d5528dde0006.js"></script>-->
+    <#--<script src="/static3/intl-tel-input/lib/libphonenumber/build/utils.5cc9f6b8d97c.js"></script>-->
+    <#--<script src="/static3/js/haobtc.70e6df07c3b9.js"></script>-->
+    <#--<script src="/static3/js/views/auth.cfa01a638a12.js"></script>-->
+    <#--<script src="/static3/js/views/nav.97526d1d0acd.js"></script>-->
+    <#--<script src="/static3/js/views/index.2545b1de8f0f.js"></script>-->
 
     <script>
         //<!--
@@ -67,9 +62,9 @@
         }
         //-->
     </script>
-    <script src="/static3/js/notify.7907ab63d175.js"></script>
+    <#--<script src="/static3/js/notify.7907ab63d175.js"></script>-->
 
-    <script src="/static3/js/jsi18n/zh-hans/jsi18n.709511afe475.js"></script>
+    <#--<script src="/static3/js/jsi18n/zh-hans/jsi18n.709511afe475.js"></script>-->
 
     <!--  css -->
 
@@ -93,25 +88,22 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/?k=ybskDi">
-                    <img alt="haobtc" src="/media/logo/ZNqi7NnFdqTtjlKD.png" width="125" title="好比特币-市场份额第一的比特币钱包">
+                    <img alt="GoodAndBetter" src="/img/ship.jpg" width="125" title="从自己想做的第一件事开始">
                 </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="index-nav-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown head-nav-dropdown hidden-xs" style="margin-top:15px">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">了解更多<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <div class="dropdown-arrow"></div>
-                            <li><a href="/common/transparency" target="_blank">资产透明</a></li>
-                            <li><a href="/common/pool_landing" target="_blank">好比特币矿池</a></li>
-                            <li><a href="/common/about-us" target="_blank">团队介绍</a></li>
-                            <li><a href="/common/contact" target="_blank">联系我们</a></li>
-                            <li><a href="/common/faq" target="_blank">常见问题</a></li>
-                            <li><a href="/common/logo" target="_blank">标志</a></li>
-                            <li><a href="/common/report" target="_blank">媒体报道</a></li>
-                        </ul>
-                    </li>
+                    <#--<li class="dropdown head-nav-dropdown hidden-xs" style="margin-top:15px">-->
+                        <#--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">了解更多<span class="caret"></span></a>-->
+                        <#--<ul class="dropdown-menu" role="menu">-->
+                            <#--<div class="dropdown-arrow"></div>-->
+
+                            <#--<li><a href="/common/about-us" target="_blank">团队介绍</a></li>-->
+                            <#--<li><a href="/common/contact" target="_blank">联系我们</a></li>-->
+                            <#--<li><a href="/common/faq" target="_blank">常见问题</a></li>-->
+                        <#--</ul>-->
+                    <#--</li>-->
                     <li class="dropdown head-nav-dropdown hidden-sm hidden-xs" style="margin-top:15px">
                         <!--benchmark price 从这里开始-->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-exchange"></i>买入 <span id="id_buy_btc_nav"></span> /卖出 <span id="id_sell_btc_nav"></span></a>
