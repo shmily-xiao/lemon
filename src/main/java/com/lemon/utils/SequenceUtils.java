@@ -34,7 +34,7 @@ public class SequenceUtils {
     }
 
     /**
-     * 生成指定长度的纯数字的随即序列
+     * 生成指定长度的纯字母的随即序列
      *
      * @param length
      * @return
@@ -44,7 +44,7 @@ public class SequenceUtils {
     }
 
     /**
-     * 生成指定长度的纯数字的随即序列
+     * 生成指定长度的数字和字母的随即序列
      *
      * @param length
      * @return
