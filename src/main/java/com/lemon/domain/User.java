@@ -1,6 +1,8 @@
 package com.lemon.domain;
 
 import com.lemon.domain.interfaces.IUser;
+import com.lemon.enums.UserType;
+import com.lemon.enums.ZoneStatus;
 
 import java.util.Date;
 
@@ -60,14 +62,14 @@ public class User extends BaseDomain implements IUser {
     private String salt;
 
     /**
-     * 状态
+     * 状态，表示该用户是否是可用的
      */
-    private String status;
+    private String status = "true";
 
     /**
-     * 用户的类型，或者是等级
+     * 用户的类型，或者是等级,默认为 新手
      */
-    private String type;
+    private UserType type = UserType.NEWBIE;
 
     /**
      * 成就值，得分
@@ -77,7 +79,16 @@ public class User extends BaseDomain implements IUser {
     /**
      * 用户是否公开自己的事件，或者是只能好友可见
      */
-    private String zoneStatus;
+    private ZoneStatus zoneStatus = ZoneStatus.PUBLIC;
+
+    public User(){}
+
+    public User(String mobile, String nickName, String password, String salt) {
+        this.mobile = mobile;
+        this.nickName = nickName;
+        this.password = password;
+        this.salt = salt;
+    }
 
     @Override
     public String getAvatar() {
@@ -197,21 +208,20 @@ public class User extends BaseDomain implements IUser {
     }
 
     @Override
-    public String getType() {
+    public UserType getType() {
         return type;
     }
 
-    @Override
-    public void setType(String type) {
+    public void setType(UserType type) {
         this.type = type;
     }
 
     @Override
-    public String getZoneStatus() {
+    public ZoneStatus getZoneStatus() {
         return zoneStatus;
     }
     @Override
-    public void setZoneStatus(String zoneStatus) {
+    public void setZoneStatus(ZoneStatus zoneStatus) {
         this.zoneStatus = zoneStatus;
     }
 }

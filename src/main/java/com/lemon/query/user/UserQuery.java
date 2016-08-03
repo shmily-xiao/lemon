@@ -81,8 +81,8 @@ public class UserQuery extends BaseQuery {
 
     public UserQuery(){}
 
-    public UserQuery(String nickName){
-        this.nickName = nickName;
+    public UserQuery(String mobile){
+        this.mobile = mobile;
     }
 
     public String getAvatar() {

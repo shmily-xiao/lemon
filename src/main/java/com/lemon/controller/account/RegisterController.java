@@ -1,28 +1,21 @@
 package com.lemon.controller.account;
 
-import com.lemon.domain.Cookies;
 import com.lemon.domain.User;
 import com.lemon.form.AjaxResponse;
 import com.lemon.form.user.UserAccountForm;
-import com.lemon.service.ICookiesService;
+import com.lemon.query.user.UserQuery;
 import com.lemon.service.IUserService;
 import com.lemon.utils.Md5;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.BindingResultUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.sql.Timestamp;
-import java.util.Date;
+import java.util.Optional;
 
 /**
  * Created by simpletour_java on 2015/6/3.
@@ -38,16 +31,27 @@ public class RegisterController {
 
     @RequestMapping(value = "/account/register")  //默认为GET
     public String register(){
-        return "/lemon/account/demo";
+        return "lemon/account/register";
     }
 
 
     @ResponseBody
     @RequestMapping(value = "/account/register",method = RequestMethod.POST)
-    public AjaxResponse register(@Valid UserAccountForm user, Model model, HttpServletRequest request, BindingResult result){
+    public AjaxResponse register(@Valid UserAccountForm userForm, BindingResult result, HttpServletRequest request){
         if (result.hasErrors()){
             return AjaxResponse.fail().msg("注册失败").reason("用户没有提交数据");
         }
+
+        Optional<User> userOptional = userService.findOne(new UserQuery(userForm.getMobile()));
+        if (userOptional.isPresent()) {
+            return AjaxResponse.fail().msg("注册失败").reason("该手机号已经注册过了");
+        }
+
+        int salt = (int)(((Math.random()*100+1)*1000)-1); //生成salt 999--99999
+        String password = Md5.messageDigest(userForm.getPassword() + salt);
+        User user = new User(userForm.getMobile(),userForm.getMobile(),userForm.getPassword(),salt+"");
+
+
 
 
         return AjaxResponse.fail();

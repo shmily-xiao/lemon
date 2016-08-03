@@ -1,6 +1,8 @@
 package com.lemon.domain.interfaces;
 
 import com.lemon.domain.interfaces.ibase.IName;
+import com.lemon.enums.UserType;
+import com.lemon.enums.ZoneStatus;
 
 import java.util.Date;
 
@@ -49,8 +51,8 @@ public interface IUser extends IName{
     void setStatus(String status);
 
     //用户的类型, 用于表示用户的等级
-    String getType();
-    void setType(String type);
+    UserType getType();
+    void setType(UserType type);
 
     // 用户的得分，或者是叫做 成就，每完成一件自己想做的事情就加分，理论上没有上线
     // 但是以后可以通过成就值给用户划分等级
@@ -58,7 +60,7 @@ public interface IUser extends IName{
     void setScore(Long score);
 
     // 用户是否公开自己的事件，或者是只能好友可见
-    String getZoneStatus();
-    void setZoneStatus(String zoneStatus);
+    ZoneStatus getZoneStatus();
+    void setZoneStatus(ZoneStatus zoneStatus);
 
 }
