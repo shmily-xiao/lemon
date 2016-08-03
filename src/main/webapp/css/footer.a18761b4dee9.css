@@ -1,0 +1,50 @@
+*{
+    font-weight: 400 !important;
+}
+
+footer {
+    padding-top:3em;
+}
+
+.footer-content li{
+    list-style-type: none;
+    line-height: 2.5em;
+    font-size:1em;
+    color:#808080;
+}
+
+.footer-content li > h5{
+    font-size:1.3em;
+    color:#606060;
+}
+
+.footer-content li > a{
+    color:#808080;
+    font-size: 1em;
+}
+
+.footer-terms p{
+    font-size: 1em;
+    color:#BABABA;
+    display:block;
+}
+
+.footer-terms p > a{
+    margin-left:2em;
+    color:#808080;
+}
+
+.footer-terms select {
+    margin-left: 10em;
+}
+
+.footer-content {
+    padding-left:0;
+}
+
+.footer-terms {
+    border-top:1px solid #ddd;
+    border-bottom:1px solid #ddd;
+    padding-top:0.75em;
+    margin-top:3em;
+}

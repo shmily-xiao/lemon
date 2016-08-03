@@ -37,6 +37,8 @@ public class AccountController {
     @Resource
     private ICookiesService cookiesService;
 
+    private static final int COOKIES_LIFE_TIME = 60*30;
+
     @RequestMapping(value = "/account/register")  //默认为GET
     public String register(){
         return "/lemon/account/register";
@@ -68,6 +70,43 @@ public class AccountController {
         return AjaxResponse.ok().url("");
     }
 
+
+
+    @RequestMapping(value = "/account/login")  //默认是GET方法
+    public String login(){
+        return "/lemon/account/login";
+    }
+
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public AjaxResponse login(@Valid UserAccountForm userForm,BindingResult result, HttpServletRequest request,HttpServletResponse response) {
+        if (result.hasErrors()) {
+            return AjaxResponse.fail().msg("登录失败").reason("用户没有提交任何数据");
+        }
+
+        Optional<User> userOptional = userService.findOne(new UserQuery(userForm.getMobile()));
+        if (!userOptional.isPresent()){
+            return AjaxResponse.fail().msg("登录失败").reason("用户不存在");
+        }
+
+        User user = userOptional.get();
+
+        String password = Md5.messageDigest(userForm.getPassword() + user.getSalt());
+        if (!user.getPassword().equals(password)){
+            return AjaxResponse.fail().msg("登录失败").reason("用户名或者密码错误");
+        }
+
+        HttpSession session = request.getSession();
+        Cookies cookies = this.createCookies(session, response, user);
+        cookiesService.updateCookies(cookies);
+
+        session.setAttribute("user.nickname", user.getNickName());
+
+        //// TODO: 2016/8/3 首页 url
+        return AjaxResponse.ok().url("");
+
+    }
+
+
     /**
      * 设置cookie的生存时间*
      * @param session
@@ -77,7 +116,7 @@ public class AccountController {
      */
     private Cookies createCookies(HttpSession session, HttpServletResponse response, User user ){
         // cookies 的存活时间
-        int cookieTime = 60*30;
+        int cookieTime = COOKIES_LIFE_TIME;
         String sessionId = session.getId();
         Cookie cookie = new Cookie("JSESSIONID",sessionId);//注意key值必须和原来一样，否则服务器无法标识用户
         Cookie cookie1 = new Cookie("userId",user.getId()+"");
@@ -100,74 +139,5 @@ public class AccountController {
         cookies.setLifeTime(cookieTime);   //设置生命周期
         return cookies;
     }
-
-
-
-    @RequestMapping(value = "/account/login")  //默认是GET方法
-    public String login(){
-        return "/lemon/account/login";
-    }
-
-//    @RequestMapping(value = "/login",method = RequestMethod.POST)
-//    public AjaxResponse login(User user,HttpServletRequest request,HttpServletResponse response) {
-//
-//    }
-////
-//    @RequestMapping(value = "/login",method = RequestMethod.POST)
-//    public String login(User user,Model model,HttpServletRequest request,HttpServletResponse response){
-////        System.out.println("login: " + user.getPassword());
-//        if(user.getId()!=null && !user.getId().equals("")
-//                && user.getPassword()!= null && !user.getPassword().equals("")){
-//            User userTemp = userService.findUserName(user.getId());
-//            if(userTemp != null){
-//                int salt = userTemp.getSalt();  //从数据库获取salt
-//                String pwdTemp = user.getPassword();
-//                String pwd = user.getPassword() + salt;  //组合
-//                String password = Md5.messageDigest(pwd);  //生成MD5摘要
-//                user.setPassword(password);
-//                if(userTemp.getPassword().equals(password)){
-//                    int cookieTime = 60*30; //生存的时间 以秒为单位
-//                    HttpSession session = request.getSession();
-//                    String sessionId = session.getId();
-//                    Cookie cookie = new Cookie("JSESSIONID",sessionId);//注意key值必须和原来一样，否则服务器无法标识用户
-//                    Cookie cookie1 = new Cookie("userId",user.getId());
-//                    Cookie cookie2 = new Cookie("password",pwdTemp);
-//                    cookie.setMaxAge(cookieTime);// 设置cookie的生命周期1800s
-//                    cookie1.setMaxAge(cookieTime);
-//                    cookie2.setMaxAge(cookieTime);
-//                    cookie.setPath("/");  // 设置cookie有效路径，
-//                    cookie1.setPath("/");
-//                    cookie2.setPath("/");
-//                    response.addCookie(cookie2);
-//                    response.addCookie(cookie1);
-//                    response.addCookie(cookie);//cookie添加完毕
-//                    Cookies cookies = new Cookies(); //在数据库中储存每个id对应一个sessionId
-//                    cookies.setId(user.getId());  //设置用户ＩＤ
-//                    cookies.setSessionId(sessionId);   //实体里面有一个变量叫做sessionId
-//                    Date now = new Date();
-//                    Timestamp time = new Timestamp(now.getTime());
-//                    cookies.setLoginTime(time);   //设置登陆时间
-//                    cookies.setLifeTime(cookieTime);   //设置生命周期
-////                    System.out.println("login:"+user.getId()+"==="+sessionId);
-//                    ICookiesService.updateCookies(cookies);  //更新
-////                    System.out.println("login:" + sessionId);
-//                    session.setAttribute("userId",user.getId());
-//                    session.setAttribute("userName", userTemp.getName());
-//                    return "success";
-//                }else{
-//                    model.addAttribute("message","用户ID或者密码错误！");
-//                    return "login";
-//                }
-//
-//            }else{
-//                model.addAttribute("message","此用户ID不存在！");
-//                return "login";
-//            }
-//
-//        }else{
-//            model.addAttribute("message","必须所有的都填写！");
-//            return "login";
-//        }
-//    }
 
 }

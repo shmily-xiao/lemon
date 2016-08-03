@@ -74,7 +74,7 @@ public class User extends BaseDomain implements IUser {
     /**
      * 成就值，得分
      */
-    private Long score;
+    private Long score = 0L;
 
     /**
      * 用户是否公开自己的事件，或者是只能好友可见
