@@ -16,7 +16,6 @@ import java.util.Map;
  * Created by simpletour_Jenkins on 14-11-6.
  */
 public abstract class AjaxResponse {
-
     /**
      * 成功
      * @return
@@ -142,11 +141,11 @@ public abstract class AjaxResponse {
     @JSONField(ordinal = 2, name = "msg")
     private String msg ;
 
-    @JSONField(ordinal = 3, name = "detail")
-    private String detail ;
+    @JSONField(ordinal = 3, name = "reason")
+    private String reason ;
 
     @JSONField(ordinal = 4, name = "url")
-    private String jumpUrl;
+    private String url;
 
     @JSONField(ordinal = 5, name = "data")
     protected Object data;
@@ -177,9 +176,11 @@ public abstract class AjaxResponse {
         return data;
     }
 
-    public String getJumpUrl() {return jumpUrl;}
+    public String getUrl() {return url;}
 
-    public String getDetail() {return detail;}
+    public String getReason() {
+        return reason;
+    }
 
     public String getHtml() {return html;}
 
@@ -205,24 +206,24 @@ public abstract class AjaxResponse {
         return this;
     }
 
-    public AjaxResponse detail(String detail){
-        if (this.getMessageSource()!=null && detail.contains("."))
-            this.detail =messageSource.getMessage(detail,null,null);
+    public AjaxResponse reason(String reason){
+        if (this.getMessageSource()!=null && reason.contains("."))
+            this.reason =messageSource.getMessage(reason,null,null);
         else
-            this.detail=detail;
+            this.reason=reason;
         return this;
     }
 
-    public AjaxResponse detail(Exception e){
+    public AjaxResponse reason(Exception e){
         if (this.getMessageSource()!=null && e.getMessage().contains("."))
-            this.detail =messageSource.getMessage(e.getMessage(),null,null);
+            this.reason =messageSource.getMessage(e.getMessage(),null,null);
         else
-            this.detail =e.getMessage();
+            this.reason =e.getMessage();
         return this;
     }
 
-    public AjaxResponse jumpUrl(String jumpUrl){
-        this.jumpUrl = jumpUrl;
+    public AjaxResponse url(String url){
+        this.url = url;
         return this;
     }
 
@@ -236,7 +237,7 @@ public abstract class AjaxResponse {
      * @param data
      * @return
      */
-    public AjaxResponse reason(Object data){
+    public AjaxResponse data(Object data){
         throw new UnsupportedOperationException("unsupported operation");
     }
 
@@ -276,7 +277,7 @@ public abstract class AjaxResponse {
         }
 
         @Override
-        public AjaxResponse reason(Object data) {
+        public AjaxResponse data(Object data) {
             this.data = data;
             return this;
         }
