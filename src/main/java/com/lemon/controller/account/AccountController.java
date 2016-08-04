@@ -62,6 +62,9 @@ public class AccountController {
         String password = Md5.messageDigest(userForm.getPassword() + salt);
         User user = new User(userForm.getMobile(),userForm.getMobile(),password,salt);
         Optional<User> newUser = userService.insert(user);
+        if (!newUser.isPresent()){
+            return AjaxResponse.fail().msg("注册失败").reason("网络异常请稍后再试");
+        }
         HttpSession session = request.getSession();
         cookiesService.insertCookies(this.createCookies(session,response,newUser.get()));//登陆成功后就会抛出用户ID和用户名
 
@@ -75,11 +78,12 @@ public class AccountController {
 
     @RequestMapping(value = "/account/login")  //默认是GET方法
     public String login(){
-        return "/lemon/account/login";
+        return "lemon/account/login";
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public AjaxResponse login(@Valid UserAccountForm userForm,BindingResult result, HttpServletRequest request,HttpServletResponse response) {
+    @ResponseBody
+    @RequestMapping(value = "/account/login",method = RequestMethod.POST)
+    public AjaxResponse login(@Valid @RequestBody UserAccountForm userForm,BindingResult result, HttpServletRequest request,HttpServletResponse response) {
         if (result.hasErrors()) {
             return AjaxResponse.fail().msg("登录失败").reason("用户没有提交任何数据");
         }
