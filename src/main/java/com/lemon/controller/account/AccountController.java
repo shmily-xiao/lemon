@@ -11,6 +11,7 @@ import com.lemon.utils.Md5;
 import com.lemon.utils.SequenceUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,7 +48,7 @@ public class AccountController {
 
     @ResponseBody
     @RequestMapping(value = "/account/register",method = RequestMethod.POST)
-    public AjaxResponse register(@Valid UserAccountForm userForm, BindingResult result, HttpServletRequest request, HttpServletResponse response){
+    public AjaxResponse register(@Valid @RequestBody UserAccountForm userForm, BindingResult result, HttpServletRequest request, HttpServletResponse response){
         if (result.hasErrors()){
             return AjaxResponse.fail().msg("注册失败").reason("用户没有提交数据");
         }
