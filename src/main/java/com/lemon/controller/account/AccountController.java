@@ -61,9 +61,9 @@ public class AccountController {
         String salt = SequenceUtils.generateAlphaNun(5); //生成salt
         String password = Md5.messageDigest(userForm.getPassword() + salt);
         User user = new User(userForm.getMobile(),userForm.getMobile(),password,salt);
-
+        Optional<User> newUser = userService.insert(user);
         HttpSession session = request.getSession();
-        cookiesService.insertCookies(this.createCookies(session,response,user));//登陆成功后就会抛出用户ID和用户名
+        cookiesService.insertCookies(this.createCookies(session,response,newUser.get()));//登陆成功后就会抛出用户ID和用户名
 
         session.setAttribute("user.nickname", user.getNickName());
 

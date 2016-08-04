@@ -7,26 +7,21 @@
 
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
     <!--创建数据源-->
-    <bean id="druidDataSource" class="org.apache.commons.dbcp.BasicDataSource"
-          destroy-method="close" scope="singleton">
+    <bean id="remotePosDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" scope="singleton">
         <property name="driverClassName" value="${jdbc.driver}"></property>
         <property name="url" value="${jdbc.url}"></property>
         <property name="username" value="${jdbc.username}"></property>
         <property name="password" value="${jdbc.password}"></property>
-        <property name="maxActive" value="100"></property>
-        <property name="maxWait" value="3000"></property>
-        <property name="defaultAutoCommit" value="true"></property>
-        <property name="validationQuery" value="select 1"></property>
     </bean>
 
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="druidDataSource"/>
+        <property name="dataSource" ref="remotePosDataSource"/>
     </bean>
     <tx:annotation-driven transaction-manager="txManager" />
 
     <!--创建SqlSessionFactory，同时指定数据源-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="druidDataSource" />
+        <property name="dataSource" ref="remotePosDataSource" />
         <property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml" />
     </bean>
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
