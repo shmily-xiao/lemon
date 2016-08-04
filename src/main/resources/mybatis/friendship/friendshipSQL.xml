@@ -7,6 +7,7 @@
         <result property="createdTime" column="created_time"/>
         <result property="userId" column="user_id"/>
         <result property="friendId" column="friend_id"/>
+        <result property="group" column="grouping"/>
         <!--<association property="detail" javaType="Detail" resultMap="com.demo.domain.Detail.detailResultMap"/>-->
     </resultMap>
     <delete id="deleteById">

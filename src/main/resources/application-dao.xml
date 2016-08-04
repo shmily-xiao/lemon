@@ -7,7 +7,7 @@
 
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
     <!--创建数据源-->
-    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource"
+    <bean id="druidDataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close" scope="singleton">
         <property name="driverClassName" value="${jdbc.driver}"></property>
         <property name="url" value="${jdbc.url}"></property>

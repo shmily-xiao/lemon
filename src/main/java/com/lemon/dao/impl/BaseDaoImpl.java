@@ -27,7 +27,7 @@ public abstract class BaseDaoImpl<T extends BaseDomain, M extends BaseQuery> ext
     }
 
     public final String opof(String namespace, String op){
-        return String.format("%s,%s",namespace,op);
+        return String.format("%s.%s",namespace,op);
     }
 
     @Override
