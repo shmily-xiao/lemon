@@ -10,6 +10,12 @@
     <!-- Bootstrap -->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/bootstrap.2183d05f5a0a.css" rel="stylesheet">
+    <link href="/css/index.c4dfc26089f4.css" rel="stylesheet"/>
+    <link href="/css/font-awesome.8e12157da5fc.css" rel="stylesheet"/>
+    <link href="/css/intlTelInput.1c5f40243067.css" rel="stylesheet" />
+    <link href="/css/intlTelInput-reload.32b2d0bf5fb4.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/footer.a18761b4dee9.css">
+    s
     <script src="/js/angular.min.js"></script>
     <script src="/js/jquery-3.1.0.min.js" charset="utf-8"></script>
     <script src="/js/jquery.nicescroll.min.js"></script>
@@ -100,7 +106,9 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title" id="requestlabel">微信登录</h4>
+                                            <h4 class="modal-title" id="requestlabel">
+                                                <img src="/img/qq16w.ico" style="margin-top: -3px; margin-right: 3px;"/>QQ登录
+                                            </h4>
                                         </div>
                                         <div class="modal-body">
                                             <div class="_wx_">
