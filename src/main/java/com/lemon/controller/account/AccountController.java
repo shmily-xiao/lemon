@@ -112,6 +112,11 @@ public class AccountController {
     }
 
 
+    @RequestMapping(value = "/")
+    public String index(){
+        return "/lemon/account/index";
+    }
+
     /**
      * 设置cookie的生存时间*
      * @param session
