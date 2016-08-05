@@ -12,15 +12,20 @@
     <link href="/css/bootstrap.2183d05f5a0a.css" rel="stylesheet">
     <link href="/css/index.c4dfc26089f4.css" rel="stylesheet"/>
     <link href="/css/font-awesome.8e12157da5fc.css" rel="stylesheet"/>
-    <link href="/css/intlTelInput.1c5f40243067.css" rel="stylesheet" />
     <link href="/css/intlTelInput-reload.32b2d0bf5fb4.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/footer.a18761b4dee9.css">
-    s
+    <link href="/css/footer.a18761b4dee9.css" rel="stylesheet" >
+
     <script src="/js/angular.min.js"></script>
     <script src="/js/jquery-3.1.0.min.js" charset="utf-8"></script>
     <script src="/js/jquery.nicescroll.min.js"></script>
     <script src="/js/md5.js"></script>
 
+    <style>
+        .center-block {
+            margin-bottom: 52px;
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
 
@@ -94,12 +99,13 @@
                                 <a href="/account/register">创建新账号</a>
 
 
-                            </p><div class="login-wechat" data-expire_seconds="300">
-                            <a class="btn btn-default text-center hidden-xs" data-toggle="modal" data-target="#wechat-login-qr"><i class="fa fa-wechat"></i>微信登录</a>
-                        </div>
+                            </p>
+                                <div class="login-wechat" data-expire_seconds="300">
+                                    <a class="btn btn-default text-center hidden-xs" style="margin-top: 8px;" data-toggle="modal" data-target="#wechat-login-qr">
+                                        <img src="/img/qq16w.ico" style="margin-top: -5px; margin-right: 4px;"/>QQ登录
+                                    </a>
+                                </div>
 
-
-                            <p></p>
 
 
                             <div class="modal fade" id="wechat-login-qr" tabindex="-1" role="dialog" aria-labelledby="requestlabel">
