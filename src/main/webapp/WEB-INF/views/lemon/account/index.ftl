@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="home-forms" data-login="False">
-                    <form id="home-login-form" method="post" class="home-login-form home-form-content" action="/account/login" ng-style="{'display':loginStyle}">
+                    <form id="home-login-form" method="post" class="home-login-form home-form-content" name="login" action="/account/login" ng-style="{'display':loginStyle}">
 
                         <div class="col-md-4 col-sm-6 home-login-form-icon">
                             <img src="/img/user48.ico" style="margin-top: 4px; margin-left: 12px;">
@@ -102,13 +102,27 @@
                             <h4>安全登录</h4>
                             <p>我们保障您的安全.</p>
                         </div>
-                        <input id="login_account" name="username" type="text" class="form-control" placeholder="请输入您的邮箱或手机号码">
-                        <input class="hidden" id="login_real_account" name="account" type="text" />
+                        <input class="form-control"
+                               id="login_account"
+                               name="username"
+                               type="text"
+                               ng-pattern="/^1[3|4|5|7|8]\d{9}$/"
+                               ng-trim='false'
+                               ng-model="loginMobile"
+                               ng-minlength=11
+                               placeholder="请输入您的手机号码"/>
                         <label></label>
-                        <input id="login_password" name="password" type="password" class="form-control" placeholder="请输入您的密码">
+                        <input id="login_password"
+                               name="password"
+                               type="password"
+                               class="form-control"
+                               ng-trim='false'
+                               ng-model="loginPassword"
+                               ng-minlength=8
+                               ng-maxlength=100
+                               placeholder="请输入您的密码">
                         <label></label>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block btn-primary home-log-signup-action">登录</button>
-
+                        <button ng-click="loginSubmit($event)" class="btn btn-primary btn-lg btn-block btn-primary home-log-signup-action">登录</button>
                         <div class="home-login-wechat" data-expire_seconds=300>
                             <a class="btn btn-default" data-toggle="modal" data-target="#wechat-login-qr" >
                                 <img src="/img/qq16w.ico" style="margin-top: -3px; margin-right: 3px;"/>QQ登录
@@ -149,22 +163,44 @@
                     <!--  -->
 
 
-                    <form id="home-signup-form" class="home-signup-form home-form-content" method="post" action="/account/register" ng-style="{'display':signupStyle}">
+                    <form id="home-signup-form" class="home-signup-form home-form-content" name="signup" method="post" action="/account/register" ng-style="{'display':signupStyle}">
                         <input type='text' style='display:none' />
                         <input type='password' style='display:none' />
                         <input type='password' style='position:absolute; top:-2000px;'/>
                         <div class="form-group">
-                            <input class="form-control" id="signup_account" maxlength="100" type="tel" autocomplete="off" placeholder="请输入你的手机号">
-                            <input class="form-control hidden" id="id_real_account" maxlength="100" name="account" type="tel" />
+                            <input class="form-control"
+                                   id="signup_account"
+                                   type="tel"
+                                   ng-pattern="/^1[3|4|5|7|8]\d{9}$/"
+                                   ng-trim='false'
+                                   ng-model="signupMobile"
+                                   ng-minlength=11
+                                   placeholder="请输入你的手机号">
                         </div>
                         <div class="form-group">
-                            <input class="form-control" id="id_password" name="password" placeholder="请输入你的密码,最少10位" type="password" />
+                            <input class="form-control"
+                                   id="id_password"
+                                   type="password"
+                                   ng-trim='false'
+                                   ng-model="signupPassword"
+                                   ng-minlength=8
+                                   ng-maxlength=100
+                                   placeholder="请输入你的密码,最少8位"/>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" id="id_confirm_password" name="confirm_password" placeholder="再次确认你的密码" type="password" />
+                            <input class="form-control"
+                                   id="id_confirm_password"
+                                   placeholder="再次确认你的密码"
+                                   ng-trim='false'
+                                   ng-model="signupConfirmPassword"
+                                   ng-minlength=8
+                                   ng-maxlength=100
+                                   type="password" />
                         </div>
                         <div class="form-group hidden">
-                            <input id="id_agreement" name="agreement" type="checkbox" />
+                            <input id="id_agreement"
+                                   ng-model="agreement"
+                                   type="checkbox" />
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg btn-block btn-primary home-log-signup-action">创建新账号</button>
                     </form>
@@ -211,6 +247,14 @@
         $scope.loginStyle='block';
         $scope.signupStyle='none';
 
+        $scope.loginMobile='';
+        $scope.loginPassword='';
+        $scope.sigupMobile='';
+        $scope.signupPassword='';
+        $scope.signupConfirmPassword='';
+        $scope.agreement = '';
+
+
         $scope.loginForm =function(){
             $scope.isLoginForm=true;
             $scope.isSignupForm=false;
@@ -223,7 +267,41 @@
             $scope.isSignupForm=true;
             $scope.loginStyle='none';
             $scope.signupStyle='block';
-        }
+        };
+
+        // 登录
+        $scope.loginSubmit = function($event) {
+            if ($scope.login.$invalid || $scope.loginMobile=='' || $scope.loginPassword=='' ){
+                return;
+            }
+            $http.post('/account/login',{mobile:$scope.loginMobile,password:hex_md5($scope.loginPassword)}).success(function(data) {
+                if(data.code==0){
+                    location.href = data.url;
+                }else if(data.code == 1){
+                    alert(data.reason);
+                }
+            }).error(function(){
+                alert('网络异常，请重试');
+            })
+        };
+
+        // 注册
+        $scope.signupSubmit = function($event) {
+            if ($scope.signup.$invalid || $scope.signupPassword != $scope.signupConfirmPassword
+                    || $scope.sigupMobile=='' || $scope.signupPassword=='' || !$scope.agreement || $scope.agreement==''){
+                return;
+            }
+            $scope.isValid=true;
+            $http.post('/account/register',{mobile:$scope.sigupMobile,password:hex_md5($scope.signupPassword)}).success(function(data) {
+                if(data.code==0){
+                    location.href = data.url;
+                }else if(data.code == 1){
+                    alert(data.reason);
+                }
+            }).error(function(){
+                alert('网络异常，请重试');
+            })
+        };
 
     }]);
 
