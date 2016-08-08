@@ -122,7 +122,7 @@
                                ng-maxlength=100
                                placeholder="请输入您的密码">
                         <label></label>
-                        <button ng-click="loginSubmit($event)" class="btn btn-primary btn-lg btn-block btn-primary home-log-signup-action">登录</button>
+                        <button ng-click="loginSubmit($event)" type="button" class="btn btn-primary btn-lg btn-block btn-primary home-log-signup-action">登录</button>
                         <div class="home-login-wechat" data-expire_seconds=300>
                             <a class="btn btn-default" data-toggle="modal" data-target="#wechat-login-qr" >
                                 <img src="/img/qq16w.ico" style="margin-top: -3px; margin-right: 3px;"/>QQ登录
@@ -202,7 +202,7 @@
                                    ng-model="agreement"
                                    type="checkbox" />
                         </div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block btn-primary home-log-signup-action">创建新账号</button>
+                        <button ng-click="signupSubmit($event)" type="button" class="btn btn-primary btn-lg btn-block btn-primary home-log-signup-action">创建新账号</button>
                     </form>
                 </div>
                 <!--右侧登录框开始-->
@@ -272,6 +272,7 @@
         // 登录
         $scope.loginSubmit = function($event) {
             if ($scope.login.$invalid || $scope.loginMobile=='' || $scope.loginPassword=='' ){
+                alert('账号或密码错误');
                 return;
             }
             $http.post('/account/login',{mobile:$scope.loginMobile,password:hex_md5($scope.loginPassword)}).success(function(data) {
