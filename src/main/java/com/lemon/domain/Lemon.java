@@ -44,6 +44,11 @@ public class Lemon extends BaseDomain implements ILemon{
      */
     private Long userId;
 
+    /**
+     * 此条记录是否公开
+     */
+    private Boolean isPublic;
+
     @Override
     public String getDescription() {
         return description;
@@ -113,5 +118,13 @@ public class Lemon extends BaseDomain implements ILemon{
         this.userId = userId;
     }
 
+    @Override
+    public Boolean getIsPublic() {
+        return this.isPublic;
+    }
 
+    @Override
+    public void setIsPublic(Boolean isPublic) {
+        this.isPublic = isPublic;
+    }
 }

@@ -31,4 +31,8 @@ public interface ILemon extends IName{
     // 这个事件是由谁创建的
     Long getUserId();
     void setUserId(Long userId);
+
+    // 此条记录是否公开
+    Boolean getIsPublic();
+    void setIsPublic(Boolean isPublic);
 }

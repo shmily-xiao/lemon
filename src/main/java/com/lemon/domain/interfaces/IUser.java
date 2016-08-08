@@ -63,4 +63,8 @@ public interface IUser extends IName{
     ZoneStatus getZoneStatus();
     void setZoneStatus(ZoneStatus zoneStatus);
 
+    // 个人简介
+    String getProfile();
+    void setProfile(String profile);
+
 }

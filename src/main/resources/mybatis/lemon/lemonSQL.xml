@@ -8,11 +8,12 @@
         <result property="expectTime" column="expect_time"/>
         <result property="finishedTime" column="finished_time"/>
         <result property="userId" column="user_id"/>
+        <result property="isPublic" column="is_public"/>
         <!--<association property="detail" javaType="Detail" resultMap="com.demo.domain.Detail.detailResultMap"/>-->
     </resultMap>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO lemon(created_time, finished, name, description, expect_time, finished_time, level, user_id)
-        VALUES(#{createdTime},#{finished}, #{name}, #{description}, #{expectTime}, #{finishedTime}, #{level}, #{userId});
+        INSERT INTO lemon(created_time, finished, name, description, expect_time, finished_time, level, user_id,is_public)
+        VALUES(#{createdTime},#{finished}, #{name}, #{description}, #{expectTime}, #{finishedTime}, #{level}, #{userId},#{isPublic});
     </insert>
 
     <select id="findById" resultMap="lemonResultMap">
@@ -30,6 +31,7 @@
             <if test="finishedTime != null and finishedTime != ''"> AND finished_time = #{finishedTime}</if>
             <if test="level != null and level != ''"> AND level = #{level}</if>
             <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
+            <if test="isPublic != null ''"> AND is_public = #{isPublic}</if>
         </where>
     </select>
 
@@ -44,6 +46,7 @@
             <if test="finishedTime != null and finishedTime != ''"> AND finished_time = #{finishedTime}</if>
             <if test="level != null and level != ''"> AND level = #{level}</if>
             <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
+            <if test="isPublic != null ''"> AND is_public = #{isPublic}</if>
         </where>
     </select>
 
@@ -59,6 +62,7 @@
             <if test="finishedTime != null and finishedTime != ''"> AND finished_time = #{finishedTime}</if>
             <if test="level != null and level != ''"> AND level = #{level}</if>
             <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
+            <if test="isPublic != null ''"> AND is_public = #{isPublic}</if>
         </where>
     </select>
 
@@ -77,6 +81,7 @@
             <if test="finishedTime != null and finishedTime != ''"> AND finished_time = #{finishedTime}</if>
             <if test="level != null and level != ''"> AND level = #{level}</if>
             <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
+            <if test="isPublic != null ''"> AND is_public = #{isPublic}</if>
         </where>
     </delete>
 
@@ -89,6 +94,7 @@
              <if test="expectTime != null and expectTime != ''">expect_time = #{expectTime},</if>
              <if test="finishedTime != null and finishedTime != ''">finished_time = #{finishedTime},</if>
              <if test="level != null and level != ''">level = #{level}</if>
+             <if test="isPublic != null ''"> AND is_public = #{isPublic}</if>
          </set>
         WHERE id = #{id};
     </update>

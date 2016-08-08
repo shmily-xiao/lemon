@@ -52,6 +52,11 @@ public class User extends BaseDomain implements IUser {
     private String email;
 
     /**
+     * 个人简介
+     */
+    private String profile;
+
+    /**
      * 密码（MD5)
      */
     private String password;
@@ -223,5 +228,15 @@ public class User extends BaseDomain implements IUser {
     @Override
     public void setZoneStatus(ZoneStatus zoneStatus) {
         this.zoneStatus = zoneStatus;
+    }
+
+    @Override
+    public String getProfile() {
+        return profile;
+    }
+
+    @Override
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 }

@@ -35,8 +35,8 @@
     </delete>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO u_user(created_time, avatar, gender, name, nick_name, birthday, mobile, qq_no, email, password, salt, status, type, score, zone_status)
-        VALUES (#{createdTime}, #{avatar}, #{gender}, #{name}, #{nickName}, #{birthday}, #{mobile}, #{qqNo}, #{email}, #{password}, #{salt}, #{status}, #{type}, #{score}, #{zoneStatus});
+        INSERT INTO u_user(created_time, avatar, gender, name, nick_name, birthday, mobile, qq_no, email, password, salt, status, type, score, zone_status,profile)
+        VALUES (#{createdTime}, #{avatar}, #{gender}, #{name}, #{nickName}, #{birthday}, #{mobile}, #{qqNo}, #{email}, #{password}, #{salt}, #{status}, #{type}, #{score}, #{zoneStatus}, #{profile});
     </insert>
 
     <update id="update" >
@@ -56,6 +56,7 @@
             <if test="type != null and type != ''">and type = #{type}</if>
             <if test="score != null and score != ''">and score = #{score}</if>
             <if test="zoneStatus != null and zoneStatus != ''">and zone_status = #{zoneStatus}</if>
+            <if test="profile != null and profile != ''">and profile = #{profile}</if>
         </set>
         WHERE id = #{id};
     </update>
