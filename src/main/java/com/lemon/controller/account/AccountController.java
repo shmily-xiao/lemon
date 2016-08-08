@@ -32,6 +32,8 @@ import java.util.Optional;
 @Controller
 public class AccountController {
 
+    //// TODO: 2016/8/8 0008 需要写一个拦截器，完成用户的自动登录
+    
     @Resource //  但是@Autowired 是spring提供的，@Resource是j2ee提供的
     private IUserService userService;
 
@@ -68,7 +70,8 @@ public class AccountController {
         HttpSession session = request.getSession();
         cookiesService.insertCookies(this.createCookies(session,response,newUser.get()));//登陆成功后就会抛出用户ID和用户名
 
-        session.setAttribute("user.nickname", user.getNickName());
+//        session.setAttribute("user.nickname", user.getNickName());
+        session.setAttribute("user.account", user.getMobile());
 
         //todo 首页，或者是个人中心 url
         return AjaxResponse.ok().url("");
@@ -104,7 +107,8 @@ public class AccountController {
         Cookies cookies = this.createCookies(session, response, user);
         cookiesService.updateCookies(cookies);
 
-        session.setAttribute("user.nickname", user.getNickName());
+//        session.setAttribute("user.nickname", user.getNickName());
+        session.setAttribute("user.account", user.getMobile());
 
         //// TODO: 2016/8/3 首页 url
         return AjaxResponse.ok().url("");

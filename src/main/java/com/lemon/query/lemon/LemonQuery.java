@@ -43,11 +43,16 @@ public class LemonQuery extends BaseQuery{
      */
     private Long userId;
 
+    /**
+     * 此条记录是否公开
+     */
+    private Boolean isPublic;
+
 
     public LemonQuery() {
     }
 
-    public LemonQuery(String description, Date expectTime, Boolean finished, Date finishedTime, Integer level, String name, Long userId) {
+    public LemonQuery(String description, Date expectTime, Boolean finished, Date finishedTime, Integer level, String name, Long userId, Boolean isPublic) {
         this.description = description;
         this.expectTime = expectTime;
         this.finished = finished;
@@ -55,6 +60,7 @@ public class LemonQuery extends BaseQuery{
         this.level = level;
         this.name = name;
         this.userId = userId;
+        this.isPublic = isPublic;
     }
 
     public String getDescription() {
@@ -111,5 +117,13 @@ public class LemonQuery extends BaseQuery{
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Boolean getPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(Boolean aPublic) {
+        isPublic = aPublic;
     }
 }
