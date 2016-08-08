@@ -197,10 +197,11 @@
                                    ng-maxlength=100
                                    type="password" />
                         </div>
-                        <div class="form-group hidden">
+                        <div class="form-group">
                             <input id="id_agreement"
                                    ng-model="agreement"
                                    type="checkbox" />
+                            我同意&nbsp;<a href="#">使用条款</a>&nbsp;和&nbsp;<a href="#">隐私条款</a>.
                         </div>
                         <button ng-click="signupSubmit($event)" type="button" class="btn btn-primary btn-lg btn-block btn-primary home-log-signup-action">创建新账号</button>
                     </form>
@@ -249,7 +250,7 @@
 
         $scope.loginMobile='';
         $scope.loginPassword='';
-        $scope.sigupMobile='';
+        $scope.signupMobile='';
         $scope.signupPassword='';
         $scope.signupConfirmPassword='';
         $scope.agreement = '';
@@ -289,11 +290,16 @@
         // 注册
         $scope.signupSubmit = function($event) {
             if ($scope.signup.$invalid || $scope.signupPassword != $scope.signupConfirmPassword
-                    || $scope.sigupMobile=='' || $scope.signupPassword=='' || !$scope.agreement || $scope.agreement==''){
+                    || $scope.signupMobile=='' || $scope.signupPassword=='' || !$scope.agreement || $scope.agreement==''){
+                if (!$scope.agreement) {
+                    alert("请勾选协议");
+                }else {
+                    alert('检查表单是否填写正确');
+                }
                 return;
             }
             $scope.isValid=true;
-            $http.post('/account/register',{mobile:$scope.sigupMobile,password:hex_md5($scope.signupPassword)}).success(function(data) {
+            $http.post('/account/register',{mobile:$scope.signupMobile,password:hex_md5($scope.signupPassword)}).success(function(data) {
                 if(data.code==0){
                     location.href = data.url;
                 }else if(data.code == 1){
