@@ -1,5 +1,8 @@
 package com.lemon.form.user;
 
+import com.lemon.enums.GenderType;
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -16,36 +19,49 @@ public class UserInformationForm extends BaseForm{
     /**
      * 性别
      */
-    private String gender;
+    @NotNull
+    @NotBlank
+    private GenderType gender;
 
     /**
      * 名字
      */
+    @NotNull
+    @NotBlank
     private String name;
 
     /**
      * 昵称   用户的登录账户的名字
      */
+    @NotNull
+    @NotBlank
     private String nickName;
 
     /**
      * 生日
      */
+    @NotNull
     private LocalDate birthday;
 
     /**
      * 电话号码
      */
+    @NotBlank
+    @NotNull
     private String mobile;
 
     /**
      * qq号码
      */
+    @NotBlank
+    @NotNull
     private String qqNo;
 
     /**
      * 邮箱
      */
+    @NotBlank
+    @NotNull
     private String email;
 
     /**
@@ -82,11 +98,11 @@ public class UserInformationForm extends BaseForm{
         this.email = email;
     }
 
-    public String getGender() {
+    public GenderType getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(GenderType gender) {
         this.gender = gender;
     }
 

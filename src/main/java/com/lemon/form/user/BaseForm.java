@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
  */
 public class BaseForm {
 
-    @NotNull
     private Long id;
 
     public Long getId() {

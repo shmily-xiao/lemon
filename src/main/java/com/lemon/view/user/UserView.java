@@ -76,7 +76,9 @@ public class UserView {
     public UserView(User user){
         this.id = user.getId();
         this.avatar = user.getAvatar();
-        this.gender = user.getGender();
+        if (user.getGender() != null) {
+            this.gender = user.getGender().name();
+        }
         this.name = user.getName();
         this.nickName = user.getNickName();
         if (user.getBirthday()!=null) {

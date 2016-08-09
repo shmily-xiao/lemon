@@ -1,6 +1,7 @@
 package com.lemon.domain;
 
 import com.lemon.domain.interfaces.IUser;
+import com.lemon.enums.GenderType;
 import com.lemon.enums.UserType;
 import com.lemon.enums.ZoneStatus;
 
@@ -20,7 +21,7 @@ public class User extends BaseDomain implements IUser {
     /**
      * 性别
      */
-    private String gender;
+    private GenderType gender;
 
     /**
      * 名字
@@ -126,12 +127,12 @@ public class User extends BaseDomain implements IUser {
     }
 
     @Override
-    public String getGender() {
+    public GenderType getGender() {
         return gender;
     }
 
     @Override
-    public void setGender(String gender) {
+    public void setGender(GenderType gender) {
         this.gender = gender;
     }
 

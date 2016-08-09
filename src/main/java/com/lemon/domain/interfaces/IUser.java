@@ -1,6 +1,7 @@
 package com.lemon.domain.interfaces;
 
 import com.lemon.domain.interfaces.ibase.IName;
+import com.lemon.enums.GenderType;
 import com.lemon.enums.UserType;
 import com.lemon.enums.ZoneStatus;
 
@@ -16,8 +17,8 @@ public interface IUser extends IName{
     void setAvatar(String avatar);
 
     // 性别
-    String getGender();
-    void setGender(String gender);
+    GenderType getGender();
+    void setGender(GenderType gender);
 
     // 昵称
     String getNickName();
