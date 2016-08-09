@@ -3,10 +3,12 @@ package com.lemon.controller.account;
 import com.lemon.domain.User;
 import com.lemon.form.AjaxResponse;
 import com.lemon.form.user.UserInformationForm;
+import com.lemon.form.user.UserPasswordModifyForm;
 import com.lemon.form.user.UserPrivacyForm;
 import com.lemon.query.user.UserQuery;
 import com.lemon.service.IUserService;
 import com.lemon.utils.ConvertUtils;
+import com.lemon.utils.Md5;
 import com.lemon.view.user.UserView;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,7 +62,7 @@ public class PersonalCenterController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/personal/center/information/modify")
+    @RequestMapping(value = "/personal/center/modify/information")
     public AjaxResponse updateUser(@RequestBody @Valid  UserInformationForm userForm, BindingResult result, HttpServletRequest request){
 
         if (result.hasErrors()) return AjaxResponse.fail().msg("保存失败").reason("数据表单没有填写完全");
@@ -82,11 +84,68 @@ public class PersonalCenterController {
     }
 
 
-    @RequestMapping(value = "/personal/center/privacy/modify")
-    public AjaxResponse updateUserPrivacy(@RequestBody UserPrivacyForm form){
+    /**
+     * 最初（2016-8-9）：更新隐私设置，类似于空间的访问限制，不排除以后会有更多的设置
+     *
+     * @param form
+     * @param result
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/personal/center/modify/privacy")
+    public AjaxResponse updateUserPrivacy(@RequestBody @Valid UserPrivacyForm form, BindingResult result, HttpServletRequest request){
+        if (result.hasErrors()) return AjaxResponse.fail().msg("保存失败").reason("数据表单没有填写完全");
 
-        return AjaxResponse.fail();
+        HttpSession session = request.getSession();
+        String account = (String)session.getAttribute("user.account");
+        if (account == null || account.isEmpty()) return AjaxResponse.fail().reason("用户没有登录").url("/account/login");
+
+        // 理论上应该不会有错
+        Optional<User> user = this.getUser(account);
+
+        // todo 默认值会被创建么？
+        User newUser = ConvertUtils.convert(form,User.class);
+        newUser.setId(user.get().getId());
+
+        Optional<User> newUserOptional = userService.update(newUser);
+        if (!newUserOptional.isPresent()){
+            return AjaxResponse.fail().msg("更新失败").reason("网络错误");
+        }
+
+        return AjaxResponse.ok();
     }
+
+    /**
+     * 修改密码
+     * @param form
+     * @param result
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/personal/center/modify/password")
+    public AjaxResponse updatePassword( @RequestBody @Valid UserPasswordModifyForm form, BindingResult result, HttpServletRequest request){
+        if (result.hasErrors()) return AjaxResponse.fail().msg("修改失败").reason("数据表单没有填写完全");
+
+        HttpSession session = request.getSession();
+        String account = (String)session.getAttribute("user.account");
+        if (account == null || account.isEmpty()) return AjaxResponse.fail().reason("用户没有登录").url("/account/login");
+
+        // 理论上应该不会有错
+        Optional<User> user = this.getUser(account);
+        if (!user.get().getPassword().equals(Md5.messageDigest(form.getOldPassword() + user.get().getSalt()))){
+            return AjaxResponse.fail().msg("修改失败").reason("原密码不正确");
+        }
+
+        user.get().setPassword(Md5.messageDigest(form.getNewPassword() + user.get().getSalt()));
+        Optional<User> newUser = userService.update(user.get());
+        if (!newUser.isPresent()){
+            return AjaxResponse.fail().msg("更新失败").reason("网络错误");
+        }
+        return AjaxResponse.ok();
+    }
+
 
     /**
      * 这个地方主要是考虑到用户可以使用手机号登录，也可以使用QQ号码登录
