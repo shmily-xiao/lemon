@@ -5,6 +5,7 @@ import com.lemon.form.AjaxResponse;
 import com.lemon.form.user.UserInformationForm;
 import com.lemon.query.user.UserQuery;
 import com.lemon.service.IUserService;
+import com.lemon.utils.ConvertUtils;
 import com.lemon.view.user.UserView;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,8 +68,8 @@ public class PersonalCenterController {
         if (account == null || account.isEmpty()) return AjaxResponse.fail().reason("用户没有登录").url("/account/login");
 
         Optional<User> user = this.getUser(account);
-
-
+        User newUser = ConvertUtils.convert(userForm,User.class);
+        newUser.setId(user.get().getId());
 
 
         return AjaxResponse.fail();

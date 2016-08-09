@@ -1,5 +1,6 @@
 package com.lemon.form.user;
 
+import com.lemon.convert.Form2DomainConvert;
 import com.lemon.enums.GenderType;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -14,6 +15,7 @@ public class UserInformationForm extends BaseForm{
     /**
      * 头像
      */
+    @Form2DomainConvert
     private String avatar;
 
     /**
@@ -21,6 +23,7 @@ public class UserInformationForm extends BaseForm{
      */
     @NotNull
     @NotBlank
+    @Form2DomainConvert
     private GenderType gender;
 
     /**
@@ -28,6 +31,7 @@ public class UserInformationForm extends BaseForm{
      */
     @NotNull
     @NotBlank
+    @Form2DomainConvert
     private String name;
 
     /**
@@ -35,32 +39,38 @@ public class UserInformationForm extends BaseForm{
      */
     @NotNull
     @NotBlank
+    @Form2DomainConvert
     private String nickName;
 
     /**
      * 生日
      */
     @NotNull
+    @Form2DomainConvert
     private LocalDate birthday;
 
     /**
      * 电话号码
      */
+    @Form2DomainConvert
     private String mobile;
 
     /**
      * qq号码
      */
+    @Form2DomainConvert
     private String qqNo;
 
     /**
      * 邮箱
      */
+    @Form2DomainConvert
     private String email;
 
     /**
      * 个人简介
      */
+    @Form2DomainConvert
     private String profile;
 
     public String getAvatar() {
