@@ -2,6 +2,7 @@ package com.lemon.domain.interfaces;
 
 import com.lemon.domain.interfaces.ibase.IName;
 import com.lemon.enums.GenderType;
+import com.lemon.enums.SignupType;
 import com.lemon.enums.UserType;
 import com.lemon.enums.ZoneStatus;
 
@@ -69,4 +70,6 @@ public interface IUser extends IName{
     String getProfile();
     void setProfile(String profile);
 
+    SignupType getSignupType();
+    void setSignupType(SignupType signupType);
 }

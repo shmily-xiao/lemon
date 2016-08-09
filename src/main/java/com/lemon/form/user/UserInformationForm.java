@@ -46,33 +46,22 @@ public class UserInformationForm extends BaseForm{
     /**
      * 电话号码
      */
-    @NotBlank
-    @NotNull
     private String mobile;
 
     /**
      * qq号码
      */
-    @NotBlank
-    @NotNull
     private String qqNo;
 
     /**
      * 邮箱
      */
-    @NotBlank
-    @NotNull
     private String email;
 
     /**
      * 个人简介
      */
     private String profile;
-
-    /**
-     * 用户是否公开自己的事件，或者是只能好友可见
-     */
-    private String zoneStatus;
 
     public String getAvatar() {
         return avatar;
@@ -146,11 +135,4 @@ public class UserInformationForm extends BaseForm{
         this.qqNo = qqNo;
     }
 
-    public String getZoneStatus() {
-        return zoneStatus;
-    }
-
-    public void setZoneStatus(String zoneStatus) {
-        this.zoneStatus = zoneStatus;
-    }
 }

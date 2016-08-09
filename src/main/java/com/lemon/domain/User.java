@@ -2,6 +2,7 @@ package com.lemon.domain;
 
 import com.lemon.domain.interfaces.IUser;
 import com.lemon.enums.GenderType;
+import com.lemon.enums.SignupType;
 import com.lemon.enums.UserType;
 import com.lemon.enums.ZoneStatus;
 
@@ -88,13 +89,19 @@ public class User extends BaseDomain implements IUser {
      */
     private ZoneStatus zoneStatus = ZoneStatus.PUBLIC;
 
+    /**
+     * 注册类型，最初是手机号、和qq号
+     */
+    private SignupType signupType;
+
     public User(){}
 
-    public User(String mobile, String nickName, String password, String salt) {
+    public User(String mobile, String nickName, String password, String salt, SignupType signupType) {
         this.mobile = mobile;
         this.nickName = nickName;
         this.password = password;
         this.salt = salt;
+        this.signupType = signupType;
     }
 
     @Override
@@ -240,5 +247,15 @@ public class User extends BaseDomain implements IUser {
     @Override
     public void setProfile(String profile) {
         this.profile = profile;
+    }
+
+    @Override
+    public SignupType getSignupType() {
+        return signupType;
+    }
+
+    @Override
+    public void setSignupType(SignupType signupType) {
+        this.signupType = signupType;
     }
 }

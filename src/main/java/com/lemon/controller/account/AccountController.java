@@ -2,6 +2,7 @@ package com.lemon.controller.account;
 
 import com.lemon.domain.Cookies;
 import com.lemon.domain.User;
+import com.lemon.enums.SignupType;
 import com.lemon.form.AjaxResponse;
 import com.lemon.form.user.UserAccountForm;
 import com.lemon.query.user.UserQuery;
@@ -62,7 +63,7 @@ public class AccountController {
 
         String salt = SequenceUtils.generateAlphaNun(5); //生成salt
         String password = Md5.messageDigest(userForm.getPassword() + salt);
-        User user = new User(userForm.getMobile(),userForm.getMobile(),password,salt);
+        User user = new User(userForm.getMobile(),userForm.getMobile(),password,salt, SignupType.MOBILE);
         Optional<User> newUser = userService.insert(user);
         if (!newUser.isPresent()){
             return AjaxResponse.fail().msg("注册失败").reason("网络异常请稍后再试");
