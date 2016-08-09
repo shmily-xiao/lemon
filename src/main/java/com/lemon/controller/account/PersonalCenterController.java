@@ -3,6 +3,7 @@ package com.lemon.controller.account;
 import com.lemon.domain.User;
 import com.lemon.form.AjaxResponse;
 import com.lemon.form.user.UserInformationForm;
+import com.lemon.form.user.UserPrivacyForm;
 import com.lemon.query.user.UserQuery;
 import com.lemon.service.IUserService;
 import com.lemon.utils.ConvertUtils;
@@ -59,7 +60,7 @@ public class PersonalCenterController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/personal/center/modify")
+    @RequestMapping(value = "/personal/center/information/modify")
     public AjaxResponse updateUser(@RequestBody @Valid  UserInformationForm userForm, BindingResult result, HttpServletRequest request){
 
         if (result.hasErrors()) return AjaxResponse.fail().msg("保存失败").reason("数据表单没有填写完全");
@@ -67,14 +68,24 @@ public class PersonalCenterController {
         String account = (String)session.getAttribute("user.account");
         if (account == null || account.isEmpty()) return AjaxResponse.fail().reason("用户没有登录").url("/account/login");
 
+        // 理论上应该不会有错
         Optional<User> user = this.getUser(account);
         User newUser = ConvertUtils.convert(userForm,User.class);
         newUser.setId(user.get().getId());
 
+        Optional<User> newUserOptional = userService.update(newUser);
+        if (!newUserOptional.isPresent()){
+            return AjaxResponse.fail().msg("更新失败").reason("网络错误");
+        }
+
+        return AjaxResponse.ok();
+    }
+
+
+    @RequestMapping(value = "/personal/center/privacy/modify")
+    public AjaxResponse updateUserPrivacy(@RequestBody UserPrivacyForm form){
 
         return AjaxResponse.fail();
-
-
     }
 
     /**
