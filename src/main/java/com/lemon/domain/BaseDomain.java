@@ -1,5 +1,6 @@
 package com.lemon.domain;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
 public class BaseDomain{
     protected Long id;
 
-    protected Date createdTime;
+    protected LocalDateTime createdTime;
 
     public Long getId() {
         return id;
@@ -18,11 +19,11 @@ public class BaseDomain{
         this.id = id;
     }
 
-    public Date getCreatedTime() {
+    public LocalDateTime getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(Date createdTime) {
+    public void setCreatedTime(LocalDateTime createdTime) {
         this.createdTime = createdTime;
     }
 }

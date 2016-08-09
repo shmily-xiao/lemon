@@ -4,6 +4,7 @@ import com.lemon.domain.interfaces.IUser;
 import com.lemon.enums.UserType;
 import com.lemon.enums.ZoneStatus;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -34,7 +35,7 @@ public class User extends BaseDomain implements IUser {
     /**
      * 生日
      */
-    private Date birthday;
+    private LocalDate birthday;
 
     /**
      * 电话号码
@@ -105,12 +106,12 @@ public class User extends BaseDomain implements IUser {
     }
 
     @Override
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
     @Override
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 

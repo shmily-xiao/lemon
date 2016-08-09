@@ -46,6 +46,7 @@ public class Lemon extends BaseDomain implements ILemon{
 
     /**
      * 此条记录是否公开
+     * user有一个权限设置是对所有记录而言的，这个地方的权限只会对此条记录起作用
      */
     private Boolean isPublic;
 

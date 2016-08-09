@@ -1,5 +1,6 @@
 package com.lemon.domain.interfaces.ibase;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -9,6 +10,6 @@ import java.util.Date;
  */
 public interface ICreatedTime extends IId{
     // 创建时间
-    Date getCreatedTime();
-    void setCreatedTime(Date createdTime);
+    LocalDateTime getCreatedTime();
+    void setCreatedTime(LocalDateTime createdTime);
 }

@@ -4,6 +4,7 @@ import com.lemon.domain.interfaces.ibase.IName;
 import com.lemon.enums.UserType;
 import com.lemon.enums.ZoneStatus;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -23,8 +24,8 @@ public interface IUser extends IName{
     void setNickName(String nickName);
 
     // 生日
-    Date getBirthday();
-    void setBirthday(Date birthday);
+    LocalDate getBirthday();
+    void setBirthday(LocalDate birthday);
 
     // 手机号
     String getMobile();

@@ -1,14 +1,12 @@
-package com.lemon.query.user;
+package com.lemon.form.user;
 
-import com.lemon.query.BaseQuery;
-
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
- * Created by simpletour_Jenkin on 2016/7/30.
+ * Created by simpletour_Jenkin on 2016/8/9.
  */
-public class UserQuery extends BaseQuery {
+public class UserInformationForm extends BaseForm{
 
     /**
      * 头像
@@ -26,7 +24,7 @@ public class UserQuery extends BaseQuery {
     private String name;
 
     /**
-     * 昵称
+     * 昵称   用户的登录账户的名字
      */
     private String nickName;
 
@@ -51,40 +49,14 @@ public class UserQuery extends BaseQuery {
     private String email;
 
     /**
-     * 密码（MD5)
+     * 个人简介
      */
-    private String password;
-
-    /**
-     * 随机数
-     */
-    private String salt;
-
-    /**
-     * 状态
-     */
-    private String status;
-
-    /**
-     * 用户的类型，或者是等级
-     */
-    private String type;
-
-    /**
-     * 成就值，得分
-     */
-    private Long score;
+    private String profile;
 
     /**
      * 用户是否公开自己的事件，或者是只能好友可见
      */
     private String zoneStatus;
-
-    public UserQuery(){}
-
-    public UserQuery(String mobile){
-        this.mobile = mobile;
-    }
 
     public String getAvatar() {
         return avatar;
@@ -142,12 +114,12 @@ public class UserQuery extends BaseQuery {
         this.nickName = nickName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getProfile() {
+        return profile;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 
     public String getQqNo() {
@@ -156,38 +128,6 @@ public class UserQuery extends BaseQuery {
 
     public void setQqNo(String qqNo) {
         this.qqNo = qqNo;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
-
-    public Long getScore() {
-        return score;
-    }
-
-    public void setScore(Long score) {
-        this.score = score;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getZoneStatus() {

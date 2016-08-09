@@ -79,7 +79,18 @@ public class UserView {
         this.gender = user.getGender();
         this.name = user.getName();
         this.nickName = user.getNickName();
-//        this.year = user.getBirthday()
+        if (user.getBirthday()!=null) {
+            this.year = user.getBirthday().getYear();
+            this.month = user.getBirthday().getMonthValue();
+            this.day = user.getBirthday().getDayOfMonth();
+        }
+        this.mobile = user.getMobile();
+        this.qqNo = user.getQqNo();
+        this.email = user.getEmail();
+        this.profile = user.getProfile();
+        this.type = user.getType().getName();
+        this.score = user.getScore();
+        this.zoneStatus = user.getZoneStatus().getName();
     }
 
     public String getAvatar() {

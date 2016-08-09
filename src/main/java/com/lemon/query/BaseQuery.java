@@ -1,5 +1,6 @@
 package com.lemon.query;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -9,7 +10,7 @@ public class BaseQuery {
 
     private Long id;
 
-    private Date createdTime;
+    private LocalDateTime createdTime;
 
     // 分页开始的地方
     private Integer offset = 0;
@@ -30,11 +31,11 @@ public class BaseQuery {
         this.id = id;
     }
 
-    public Date getCreatedTime() {
+    public LocalDateTime getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(Date createdTime) {
+    public void setCreatedTime(LocalDateTime createdTime) {
         this.createdTime = createdTime;
     }
 
