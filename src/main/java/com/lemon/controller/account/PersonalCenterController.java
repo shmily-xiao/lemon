@@ -26,6 +26,7 @@ import java.util.Optional;
 
 /**
  * Created by Administrator on 2016/8/8 0008.
+ * 个人中心，修改资料，修改密码，修改隐私权限
  */
 @Controller
 public class PersonalCenterController {
@@ -103,12 +104,10 @@ public class PersonalCenterController {
 
         // 理论上应该不会有错
         Optional<User> user = this.getUser(account);
+        // 更新空间的隐私设置
+        user.get().setZoneStatus(form.getZoneStatus());
 
-        // todo 默认值会被创建么？
-        User newUser = ConvertUtils.convert(form,User.class);
-        newUser.setId(user.get().getId());
-
-        Optional<User> newUserOptional = userService.update(newUser);
+        Optional<User> newUserOptional = userService.update(user.get());
         if (!newUserOptional.isPresent()){
             return AjaxResponse.fail().msg("更新失败").reason("网络错误");
         }
