@@ -43,14 +43,14 @@ public class AccountController {
 
     private static final int COOKIES_LIFE_TIME = 60*30;
 
-    @RequestMapping(value = "/account/register")  //默认为GET
+    @RequestMapping(value = "/lemon/account/register")  //默认为GET
     public String register(){
         return "/lemon/account/register";
     }
 
 
     @ResponseBody
-    @RequestMapping(value = "/account/register",method = RequestMethod.POST)
+    @RequestMapping(value = "/lemon/account/register",method = RequestMethod.POST)
     public AjaxResponse register(@Valid @RequestBody UserAccountForm userForm, BindingResult result, HttpServletRequest request, HttpServletResponse response){
         if (result.hasErrors()){
             return AjaxResponse.fail().msg("注册失败").reason("用户没有提交数据");
@@ -80,13 +80,13 @@ public class AccountController {
 
 
 
-    @RequestMapping(value = "/account/login")  //默认是GET方法
+    @RequestMapping(value = "/lemon/account/login")  //默认是GET方法
     public String login(){
         return "lemon/account/login";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/account/login",method = RequestMethod.POST)
+    @RequestMapping(value = "/lemon/account/login",method = RequestMethod.POST)
     public AjaxResponse login(@Valid @RequestBody UserAccountForm userForm,BindingResult result, HttpServletRequest request,HttpServletResponse response) {
         if (result.hasErrors()) {
             return AjaxResponse.fail().msg("登录失败").reason("用户没有提交任何数据");
@@ -114,12 +114,6 @@ public class AccountController {
         //// TODO: 2016/8/3 首页 url
         return AjaxResponse.ok().url("");
 
-    }
-
-
-    @RequestMapping(value = "/")
-    public String index(){
-        return "/lemon/account/index";
     }
 
     /**

@@ -42,7 +42,7 @@ public class PersonalCenterController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/personal/center")
+    @RequestMapping(value = "/lemon/personal/center")
     public String personalCenter(Model model, HttpServletRequest request){
         HttpSession session = request.getSession();
         String account = (String)session.getAttribute("user.account");
@@ -63,7 +63,7 @@ public class PersonalCenterController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/personal/center/modify/information")
+    @RequestMapping(value = "/lemon/personal/center/modify/information")
     public AjaxResponse updateUser(@RequestBody @Valid  UserInformationForm userForm, BindingResult result, HttpServletRequest request){
 
         if (result.hasErrors()) return AjaxResponse.fail().msg("保存失败").reason("数据表单没有填写完全");
@@ -94,7 +94,7 @@ public class PersonalCenterController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/personal/center/modify/privacy")
+    @RequestMapping(value = "/lemon/personal/center/modify/privacy")
     public AjaxResponse updateUserPrivacy(@RequestBody @Valid UserPrivacyForm form, BindingResult result, HttpServletRequest request){
         if (result.hasErrors()) return AjaxResponse.fail().msg("保存失败").reason("数据表单没有填写完全");
 
@@ -123,7 +123,7 @@ public class PersonalCenterController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/personal/center/modify/password")
+    @RequestMapping(value = "/lemon/personal/center/modify/password")
     public AjaxResponse updatePassword( @RequestBody @Valid UserPasswordModifyForm form, BindingResult result, HttpServletRequest request){
         if (result.hasErrors()) return AjaxResponse.fail().msg("修改失败").reason("数据表单没有填写完全");
 
