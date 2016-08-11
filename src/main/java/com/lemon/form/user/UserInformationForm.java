@@ -1,7 +1,9 @@
 package com.lemon.form.user;
 
-import com.lemon.convert.Form2DomainConvert;
+import com.lemon.domain.User;
 import com.lemon.enums.GenderType;
+import com.lemon.framework.mapping.annotation.MappingClass;
+import com.lemon.framework.mapping.annotation.MappingRule;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
@@ -10,12 +12,13 @@ import java.time.LocalDate;
 /**
  * Created by simpletour_Jenkin on 2016/8/9.
  */
+@MappingClass(User.class)
 public class UserInformationForm extends BaseForm{
 
     /**
      * 头像
      */
-    @Form2DomainConvert
+    @MappingRule
     private String avatar;
 
     /**
@@ -23,7 +26,7 @@ public class UserInformationForm extends BaseForm{
      */
     @NotNull
     @NotBlank
-    @Form2DomainConvert
+    @MappingRule
     private GenderType gender;
 
     /**
@@ -31,7 +34,7 @@ public class UserInformationForm extends BaseForm{
      */
     @NotNull
     @NotBlank
-    @Form2DomainConvert
+    @MappingRule
     private String name;
 
     /**
@@ -39,38 +42,38 @@ public class UserInformationForm extends BaseForm{
      */
     @NotNull
     @NotBlank
-    @Form2DomainConvert
+    @MappingRule
     private String nickName;
 
     /**
      * 生日
      */
     @NotNull
-    @Form2DomainConvert
+    @MappingRule
     private LocalDate birthday;
 
     /**
      * 电话号码
      */
-    @Form2DomainConvert
+    @MappingRule
     private String mobile;
 
     /**
      * qq号码
      */
-    @Form2DomainConvert
+    @MappingRule
     private String qqNo;
 
     /**
      * 邮箱
      */
-    @Form2DomainConvert
+    @MappingRule
     private String email;
 
     /**
      * 个人简介
      */
-    @Form2DomainConvert
+    @MappingRule
     private String profile;
 
     public String getAvatar() {

@@ -5,15 +5,14 @@ import com.lemon.form.AjaxResponse;
 import com.lemon.form.user.UserInformationForm;
 import com.lemon.form.user.UserPasswordModifyForm;
 import com.lemon.form.user.UserPrivacyForm;
+import com.lemon.framework.mapping.excutor.MappingExcutor;
 import com.lemon.query.user.UserQuery;
 import com.lemon.service.IUserService;
-import com.lemon.utils.ConvertUtils;
 import com.lemon.utils.Md5;
 import com.lemon.view.user.UserView;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -73,7 +72,7 @@ public class PersonalCenterController {
 
         // 理论上应该不会有错
         Optional<User> user = this.getUser(account);
-        User newUser = ConvertUtils.convert(userForm,User.class);
+        User newUser = MappingExcutor.map(userForm);
         newUser.setId(user.get().getId());
 
         Optional<User> newUserOptional = userService.update(newUser);

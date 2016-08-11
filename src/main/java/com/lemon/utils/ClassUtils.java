@@ -1,8 +1,8 @@
 package com.lemon.utils;
 
-import com.lemon.convert.IConvertor;
 import com.lemon.domain.BaseDomain;
 import com.lemon.enums.UtilsConstants;
+import com.lemon.framework.mapping.core.IConvertor;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -50,10 +50,10 @@ public class ClassUtils {
 
         // 若父类是Object，则直接返回当前Field列表
         Class<?> superClass = clazz.getSuperclass();
-        if (superClass == Object.class) return dFields;
+        if (Object.class.equals(superClass)) return dFields;
 
         // 递归查询父类的field列表
-        Field[] superFields = getAllFieldsWithRoot(superClass);
+        Field[] superFields = getAllFieldsWithRoot(superClass, predicate);
         if (null != superFields && superFields.length > 0) {
             Stream.of(superFields).filter(field -> !fieldList.contains(field))
                     .filter(field -> predicate == null || predicate.test(field))
@@ -107,6 +107,16 @@ public class ClassUtils {
     }
 
     /**
+     *
+     * @param obj
+     * @param field
+     * @return
+     */
+    public static Object getValue(Object obj, Field field){
+        return getValue(obj, field.getName());
+    }
+
+    /**
      * 初始化目标对象
      *
      * @param clazz
@@ -114,6 +124,23 @@ public class ClassUtils {
      * @return
      */
     public static <T extends BaseDomain> T init(Class<T> clazz) {
+        try {
+            return clazz.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 初始化目标对象
+     *
+     * @param clazz
+     * @return
+     */
+    public static Object initObj(Class clazz) {
         try {
             return clazz.newInstance();
         } catch (InstantiationException e) {
@@ -139,6 +166,23 @@ public class ClassUtils {
             // 从数据库转换到实体的类时候，有可能出现传入的value和目标的实体类的属性类型不匹配的情况，导致报错java.lang.IllegalArgumentException: argument type mismatch
             // 这里把传入的value转换为对应的实体类的属性的类型
             value = processValue(value, fieldClass, targetObj);
+            method.invoke(targetObj, value);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 把找到的具体值设置到目标对象中
+     *
+     * @param targetField
+     * @param value
+     * @param targetObj
+     * @param <T>
+     */
+    public static <T extends BaseDomain> void setValue(Field targetField, Object value, Object targetObj) {
+        try {
+            Method method = targetObj.getClass().getMethod(UtilsConstants.SETTER + StringUtils.toFirstUpCase(targetField.getName()), targetField.getType());
             method.invoke(targetObj, value);
         } catch (Exception e) {
             e.printStackTrace();
