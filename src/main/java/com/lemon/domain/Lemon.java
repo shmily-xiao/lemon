@@ -1,6 +1,7 @@
 package com.lemon.domain;
 
 import com.lemon.domain.interfaces.ILemon;
+import com.lemon.enums.LemonType;
 
 import java.util.Date;
 
@@ -25,6 +26,11 @@ public class Lemon extends BaseDomain implements ILemon{
     private String description;
 
     /**
+     * 图片，可能有多个,所以这里存取的时候都应该是一个json，方便以后扩展
+     */
+    private String images;
+
+    /**
      * 自己定的大概的完成时间
      */
     private Date expectTime;
@@ -35,9 +41,14 @@ public class Lemon extends BaseDomain implements ILemon{
     private Date finishedTime;
 
     /**
-     * 这件事情的等级。这个等级由用户自己定义
+     * 这件事情的等级,有 梦想 、 琐事 、 抒情 等
      */
-    private Integer level;
+    private LemonType type;
+
+    /**
+     * 是否用短信提醒用户
+     */
+    private Boolean remind;
 
     /**
      * 这件事情由谁来创建
@@ -90,16 +101,6 @@ public class Lemon extends BaseDomain implements ILemon{
     }
 
     @Override
-    public Integer getLevel() {
-        return level;
-    }
-
-    @Override
-    public void setLevel(Integer level) {
-        this.level = level;
-    }
-
-    @Override
     public String getName() {
         return name;
     }
@@ -128,4 +129,35 @@ public class Lemon extends BaseDomain implements ILemon{
     public void setIsPublic(Boolean isPublic) {
         this.isPublic = isPublic;
     }
+
+    @Override
+    public String getImages() {
+        return images;
+    }
+
+    @Override
+    public void setImages(String images) {
+        this.images = images;
+    }
+
+    @Override
+    public LemonType getType() {
+        return type;
+    }
+
+    @Override
+    public void setType(LemonType type) {
+        this.type = type;
+    }
+
+    @Override
+    public Boolean getRemind() {
+        return remind;
+    }
+
+    @Override
+    public void setRemind(Boolean remind) {
+        this.remind = remind;
+    }
+
 }
