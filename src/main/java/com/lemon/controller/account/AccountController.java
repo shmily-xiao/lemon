@@ -2,11 +2,14 @@ package com.lemon.controller.account;
 
 import com.lemon.domain.Cookies;
 import com.lemon.domain.User;
+import com.lemon.domain.UserAccount;
+import com.lemon.enums.AccountType;
 import com.lemon.enums.SignupType;
 import com.lemon.form.AjaxResponse;
 import com.lemon.form.user.UserAccountForm;
 import com.lemon.query.user.UserQuery;
 import com.lemon.service.ICookiesService;
+import com.lemon.service.IUserAccountService;
 import com.lemon.service.IUserService;
 import com.lemon.utils.Md5;
 import com.lemon.utils.SequenceUtils;
@@ -41,14 +44,29 @@ public class AccountController {
     @Resource
     private ICookiesService cookiesService;
 
+    @Resource
+    private IUserAccountService userAccountService;
+
     private static final int COOKIES_LIFE_TIME = 60*30;
 
+    /**
+     * 注册页面
+     * @return
+     */
     @RequestMapping(value = "/lemon/account/register")  //默认为GET
     public String register(){
         return "/lemon/account/register";
     }
 
 
+    /**
+     * 手机号注册
+     * @param userForm
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/lemon/account/register",method = RequestMethod.POST)
     public AjaxResponse register(@Valid @RequestBody UserAccountForm userForm, BindingResult result, HttpServletRequest request, HttpServletResponse response){
@@ -63,11 +81,15 @@ public class AccountController {
 
         String salt = SequenceUtils.generateAlphaNun(5); //生成salt
         String password = Md5.messageDigest(userForm.getPassword() + salt);
-        User user = new User();
-        Optional<User> newUser = userService.insert(user);
+        String account = SequenceUtils.generateAlpha(4) + userForm.getMobile();
+        // 昵称默认是 account
+        User user = new User(account, account, password, salt, SignupType.MOBILE);
+
+        Optional<User> newUser = userService.createUser(user, userForm.getMobile());
         if (!newUser.isPresent()){
             return AjaxResponse.fail().msg("注册失败").reason("网络异常请稍后再试");
         }
+
         HttpSession session = request.getSession();
         cookiesService.insertCookies(this.createCookies(session,response,newUser.get()));//登陆成功后就会抛出用户ID和用户名
 
@@ -79,12 +101,23 @@ public class AccountController {
     }
 
 
-
+    /**
+     * 登录页面
+     * @return
+     */
     @RequestMapping(value = "/lemon/account/login")  //默认是GET方法
     public String login(){
         return "lemon/account/login";
     }
 
+    /**
+     * 登录
+     * @param userForm
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/lemon/account/login",method = RequestMethod.POST)
     public AjaxResponse login(@Valid @RequestBody UserAccountForm userForm,BindingResult result, HttpServletRequest request,HttpServletResponse response) {

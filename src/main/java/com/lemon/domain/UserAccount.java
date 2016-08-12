@@ -24,6 +24,13 @@ public class UserAccount extends BaseDomain implements IUserAccount{
      */
     private AccountType type;
 
+    public UserAccount(){}
+
+    public UserAccount(Long userId, String account, AccountType type){
+        this.userId = userId;
+        this.account = account;
+        this.type = type;
+    }
 
     @Override
     public String getAccount() {

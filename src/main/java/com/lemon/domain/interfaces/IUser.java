@@ -81,4 +81,8 @@ public interface IUser extends IName{
     // 短信的条数
     Long getSmsCount();
     void setSmsCount(Long smsCount);
+
+    // 是否可以更改账号
+    Boolean getModifyAvailable();
+    void setModifyAvailable(Boolean modifyAvailable);
 }
