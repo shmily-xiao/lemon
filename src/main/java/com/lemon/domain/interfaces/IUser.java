@@ -29,13 +29,17 @@ public interface IUser extends IName{
     LocalDate getBirthday();
     void setBirthday(LocalDate birthday);
 
-    // 手机号
-    String getMobile();
-    void setMobile(String mobile);
+//    // 手机号
+//    String getMobile();
+//    void setMobile(String mobile);
+//
+//    // qq号码
+//    String getQqNo();
+//    void setQqNo(String qqNo);
 
-    // qq号码
-    String getQqNo();
-    void setQqNo(String qqNo);
+    // 用户的账号
+    String getAccount();
+    void setAccount(String account);
 
     // 邮箱
     String getEmail();

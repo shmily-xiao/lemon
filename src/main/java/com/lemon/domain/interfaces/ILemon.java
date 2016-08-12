@@ -1,6 +1,7 @@
 package com.lemon.domain.interfaces;
 
 import com.lemon.domain.interfaces.ibase.IName;
+import com.lemon.enums.LemonType;
 
 import java.util.Date;
 
@@ -24,10 +25,6 @@ public interface ILemon extends IName{
     Date getFinishedTime();
     void setFinishedTime(Date finishedTime);
 
-    // 事件的等级
-    Integer getLevel();
-    void setLevel(Integer level);
-
     // 这个事件是由谁创建的
     Long getUserId();
     void setUserId(Long userId);
@@ -35,4 +32,16 @@ public interface ILemon extends IName{
     // 此条记录是否公开
     Boolean getIsPublic();
     void setIsPublic(Boolean isPublic);
+
+    // 事件的类型
+    LemonType getType();
+    void setType(LemonType type);
+
+    // 是否需要短信提醒
+    Boolean getRemind();
+    void setRemind(Boolean remind);
+
+    // 照片
+    String getImages();
+    void setImages(String images);
 }

@@ -30,6 +30,11 @@ public class User extends BaseDomain implements IUser {
     private String name;
 
     /**
+     * 用户在我们系统的唯一账号，和手机号，QQ都决定了同一个账号
+     */
+    private String account="";
+
+    /**
      * 昵称   用户的登录账户的名字
      */
     private String nickName;
@@ -40,12 +45,12 @@ public class User extends BaseDomain implements IUser {
     private LocalDate birthday;
 
     /**
-     * 电话号码
+     * 电话号码,不是数据库的字段，但是应该属于用户的一部分
      */
     private String mobile;
 
     /**
-     * qq号码
+     * qq号码,不是数据库的字段，但是应该属于用户的一部分
      */
     private String qqNo;
 
@@ -96,8 +101,7 @@ public class User extends BaseDomain implements IUser {
 
     public User(){}
 
-    public User(String mobile, String nickName, String password, String salt, SignupType signupType) {
-        this.mobile = mobile;
+    public User(String nickName, String password, String salt, SignupType signupType) {
         this.nickName = nickName;
         this.password = password;
         this.salt = salt;
@@ -143,14 +147,23 @@ public class User extends BaseDomain implements IUser {
         this.gender = gender;
     }
 
-    @Override
     public String getMobile() {
         return mobile;
     }
 
-    @Override
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+
+    @Override
+    public String getAccount() {
+        return account;
+    }
+
+    @Override
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     @Override
