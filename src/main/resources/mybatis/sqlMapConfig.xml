@@ -3,6 +3,7 @@
 <configuration>
     <typeAliases>
         <typeAlias alias="User" type="com.lemon.domain.User"/>
+        <typeAlias alias="UserAccount" type="com.lemon.domain.UserAccount"/>
         <typeAlias alias="Friendship" type="com.lemon.domain.Friendship"/>
         <typeAlias alias="Cookies" type="com.lemon.domain.Cookies"/>
         <typeAlias alias="Lemon" type="com.lemon.domain.Lemon"/>
@@ -11,6 +12,7 @@
     </typeAliases>
     <mappers>
         <mapper resource="mybatis/user/userSQL.xml"/>
+        <mapper resource="mybatis/user/userAccountSQL.xml"/>
         <mapper resource="mybatis/wechatUser/wechatUserSQL.xml"/>
         <mapper resource="mybatis/cookies/cookiesSQL.xml"/>
         <mapper resource="mybatis/lemon/lemonSQL.xml"/>
