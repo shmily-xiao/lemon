@@ -12,8 +12,8 @@
         <!--<association property="detail" javaType="Detail" resultMap="com.demo.domain.Detail.detailResultMap"/>-->
     </resultMap>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO lemon(created_time, finished, name, description, expect_time, finished_time, level, user_id,is_public)
-        VALUES(#{createdTime},#{finished}, #{name}, #{description}, #{expectTime}, #{finishedTime}, #{level}, #{userId},#{isPublic});
+        INSERT INTO lemon(created_time, finished, name, description, expect_time, finished_time, type, user_id, is_public, images, remind)
+        VALUES(#{createdTime},#{finished}, #{name}, #{description}, #{expectTime}, #{finishedTime}, #{type}, #{userId},#{isPublic}), #{images}, #{remind};
     </insert>
 
     <select id="findById" resultMap="lemonResultMap">
@@ -29,9 +29,11 @@
             <if test="description != null and description != ''"> AND description = #{description}</if>
             <if test="expectTime != null and expectTime != ''"> AND expect_time = #{expectTime}</if>
             <if test="finishedTime != null and finishedTime != ''"> AND finished_time = #{finishedTime}</if>
-            <if test="level != null and level != ''"> AND level = #{level}</if>
+            <if test="type != null and type != ''"> AND type = #{type}</if>
             <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
             <if test="isPublic != null ''"> AND is_public = #{isPublic}</if>
+            <if test="images != null and images != ''"> AND images = #{images}</if>
+            <if test="remind != null and remind != ''"> AND remind = #{remind}</if>
         </where>
     </select>
 
@@ -44,9 +46,11 @@
             <if test="description != null and description != ''"> AND description = #{description}</if>
             <if test="expectTime != null and expectTime != ''"> AND expect_time = #{expectTime}</if>
             <if test="finishedTime != null and finishedTime != ''"> AND finished_time = #{finishedTime}</if>
-            <if test="level != null and level != ''"> AND level = #{level}</if>
+            <if test="type != null and type != ''"> AND type = #{type}</if>
             <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
             <if test="isPublic != null ''"> AND is_public = #{isPublic}</if>
+            <if test="images != null and images != ''"> AND images = #{images}</if>
+            <if test="remind != null and remind != ''"> AND remind = #{remind}</if>
         </where>
     </select>
 
@@ -60,9 +64,11 @@
             <if test="description != null and description != ''"> AND description = #{description}</if>
             <if test="expectTime != null and expectTime != ''"> AND expect_time = #{expectTime}</if>
             <if test="finishedTime != null and finishedTime != ''"> AND finished_time = #{finishedTime}</if>
-            <if test="level != null and level != ''"> AND level = #{level}</if>
+            <if test="type != null and type != ''"> AND type = #{type}</if>
             <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
             <if test="isPublic != null ''"> AND is_public = #{isPublic}</if>
+            <if test="images != null and images != ''"> AND images = #{images}</if>
+            <if test="remind != null and remind != ''"> AND remind = #{remind}</if>
         </where>
     </select>
 
@@ -79,22 +85,28 @@
             <if test="description != null and description != ''"> AND description = #{description}</if>
             <if test="expectTime != null and expectTime != ''"> AND expect_time = #{expectTime}</if>
             <if test="finishedTime != null and finishedTime != ''"> AND finished_time = #{finishedTime}</if>
-            <if test="level != null and level != ''"> AND level = #{level}</if>
+            <if test="type != null and type != ''"> AND type = #{type}</if>
             <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
             <if test="isPublic != null ''"> AND is_public = #{isPublic}</if>
+            <if test="images != null and images != ''"> AND images = #{images}</if>
+            <if test="remind != null and remind != ''"> AND remind = #{remind}</if>
         </where>
     </delete>
 
     <update id="update">
         UPDATE lemon
          <set>
-             <if test="finished != null">finished = #{finished},</if>
-             <if test="name != null and name != ''">name = #{name},</if>
-             <if test="description != null and description != ''">description = #{description},</if>
-             <if test="expectTime != null and expectTime != ''">expect_time = #{expectTime},</if>
-             <if test="finishedTime != null and finishedTime != ''">finished_time = #{finishedTime},</if>
-             <if test="level != null and level != ''">level = #{level}</if>
+             <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
+             <if test="finished != null"> AND finished = #{finished}</if>
+             <if test="name != null and name != ''"> AND name = #{name}</if>
+             <if test="description != null and description != ''"> AND description = #{description}</if>
+             <if test="expectTime != null and expectTime != ''"> AND expect_time = #{expectTime}</if>
+             <if test="finishedTime != null and finishedTime != ''"> AND finished_time = #{finishedTime}</if>
+             <if test="type != null and type != ''"> AND type = #{type}</if>
+             <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
              <if test="isPublic != null ''"> AND is_public = #{isPublic}</if>
+             <if test="images != null and images != ''"> AND images = #{images}</if>
+             <if test="remind != null and remind != ''"> AND remind = #{remind}</if>
          </set>
         WHERE id = #{id};
     </update>
