@@ -16,11 +16,17 @@ public class ReserveDBConvertor implements IConvertor {
     @Override
     public Object convert(Object value, Object... obj) {
 
+        // 若长度不为7，说明没有传外参数列表，则直接返回源属性值
+        if (obj.length <=7) return value;
+
         // 外参数列表
         Object[] params = (Object[]) obj[7];
 
         // 数据库中的源对象
         Object dbObj = params[0];
+
+        // 若数据库中的源对象为空，则直接返回源属性值
+        if (dbObj != null) return value;
 
         // 源属性Field
         Field orginField = (Field) obj[2];
