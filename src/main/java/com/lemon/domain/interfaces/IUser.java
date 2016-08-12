@@ -74,6 +74,11 @@ public interface IUser extends IName{
     String getProfile();
     void setProfile(String profile);
 
+    // 用户最开始注册的类型，是手机号，还是QQ
     SignupType getSignupType();
     void setSignupType(SignupType signupType);
+
+    // 短信的条数
+    Long getSmsCount();
+    void setSmsCount(Long smsCount);
 }

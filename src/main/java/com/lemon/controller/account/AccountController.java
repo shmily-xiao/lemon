@@ -63,7 +63,7 @@ public class AccountController {
 
         String salt = SequenceUtils.generateAlphaNun(5); //生成salt
         String password = Md5.messageDigest(userForm.getPassword() + salt);
-        User user = new User(userForm.getMobile(),userForm.getMobile(),password,salt, SignupType.MOBILE);
+        User user = new User();
         Optional<User> newUser = userService.insert(user);
         if (!newUser.isPresent()){
             return AjaxResponse.fail().msg("注册失败").reason("网络异常请稍后再试");

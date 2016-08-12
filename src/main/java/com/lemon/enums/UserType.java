@@ -8,19 +8,19 @@ public enum UserType {
     NEWBIE("新手"),
     PROBATIONER("实习生");
 
-    private String name;
+    private String value;
 
     UserType(){}
 
-    UserType(String name){
-        this.name = name;
+    UserType(String value){
+        this.value = value;
     }
 
-    public String getName() {
-        return name;
+    public String getValue() {
+        return value;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setValue(String value) {
+        this.value = value;
     }
 }
