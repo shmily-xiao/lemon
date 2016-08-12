@@ -7,20 +7,20 @@ public enum SignupType {
     MOBILE("手机号"),
     QQ("qq号");
 
-    private String name;
+    private String value;
 
     SignupType(){}
 
-    SignupType(String name) {
-        this.name = name;
+    SignupType(String value) {
+        this.value = value;
     }
 
 
-    public String getName() {
-        return name;
+    public String getValue() {
+        return value;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setValue(String value) {
+        this.value = value;
     }
 }

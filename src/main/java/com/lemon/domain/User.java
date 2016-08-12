@@ -99,6 +99,11 @@ public class User extends BaseDomain implements IUser {
      */
     private SignupType signupType;
 
+    /**
+     * 短信的条数
+     */
+    private Long smsCount;
+
     public User(){}
 
     public User(String nickName, String password, String salt, SignupType signupType) {
@@ -270,5 +275,15 @@ public class User extends BaseDomain implements IUser {
     @Override
     public void setSignupType(SignupType signupType) {
         this.signupType = signupType;
+    }
+
+    @Override
+    public Long getSmsCount() {
+        return smsCount;
+    }
+
+    @Override
+    public void setSmsCount(Long smsCount) {
+        this.smsCount = smsCount;
     }
 }

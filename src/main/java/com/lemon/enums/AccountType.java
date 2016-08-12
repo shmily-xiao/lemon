@@ -1,18 +1,18 @@
 package com.lemon.enums;
 
 /**
- * Created by Administrator on 2016/8/11 0011.
+ * Created by simpletour_Jenkin on 2016/8/12.
  */
-public enum LemonType {
-    DREAM("梦想"),
-    TRIFLES("琐事"),
-    LYRICISM("抒情");
+public enum AccountType {
+    MOBILE("手机号"),
+    QQ("qq号"),
+    SYSTEM_DEFAULT("系统分配");
 
     private String value;
 
-    LemonType(){}
+    AccountType (){}
 
-    LemonType(String value){
+    AccountType(String value){
         this.value = value;
     }
 

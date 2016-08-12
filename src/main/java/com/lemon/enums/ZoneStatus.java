@@ -9,19 +9,19 @@ public enum ZoneStatus {
     PRIVATE("私有"),
     FRIENDSHIP("对好友可见");
 
-    private String name;
+    private String value;
 
     ZoneStatus(){}
 
-    ZoneStatus(String name){
-        this.name = name;
+    ZoneStatus(String value){
+        this.value = value;
     }
 
-    public String getName() {
-        return name;
+    public String getValue() {
+        return value;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setValue(String value) {
+        this.value = value;
     }
 }
