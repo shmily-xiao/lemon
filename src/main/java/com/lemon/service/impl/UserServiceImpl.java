@@ -49,4 +49,9 @@ public class UserServiceImpl extends BaseServiceImpl<User,BaseQuery> implements 
 
         return newUser;
     }
+
+    @Override
+    public Optional<User> getAvailableUser(String account) {
+        return null;
+    }
 }

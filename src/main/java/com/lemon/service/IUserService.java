@@ -21,4 +21,12 @@ public interface IUserService extends IBaseService<User, BaseQuery>{
      * @return
      */
     Optional<User> createUser(User user, String account);
+
+    /**
+     * 用户登录账号查询
+     *
+     * @param account
+     * @return
+     */
+    Optional<User> getAvailableUser(String account);
 }

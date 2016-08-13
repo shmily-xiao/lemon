@@ -44,8 +44,6 @@ public class AccountController {
     @Resource
     private ICookiesService cookiesService;
 
-    @Resource
-    private IUserAccountService userAccountService;
 
     private static final int COOKIES_LIFE_TIME = 60*30;
 
