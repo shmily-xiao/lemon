@@ -8,9 +8,9 @@ import java.util.Date;
  */
 public class BaseQuery {
 
-    private Long id;
+    protected Long id;
 
-    private LocalDateTime createdTime;
+    protected LocalDateTime createdTime;
 
     // 分页开始的地方
     private Integer offset = 0;

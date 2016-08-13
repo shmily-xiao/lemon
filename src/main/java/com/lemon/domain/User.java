@@ -104,9 +104,15 @@ public class User extends BaseDomain implements IUser {
      */
     private Long smsCount;
 
+    /**
+     * 是否可以更改账号
+     */
+    private Boolean modifyAvailable = Boolean.TRUE;
+
     public User(){}
 
-    public User(String nickName, String password, String salt, SignupType signupType) {
+    public User(String account, String nickName, String password, String salt, SignupType signupType) {
+        this.account = account;
         this.nickName = nickName;
         this.password = password;
         this.salt = salt;
@@ -285,5 +291,15 @@ public class User extends BaseDomain implements IUser {
     @Override
     public void setSmsCount(Long smsCount) {
         this.smsCount = smsCount;
+    }
+
+    @Override
+    public Boolean getModifyAvailable() {
+        return modifyAvailable;
+    }
+
+    @Override
+    public void setModifyAvailable(Boolean modifyAvailable) {
+        this.modifyAvailable = modifyAvailable;
     }
 }

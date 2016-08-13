@@ -84,7 +84,7 @@ public class MappingExcutor {
         // 获取目标对象属性的name
         String targetName = "".equals(mappingRule.name()) ? originField.getName() : mappingRule.name();
 
-        // 获取目标对象Field对象
+        // 获取目标属性Field对象
         Field targetField = getTargetFiled(targetObj.getClass(), targetName);
         Objects.requireNonNull(targetField);
 

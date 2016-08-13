@@ -1,13 +1,12 @@
-package com.lemon.domain;
+package com.lemon.query.user;
 
-import com.lemon.domain.interfaces.IUserAccount;
 import com.lemon.enums.AccountType;
+import com.lemon.query.BaseQuery;
 
 /**
- * Created by simpletour_Jenkin on 2016/8/12.
+ * Created by simpletour_Jenkin on 2016/8/13.
  */
-public class UserAccount extends BaseDomain implements IUserAccount{
-
+public class UserAccountQuery extends BaseQuery{
     /**
      * 用户的id
      *
@@ -24,25 +23,27 @@ public class UserAccount extends BaseDomain implements IUserAccount{
      */
     private AccountType type;
 
-    public UserAccount(){}
-
-    public UserAccount(Long userId, String account, AccountType type){
-        this.userId = userId;
-        this.account = account;
-        this.type = type;
+    public UserAccountQuery() {
     }
 
-    @Override
+    public UserAccountQuery(String account, AccountType type, Long userId) {
+        this.account = account;
+        this.type = type;
+        this.userId = userId;
+    }
+
+    public UserAccountQuery(String account) {
+        this.account = account;
+    }
+
     public String getAccount() {
         return account;
     }
 
-    @Override
     public void setAccount(String account) {
         this.account = account;
     }
 
-    @Override
     public AccountType getType() {
         return type;
     }
@@ -51,12 +52,10 @@ public class UserAccount extends BaseDomain implements IUserAccount{
         this.type = type;
     }
 
-    @Override
     public Long getUserId() {
         return userId;
     }
 
-    @Override
     public void setUserId(Long userId) {
         this.userId = userId;
     }

@@ -86,6 +86,11 @@ public class UserQuery extends BaseQuery {
         this.mobile = mobile;
     }
 
+    public UserQuery(Long id, String status){
+        this.id = id;
+        this.status = status;
+    }
+
     public String getAvatar() {
         return avatar;
     }
