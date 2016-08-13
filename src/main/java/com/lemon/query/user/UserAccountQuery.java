@@ -25,6 +25,9 @@ public class UserAccountQuery extends BaseQuery{
 
     public UserAccountQuery() {
     }
+    public UserAccountQuery(Long userId){
+        this.userId = userId;
+    }
 
     public UserAccountQuery(String account, AccountType type, Long userId) {
         this.account = account;

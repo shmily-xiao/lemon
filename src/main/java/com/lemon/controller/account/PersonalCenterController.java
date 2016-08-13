@@ -47,7 +47,7 @@ public class PersonalCenterController {
         String account = (String)session.getAttribute("user.account");
         if (account == null || account.isEmpty()) return "redirect:/account/login";
 
-        model.addAttribute("user",new UserView(this.getUser(account).get()));
+        model.addAttribute("user",new UserView(userService.findUserByAccount(account).get()));
 
         return "";
     }
@@ -71,7 +71,7 @@ public class PersonalCenterController {
         if (account == null || account.isEmpty()) return AjaxResponse.fail().reason("用户没有登录").url("/account/login");
 
         // 理论上应该不会有错
-        Optional<User> user = this.getUser(account);
+        Optional<User> user = userService.findUserByAccount(account);
         User newUser = MappingExcutor.map(userForm);
         newUser.setId(user.get().getId());
 
@@ -102,7 +102,7 @@ public class PersonalCenterController {
         if (account == null || account.isEmpty()) return AjaxResponse.fail().reason("用户没有登录").url("/account/login");
 
         // 理论上应该不会有错
-        Optional<User> user = this.getUser(account);
+        Optional<User> user = userService.findUserByAccount(account);
         // 更新空间的隐私设置
         user.get().setZoneStatus(form.getZoneStatus());
 
@@ -131,7 +131,7 @@ public class PersonalCenterController {
         if (account == null || account.isEmpty()) return AjaxResponse.fail().reason("用户没有登录").url("/account/login");
 
         // 理论上应该不会有错
-        Optional<User> user = this.getUser(account);
+        Optional<User> user = userService.findUserByAccount(account);
         if (!user.get().getPassword().equals(Md5.messageDigest(form.getOldPassword() + user.get().getSalt()))){
             return AjaxResponse.fail().msg("修改失败").reason("原密码不正确");
         }

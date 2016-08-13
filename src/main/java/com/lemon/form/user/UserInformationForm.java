@@ -53,18 +53,6 @@ public class UserInformationForm extends BaseForm{
     private LocalDate birthday;
 
     /**
-     * 电话号码
-     */
-    @MappingRule
-    private String mobile;
-
-    /**
-     * qq号码
-     */
-    @MappingRule
-    private String qqNo;
-
-    /**
      * 邮箱
      */
     @MappingRule
@@ -108,14 +96,6 @@ public class UserInformationForm extends BaseForm{
         this.gender = gender;
     }
 
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
     public String getName() {
         return name;
     }
@@ -138,14 +118,6 @@ public class UserInformationForm extends BaseForm{
 
     public void setProfile(String profile) {
         this.profile = profile;
-    }
-
-    public String getQqNo() {
-        return qqNo;
-    }
-
-    public void setQqNo(String qqNo) {
-        this.qqNo = qqNo;
     }
 
 }

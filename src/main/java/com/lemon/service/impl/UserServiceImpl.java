@@ -35,6 +35,19 @@ public class UserServiceImpl extends BaseServiceImpl<User,BaseQuery> implements 
         return userDao;
     }
 
+    @Override
+    public Optional<User> find(Long id) {
+        Optional<User> user = super.find(id);
+        List<UserAccount> userAccounts = userAccountDao.findEntities(new UserAccountQuery());
+        userAccounts.forEach(userAccount -> {
+            if (AccountType.MOBILE.equals(userAccount.getType())){
+                user.get().setMobile(userAccount.getAccount());
+            }else if (AccountType.QQ.equals(userAccount.getType())){
+                user.get().setQqNo(userAccount.getAccount());
+            }
+        });
+        return user;
+    }
 
     @Override
     @Transactional
@@ -54,7 +67,7 @@ public class UserServiceImpl extends BaseServiceImpl<User,BaseQuery> implements 
     }
 
     @Override
-    public Optional<User> getFindUserByAccount(String account) {
+    public Optional<User> findUserByAccount(String account) {
         List<UserAccount> userAccounts = userAccountDao.findEntities(new UserAccountQuery(account));
         if (userAccounts == null || userAccounts.isEmpty()){
             return Optional.empty();
