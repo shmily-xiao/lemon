@@ -8,11 +8,14 @@ import com.lemon.domain.UserAccount;
 import com.lemon.enums.AccountType;
 import com.lemon.enums.SignupType;
 import com.lemon.query.BaseQuery;
+import com.lemon.query.user.UserAccountQuery;
+import com.lemon.query.user.UserQuery;
 import com.lemon.service.IUserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -51,7 +54,14 @@ public class UserServiceImpl extends BaseServiceImpl<User,BaseQuery> implements 
     }
 
     @Override
-    public Optional<User> getAvailableUser(String account) {
-        return null;
+    public Optional<User> getFindUserByAccount(String account) {
+        List<UserAccount> userAccounts = userAccountDao.findEntities(new UserAccountQuery(account));
+        if (userAccounts == null || userAccounts.isEmpty()){
+            return Optional.empty();
+        }
+        Optional<User> user = this.find(userAccounts.get(0).getUserId());
+        return user;
     }
+
+
 }

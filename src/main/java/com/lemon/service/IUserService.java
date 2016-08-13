@@ -28,5 +28,5 @@ public interface IUserService extends IBaseService<User, BaseQuery>{
      * @param account
      * @return
      */
-    Optional<User> getAvailableUser(String account);
+    Optional<User> getFindUserByAccount(String account);
 }
