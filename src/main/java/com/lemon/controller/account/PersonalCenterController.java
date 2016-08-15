@@ -13,6 +13,7 @@ import com.lemon.view.user.UserView;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -123,7 +124,7 @@ public class PersonalCenterController {
      */
     @ResponseBody
     @RequestMapping(value = "/lemon/personal/center/modify/password")
-    public AjaxResponse updatePassword( @RequestBody @Valid UserPasswordModifyForm form, BindingResult result, HttpServletRequest request){
+    public AjaxResponse updatePassword(@RequestBody @Valid UserPasswordModifyForm form, BindingResult result, HttpServletRequest request){
         if (result.hasErrors()) return AjaxResponse.fail().msg("修改失败").reason("数据表单没有填写完全");
 
         HttpSession session = request.getSession();
@@ -144,6 +145,13 @@ public class PersonalCenterController {
         return AjaxResponse.ok();
     }
 
+
+    @ResponseBody
+    @RequestMapping("/lemon/personal/send/auth/code/{mobile:^1[3|4|5|7|8]\\d{9}$}")
+    public AjaxResponse sendAuthCode(@PathVariable String mobile){
+
+        return AjaxResponse.fail();
+    }
 
     /**
      * 这个地方主要是考虑到用户可以使用手机号登录，也可以使用QQ号码登录
