@@ -70,7 +70,7 @@ public class PersonalCenterController {
         String account = (String)session.getAttribute("user.account");
         if (account == null || account.isEmpty()) return AjaxResponse.fail().reason("用户没有登录").url("/account/login");
 
-        // 理论上应该不会有错
+        // 理论上应该不会有错 // TODO: 2016/8/15 这个地方需要更改，form中属性是要更改的，其他的保留数据库数据
         Optional<User> user = userService.findUserByAccount(account);
         User newUser = MappingExcutor.map(userForm);
         newUser.setId(user.get().getId());

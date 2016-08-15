@@ -38,7 +38,7 @@ public class UserServiceImpl extends BaseServiceImpl<User,BaseQuery> implements 
     @Override
     public Optional<User> find(Long id) {
         Optional<User> user = super.find(id);
-        List<UserAccount> userAccounts = userAccountDao.findEntities(new UserAccountQuery());
+        List<UserAccount> userAccounts = userAccountDao.findEntities(new UserAccountQuery(id));
         userAccounts.forEach(userAccount -> {
             if (AccountType.MOBILE.equals(userAccount.getType())){
                 user.get().setMobile(userAccount.getAccount());
