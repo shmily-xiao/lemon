@@ -63,6 +63,13 @@ public class LemonQuery extends BaseQuery{
         this.isPublic = isPublic;
     }
 
+    // 第一个参数是指要开始的地方，第二个参数是指每页显示多少条数据；
+    public LemonQuery(Integer index, Integer size){
+        this.offset = index * size - 1;
+        this.size = size;
+
+    }
+
     public String getDescription() {
         return description;
     }

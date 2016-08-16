@@ -36,7 +36,7 @@ public class PersonalCenterController {
 
     /**
      *
-     * 个人中心的访问
+     * 个人中心 设置 的访问
      *
      * @param model
      * @param request

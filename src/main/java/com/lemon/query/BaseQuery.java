@@ -13,15 +13,15 @@ public class BaseQuery {
     protected LocalDateTime createdTime;
 
     // 分页开始的地方
-    private Integer offset = 0;
+    protected Integer offset = 0;
 
     // 分页一页显示的条数
-    private Integer size = 10;
+    protected Integer size = 10;
 
     // 总记录数
-    private Integer totalRecord;
+    protected Integer totalRecord;
     // 总页数
-    private Integer totalPage;
+    protected Integer totalPage;
 
     public Long getId() {
         return id;

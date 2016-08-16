@@ -35,6 +35,7 @@
             <if test="images != null and images != ''"> AND images = #{images}</if>
             <if test="remind != null and remind != ''"> AND remind = #{remind}</if>
         </where>
+        LIMIT #{offset},#{size}
     </select>
 
     <select id="findEntities" resultMap="lemonResultMap">
