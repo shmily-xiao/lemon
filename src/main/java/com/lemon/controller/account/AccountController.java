@@ -72,7 +72,7 @@ public class AccountController {
             return AjaxResponse.fail().msg("注册失败").reason("用户没有提交数据");
         }
 
-        Optional<User> userOptional = userService.getFindUserByAccount(userForm.getMobile());
+        Optional<User> userOptional = userService.findUserByAccount(userForm.getMobile());
         if (userOptional.isPresent()) {
             return AjaxResponse.fail().msg("注册失败").reason("该手机号已经注册过了");
         }
@@ -123,7 +123,7 @@ public class AccountController {
             return AjaxResponse.fail().msg("登录失败").reason("用户没有提交任何数据");
         }
 
-        Optional<User> userOptional = userService.getFindUserByAccount(userForm.getMobile());
+        Optional<User> userOptional = userService.findUserByAccount(userForm.getMobile());
         if (!userOptional.isPresent()){
             return AjaxResponse.fail().msg("登录失败").reason("用户不存在");
         }
