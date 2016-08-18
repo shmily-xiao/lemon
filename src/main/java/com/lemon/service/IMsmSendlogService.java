@@ -1,10 +1,7 @@
 package com.lemon.service;
 
-import com.lemon.domain.MsmSendlog;
-import com.lemon.query.BaseQuery;
-import com.lemon.query.msmSendlog.MsmSendlogQuery;
+import com.lemon.domain.msm.MsmSendlog;
 
-import java.util.List;
 import java.util.Optional;
 
 /**

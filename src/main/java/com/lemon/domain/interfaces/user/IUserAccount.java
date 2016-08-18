@@ -1,10 +1,12 @@
-package com.lemon.domain.interfaces;
+package com.lemon.domain.interfaces.user;
 
 import com.lemon.domain.interfaces.ibase.ICreatedTime;
 import com.lemon.enums.AccountType;
 
 /**
  * Created by simpletour_Jenkin on 2016/8/12.
+ *
+ * 用的的账号表，用于登录的账号记录表
  */
 public interface IUserAccount extends ICreatedTime {
 

@@ -2,14 +2,10 @@ package com.lemon.controller.account;
 
 import com.lemon.domain.Cookies;
 import com.lemon.domain.User;
-import com.lemon.domain.UserAccount;
-import com.lemon.enums.AccountType;
 import com.lemon.enums.SignupType;
 import com.lemon.form.AjaxResponse;
 import com.lemon.form.user.UserAccountForm;
-import com.lemon.query.user.UserQuery;
 import com.lemon.service.ICookiesService;
-import com.lemon.service.IUserAccountService;
 import com.lemon.service.IUserService;
 import com.lemon.utils.Md5;
 import com.lemon.utils.SequenceUtils;

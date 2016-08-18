@@ -1,6 +1,8 @@
-package com.lemon.domain;
+package com.lemon.domain.friend;
 
-import com.lemon.domain.interfaces.IFriendship;
+import com.lemon.domain.BaseDomain;
+import com.lemon.domain.interfaces.friend.IFriendship;
+import com.lemon.enums.FriendType;
 
 /**
  * Created by simpletour_Jenkin on 2016/7/28.
@@ -20,12 +22,17 @@ public class Friendship extends BaseDomain implements IFriendship{
     /**
      * 朋友的类型，普通，特别关注
      */
-    private String type;
+    private FriendType type;
 
     /**
-     * 用户对好友的分类
+     * 用户对好友的分组
      */
-    private String group;
+    private Long friendGroupId;
+
+    /**
+     * 用户这条信息对好友的公开策略
+     */
+    private Long accessControlId;
 
     @Override
     public Long getFriendId() {
@@ -38,12 +45,12 @@ public class Friendship extends BaseDomain implements IFriendship{
     }
 
     @Override
-    public String getType() {
+    public FriendType getType() {
         return type;
     }
 
     @Override
-    public void setType(String type) {
+    public void setType(FriendType type) {
         this.type = type;
     }
 
@@ -58,12 +65,22 @@ public class Friendship extends BaseDomain implements IFriendship{
     }
 
     @Override
-    public String getGroup() {
-        return group;
+    public Long getAccessControlId() {
+        return accessControlId;
     }
 
     @Override
-    public void setGroup(String group) {
-        this.group = group;
+    public void setAccessControlId(Long accessControlId) {
+        this.accessControlId = accessControlId;
+    }
+
+    @Override
+    public Long getFriendGroupId() {
+        return friendGroupId;
+    }
+
+    @Override
+    public void setFriendGroupId(Long friendGroupId) {
+        this.friendGroupId = friendGroupId;
     }
 }

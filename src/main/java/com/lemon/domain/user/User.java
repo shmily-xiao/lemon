@@ -1,13 +1,11 @@
-package com.lemon.domain;
+package com.lemon.domain.user;
 
-import com.lemon.domain.interfaces.IUser;
+import com.lemon.domain.BaseDomain;
+import com.lemon.domain.interfaces.user.IUser;
 import com.lemon.enums.GenderType;
 import com.lemon.enums.SignupType;
-import com.lemon.enums.UserType;
-import com.lemon.enums.ZoneStatus;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * Created by simpletour_Jenkin on 2016/7/27.
@@ -79,30 +77,30 @@ public class User extends BaseDomain implements IUser {
      */
     private String status = "true";
 
-    /**
-     * 用户的类型，或者是等级,默认为 新手
-     */
-    private UserType type = UserType.NEWBIE;
+//    /**
+//     * 用户的类型，或者是等级,默认为 新手
+//     */
+//    private UserType type = UserType.NEWBIE;
 
-    /**
-     * 成就值，得分
-     */
-    private Long score = 0L;
-
-    /**
-     * 用户是否公开自己的事件，或者是只能好友可见
-     */
-    private ZoneStatus zoneStatus = ZoneStatus.PUBLIC;
+//    /**
+//     * 成就值，得分
+//     */
+//    private Long score = 0L;
+//
+//    /**
+//     * 用户是否公开自己的事件，或者是只能好友可见
+//     */
+//    private ZoneStatus zoneStatus = ZoneStatus.PUBLIC;
 
     /**
      * 注册类型，最初是手机号、和qq号
      */
     private SignupType signupType;
 
-    /**
-     * 短信的条数
-     */
-    private Long smsCount;
+//    /**
+//     * 短信的条数
+//     */
+//    private Long smsCount;
 
     /**
      * 是否可以更改账号
@@ -226,16 +224,6 @@ public class User extends BaseDomain implements IUser {
     }
 
     @Override
-    public Long getScore() {
-        return score;
-    }
-
-    @Override
-    public void setScore(Long score) {
-        this.score = score;
-    }
-
-    @Override
     public String getStatus() {
         return status;
     }
@@ -243,24 +231,6 @@ public class User extends BaseDomain implements IUser {
     @Override
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    @Override
-    public UserType getType() {
-        return type;
-    }
-
-    public void setType(UserType type) {
-        this.type = type;
-    }
-
-    @Override
-    public ZoneStatus getZoneStatus() {
-        return zoneStatus;
-    }
-    @Override
-    public void setZoneStatus(ZoneStatus zoneStatus) {
-        this.zoneStatus = zoneStatus;
     }
 
     @Override
@@ -281,16 +251,6 @@ public class User extends BaseDomain implements IUser {
     @Override
     public void setSignupType(SignupType signupType) {
         this.signupType = signupType;
-    }
-
-    @Override
-    public Long getSmsCount() {
-        return smsCount;
-    }
-
-    @Override
-    public void setSmsCount(Long smsCount) {
-        this.smsCount = smsCount;
     }
 
     @Override

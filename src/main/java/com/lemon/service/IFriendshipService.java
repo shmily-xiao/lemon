@@ -1,6 +1,6 @@
 package com.lemon.service;
 
-import com.lemon.domain.Friendship;
+import com.lemon.domain.friend.Friendship;
 import com.lemon.query.BaseQuery;
 
 /**

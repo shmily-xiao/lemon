@@ -1,9 +1,8 @@
 package com.lemon.dao.impl;
 
 import com.lemon.dao.IMsmSendlogDao;
-import com.lemon.domain.MsmSendlog;
+import com.lemon.domain.msm.MsmSendlog;
 import com.lemon.query.BaseQuery;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 /**

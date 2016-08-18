@@ -1,6 +1,7 @@
-package com.lemon.domain;
+package com.lemon.domain.wechatUser;
 
-import com.lemon.domain.interfaces.IWechatUser;
+import com.lemon.domain.BaseDomain;
+import com.lemon.domain.interfaces.wechatUser.IWechatUser;
 
 /**
  * Created by simpletour_Jenkin on 2016/7/27.

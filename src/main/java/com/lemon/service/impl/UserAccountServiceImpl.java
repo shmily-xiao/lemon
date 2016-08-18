@@ -2,7 +2,7 @@ package com.lemon.service.impl;
 
 import com.lemon.dao.IBaseDao;
 import com.lemon.dao.IUserAccountDao;
-import com.lemon.domain.UserAccount;
+import com.lemon.domain.user.UserAccount;
 import com.lemon.query.BaseQuery;
 import com.lemon.service.IUserAccountService;
 import org.springframework.stereotype.Service;

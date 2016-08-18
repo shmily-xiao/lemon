@@ -1,6 +1,6 @@
 package com.lemon.dao;
 
-import com.lemon.domain.WechatUser;
+import com.lemon.domain.wechatUser.WechatUser;
 import com.lemon.query.BaseQuery;
 
 /**

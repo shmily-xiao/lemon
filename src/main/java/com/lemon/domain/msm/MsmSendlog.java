@@ -1,6 +1,7 @@
-package com.lemon.domain;
+package com.lemon.domain.msm;
 
-import com.lemon.domain.interfaces.IMsmSendlog;
+import com.lemon.domain.BaseDomain;
+import com.lemon.domain.interfaces.msm.IMsmSendlog;
 
 /**
  * Created by simpletour_Jenkin on 2016/7/27.

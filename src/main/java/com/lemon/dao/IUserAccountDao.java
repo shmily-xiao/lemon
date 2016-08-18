@@ -1,6 +1,6 @@
 package com.lemon.dao;
 
-import com.lemon.domain.UserAccount;
+import com.lemon.domain.user.UserAccount;
 import com.lemon.query.BaseQuery;
 
 /**

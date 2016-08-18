@@ -1,9 +1,10 @@
-package com.lemon.domain.interfaces;
+package com.lemon.domain.interfaces.wechatUser;
 
 import com.lemon.domain.interfaces.ibase.ICreatedTime;
 
 /**
  * Created by simpletour_Jenkin on 2016/7/27.
+ * 微信表，同时对用户表的映射
  */
 public interface IWechatUser extends ICreatedTime{
     // 手机号码

@@ -1,6 +1,6 @@
 package com.lemon.dao;
 
-import com.lemon.domain.MsmSendlog;
+import com.lemon.domain.msm.MsmSendlog;
 import com.lemon.query.BaseQuery;
 
 /**

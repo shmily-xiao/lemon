@@ -1,9 +1,8 @@
 package com.lemon.dao.impl;
 
 import com.lemon.dao.IWechatUserDao;
-import com.lemon.domain.WechatUser;
+import com.lemon.domain.wechatUser.WechatUser;
 import com.lemon.query.BaseQuery;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 /**

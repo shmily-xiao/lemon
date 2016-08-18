@@ -1,6 +1,7 @@
-package com.lemon.domain;
+package com.lemon.domain.content;
 
-import com.lemon.domain.interfaces.ILemon;
+import com.lemon.domain.BaseDomain;
+import com.lemon.domain.interfaces.content.IContent;
 import com.lemon.enums.LemonType;
 
 import java.util.Date;
@@ -8,7 +9,7 @@ import java.util.Date;
 /**
  * Created by simpletour_Jenkin on 2016/7/27.
  */
-public class Lemon extends BaseDomain implements ILemon{
+public class Content extends BaseDomain implements IContent {
 
     /**
      * 是否完成了

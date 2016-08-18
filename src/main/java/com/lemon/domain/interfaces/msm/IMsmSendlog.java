@@ -1,9 +1,10 @@
-package com.lemon.domain.interfaces;
+package com.lemon.domain.interfaces.msm;
 
 import com.lemon.domain.interfaces.ibase.ICreatedTime;
 
 /**
  * Created by simpletour_Jenkin on 2016/7/27.
+ * 短息验证码
  */
 public interface IMsmSendlog extends ICreatedTime{
     // 验证码

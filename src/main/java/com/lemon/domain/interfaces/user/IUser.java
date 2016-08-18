@@ -1,4 +1,4 @@
-package com.lemon.domain.interfaces;
+package com.lemon.domain.interfaces.user;
 
 import com.lemon.domain.interfaces.ibase.IName;
 import com.lemon.enums.GenderType;
@@ -11,6 +11,8 @@ import java.util.Date;
 
 /**
  * Created by simpletour_Jenkin on 2016/7/27.
+ *
+ * 用户的基本信息表
  */
 public interface IUser extends IName{
     // 头像
@@ -57,18 +59,18 @@ public interface IUser extends IName{
     String getStatus();
     void setStatus(String status);
 
-    //用户的类型, 用于表示用户的等级
-    UserType getType();
-    void setType(UserType type);
+//    //用户的类型, 用于表示用户的等级
+//    UserType getType();
+//    void setType(UserType type);
 
-    // 用户的得分，或者是叫做 成就，每完成一件自己想做的事情就加分，理论上没有上线
-    // 但是以后可以通过成就值给用户划分等级
-    Long getScore();
-    void setScore(Long score);
+//    // 用户的得分，或者是叫做 成就，每完成一件自己想做的事情就加分，理论上没有上线
+//    // 但是以后可以通过成就值给用户划分等级
+//    Long getScore();
+//    void setScore(Long score);
 
-    // 用户是否公开自己的事件，或者是只能好友可见
-    ZoneStatus getZoneStatus();
-    void setZoneStatus(ZoneStatus zoneStatus);
+//    // 用户是否公开自己的事件，或者是只能好友可见
+//    ZoneStatus getZoneStatus();
+//    void setZoneStatus(ZoneStatus zoneStatus);
 
     // 个人简介
     String getProfile();
@@ -78,9 +80,9 @@ public interface IUser extends IName{
     SignupType getSignupType();
     void setSignupType(SignupType signupType);
 
-    // 短信的条数
-    Long getSmsCount();
-    void setSmsCount(Long smsCount);
+//    // 短信的条数
+//    Long getSmsCount();
+//    void setSmsCount(Long smsCount);
 
     // 是否可以更改账号
     Boolean getModifyAvailable();

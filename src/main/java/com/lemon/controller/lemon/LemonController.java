@@ -1,6 +1,6 @@
 package com.lemon.controller.lemon;
 
-import com.lemon.domain.Lemon;
+import com.lemon.domain.content.Content;
 import com.lemon.query.lemon.LemonQuery;
 import com.lemon.service.ILemonService;
 import org.springframework.stereotype.Controller;
@@ -29,7 +29,7 @@ public class LemonController {
     @RequestMapping(value = "/lemon/lemons")
     public String homeLemons(HttpServletRequest request, Model model){
 
-        List<Lemon> lemons = lemonService.findByPage(new LemonQuery(1,10));
+        List<Content> lemons = lemonService.findByPage(new LemonQuery(1,10));
 
         return "";
     }
