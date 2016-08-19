@@ -7,7 +7,8 @@
         <result property="createdTime" column="created_time"/>
         <result property="userId" column="user_id"/>
         <result property="friendId" column="friend_id"/>
-        <result property="group" column="grouping"/>
+        <result property="friendGroupId" column="friend_group_id"/>
+        <result property="accessControlId" column="access_control_id"/>
         <!--<association property="detail" javaType="Detail" resultMap="com.demo.domain.Detail.detailResultMap"/>-->
     </resultMap>
     <delete id="deleteById">
@@ -17,16 +18,18 @@
     <delete id="delete">
         DELETE FROM friendship
         <where>
-            <if test="userId != null and userId != ''">user_id = #{userId}</if>
+            <if test="id !=null  and id != ''">id = #{id}</if>
+            <if test="userId != null and userId != ''">and user_id = #{userId}</if>
             <if test="friendId != null and friendId != ''">and friend_id = #{friendId}</if>
             <if test="type != null and type != ''">and type = #{type}</if>
-            <if test="group != null and group != ''">and group = #{group}</if>
+            <if test="friendGroupId != null and friendGroupId != ''">and friend_group_id = #{friendGroupId}</if>
+            <if test="accessControlId != null and accessControlId != ''">and access_control_id = #{accessControlId}</if>
         </where>
     </delete>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO friendship (created_time, user_id, friend_id, type, group)
-        VALUES (#{createdTime}, #{userId}, #{friendId}, #{type}, #{group});
+        INSERT INTO friendship (created_time, user_id, friend_id, type, friend_group_id, access_control_id)
+        VALUES (#{createdTime}, #{userId}, #{friendId}, #{type}, #{friendGroupId}, #{accessControlId});
     </insert>
 
     <update id="update" >
@@ -35,7 +38,8 @@
             <if test="userId != null and userId != ''">user_id = #{userId}</if>
             <if test="friendId != null and friendId != ''">and friend_id = #{friendId}</if>
             <if test="type != null and type != ''">and type = #{type}</if>
-            <if test="group != null and group != ''">and group = #{group}</if>
+            <if test="friendGroupId != null and friendGroupId != ''">and friend_group_id = #{friendGroupId}</if>
+            <if test="accessControlId != null and accessControlId != ''">and access_control_id = #{accessControlId}</if>
         </set>
         WHERE id = #{id};
     </update>
@@ -47,10 +51,12 @@
     <select id="findByPage" resultMap="friendshipResultMap">
         SELECT * FROM friendship
         <where>
-            <if test="userId != null and userId != ''">user_id = #{userId}</if>
+            <if test="id !=null  and id != ''">id = #{id}</if>
+            <if test="userId != null and userId != ''">and user_id = #{userId}</if>
             <if test="friendId != null and friendId != ''">and friend_id = #{friendId}</if>
             <if test="type != null and type != ''">and type = #{type}</if>
-            <if test="group != null and group != ''">and group = #{group}</if>
+            <if test="friendGroupId != null and friendGroupId != ''">and friend_group_id = #{friendGroupId}</if>
+            <if test="accessControlId != null and accessControlId != ''">and access_control_id = #{accessControlId}</if>
         </where>
     </select>
 
@@ -58,20 +64,26 @@
     <select id="findEntities" resultMap="friendshipResultMap">
         SELECT * FROM friendship
         <where>
-            <if test="userId != null and userId != ''">user_id = #{userId}</if>
+            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
+            <if test="id !=null  and id != ''">and id = #{id}</if>
+            <if test="userId != null and userId != ''">and user_id = #{userId}</if>
             <if test="friendId != null and friendId != ''">and friend_id = #{friendId}</if>
             <if test="type != null and type != ''">and type = #{type}</if>
-            <if test="group != null and group != ''">and group = #{group}</if>
+            <if test="friendGroupId != null and friendGroupId != ''">and friend_group_id = #{friendGroupId}</if>
+            <if test="accessControlId != null and accessControlId != ''">and access_control_id = #{accessControlId}</if>
         </where>
     </select>
 
     <select id="count" resultMap="friendshipResultMap">
         SELECT count(*) FROM friendship
         <where>
-            <if test="userId != null and userId != ''">user_id = #{userId}</if>
+            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
+            <if test="id !=null  and id != ''">and id = #{id}</if>
+            <if test="userId != null and userId != ''">and user_id = #{userId}</if>
             <if test="friendId != null and friendId != ''">and friend_id = #{friendId}</if>
             <if test="type != null and type != ''">and type = #{type}</if>
-            <if test="group != null and group != ''">and group = #{group}</if>
+            <if test="friendGroupId != null and friendGroupId != ''">and friend_group_id = #{friendGroupId}</if>
+            <if test="accessControlId != null and accessControlId != ''">and access_control_id = #{accessControlId}</if>
         </where>
     </select>
 </mapper>

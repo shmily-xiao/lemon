@@ -6,11 +6,8 @@
         <id property="id" column="id" />
         <result property="createdTime" column="created_time"/>
         <result property="nickName" column="nick_name"/>
-        <result property="qqNo" column="qq_no"/>
-        <result property="zoneStatus" column="zone_status"/>
-        <result property="smsCount" column="sms_count"/>
         <result property="modifyAvailable" column="modify_available"/>
-
+        <result property="signupType" column="signup_type"/>
     </resultMap>
 
     <delete id="deleteById">
@@ -30,15 +27,13 @@
             <if test="password != null and password != ''">and password = #{password}</if>
             <if test="salt != null and salt != ''">and salt = #{salt}</if>
             <if test="status != null and status != ''">and status = #{status}</if>
-            <if test="type != null and type != ''">and type = #{type}</if>
             <if test="score != null and score != ''">and score = #{score}</if>
-            <if test="zoneStatus != null and zoneStatus != ''">and zone_status = #{zoneStatus}</if>
         </where>
     </delete>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO u_user(created_time, avatar, gender, name, nick_name, birthday,account, email, password, salt, status, type, score, zone_status, profile, sms_count, modify_available)
-        VALUES (#{createdTime}, #{avatar}, #{gender}, #{name}, #{nickName}, #{birthday}, #{account}, #{email}, #{password}, #{salt}, #{status}, #{type}, #{score}, #{zoneStatus}, #{profile},#{smsCount},#{modifyAvailable});
+        INSERT INTO u_user(created_time, avatar, gender, name, nick_name, birthday,account, email, password, salt, status, profile,  modify_available, signup_type)
+        VALUES (#{createdTime}, #{avatar}, #{gender}, #{name}, #{nickName}, #{birthday}, #{account}, #{email}, #{password}, #{salt}, #{status}, #{profile},#{modifyAvailable}, #{signupType});
     </insert>
 
     <update id="update" >
@@ -54,11 +49,7 @@
             <if test="password != null and password != ''">and password = #{password}</if>
             <if test="salt != null and salt != ''">and salt = #{salt}</if>
             <if test="status != null and status != ''">and status = #{status}</if>
-            <if test="type != null and type != ''">and type = #{type}</if>
-            <if test="score != null and score != ''">and score = #{score}</if>
-            <if test="zoneStatus != null and zoneStatus != ''">and zone_status = #{zoneStatus}</if>
             <if test="profile != null and profile != ''">and profile = #{profile}</if>
-            <if test="smsCount != null and smsCount != ''">and sms_count = #{smsCount}</if>
             <if test="modifyAvailable != null ">and modify_available = #{modifyAvailable}</if>
         </set>
         WHERE id = #{id};
@@ -81,11 +72,7 @@
             <if test="password != null and password != ''">and password = #{password}</if>
             <if test="salt != null and salt != ''">and salt = #{salt}</if>
             <if test="status != null and status != ''">and status = #{status}</if>
-            <if test="type != null and type != ''">and type = #{type}</if>
-            <if test="score != null and score != ''">and score = #{score}</if>
-            <if test="zoneStatus != null and zoneStatus != ''">and zone_status = #{zoneStatus}</if>
             <if test="profile != null and profile != ''">and profile = #{profile}</if>
-            <if test="smsCount != null and smsCount != ''">and sms_count = #{smsCount}</if>
             <if test="modifyAvailable != null ">and modify_available = #{modifyAvailable}</if>
         </where>
     </select>
@@ -104,11 +91,7 @@
             <if test="password != null and password != ''">and password = #{password}</if>
             <if test="salt != null and salt != ''">and salt = #{salt}</if>
             <if test="status != null and status != ''">and status = #{status}</if>
-            <if test="type != null and type != ''">and type = #{type}</if>
-            <if test="score != null and score != ''">and score = #{score}</if>
-            <if test="zoneStatus != null and zoneStatus != ''">and zone_status = #{zoneStatus}</if>
             <if test="profile != null and profile != ''">and profile = #{profile}</if>
-            <if test="smsCount != null and smsCount != ''">and sms_count = #{smsCount}</if>
             <if test="modifyAvailable != null ">and modify_available = #{modifyAvailable}</if>
         </where>
     </select>
@@ -126,11 +109,7 @@
             <if test="password != null and password != ''">and password = #{password}</if>
             <if test="salt != null and salt != ''">and salt = #{salt}</if>
             <if test="status != null and status != ''">and status = #{status}</if>
-            <if test="type != null and type != ''">and type = #{type}</if>
-            <if test="score != null and score != ''">and score = #{score}</if>
-            <if test="zoneStatus != null and zoneStatus != ''">and zone_status = #{zoneStatus}</if>
             <if test="profile != null and profile != ''">and profile = #{profile}</if>
-            <if test="smsCount != null and smsCount != ''">and sms_count = #{smsCount}</if>
             <if test="modifyAvailable != null ">and modify_available = #{modifyAvailable}</if>
         </where>
     </select>

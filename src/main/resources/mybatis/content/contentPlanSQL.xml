@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lemon.dao.impl.ContentPlanDaoImpl">
+    <resultMap id="contentPlanResultMap" type="ContentPlan" autoMapping="true">
+        <id property="id" column="id" />
+        <result property="createdTime" column="created_time"/>
+        <result property="userId" column="user_id"/>
+        <result property="contentId" column="content_id"/>
+        <result property="expectTime" column="expect_time"/>
+        <result property="finishedTime" column="finished_time"/>
+        <!--<association property="detail" javaType="Detail" resultMap="com.demo.domain.Detail.detailResultMap"/>-->
+    </resultMap>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO content_plan(created_time, user_id,content_id,expect_time,finished_time,finished, remind)
+        VALUES(#{createdTime},#{userId},#{contentId},#{expectTime},#{finishedTime}, #{finished}, #{remind});
+    </insert>
+
+    <select id="findById" resultMap="contentResultMap">
+        SELECT * FROM  content_plan WHERE id = #{id};
+    </select>
+
+    <select id="findByPage" resultMap="contentPlanResultMap">
+        SELECT * FROM  content_plan
+        <where>
+            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
+            <if test="contentId != null and contentId != ''"> AND content_id = #{contentId}</if>
+            <if test="finished != null "> AND finished = #{finished}</if>
+            <if test="expectTime != null and expectTime != ''"> AND expect_time = #{expectTime}</if>
+            <if test="finishedTime != null and finishedTime != ''"> AND finished_time = #{finishedTime}</if>
+            <if test="remind != null "> AND remind = #{remind}</if>
+            <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
+        </where>
+        LIMIT #{offset},#{size}
+    </select>
+
+    <select id="findEntities" resultMap="contentPlanResultMap">
+        SELECT * FROM  content_plan
+        <where>
+            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
+            <if test="contentId != null and contentId != ''"> AND content_id = #{contentId}</if>
+            <if test="finished != null "> AND finished = #{finished}</if>
+            <if test="expectTime != null and expectTime != ''"> AND expect_time = #{expectTime}</if>
+            <if test="finishedTime != null and finishedTime != ''"> AND finished_time = #{finishedTime}</if>
+            <if test="remind != null "> AND remind = #{remind}</if>
+            <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
+        </where>
+    </select>
+
+
+    <select id="count" resultMap="contentPlanResultMap">
+        SELECT count(*) FROM  content_plan
+        <where>
+            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
+            <if test="contentId != null and contentId != ''"> AND content_id = #{contentId}</if>
+            <if test="finished != null "> AND finished = #{finished}</if>
+            <if test="expectTime != null and expectTime != ''"> AND expect_time = #{expectTime}</if>
+            <if test="finishedTime != null and finishedTime != ''"> AND finished_time = #{finishedTime}</if>
+            <if test="remind != null "> AND remind = #{remind}</if>
+            <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
+        </where>
+    </select>
+
+    <delete id="deleteById" >
+        DELETE FROM content_plan WHERE id = #{id};
+    </delete>
+
+    <delete id="delete">
+        DELETE FROM content_plan
+        <where>
+            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
+            <if test="contentId != null and contentId != ''"> AND content_id = #{contentId}</if>
+            <if test="finished != null "> AND finished = #{finished}</if>
+            <if test="expectTime != null and expectTime != ''"> AND expect_time = #{expectTime}</if>
+            <if test="finishedTime != null and finishedTime != ''"> AND finished_time = #{finishedTime}</if>
+            <if test="remind != null "> AND remind = #{remind}</if>
+            <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
+        </where>
+    </delete>
+
+    <update id="update">
+        UPDATE content_plan
+        <set>
+            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
+            <if test="contentId != null and contentId != ''"> AND content_id = #{contentId}</if>
+            <if test="finished != null "> AND finished = #{finished}</if>
+            <if test="expectTime != null and expectTime != ''"> AND expect_time = #{expectTime}</if>
+            <if test="finishedTime != null and finishedTime != ''"> AND finished_time = #{finishedTime}</if>
+            <if test="remind != null "> AND remind = #{remind}</if>
+            <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
+        </set>
+        WHERE id = #{id};
+    </update>
+
+</mapper>
