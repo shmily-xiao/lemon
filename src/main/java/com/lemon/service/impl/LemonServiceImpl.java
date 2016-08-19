@@ -1,7 +1,7 @@
 package com.lemon.service.impl;
 
 import com.lemon.dao.IBaseDao;
-import com.lemon.dao.ILemonDao;
+import com.lemon.dao.IContentDao;
 import com.lemon.domain.content.Content;
 import com.lemon.query.BaseQuery;
 import com.lemon.service.ILemonService;
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 @Service
 public class LemonServiceImpl extends BaseServiceImpl<Content,BaseQuery> implements ILemonService{
     @Resource
-    private ILemonDao lemonDao;
+    private IContentDao lemonDao;
 
     @Override
     protected IBaseDao<Content, BaseQuery> getBaseDao() {
