@@ -6,6 +6,7 @@ import com.lemon.enums.UserType;
 
 /**
  * Created by simpletour_Jenkin on 2016/8/19.
+ * 用户的业务数据表
  */
 public class UserRecord extends BaseDomain implements IUserRecord {
     /**

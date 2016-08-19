@@ -6,6 +6,7 @@ import com.lemon.enums.FriendType;
 
 /**
  * Created by simpletour_Jenkin on 2016/8/19.
+ * 用户的分组表
  */
 public class FriendGroup extends BaseDomain implements IFriendGroup{
 

@@ -9,6 +9,8 @@ import java.time.LocalDate;
 
 /**
  * Created by simpletour_Jenkin on 2016/7/27.
+ *
+ * 用户的基本信息表
  */
 public class User extends BaseDomain implements IUser {
 
