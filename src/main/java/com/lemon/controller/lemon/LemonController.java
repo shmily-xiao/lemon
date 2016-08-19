@@ -2,7 +2,7 @@ package com.lemon.controller.lemon;
 
 import com.lemon.domain.content.Content;
 import com.lemon.query.lemon.LemonQuery;
-import com.lemon.service.ILemonService;
+import com.lemon.service.IContentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +19,7 @@ import java.util.List;
 public class LemonController {
 
     @Resource
-    private ILemonService lemonService;
+    private IContentService lemonService;
     /**
      * 首页
      * @param request
