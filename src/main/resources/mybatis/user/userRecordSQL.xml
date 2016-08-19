@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lemon.dao.impl.UserRecordDaoImpl">
+    <resultMap id="userRecordResultMap" type="UserRecord" autoMapping="true">
+        <id property="id" column="id" />
+        <result property="createdTime" column="created_time"/>
+        <result property="userId" column="user_id"/>
+        <result property="accessControlId" column="access_control_id"/>
+        <result property="smsCount" column="sms_count"/>
+        <!--<association property="detail" javaType="Detail" resultMap="com.demo.domain.Detail.detailResultMap"/>-->
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user_record (created_time, type, score, sms_count, user_id, access_control_id)
+        VALUES(#{createdTime}, #{type}, #{score}, #{smsCount}, #{userId},#{accessControlId});
+    </insert>
+
+    <select id="findById" resultMap="userRecordResultMap">
+        SELECT * FROM  user_record WHERE id = #{id};
+    </select>
+
+    <select id="findByPage" resultMap="userRecordResultMap">
+        SELECT * FROM  user_record
+        <where>
+            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
+            <if test="type != null and type != ''"> AND type = #{type}</if>
+            <if test="score != null and score != ''"> AND score = #{score}</if>
+            <if test="smsCount != null and smsCount != ''"> AND sms_count = #{smsCount}</if>
+            <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
+            <if test="accessControlId != null and accessControlId != ''"> AND access_control_id = #{accessControlId}</if>
+        </where>
+        LIMIT #{offset},#{size}
+    </select>
+
+    <select id="findEntities" resultMap="userRecordResultMap">
+        SELECT * FROM  user_record
+        <where>
+            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
+            <if test="type != null and type != ''"> AND type = #{type}</if>
+            <if test="score != null and score != ''"> AND score = #{score}</if>
+            <if test="smsCount != null and smsCount != ''"> AND sms_count = #{smsCount}</if>
+            <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
+            <if test="accessControlId != null and accessControlId != ''"> AND access_control_id = #{accessControlId}</if>
+        </where>
+    </select>
+
+
+    <select id="count" resultMap="userRecordResultMap">
+        SELECT count(*) FROM  user_record
+        <where>
+            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
+            <if test="type != null and type != ''"> AND type = #{type}</if>
+            <if test="score != null and score != ''"> AND score = #{score}</if>
+            <if test="smsCount != null and smsCount != ''"> AND sms_count = #{smsCount}</if>
+            <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
+            <if test="accessControlId != null and accessControlId != ''"> AND access_control_id = #{accessControlId}</if>
+        </where>
+    </select>
+
+    <delete id="deleteById" >
+        DELETE FROM user_record WHERE id = #{id};
+    </delete>
+
+    <delete id="delete">
+        DELETE FROM user_record
+        <where>
+            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
+            <if test="type != null and type != ''"> AND type = #{type}</if>
+            <if test="score != null and score != ''"> AND score = #{score}</if>
+            <if test="smsCount != null and smsCount != ''"> AND sms_count = #{smsCount}</if>
+            <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
+            <if test="accessControlId != null and accessControlId != ''"> AND access_control_id = #{accessControlId}</if>
+        </where>
+    </delete>
+
+    <update id="update">
+        UPDATE user_record
+        <set>
+            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
+            <if test="type != null and type != ''"> AND type = #{type}</if>
+            <if test="score != null and score != ''"> AND score = #{score}</if>
+            <if test="smsCount != null and smsCount != ''"> AND sms_count = #{smsCount}</if>
+            <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
+            <if test="accessControlId != null and accessControlId != ''"> AND access_control_id = #{accessControlId}</if>
+        </set>
+        WHERE id = #{id};
+    </update>
+
+</mapper>
