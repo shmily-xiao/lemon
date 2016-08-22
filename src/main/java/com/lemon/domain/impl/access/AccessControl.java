@@ -23,6 +23,14 @@ public class AccessControl extends BaseDomain implements IAccessControl {
      */
     private String strategy;
 
+    public AccessControl() {
+    }
+
+    public AccessControl(Long rowId, String rowTable, String strategy) {
+        this.rowId = rowId;
+        this.rowTable = rowTable;
+        this.strategy = strategy;
+    }
 
     @Override
     public Long getRowId() {

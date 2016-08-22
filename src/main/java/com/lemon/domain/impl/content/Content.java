@@ -2,7 +2,8 @@ package com.lemon.domain.impl.content;
 
 import com.lemon.domain.impl.BaseDomain;
 import com.lemon.domain.interfaces.content.IContent;
-import com.lemon.enums.LemonType;
+import com.lemon.enums.ContentType;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.Date;
 
@@ -12,14 +13,9 @@ import java.util.Date;
 public class Content extends BaseDomain implements IContent {
 
     /**
-     * 是否完成了
-     */
-    private Boolean finished;
-
-    /**
      * 要完成的事情的标题
      */
-    private String name;
+    private String title;
 
     /**
      * 对这件事情的大概描述
@@ -32,24 +28,9 @@ public class Content extends BaseDomain implements IContent {
     private String images;
 
     /**
-     * 自己定的大概的完成时间
-     */
-    private Date expectTime;
-
-    /**
-     * 完成的时间
-     */
-    private Date finishedTime;
-
-    /**
      * 这件事情的等级,有 梦想 、 琐事 、 抒情 等
      */
-    private LemonType type;
-
-    /**
-     * 是否用短信提醒用户
-     */
-    private Boolean remind;
+    private ContentType type;
 
     /**
      * 这件事情由谁来创建
@@ -57,10 +38,9 @@ public class Content extends BaseDomain implements IContent {
     private Long userId;
 
     /**
-     * 此条记录是否公开
-     * user有一个权限设置是对所有记录而言的，这个地方的权限只会对此条记录起作用
+     * 是否删除了
      */
-    private Boolean isPublic;
+    private Boolean del;
 
     @Override
     public String getDescription() {
@@ -72,44 +52,6 @@ public class Content extends BaseDomain implements IContent {
         this.description = description;
     }
 
-    @Override
-    public Date getExpectTime() {
-        return expectTime;
-    }
-
-    @Override
-    public void setExpectTime(Date expectTime) {
-        this.expectTime = expectTime;
-    }
-
-    @Override
-    public Boolean getFinished() {
-        return finished;
-    }
-
-    @Override
-    public void setFinished(Boolean finished) {
-        this.finished = finished;
-    }
-
-    @Override
-    public Date getFinishedTime() {
-        return finishedTime;
-    }
-
-    public void setFinishedTime(Date finishedTime) {
-        this.finishedTime = finishedTime;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
 
     @Override
     public Long getUserId() {
@@ -119,16 +61,6 @@ public class Content extends BaseDomain implements IContent {
     @Override
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    @Override
-    public Boolean getIsPublic() {
-        return this.isPublic;
-    }
-
-    @Override
-    public void setIsPublic(Boolean isPublic) {
-        this.isPublic = isPublic;
     }
 
     @Override
@@ -142,23 +74,32 @@ public class Content extends BaseDomain implements IContent {
     }
 
     @Override
-    public LemonType getType() {
+    public ContentType getType() {
         return type;
     }
 
     @Override
-    public void setType(LemonType type) {
+    public void setType(ContentType type) {
         this.type = type;
     }
 
     @Override
-    public Boolean getRemind() {
-        return remind;
+    public Boolean getDel() {
+        return del;
     }
 
     @Override
-    public void setRemind(Boolean remind) {
-        this.remind = remind;
+    public void setDel(Boolean del) {
+        this.del = del;
     }
 
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

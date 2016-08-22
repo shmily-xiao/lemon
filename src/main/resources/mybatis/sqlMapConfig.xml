@@ -2,7 +2,7 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias alias="User" type="com.lemon.domain.User"/>
+        <typeAlias alias="User" type="com.lemon.domain.impl.user.User"/>
         <typeAlias alias="UserAccount" type="com.lemon.domain.impl.user.UserAccount"/>
         <typeAlias alias="UserRecord" type="com.lemon.domain.impl.user.UserRecord"/>
         <typeAlias alias="Friendship" type="com.lemon.domain.impl.friend.Friendship"/>

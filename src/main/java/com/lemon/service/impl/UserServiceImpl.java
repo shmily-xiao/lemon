@@ -1,12 +1,14 @@
 package com.lemon.service.impl;
 
-import com.lemon.dao.IBaseDao;
-import com.lemon.dao.IUserAccountDao;
-import com.lemon.dao.IUserDao;
+import com.lemon.dao.*;
+import com.lemon.domain.impl.access.AccessControl;
 import com.lemon.domain.impl.user.User;
 import com.lemon.domain.impl.user.UserAccount;
+import com.lemon.domain.impl.user.UserRecord;
+import com.lemon.enums.AccessControlRowTableType;
 import com.lemon.enums.AccountType;
 import com.lemon.enums.SignupType;
+import com.lemon.enums.ZoneStatus;
 import com.lemon.query.BaseQuery;
 import com.lemon.query.user.UserAccountQuery;
 import com.lemon.service.IUserService;
@@ -28,6 +30,12 @@ public class UserServiceImpl extends BaseServiceImpl<User,BaseQuery> implements 
 
     @Resource
     private IUserAccountDao userAccountDao;
+
+    @Resource
+    private IAccessControlDao accessControlDao;
+
+    @Resource
+    private IUserRecordDao userRecordDao;
 
     @Override
     protected IBaseDao<User, BaseQuery> getBaseDao() {
@@ -61,6 +69,18 @@ public class UserServiceImpl extends BaseServiceImpl<User,BaseQuery> implements 
             userAccountDao.insert(new UserAccount(newUser.get().getId(),account, AccountType.QQ));
         }
         userAccountDao.insert(new UserAccount(newUser.get().getId(),user.getAccount(), AccountType.SYSTEM_DEFAULT));
+
+        AccessControl accessControl = new AccessControl(newUser.get().getId(), AccessControlRowTableType.USER.name(), ZoneStatus.PUBLIC.name());
+
+        Optional<AccessControl> newAccessControl = accessControlDao.insert(accessControl) != 0 ? Optional.of(accessControl):Optional.empty();
+
+        if (!newAccessControl.isPresent()) return Optional.empty();
+
+        UserRecord userRecord = new UserRecord(newAccessControl.get().getId(),newUser.get().getId());
+
+        Optional<UserRecord> newUserRecord = userRecordDao.insert(userRecord)!=0?Optional.of(userRecord):Optional.empty();
+
+        if (!newUserRecord.isPresent()) return Optional.empty();
 
         return newUser;
     }

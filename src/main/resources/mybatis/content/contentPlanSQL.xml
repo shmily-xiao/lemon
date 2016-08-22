@@ -16,7 +16,7 @@
         VALUES(#{createdTime},#{userId},#{contentId},#{expectTime},#{finishedTime}, #{finished}, #{remind});
     </insert>
 
-    <select id="findById" resultMap="contentResultMap">
+    <select id="findById" resultMap="contentPlanResultMap">
         SELECT * FROM  content_plan WHERE id = #{id};
     </select>
 

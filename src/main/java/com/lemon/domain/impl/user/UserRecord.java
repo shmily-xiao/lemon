@@ -12,17 +12,17 @@ public class UserRecord extends BaseDomain implements IUserRecord {
     /**
      * 用户的等级
      */
-    private UserType type;
+    private UserType type = UserType.NEWBIE;
 
     /**
      * 用户的成就值
      */
-    private Long score;
+    private Long score = 0L;
 
     /**
      * 短信的条数
      */
-    private Long smsCount;
+    private Long smsCount = -1L;
 
     /**
      * 用户的id
@@ -34,6 +34,13 @@ public class UserRecord extends BaseDomain implements IUserRecord {
      */
     private Long accessControlId;
 
+    public UserRecord() {
+    }
+
+    public UserRecord(Long accessControlId, Long userId) {
+        this.accessControlId = accessControlId;
+        this.userId = userId;
+    }
 
     @Override
     public Long getAccessControlId() {
