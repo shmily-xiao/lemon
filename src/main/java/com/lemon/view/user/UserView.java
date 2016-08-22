@@ -1,6 +1,7 @@
 package com.lemon.view.user;
 
-import com.lemon.domain.User;
+
+import com.lemon.domain.impl.user.User;
 
 import java.util.Date;
 

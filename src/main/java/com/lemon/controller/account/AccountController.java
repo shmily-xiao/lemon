@@ -1,7 +1,7 @@
 package com.lemon.controller.account;
 
 import com.lemon.domain.impl.Cookies;
-import com.lemon.domain.User;
+import com.lemon.domain.impl.user.User;
 import com.lemon.enums.SignupType;
 import com.lemon.form.AjaxResponse;
 import com.lemon.form.user.UserAccountForm;

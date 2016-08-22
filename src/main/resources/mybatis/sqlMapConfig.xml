@@ -13,6 +13,7 @@
         <typeAlias alias="Interaction" type="com.lemon.domain.impl.content.Interaction"/>
         <typeAlias alias="MsmSendlog" type="com.lemon.domain.impl.msm.MsmSendlog"/>
         <typeAlias alias="WechatUser" type="com.lemon.domain.impl.wechatUser.WechatUser"/>
+        <typeAlias alias="AccessControl" type="com.lemon.domain.impl.access.AccessControl"/>
     </typeAliases>
     <mappers>
         <mapper resource="mybatis/user/userSQL.xml"/>
@@ -26,5 +27,6 @@
         <mapper resource="mybatis/friendship/friendshipSQL.xml"/>
         <mapper resource="mybatis/friendship/friendGroupSQL.xml"/>
         <mapper resource="mybatis/msmSendlog/msmSendlogSQL.xml"/>
+        <mapper resource="mybatis/access/accessControlSQL.xml"/>
     </mappers>
 </configuration>

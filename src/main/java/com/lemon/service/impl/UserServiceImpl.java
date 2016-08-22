@@ -3,7 +3,7 @@ package com.lemon.service.impl;
 import com.lemon.dao.IBaseDao;
 import com.lemon.dao.IUserAccountDao;
 import com.lemon.dao.IUserDao;
-import com.lemon.domain.User;
+import com.lemon.domain.impl.user.User;
 import com.lemon.domain.impl.user.UserAccount;
 import com.lemon.enums.AccountType;
 import com.lemon.enums.SignupType;
