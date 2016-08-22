@@ -1,6 +1,6 @@
 package com.lemon.service;
 
-import com.lemon.domain.Cookies;
+import com.lemon.domain.impl.Cookies;
 
 /**
  * Created by simpletour_java on 2015/6/4.

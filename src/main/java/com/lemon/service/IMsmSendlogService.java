@@ -1,6 +1,6 @@
 package com.lemon.service;
 
-import com.lemon.domain.msm.MsmSendlog;
+import com.lemon.domain.impl.msm.MsmSendlog;
 
 import java.util.Optional;
 

@@ -1,6 +1,6 @@
 package com.lemon.dao;
 
-import com.lemon.domain.friend.Friendship;
+import com.lemon.domain.impl.friend.Friendship;
 import com.lemon.query.BaseQuery;
 
 /**

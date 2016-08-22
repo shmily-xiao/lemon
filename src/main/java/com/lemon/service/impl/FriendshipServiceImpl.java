@@ -2,7 +2,7 @@ package com.lemon.service.impl;
 
 import com.lemon.dao.IBaseDao;
 import com.lemon.dao.IFriendshipDao;
-import com.lemon.domain.friend.Friendship;
+import com.lemon.domain.impl.friend.Friendship;
 import com.lemon.query.BaseQuery;
 import com.lemon.service.IFriendshipService;
 import org.springframework.stereotype.Service;

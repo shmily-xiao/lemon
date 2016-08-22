@@ -2,7 +2,7 @@ package com.lemon.service.impl;
 
 import com.lemon.dao.IBaseDao;
 import com.lemon.dao.IFriendGroupDao;
-import com.lemon.domain.friend.FriendGroup;
+import com.lemon.domain.impl.friend.FriendGroup;
 import com.lemon.query.BaseQuery;
 import com.lemon.service.IFriendGroupService;
 import org.jvnet.hk2.annotations.Service;

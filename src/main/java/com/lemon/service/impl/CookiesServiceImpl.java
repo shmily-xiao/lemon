@@ -1,7 +1,7 @@
 package com.lemon.service.impl;
 
 import com.lemon.dao.CookiesDao;
-import com.lemon.domain.Cookies;
+import com.lemon.domain.impl.Cookies;
 import com.lemon.service.ICookiesService;
 import org.springframework.stereotype.Service;
 

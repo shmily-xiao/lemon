@@ -3,12 +3,12 @@
 <configuration>
     <typeAliases>
         <typeAlias alias="User" type="com.lemon.domain.User"/>
-        <typeAlias alias="UserAccount" type="com.lemon.domain.user.UserAccount"/>
-        <typeAlias alias="Friendship" type="com.lemon.domain.friend.Friendship"/>
-        <typeAlias alias="Cookies" type="com.lemon.domain.Cookies"/>
-        <typeAlias alias="Lemon" type="com.lemon.domain.content.Content"/>
-        <typeAlias alias="MsmSendlog" type="com.lemon.domain.msm.MsmSendlog"/>
-        <typeAlias alias="WechatUser" type="com.lemon.domain.wechatUser.WechatUser"/>
+        <typeAlias alias="UserAccount" type="com.lemon.domain.impl.user.UserAccount"/>
+        <typeAlias alias="Friendship" type="com.lemon.domain.impl.friend.Friendship"/>
+        <typeAlias alias="Cookies" type="com.lemon.domain.impl.Cookies"/>
+        <typeAlias alias="Lemon" type="com.lemon.domain.impl.content.Content"/>
+        <typeAlias alias="MsmSendlog" type="com.lemon.domain.impl.msm.MsmSendlog"/>
+        <typeAlias alias="WechatUser" type="com.lemon.domain.impl.wechatUser.WechatUser"/>
     </typeAliases>
     <mappers>
         <mapper resource="mybatis/user/userSQL.xml"/>

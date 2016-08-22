@@ -1,8 +1,7 @@
 package com.lemon.dao;
 
 
-import com.alibaba.druid.mock.MockBlob;
-import com.lemon.domain.BaseDomain;
+import com.lemon.domain.impl.BaseDomain;
 import com.lemon.query.BaseQuery;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.lemon.dao;
 
-import com.lemon.domain.content.Interaction;
+import com.lemon.domain.impl.content.Interaction;
 import com.lemon.query.BaseQuery;
 
 /**

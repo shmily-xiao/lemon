@@ -2,7 +2,7 @@ package com.lemon.service.impl;
 
 import com.lemon.dao.IBaseDao;
 import com.lemon.dao.IContentDao;
-import com.lemon.domain.content.Content;
+import com.lemon.domain.impl.content.Content;
 import com.lemon.query.BaseQuery;
 import com.lemon.service.IContentService;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.lemon.service;
 
-import com.lemon.domain.wechatUser.WechatUser;
+import com.lemon.domain.impl.wechatUser.WechatUser;
 import com.lemon.query.BaseQuery;
 
 /**

@@ -1,7 +1,7 @@
 package com.lemon.dao.impl;
 
 import com.lemon.dao.IUserRecordDao;
-import com.lemon.domain.user.UserRecord;
+import com.lemon.domain.impl.user.UserRecord;
 import com.lemon.query.BaseQuery;
 import org.springframework.stereotype.Repository;
 

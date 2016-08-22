@@ -1,8 +1,7 @@
-package com.lemon.domain.friend;
+package com.lemon.domain.impl.friend;
 
-import com.lemon.domain.BaseDomain;
+import com.lemon.domain.impl.BaseDomain;
 import com.lemon.domain.interfaces.friend.IFriendGroup;
-import com.lemon.enums.FriendType;
 
 /**
  * Created by simpletour_Jenkin on 2016/8/19.
