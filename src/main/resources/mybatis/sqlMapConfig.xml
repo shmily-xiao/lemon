@@ -4,19 +4,27 @@
     <typeAliases>
         <typeAlias alias="User" type="com.lemon.domain.User"/>
         <typeAlias alias="UserAccount" type="com.lemon.domain.impl.user.UserAccount"/>
+        <typeAlias alias="UserRecord" type="com.lemon.domain.impl.user.UserRecord"/>
         <typeAlias alias="Friendship" type="com.lemon.domain.impl.friend.Friendship"/>
+        <typeAlias alias="FriendGroup" type="com.lemon.domain.impl.friend.FriendGroup"/>
         <typeAlias alias="Cookies" type="com.lemon.domain.impl.Cookies"/>
-        <typeAlias alias="Lemon" type="com.lemon.domain.impl.content.Content"/>
+        <typeAlias alias="Content" type="com.lemon.domain.impl.content.Content"/>
+        <typeAlias alias="ContentPlan" type="com.lemon.domain.impl.content.ContentPlan"/>
+        <typeAlias alias="Interaction" type="com.lemon.domain.impl.content.Interaction"/>
         <typeAlias alias="MsmSendlog" type="com.lemon.domain.impl.msm.MsmSendlog"/>
         <typeAlias alias="WechatUser" type="com.lemon.domain.impl.wechatUser.WechatUser"/>
     </typeAliases>
     <mappers>
         <mapper resource="mybatis/user/userSQL.xml"/>
         <mapper resource="mybatis/user/userAccountSQL.xml"/>
+        <mapper resource="mybatis/user/userRecordSQL.xml"/>
         <mapper resource="mybatis/wechatUser/wechatUserSQL.xml"/>
         <mapper resource="mybatis/cookies/cookiesSQL.xml"/>
-        <mapper resource="mybatis/lemon/lemonSQL.xml"/>
+        <mapper resource="mybatis/content/contentSQL.xml"/>
+        <mapper resource="mybatis/content/contentPlanSQL.xml"/>
+        <mapper resource="mybatis/content/interactionSQL.xml"/>
         <mapper resource="mybatis/friendship/friendshipSQL.xml"/>
+        <mapper resource="mybatis/friendship/friendGroupSQL.xml"/>
         <mapper resource="mybatis/msmSendlog/msmSendlogSQL.xml"/>
     </mappers>
 </configuration>
