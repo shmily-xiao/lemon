@@ -3,6 +3,7 @@ package com.lemon.domain.content;
 import com.lemon.domain.BaseDomain;
 import com.lemon.domain.interfaces.content.IContent;
 import com.lemon.enums.LemonType;
+import com.sun.tools.corba.se.idl.constExpr.BooleanNot;
 
 import java.util.Date;
 
@@ -10,16 +11,16 @@ import java.util.Date;
  * Created by simpletour_Jenkin on 2016/7/27.
  */
 public class Content extends BaseDomain implements IContent {
-
-    /**
-     * 是否完成了
-     */
-    private Boolean finished;
-
-    /**
-     * 要完成的事情的标题
-     */
-    private String name;
+//
+//    /**
+//     * 是否完成了
+//     */
+//    private Boolean finished;
+//
+//    /**
+//     * 要完成的事情的标题
+//     */
+//    private String name;
 
     /**
      * 对这件事情的大概描述
@@ -31,36 +32,49 @@ public class Content extends BaseDomain implements IContent {
      */
     private String images;
 
-    /**
-     * 自己定的大概的完成时间
-     */
-    private Date expectTime;
-
-    /**
-     * 完成的时间
-     */
-    private Date finishedTime;
+//    /**
+//     * 自己定的大概的完成时间
+//     */
+//    private Date expectTime;
+//
+//    /**
+//     * 完成的时间
+//     */
+//    private Date finishedTime;
 
     /**
      * 这件事情的等级,有 梦想 、 琐事 、 抒情 等
      */
     private LemonType type;
 
-    /**
-     * 是否用短信提醒用户
-     */
-    private Boolean remind;
+//    /**
+//     * 是否用短信提醒用户
+//     */
+//    private Boolean remind;
 
     /**
      * 这件事情由谁来创建
      */
     private Long userId;
 
+//    /**
+//     * 此条记录是否公开
+//     * user有一个权限设置是对所有记录而言的，这个地方的权限只会对此条记录起作用
+//     */
+//    private Boolean isPublic;
+
+
     /**
-     * 此条记录是否公开
-     * user有一个权限设置是对所有记录而言的，这个地方的权限只会对此条记录起作用
+     * 是否删除
      */
-    private Boolean isPublic;
+    private Boolean del;
+
+
+    /**
+     * 标题
+     */
+    private String title;
+
 
     @Override
     public String getDescription() {
@@ -72,44 +86,44 @@ public class Content extends BaseDomain implements IContent {
         this.description = description;
     }
 
-    @Override
-    public Date getExpectTime() {
-        return expectTime;
-    }
+//    @Override
+//    public Date getExpectTime() {
+//        return expectTime;
+//    }
+//
+//    @Override
+//    public void setExpectTime(Date expectTime) {
+//        this.expectTime = expectTime;
+//    }
+//
+//    @Override
+//    public Boolean getFinished() {
+//        return finished;
+//    }
+//
+//    @Override
+//    public void setFinished(Boolean finished) {
+//        this.finished = finished;
+//    }
 
-    @Override
-    public void setExpectTime(Date expectTime) {
-        this.expectTime = expectTime;
-    }
+//    @Override
+//    public Date getFinishedTime() {
+//        return finishedTime;
+//    }
 
-    @Override
-    public Boolean getFinished() {
-        return finished;
-    }
+//    public void setFinishedTime(Date finishedTime) {
+//        this.finishedTime = finishedTime;
+//    }
 
-    @Override
-    public void setFinished(Boolean finished) {
-        this.finished = finished;
-    }
-
-    @Override
-    public Date getFinishedTime() {
-        return finishedTime;
-    }
-
-    public void setFinishedTime(Date finishedTime) {
-        this.finishedTime = finishedTime;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
+//    @Override
+//    public String getName() {
+//        return name;
+//    }
+//
+//    @Override
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     @Override
     public Long getUserId() {
@@ -121,15 +135,15 @@ public class Content extends BaseDomain implements IContent {
         this.userId = userId;
     }
 
-    @Override
-    public Boolean getIsPublic() {
-        return this.isPublic;
-    }
-
-    @Override
-    public void setIsPublic(Boolean isPublic) {
-        this.isPublic = isPublic;
-    }
+//    @Override
+//    public Boolean getIsPublic() {
+//        return this.isPublic;
+//    }
+//
+//    @Override
+//    public void setIsPublic(Boolean isPublic) {
+//        this.isPublic = isPublic;
+//    }
 
     @Override
     public String getImages() {
@@ -151,14 +165,34 @@ public class Content extends BaseDomain implements IContent {
         this.type = type;
     }
 
+//    @Override
+//    public Boolean getRemind() {
+//        return remind;
+//    }
+//
+//    @Override
+//    public void setRemind(Boolean remind) {
+//        this.remind = remind;
+//    }
+
+
     @Override
-    public Boolean getRemind() {
-        return remind;
+    public Boolean getDel(){
+        return del;
     }
 
     @Override
-    public void setRemind(Boolean remind) {
-        this.remind = remind;
+    public void setDel(Boolean del) {
+        this.del = del;
     }
 
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

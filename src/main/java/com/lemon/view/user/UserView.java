@@ -1,6 +1,7 @@
 package com.lemon.view.user;
 
-import com.lemon.domain.User;
+
+import com.lemon.domain.user.User;
 
 import java.util.Date;
 
@@ -90,9 +91,9 @@ public class UserView {
         this.qqNo = user.getQqNo();
         this.email = user.getEmail();
         this.profile = user.getProfile();
-        this.type = user.getType().getValue();
-        this.score = user.getScore();
-        this.zoneStatus = user.getZoneStatus().getValue();
+//        this.type = user.getType().getValue();
+//        this.score = user.getScore();
+//        this.zoneStatus = user.getZoneStatus().getValue();
     }
 
     public String getAvatar() {

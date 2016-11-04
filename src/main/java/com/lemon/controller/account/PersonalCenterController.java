@@ -1,6 +1,6 @@
 package com.lemon.controller.account;
 
-import com.lemon.domain.User;
+import com.lemon.domain.user.User;
 import com.lemon.form.AjaxResponse;
 import com.lemon.form.user.UserInformationForm;
 import com.lemon.form.user.UserPasswordModifyForm;
@@ -105,7 +105,7 @@ public class PersonalCenterController {
         // 理论上应该不会有错
         Optional<User> user = userService.findUserByAccount(account);
         // 更新空间的隐私设置
-        user.get().setZoneStatus(form.getZoneStatus());
+//        user.get().setZoneStatus(form.getZoneStatus());
 
         Optional<User> newUserOptional = userService.update(user.get());
         if (!newUserOptional.isPresent()){
