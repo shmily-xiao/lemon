@@ -1,6 +1,6 @@
-package com.lemon.domain.user;
+package com.lemon.domain.impl.user;
 
-import com.lemon.domain.BaseDomain;
+import com.lemon.domain.impl.BaseDomain;
 import com.lemon.domain.interfaces.user.IUserAccount;
 import com.lemon.enums.AccountType;
 

@@ -1,7 +1,7 @@
 package com.lemon.dao.impl;
 
 import com.lemon.dao.IFriendshipDao;
-import com.lemon.domain.friend.Friendship;
+import com.lemon.domain.impl.friend.Friendship;
 import com.lemon.query.BaseQuery;
 import org.springframework.stereotype.Repository;
 

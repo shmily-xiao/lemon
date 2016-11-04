@@ -1,6 +1,6 @@
-package com.lemon.domain.content;
+package com.lemon.domain.impl.content;
 
-import com.lemon.domain.BaseDomain;
+import com.lemon.domain.impl.BaseDomain;
 import com.lemon.domain.interfaces.content.IContentPlan;
 
 import java.time.LocalDateTime;

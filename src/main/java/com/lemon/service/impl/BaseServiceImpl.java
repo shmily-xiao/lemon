@@ -1,7 +1,7 @@
 package com.lemon.service.impl;
 
 import com.lemon.dao.IBaseDao;
-import com.lemon.domain.BaseDomain;
+import com.lemon.domain.impl.BaseDomain;
 import com.lemon.query.BaseQuery;
 import com.lemon.service.IBaseService;
 

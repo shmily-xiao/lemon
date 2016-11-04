@@ -1,7 +1,7 @@
 package com.lemon.dao.impl;
 
 import com.lemon.dao.IInteractionDao;
-import com.lemon.domain.content.Interaction;
+import com.lemon.domain.impl.content.Interaction;
 import com.lemon.query.BaseQuery;
 import org.springframework.stereotype.Repository;
 

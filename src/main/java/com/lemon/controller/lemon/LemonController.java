@@ -1,6 +1,6 @@
 package com.lemon.controller.lemon;
 
-import com.lemon.domain.content.Content;
+import com.lemon.domain.impl.content.Content;
 import com.lemon.query.lemon.LemonQuery;
 import com.lemon.service.IContentService;
 import org.springframework.stereotype.Controller;

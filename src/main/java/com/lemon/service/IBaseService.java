@@ -1,6 +1,6 @@
 package com.lemon.service;
 
-import com.lemon.domain.BaseDomain;
+import com.lemon.domain.impl.BaseDomain;
 import com.lemon.query.BaseQuery;
 
 import java.util.List;

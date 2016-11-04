@@ -276,7 +276,7 @@
                 alert('账号或密码错误');
                 return;
             }
-            $http.post('/account/login',{mobile:$scope.loginMobile,password:hex_md5($scope.loginPassword)}).success(function(data) {
+            $http.post('/lemon/account/login',{mobile:$scope.loginMobile,password:hex_md5($scope.loginPassword)}).success(function(data) {
                 if(data.code==0){
                     location.href = data.url;
                 }else if(data.code == 1){
@@ -299,7 +299,7 @@
                 return;
             }
             $scope.isValid=true;
-            $http.post('/account/register',{mobile:$scope.signupMobile,password:hex_md5($scope.signupPassword)}).success(function(data) {
+            $http.post('/lemon/account/register',{mobile:$scope.signupMobile,password:hex_md5($scope.signupPassword)}).success(function(data) {
                 if(data.code==0){
                     location.href = data.url;
                 }else if(data.code == 1){

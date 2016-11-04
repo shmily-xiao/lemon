@@ -1,6 +1,6 @@
 package com.lemon.utils;
 
-import com.lemon.domain.BaseDomain;
+import com.lemon.domain.impl.BaseDomain;
 import com.lemon.enums.UtilsConstants;
 import com.lemon.framework.mapping.core.IConvertor;
 

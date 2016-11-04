@@ -1,7 +1,7 @@
 package com.lemon.service.impl;
 
 import com.lemon.dao.IMsmSendlogDao;
-import com.lemon.domain.msm.MsmSendlog;
+import com.lemon.domain.impl.msm.MsmSendlog;
 import com.lemon.query.msmSendlog.MsmSendlogQuery;
 import com.lemon.service.IMsmSendlogService;
 import org.springframework.stereotype.Service;

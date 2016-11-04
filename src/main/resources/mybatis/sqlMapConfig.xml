@@ -2,40 +2,31 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias alias="User" type="com.lemon.domain.user.User"/>
-        <typeAlias alias="UserAccount" type="com.lemon.domain.user.UserAccount"/>
-        <typeAlias alias="UserRecord" type="com.lemon.domain.user.UserRecord"/>
-
-
-        <typeAlias alias="Friendship" type="com.lemon.domain.friend.Friendship"/>
-        <typeAlias alias="FriendGroup" type="com.lemon.domain.friend.FriendGroup"/>
-
-        <typeAlias alias="Cookies" type="com.lemon.domain.Cookies"/>
-
-        <typeAlias alias="MsmSendlog" type="com.lemon.domain.msm.MsmSendlog"/>
-
-        <typeAlias alias="WechatUser" type="com.lemon.domain.wechatUser.WechatUser"/>
-
-        <typeAlias alias="Content" type="com.lemon.domain.content.Content"/>
-        <typeAlias alias="ContentPlan" type="com.lemon.domain.content.ContentPlan"/>
-        <typeAlias alias="Interaction" type="com.lemon.domain.content.Interaction"/>
+        <typeAlias alias="User" type="com.lemon.domain.impl.user.User"/>
+        <typeAlias alias="UserAccount" type="com.lemon.domain.impl.user.UserAccount"/>
+        <typeAlias alias="UserRecord" type="com.lemon.domain.impl.user.UserRecord"/>
+        <typeAlias alias="Friendship" type="com.lemon.domain.impl.friend.Friendship"/>
+        <typeAlias alias="FriendGroup" type="com.lemon.domain.impl.friend.FriendGroup"/>
+        <typeAlias alias="Cookies" type="com.lemon.domain.impl.Cookies"/>
+        <typeAlias alias="Content" type="com.lemon.domain.impl.content.Content"/>
+        <typeAlias alias="ContentPlan" type="com.lemon.domain.impl.content.ContentPlan"/>
+        <typeAlias alias="Interaction" type="com.lemon.domain.impl.content.Interaction"/>
+        <typeAlias alias="MsmSendlog" type="com.lemon.domain.impl.msm.MsmSendlog"/>
+        <typeAlias alias="WechatUser" type="com.lemon.domain.impl.wechatUser.WechatUser"/>
+        <typeAlias alias="AccessControl" type="com.lemon.domain.impl.access.AccessControl"/>
     </typeAliases>
     <mappers>
         <mapper resource="mybatis/user/userSQL.xml"/>
         <mapper resource="mybatis/user/userAccountSQL.xml"/>
         <mapper resource="mybatis/user/userRecordSQL.xml"/>
-
+        <mapper resource="mybatis/wechatUser/wechatUserSQL.xml"/>
+        <mapper resource="mybatis/cookies/cookiesSQL.xml"/>
+        <mapper resource="mybatis/content/contentSQL.xml"/>
+        <mapper resource="mybatis/content/contentPlanSQL.xml"/>
+        <mapper resource="mybatis/content/interactionSQL.xml"/>
         <mapper resource="mybatis/friendship/friendshipSQL.xml"/>
         <mapper resource="mybatis/friendship/friendGroupSQL.xml"/>
-
-        <mapper resource="mybatis/cookies/cookiesSQL.xml"/>
-
         <mapper resource="mybatis/msmSendlog/msmSendlogSQL.xml"/>
-
-        <mapper resource="mybatis/wechatUser/wechatUserSQL.xml"/>
-
-        <mapper resource="mybatis/content/contentPlanSQL.xml"/>
-        <mapper resource="mybatis/content/contentSQL.xml"/>
-        <mapper resource="mybatis/content/interactionSQL.xml"/>
+        <mapper resource="mybatis/access/accessControlSQL.xml"/>
     </mappers>
 </configuration>

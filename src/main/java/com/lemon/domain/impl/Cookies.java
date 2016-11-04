@@ -1,4 +1,4 @@
-package com.lemon.domain;
+package com.lemon.domain.impl;
 
 import java.sql.Timestamp;
 

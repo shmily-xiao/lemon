@@ -1,6 +1,6 @@
 package com.lemon.form.user;
 
-import com.lemon.domain.user.User;
+import com.lemon.domain.impl.user.User;
 import com.lemon.enums.GenderType;
 import com.lemon.framework.mapping.annotation.MappingClass;
 import com.lemon.framework.mapping.annotation.MappingRule;

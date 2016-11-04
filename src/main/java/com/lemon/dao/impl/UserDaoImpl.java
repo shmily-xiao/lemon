@@ -1,7 +1,7 @@
 package com.lemon.dao.impl;
 
 import com.lemon.dao.IUserDao;
-import com.lemon.domain.user.User;
+import com.lemon.domain.impl.user.User;
 import com.lemon.query.BaseQuery;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Component;

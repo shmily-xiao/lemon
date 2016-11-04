@@ -22,12 +22,12 @@
     </delete>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO u_user(created_time, user_id, account, type)
+        INSERT INTO user_account(created_time, user_id, account, type)
         VALUES (#{createdTime}, #{userId}, #{account}, #{type});
     </insert>
 
     <update id="update" >
-        UPDATE u_user
+        UPDATE user_account
         <set>
             <if test="userId != null and userId != ''">user_id = #{userId}</if>
             <if test="account != null and account != ''">and account = #{account}</if>
@@ -37,11 +37,11 @@
     </update>
 
     <select id="findById" resultMap="userAccountResultMap">
-        SELECT * FROM u_user WHERE id = #{id};
+        SELECT * FROM user_account WHERE id = #{id};
     </select>
 
     <select id="findByPage" resultMap="userAccountResultMap">
-        SELECT * FROM u_user
+        SELECT * FROM user_account
         <where>
             <if test="userId != null and userId != ''">user_id = #{userId}</if>
             <if test="account != null and account != ''">and account = #{account}</if>
@@ -51,7 +51,7 @@
 
 
     <select id="findEntities" resultMap="userAccountResultMap">
-        SELECT * FROM u_user
+        SELECT * FROM user_account
         <where>
             <if test="userId != null and userId != ''">user_id = #{userId}</if>
             <if test="account != null and account != ''">and account = #{account}</if>
@@ -60,7 +60,7 @@
     </select>
 
     <select id="count" resultType="Int">
-        SELECT count(*) FROM u_user
+        SELECT count(*) FROM user_account
         <where>
             <if test="userId != null and userId != ''">user_id = #{userId}</if>
             <if test="account != null and account != ''">and account = #{account}</if>

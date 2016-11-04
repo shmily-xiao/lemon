@@ -1,6 +1,6 @@
 package com.lemon.service;
 
-import com.lemon.domain.user.User;
+import com.lemon.domain.impl.user.User;
 import com.lemon.enums.SignupType;
 import com.lemon.query.BaseQuery;
 

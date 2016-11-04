@@ -1,6 +1,6 @@
 package com.lemon.controller.account;
 
-import com.lemon.domain.user.User;
+import com.lemon.domain.impl.user.User;
 import com.lemon.form.AjaxResponse;
 import com.lemon.form.user.UserInformationForm;
 import com.lemon.form.user.UserPasswordModifyForm;

@@ -1,7 +1,7 @@
 package com.lemon.dao.impl;
 
 import com.lemon.dao.IContentPlanDao;
-import com.lemon.domain.content.ContentPlan;
+import com.lemon.domain.impl.content.ContentPlan;
 import com.lemon.query.BaseQuery;
 import org.springframework.stereotype.Repository;
 

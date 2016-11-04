@@ -6,7 +6,7 @@ import com.lemon.domain.interfaces.ibase.ICreatedTime;
  * Created by simpletour_Jenkin on 2016/8/18.
  * 权限控制表，关系表
  */
-public interface IAccessContol extends ICreatedTime {
+public interface IAccessControl extends ICreatedTime {
     // 外键关系表
     Long getRowId();
     void setRowId(Long rowId);

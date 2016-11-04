@@ -2,7 +2,7 @@ package com.lemon.service.impl;
 
 import com.lemon.dao.IBaseDao;
 import com.lemon.dao.IContentPlanDao;
-import com.lemon.domain.content.ContentPlan;
+import com.lemon.domain.impl.content.ContentPlan;
 import com.lemon.query.BaseQuery;
 import com.lemon.service.IContentPlanService;
 import org.jvnet.hk2.annotations.Service;

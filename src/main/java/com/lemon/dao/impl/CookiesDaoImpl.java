@@ -1,13 +1,11 @@
 package com.lemon.dao.impl;
 
 import com.lemon.dao.CookiesDao;
-import com.lemon.domain.Cookies;
+import com.lemon.domain.impl.Cookies;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import javax.annotation.Resource;
 
 /**
  * Created by simpletour_java on 2015/6/4.

@@ -1,10 +1,7 @@
 package com.lemon.domain.interfaces.content;
 
 import com.lemon.domain.interfaces.ibase.ICreatedTime;
-import com.lemon.domain.interfaces.ibase.IName;
-import com.lemon.enums.LemonType;
-
-import java.util.Date;
+import com.lemon.enums.ContentType;
 
 /**
  * Created by simpletour_Jenkin on 2016/7/27.
@@ -36,8 +33,8 @@ public interface IContent extends ICreatedTime{
 //    void setIsPublic(Boolean isPublic);
 
     // 事件的类型
-    LemonType getType();
-    void setType(LemonType type);
+    ContentType getType();
+    void setType(ContentType type);
 
 //    // 是否需要短信提醒
 //    Boolean getRemind();

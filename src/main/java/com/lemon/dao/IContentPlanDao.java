@@ -1,6 +1,6 @@
 package com.lemon.dao;
 
-import com.lemon.domain.content.ContentPlan;
+import com.lemon.domain.impl.content.ContentPlan;
 import com.lemon.query.BaseQuery;
 
 /**

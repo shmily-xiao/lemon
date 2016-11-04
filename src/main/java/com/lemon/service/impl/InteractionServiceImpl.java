@@ -2,7 +2,7 @@ package com.lemon.service.impl;
 
 import com.lemon.dao.IBaseDao;
 import com.lemon.dao.IInteractionDao;
-import com.lemon.domain.content.Interaction;
+import com.lemon.domain.impl.content.Interaction;
 import com.lemon.query.BaseQuery;
 import com.lemon.service.IInteractionService;
 import org.jvnet.hk2.annotations.Service;

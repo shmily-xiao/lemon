@@ -1,6 +1,6 @@
-package com.lemon.domain.msm;
+package com.lemon.domain.impl.msm;
 
-import com.lemon.domain.BaseDomain;
+import com.lemon.domain.impl.BaseDomain;
 import com.lemon.domain.interfaces.msm.IMsmSendlog;
 
 /**
