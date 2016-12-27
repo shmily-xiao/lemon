@@ -20,6 +20,7 @@ public class LemonController {
 
     @Resource
     private IContentService lemonService;
+
     /**
      * 首页
      * @param request
@@ -31,8 +32,23 @@ public class LemonController {
 
         List<Content> lemons = lemonService.findByPage(new LemonQuery(1,10));
 
-        return "";
+        return "lemon/home/home";
     }
+
+    /**
+     * 首页
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/lemon/lemons/test")
+    public String homeLemonsTest(HttpServletRequest request, Model model){
+
+//        List<Content> lemons = lemonService.findByPage(new LemonQuery(1,10));
+
+        return "lemon/home/home";
+    }
+
 
 
 
