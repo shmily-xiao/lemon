@@ -26,7 +26,10 @@
               padding: 40px 15px;
               text-align: center;
           }
-
+          .navbar-default {
+              background-color: #DEDEDE;
+              border-color: #e7e7e7;
+          }
       </style>
   </head>
 
