@@ -5,6 +5,8 @@ import com.lemon.domain.impl.user.User;
 import com.lemon.enums.SignupType;
 import com.lemon.form.AjaxResponse;
 import com.lemon.form.user.UserAccountForm;
+import com.lemon.manager.account.AccountManager;
+import com.lemon.pojo.constants.LemonConstants;
 import com.lemon.service.ICookiesService;
 import com.lemon.service.IUserService;
 import com.lemon.utils.Md5;
@@ -33,15 +35,15 @@ import java.util.Optional;
 public class AccountController {
 
     //// TODO: 2016/8/8 0008 需要写一个拦截器，完成用户的自动登录
-    
+
     @Resource //  但是@Autowired 是spring提供的，@Resource是j2ee提供的
     private IUserService userService;
 
     @Resource
     private ICookiesService cookiesService;
 
-
-    private static final int COOKIES_LIFE_TIME = 60*30;
+    @Resource
+    private AccountManager accountManager;
 
     /**
      * 注册页面
@@ -85,13 +87,13 @@ public class AccountController {
         }
 
         HttpSession session = request.getSession();
-        cookiesService.insertCookies(this.createCookies(session,response,newUser.get()));//登陆成功后就会抛出用户ID和用户名
+        cookiesService.insertCookies(accountManager.createCookies(session,response,newUser.get()));//登陆成功后就会抛出用户ID和用户名
 
 //        session.setAttribute("user.nickname", user.getNickName());
-        session.setAttribute("user.account", user.getMobile());
+        session.setAttribute(LemonConstants.USER_SEESSION_MOBILE, user.getMobile());
 
         //todo 首页，或者是个人中心 url
-        return AjaxResponse.ok().url("");
+        return AjaxResponse.ok().url("/lemon/lemons/test");
     }
 
 
@@ -136,48 +138,15 @@ public class AccountController {
         }
 
         HttpSession session = request.getSession();
-        Cookies cookies = this.createCookies(session, response, user);
+        Cookies cookies = accountManager.createCookies(session, response, user);
         cookiesService.updateCookies(cookies);
 
 //        session.setAttribute("user.nickname", user.getNickName());
-        session.setAttribute("user.account", user.getMobile());
+        session.setAttribute(LemonConstants.USER_SEESSION_MOBILE, user.getMobile());
 
         //// TODO: 2016/8/3 首页 url
-        return AjaxResponse.ok().url("");
+        return AjaxResponse.ok().url("/lemon/lemons/test");
 
-    }
-
-    /**
-     * 设置cookie的生存时间*
-     * @param session
-     * @param response
-     * @param user
-     * @return
-     */
-    private Cookies createCookies(HttpSession session, HttpServletResponse response, User user ){
-        // cookies 的存活时间
-        int cookieTime = COOKIES_LIFE_TIME;
-        String sessionId = session.getId();
-        Cookie cookie = new Cookie("JSESSIONID",sessionId);//注意key值必须和原来一样，否则服务器无法标识用户
-        Cookie cookie1 = new Cookie("userId",user.getId()+"");
-        Cookie cookie2 = new Cookie("password",user.getPassword());
-        cookie2.setMaxAge(cookieTime);
-        cookie2.setPath("/");
-        cookie1.setMaxAge(cookieTime);
-        cookie1.setPath("/");
-        cookie.setMaxAge(cookieTime);// 设置cookie的生命周期1800s  现在是30s
-        cookie.setPath("/");  // 设置cookie有效路径，
-        response.addCookie(cookie2);
-        response.addCookie(cookie1);
-        response.addCookie(cookie);//cookie添加完毕
-        Cookies cookies = new Cookies(); //在数据库中储存每个id对应一个sessionId
-        cookies.setUserId(user.getId()); //设置用户ID
-        cookies.setSessionId(sessionId);   //实体里面有一个变量叫做sessionId
-        Date now = new Date();
-        Timestamp time = new Timestamp(now.getTime());
-        cookies.setLoginTime(time);   //设置登陆时间
-        cookies.setLifeTime(cookieTime);   //设置生命周期
-        return cookies;
     }
 
 }
