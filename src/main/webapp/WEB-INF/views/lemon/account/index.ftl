@@ -7,8 +7,8 @@
     <meta name="baidu-site-verification" content="H53YfCY2d4" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="这是描述，这是描述，这是描述">
-    <meta name="keywords" content="关键字，关键字，关键字">
+    <#--<meta name="description" content="这是描述，这是描述，这是描述">-->
+    <#--<meta name="keywords" content="关键字，关键字，关键字">-->
 
 
     <title>
@@ -53,9 +53,9 @@
         <div class="container">
             <div class="collapse navbar-collapse" id="index-nav-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li style="margin-top: 15px;"><a href="/account/login" style="color: #202020;">登录</a></li>
+                    <li style="margin-top: 15px;"><a href="/lemon/account/login" style="color: #202020;">登录</a></li>
                     <li>
-                        <a href="/account/register">
+                        <a href="/lemon/account/register">
                             <button class="btn navbar-btn btn-primary " style="color: #202020;border: 1px solid #202020;">注册</button>
                         </a>
                     <li>
@@ -213,8 +213,8 @@
 
         <div class="row index-quick-action visible-xs">
             <div class="col-md-12">
-                <a href="/account/register" class="btn btn-lg center-block index-quick-signup">注册</a>
-                <a href="/account/login" class="btn btn-lg center-block index-quick-login" style="border: 1px solid rgba(199, 191, 191, 0.56);color: #404040;">登录</a>
+                <a href="/lemon/account/register" class="btn btn-lg center-block index-quick-signup">注册</a>
+                <a href="/lemon/account/login" class="btn btn-lg center-block index-quick-login" style="border: 1px solid rgba(199, 191, 191, 0.56);color: #404040;">登录</a>
             </div>
         </div>
     </div>

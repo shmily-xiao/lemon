@@ -32,7 +32,7 @@ public class LemonController {
 
         List<Content> lemons = lemonService.findByPage(new LemonQuery(1,10));
 
-        return "lemon/home/home";
+        return "lemon/home/home2";
     }
 
     /**
