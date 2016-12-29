@@ -28,11 +28,11 @@ public class LemonController {
      * @return
      */
     @RequestMapping(value = "/lemon/lemons")
-    public String homeLemons(HttpServletRequest request, Model model){
+    public String lemonsHome(HttpServletRequest request, Model model){
 
         List<Content> lemons = lemonService.findByPage(new LemonQuery(1,10));
 
-        return "lemon/home/home2";
+        return "lemon/home/home";
     }
 
     /**
@@ -49,6 +49,11 @@ public class LemonController {
         return "lemon/home/home";
     }
 
+    @RequestMapping(value = "/lemon/lemons/add")
+    public String addLemons(){
+
+        return "lemon/lemons/add";
+    }
 
 
 
