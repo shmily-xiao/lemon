@@ -1,12 +1,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 
 
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
-       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
    <!--过滤器！！-->
     <!--<context:component-scan base-package="com.demo"/>-->
     <!--<mvc:interceptors>-->
@@ -31,8 +31,17 @@
         <!--</mvc:interceptor>-->
     <!--</mvc:interceptors>-->
 
+    <!--通知spring使用cglib而不是jdk的来生成代理方法 ,AOP可以拦截到Controller中的方法-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="fileEncoding" value="utf-8" />
+        <property name="locations">
+            <list>
+                <value>classpath:db.properties</value>
+                <value>classpath:aliyunoss.properties</value>
+            </list>
+        </property>
+        <property name="fileEncoding" value="utf-8"/>
     </bean>
 
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"></bean>

@@ -8,12 +8,23 @@
       class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     <property name="locations">
         <list>
-            <value>classpath:config.properties</value>
+            <value>classpath:db.properties</value>
+            <value>classpath:aliyunoss.properties</value>
         </list>
     </property>
     <property name="fileEncoding" value="utf-8" />
 </bean>
     <!-- 文件上传，配置MultipartResolver处理器 -->
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+    <!-- SpringMVC 文件上传 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="1000000" />
+    </bean>
 
+    <!--&lt;!&ndash; 阿里云OSS 文件上传 &ndash;&gt;-->
+    <!--<bean class="com.belerweb.oss4springmvc.OssService">-->
+        <!--<property name="endpoint" value="${oss4springmvc.endpoint}" />-->
+        <!--<property name="accessId" value="${oss4springmvc.accessId}" />-->
+        <!--<property name="accessKey" value="${oss4springmvc.accessKey}" />-->
+        <!--<property name="bucket" value="${oss4springmvc.bucket}" />-->
+    <!--</bean>-->
 </beans>
