@@ -1,5 +1,6 @@
 package com.lemon.controller.lemon;
 
+import com.lemon.controller.BaseController;
 import com.lemon.domain.impl.content.Content;
 import com.lemon.query.lemon.LemonQuery;
 import com.lemon.service.IContentService;
@@ -16,7 +17,7 @@ import java.util.List;
  * 首页，个人中心
  */
 @Controller
-public class LemonController {
+public class LemonController extends BaseController{
 
     @Resource
     private IContentService lemonService;

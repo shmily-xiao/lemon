@@ -1,5 +1,6 @@
 package com.lemon.controller.account;
 
+import com.lemon.controller.BaseController;
 import com.lemon.domain.impl.Cookies;
 import com.lemon.domain.impl.user.User;
 import com.lemon.enums.SignupType;
@@ -19,20 +20,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Optional;
 
 /**
  * Created by simpletour_java on 2015/6/3.
  */
 @Controller
-public class AccountController {
+public class AccountController extends BaseController{
 
     //// TODO: 2016/8/8 0008 需要写一个拦截器，完成用户的自动登录
 
@@ -91,6 +89,7 @@ public class AccountController {
 
 //        session.setAttribute("user.nickname", user.getNickName());
         session.setAttribute(LemonConstants.USER_SEESSION_MOBILE, user.getMobile());
+        session.setAttribute(LemonConstants.USER_SEESSION_ID, user.getId());
 
         //todo 首页，或者是个人中心 url
         return AjaxResponse.ok().url("/lemon/lemons/test");
@@ -143,6 +142,7 @@ public class AccountController {
 
 //        session.setAttribute("user.nickname", user.getNickName());
         session.setAttribute(LemonConstants.USER_SEESSION_MOBILE, user.getMobile());
+        session.setAttribute(LemonConstants.USER_SEESSION_MOBILE, user.getId());
 
         //// TODO: 2016/8/3 首页 url
         return AjaxResponse.ok().url("/lemon/lemons/test");

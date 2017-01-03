@@ -5,4 +5,5 @@ package com.lemon.pojo.constants;
  */
 public class LemonConstants {
     public static String USER_SEESSION_MOBILE = "user.account";
+    public static String USER_SEESSION_ID = "user.id";
 }

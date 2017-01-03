@@ -1,5 +1,6 @@
 package com.lemon.controller.account;
 
+import com.lemon.controller.BaseController;
 import com.lemon.domain.impl.user.User;
 import com.lemon.form.AjaxResponse;
 import com.lemon.form.user.UserInformationForm;
@@ -30,7 +31,7 @@ import java.util.Optional;
  * 个人中心，修改资料，修改密码，修改隐私权限
  */
 @Controller
-public class PersonalCenterController {
+public class PersonalCenterController extends BaseController{
 
     @Resource
     private IUserService userService;
