@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -122,21 +122,21 @@
                                 </div>
                             </div>
                             <div class="col-md-12 column" style="height: 150px;">
-                            <div class="form-group">
+                            <#--<div class="form-group">-->
+                                <input type="file" name="file" multiple="multiple" accept="image/gif,image/jpg,image/jpeg,image/bmp,image/png">
                                 <div  style="position: relative;margin-top:10px;float:left;box-sizing:border-box;height:45px;width:46px;cursor:pointer;background:url(/img/img_add.png) no-repeat">
-                                    <div class="webuploader-pick">
-                                    </div>
-                                    <div id="rt_rt_1b5hnjjg51ldnkpa3tg16anbmm1"
-                                         style="position: absolute; top: 1px; left: 1px; width: 150px; height: 120px; overflow: hidden; bottom: auto; right: auto;">
+                                    <#--<div class="webuploader-pick">-->
+                                    <#--</div>-->
+                                    <div style="position: absolute; top: 1px; left: 1px; width: 102px; height: 102px; overflow: hidden; bottom: auto; right: auto;">
                                         <input type="file" name="file" class="webuploader-element-invisible" multiple="multiple" accept="image/gif,image/jpg,image/jpeg,image/bmp,image/png">
-                                        <label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);"></label>
+                                        <#--<label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);"></label>-->
                                     </div>
                                 </div>
                                 <#--<label for="exampleInputFile">上传图片</label><input type="file" id="exampleInputFile" />-->
                                 <#--<p class="help-block">-->
                                     <#--最多可上传九张图片-->
                                 <#--</p>-->
-                            </div>
+                            <#--</div>-->
                             </div>
 
                             <div class="btn-group">
