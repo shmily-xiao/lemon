@@ -106,6 +106,15 @@ public class AccountController extends BaseController{
     }
 
     /**
+     * 登录页面
+     * @return
+     */
+    @RequestMapping(value = "/lemon/account/qq/login")  //默认是GET方法
+    public String qqLogin(){
+        return "lemon/account/qqlogin";
+    }
+
+    /**
      * 登录
      * @param userForm
      * @param result

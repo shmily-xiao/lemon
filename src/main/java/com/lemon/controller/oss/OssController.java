@@ -62,7 +62,7 @@ public class OssController extends BaseController{
             ossClient.putObject(bucketName,objectKeyName, file.getInputStream());
         }catch (IOException e){
             e.printStackTrace();
-            return AjaxResponse.fail().reason("上传文件异常，请联系管理员wangzaijun1234@126.com").msg("文件不合法");
+            return AjaxResponse.fail().reason("上传文件异常，请联系管理员1350468513@qq.com").msg("文件不合法");
         }catch (Exception e){
             e.printStackTrace();
             return AjaxResponse.fail();

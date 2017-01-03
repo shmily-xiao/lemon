@@ -30,6 +30,31 @@
             background-color: #DEDEDE;
             border-color: #e7e7e7;
         }
+        .webuploader-pick {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            background: #00b7ee;
+            padding: 10px 15px;
+            color: #fff;
+            text-align: center;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .webuploader-pick-hover {
+            background: #00a2d4;
+        }
+
+        .webuploader-pick-disable {
+            opacity: 0.6;
+            pointer-events:none;
+        }
+        .webuploader-element-invisible {
+            position: absolute !important;
+            clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+            clip: rect(1px,1px,1px,1px);
+        }
+
     </style>
 </head>
 
@@ -96,49 +121,62 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12 column">
+                            <div class="col-md-12 column" style="height: 150px;">
                             <div class="form-group">
-                                <label for="exampleInputFile">上传图片</label><input type="file" id="exampleInputFile" />
-                                <p class="help-block">
-                                    最多可上传九张图片
-                                </p>
+                                <div  style="position: relative;margin-top:10px;float:left;box-sizing:border-box;height:45px;width:46px;cursor:pointer;background:url(/img/img_add.png) no-repeat">
+                                    <div class="webuploader-pick">
+                                    </div>
+                                    <div id="rt_rt_1b5hnjjg51ldnkpa3tg16anbmm1"
+                                         style="position: absolute; top: 1px; left: 1px; width: 150px; height: 120px; overflow: hidden; bottom: auto; right: auto;">
+                                        <input type="file" name="file" class="webuploader-element-invisible" multiple="multiple" accept="image/gif,image/jpg,image/jpeg,image/bmp,image/png">
+                                        <label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);">
+
+                                        </label>
+                                    </div>
+                                </div>
+                                <#--<label for="exampleInputFile">上传图片</label><input type="file" id="exampleInputFile" />-->
+                                <#--<p class="help-block">-->
+                                    <#--最多可上传九张图片-->
+                                <#--</p>-->
                             </div>
                             </div>
 
                             <div class="btn-group">
-                                <div class="col-md-6 column">
+                                <div class="col-md-6 column" style="margin-top: 4px;margin-bottom: 4px;">
                                 <div class="input-group input-group-md">
                                     <span class="input-group-addon">选择类型</span>
-                                    <select>
+                                    <select style="height: 34px;width: 151px;">
                                         <option>想做的事</option>
                                         <option>琐碎的事</option>
                                         <option>抒情的话</option>
                                     </select>
                                 </div>
                                 </div>
-                                <div class="col-md-6 column">
+                                <div class="col-md-6 column" style="margin-top: 4px; margin-bottom: 4px;" >
                                 <div class="input-group input-group-md">
-                                    <span class="input-group-addon">完成的时间</span>
-                                    <input type="text" value="" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii">
+                                    <span class="input-group-addon">完成时间</span>
+                                    <input style="height: 34px;width: 151px;" type="text" value="" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii">
                                     </input>
                                 </div>
                                 </div>
-                                <div class="col-md-3 column">
-                                <p >是否需要短息提醒</p>
+                                <div class="col-md-2 column">
+                                    <div class="input-group input-group-md" style="margin-top: 10px;">
+                                        短息提醒
+                                    </div>
                                 </div>
 
-                                <div class="col-md-4 column">
+                                <div class="col-md-4 column" style="margin-top: 10px;">
                                 <label class="checkbox-inline">
-                                    <input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1" > 是
+                                    <input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1" > 需要
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2" checked> 否
+                                    <input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2" checked> 不需要
                                 </label>
                                 </div>
-                                <div class="col-md-4 column">
+                                <div class="col-md-4 column" style="margin-top: 4px; margin-bottom: 4px;">
                                 <div class="input-group input-group-md">
                                     <span class="input-group-addon">可见范围</span>
-                                    <select>
+                                    <select style="height: 34px;width: 151px;">
                                         <option>公开</option>
                                         <option>私有</option>
                                         <option>对好友可见</option>
@@ -177,6 +215,7 @@
     });
 
 </script>
+
 
 </body>
 </html>
