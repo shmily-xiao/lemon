@@ -58,7 +58,7 @@
     </style>
 </head>
 
-<body>
+<body ng-app="myApp" ng-controller="lemonAdd">
 
 <!--header-->
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -113,38 +113,27 @@
 
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-addon">标题</span>
-                                    <input type="text" class="form-control" placeholder="标题">
+                                    <input type="text" class="form-control" ng-model="postData.title" placeholder="标题">
                                 </div>
                                 <div class="panel-body">
                                     <div class="form-group">
-                                        <textarea class="form-control" rows="10" style="resize:none;"></textarea>
+                                        <textarea class="form-control" ng-model="postData.content" rows="10" style="resize:none;"></textarea>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12 column" style="height: 150px;">
-                            <#--<div class="form-group">-->
-                                <input type="file" name="file" multiple="multiple" accept="image/gif,image/jpg,image/jpeg,image/bmp,image/png">
-                                <div  style="position: relative;margin-top:10px;float:left;box-sizing:border-box;height:45px;width:46px;cursor:pointer;background:url(/img/img_add.png) no-repeat">
-                                    <#--<div class="webuploader-pick">-->
-                                    <#--</div>-->
-                                    <div style="position: absolute; top: 1px; left: 1px; width: 102px; height: 102px; overflow: hidden; bottom: auto; right: auto;">
-                                        <input type="file" name="file" class="webuploader-element-invisible" multiple="multiple" accept="image/gif,image/jpg,image/jpeg,image/bmp,image/png">
-                                        <#--<label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);"></label>-->
-                                    </div>
+                            <div class="col-md-12 column" style="height: 105px;">
+                                <div  style="position: relative;margin-top:10px;box-sizing:border-box;height:80.5px;width:100px;cursor:pointer;background:url(/img/img_add.png) no-repeat center;background-size:contain;">
+                                    <label for="upload" style="display:block;width:100%;height:100%"></label>
+                                    <input type="file" id="upload" name="image" ng-model="image" class="webuploader-element-invisible" multiple="multiple" accept="image/gif,image/jpg,image/jpeg,image/bmp,image/png">
                                 </div>
-                                <#--<label for="exampleInputFile">上传图片</label><input type="file" id="exampleInputFile" />-->
-                                <#--<p class="help-block">-->
-                                    <#--最多可上传九张图片-->
-                                <#--</p>-->
-                            <#--</div>-->
                             </div>
 
                             <div class="btn-group">
                                 <div class="col-md-6 column" style="margin-top: 4px;margin-bottom: 4px;">
                                 <div class="input-group input-group-md">
                                     <span class="input-group-addon">选择类型</span>
-                                    <select style="height: 34px;width: 151px;">
-                                        <option>想做的事</option>
+                                    <select style="height: 34px;width: 151px;" ng-model="">
+                                        <option value="">想做的事</option>
                                         <option>琐碎的事</option>
                                         <option>抒情的话</option>
                                     </select>
@@ -183,7 +172,7 @@
                                 </div>
                             </div>
                             <div class="col-md-10 column"></div>
-                            <div class="col-md-2 column">
+                            <div class="col-md-2 column" style="text-align: right;">
                                 <button type="submit" class="btn btn-default">发表记录</button>
                             </div>
                         </form>
@@ -211,9 +200,15 @@
         minuteStep: 1,
         autoclose:true
     });
-
 </script>
+<script src="/js/angular.min.js"></script>
+<script>
+    var app = angular.module('myApp', []);
 
+    app.controller('lemonAdd',['$scope','$http',function($scope,$http) {
+
+    }]);
+</script>
 
 </body>
 </html>

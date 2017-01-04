@@ -14,8 +14,9 @@ public class BaseController {
 
     /**
      * 判断用户是否登录了
+     *
      * @param request
-     * @return
+     * @return 登陆了返回true
      */
     protected Boolean isUserLoginIn(HttpServletRequest request){
         String mobile = (String) request.getSession().getAttribute(LemonConstants.USER_SEESSION_MOBILE);

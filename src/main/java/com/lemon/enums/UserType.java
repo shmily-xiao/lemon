@@ -6,7 +6,8 @@ package com.lemon.enums;
  */
 public enum UserType {
     NEWBIE("新手"),
-    PROBATIONER("实习生");
+    PROBATIONER("实习生"),
+    DEFAULT("未知");
 
     private String value;
 

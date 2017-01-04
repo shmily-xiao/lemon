@@ -1,15 +1,16 @@
 package com.lemon.view.user;
 
 
+import com.lemon.domain.impl.BaseDomain;
 import com.lemon.domain.impl.user.User;
+import com.lemon.view.BaseView;
 
 import java.util.Date;
 
 /**
  * Created by Administrator on 2016/8/8 0008.
  */
-public class UserView {
-    private Long id;
+public class UserView  extends BaseView{
     /**
      * 头像
      */
@@ -182,14 +183,6 @@ public class UserView {
 
     public void setProfile(String profile) {
         this.profile = profile;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getType() {

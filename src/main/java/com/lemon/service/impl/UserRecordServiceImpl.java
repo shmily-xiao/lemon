@@ -5,7 +5,7 @@ import com.lemon.dao.IUserRecordDao;
 import com.lemon.domain.impl.user.UserRecord;
 import com.lemon.query.BaseQuery;
 import com.lemon.service.IUserRecordService;
-import org.jvnet.hk2.annotations.Service;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 

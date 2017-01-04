@@ -1,11 +1,11 @@
-package com.lemon.view.lemon;
+package com.lemon.view.lemon.contents;
 
 import java.util.List;
 
 /**
  * Created by simpletour_Jenkin on 2016/8/16.
  */
-public class HomeLemonElementView {
+public class LemonContentsElementView {
     // 头像
     private String avatar;
 
