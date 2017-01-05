@@ -3,7 +3,9 @@ package com.lemon.controller.lemon;
 import com.lemon.annotation.UserLoginValidation;
 import com.lemon.controller.BaseController;
 import com.lemon.form.AjaxResponse;
+import com.lemon.manager.lemon.LemonContentsManager;
 import com.lemon.manager.user.HeadUserInfoManager;
+import com.lemon.view.lemon.add.LemonAddView;
 import com.lemon.view.user.HeadUserInfoView;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,13 +21,16 @@ import javax.servlet.http.HttpServletRequest;
  * 首页，个人中心
  */
 @Controller
-public class LemonController extends BaseController{
+public class LemonContentsController extends BaseController{
 
 //    @Resource
 //    private IContentService lemonService;
 //
     @Resource
     private HeadUserInfoManager headUserInfoManager;
+
+    @Resource
+    private LemonContentsManager lemonContentsManager;
 
     /**
      * 首页
@@ -59,7 +64,9 @@ public class LemonController extends BaseController{
     @RequestMapping(value = "/lemon/lemons/add")
     public String addLemons(Model model, HttpServletRequest request){
         HeadUserInfoView userInfoView = headUserInfoManager.getUserView(request);
+        LemonAddView lemonAddView = lemonContentsManager.initAddView();
         model.addAttribute("headUserInfoView",userInfoView);
+        model.addAttribute("lemonAddView",lemonAddView);
 
         return "lemon/lemons/add";
     }

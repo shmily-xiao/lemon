@@ -132,41 +132,39 @@
                                 <div class="col-md-6 column" style="margin-top: 4px;margin-bottom: 4px;">
                                 <div class="input-group input-group-md">
                                     <span class="input-group-addon">选择类型</span>
-                                    <select style="height: 34px;width: 151px;" ng-model="">
-                                        <option value="">想做的事</option>
-                                        <option>琐碎的事</option>
-                                        <option>抒情的话</option>
+                                    <select style="height: 34px;width: 151px;" ng-model="postData.contentsType">
+                                        <#list lemonAddView.contentsType as contentsType>
+                                            <option value="${contentsType.value}" <#if contentsType.selected>selected="selected"</#if>>${contentsType.name}</option>
+                                        </#list>
                                     </select>
+
                                 </div>
                                 </div>
                                 <div class="col-md-6 column" style="margin-top: 4px; margin-bottom: 4px;" >
                                 <div class="input-group input-group-md">
                                     <span class="input-group-addon">完成时间</span>
-                                    <input style="height: 34px;width: 151px;" type="text" value="" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii">
+                                    <input style="height: 34px;width: 151px;" type="text" value="" id="datetimepicker" ng-model="postData.finishedTime" data-date-format="yyyy-mm-dd hh:ii">
                                     </input>
                                 </div>
                                 </div>
-                                <div class="col-md-2 column">
-                                    <div class="input-group input-group-md" style="margin-top: 10px;">
+                                <div class="col-md-6 column">
+                                    <div class="input-group input-group-md" style="margin-top: 10px; float: left">
                                         短息提醒
                                     </div>
-                                </div>
-
-                                <div class="col-md-4 column" style="margin-top: 10px;">
-                                <label class="checkbox-inline">
-                                    <input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1" > 需要
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2" checked> 不需要
-                                </label>
+                                    <label class="checkbox-inline" style="margin-top: 10px;">
+                                        <input type="radio" name="needMessage" ng-model="postData.needMessage"  value="true" > 需要
+                                    </label>
+                                    <label class="checkbox-inline" style="margin-top: 10px;">
+                                        <input type="radio" name="needMessage" ng-model="postData.needMessage"  value="false" checked> 不需要
+                                    </label>
                                 </div>
                                 <div class="col-md-4 column" style="margin-top: 4px; margin-bottom: 4px;">
                                 <div class="input-group input-group-md">
                                     <span class="input-group-addon">可见范围</span>
-                                    <select style="height: 34px;width: 151px;">
-                                        <option>公开</option>
-                                        <option>私有</option>
-                                        <option>对好友可见</option>
+                                    <select style="height: 34px;width: 151px;" ng-model="postData.strategyType">
+                                        <#list lemonAddView.strategyTypes as strategyType>
+                                            <option value="${strategyType.value}" <#if strategyType.selected>selected="selected"</#if>>${strategyType.name}</option>
+                                        </#list>
                                     </select>
                                 </div>
                                 </div>
@@ -203,9 +201,67 @@
 </script>
 <script src="/js/angular.min.js"></script>
 <script>
+    function generateMixed(n) {
+        var jschars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+        var res = "";
+        for (var i = 0; i < n; i++) {
+            var id = Math.ceil(Math.random() * 35);
+            res += jschars[id];
+        }
+        return res;
+    }
     var app = angular.module('myApp', []);
-
     app.controller('lemonAdd',['$scope','$http',function($scope,$http) {
+        $scope.postData={
+            title:'',
+            content:'',
+            finishedTime:'',
+            contentsType:'DREAM',
+            needMessage:'false',
+            strategyType:'PUBLIC'
+        };
+        (function uploadDetailImage(){
+            var uploader = WebUploader.create({
+                auto: true,
+                // 文件接收服务端。
+                server: '/simpletour/images/app_product',
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: angular.element('#upload'),
+                formData: {"randomCode": generateMixed(16)},
+                duplicate : true,
+                // 只允许选择图片文件。
+                accept: {
+                    title: 'Images',
+                    extensions: 'png,jpg,jpeg',//'gif,jpg,jpeg,bmp,png',
+                    mimeTypes: 'image/png,image/jpg,image/jpeg'//'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+                },
+                fileSingleSizeLimit: 1 * 1024 * 1024
+            });
+            uploader.on('uploadStart',function(){
+                $scope.disabled = true;
+                $scope.$apply();
+            });
+            uploader.on( 'uploadSuccess', function( file , response) {
+                if(response.code == 0){
+                    $scope.postData.images = response.data.saveHost+ response.data.savePath + '/' + response.data.saveName;
+                    $scope.$apply();
+                }else{
+                    alert.alert({
+                        message: response.msg || '上传失败,请重试',
+                        type: 'fail',
+                        delay: '3'
+                    })
+                }
+            });
+            uploader.on('error',function() {
+                alert('error!')
+            });
+            //删除图片
+            $scope.delDetailImg = function(){
+                $scope.postData.images = '';
+            };
+        })();
 
     }]);
 </script>

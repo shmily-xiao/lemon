@@ -1,7 +1,7 @@
 package com.lemon.utils;
 
 import com.lemon.domain.impl.BaseDomain;
-import com.lemon.enums.UtilsConstants;
+import com.lemon.pojo.constants.UtilsConstants;
 import com.lemon.framework.mapping.core.IConvertor;
 
 import java.lang.reflect.Field;

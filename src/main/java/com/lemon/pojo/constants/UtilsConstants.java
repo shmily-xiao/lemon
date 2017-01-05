@@ -1,4 +1,4 @@
-package com.lemon.enums;
+package com.lemon.pojo.constants;
 
 /**
  * Created by simpletour_Jenkin on 2016/8/9.

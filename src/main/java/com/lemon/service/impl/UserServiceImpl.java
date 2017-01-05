@@ -8,7 +8,7 @@ import com.lemon.domain.impl.user.UserRecord;
 import com.lemon.enums.AccessControlRowTableType;
 import com.lemon.enums.AccountType;
 import com.lemon.enums.SignupType;
-import com.lemon.enums.ZoneStatus;
+import com.lemon.enums.StrategyType;
 import com.lemon.query.BaseQuery;
 import com.lemon.query.user.UserAccountQuery;
 import com.lemon.service.IUserService;
@@ -70,7 +70,7 @@ public class UserServiceImpl extends BaseServiceImpl<User,BaseQuery> implements 
         }
         userAccountDao.insert(new UserAccount(newUser.get().getId(),user.getAccount(), AccountType.SYSTEM_DEFAULT));
 
-        AccessControl accessControl = new AccessControl(newUser.get().getId(), AccessControlRowTableType.USER.name(), ZoneStatus.PUBLIC.name());
+        AccessControl accessControl = new AccessControl(newUser.get().getId(), AccessControlRowTableType.USER.name(), StrategyType.PUBLIC.name());
 
         Optional<AccessControl> newAccessControl = accessControlDao.insert(accessControl) != 0 ? Optional.of(accessControl):Optional.empty();
 

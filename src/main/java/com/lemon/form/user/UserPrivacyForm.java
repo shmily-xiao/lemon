@@ -1,6 +1,6 @@
 package com.lemon.form.user;
 
-import com.lemon.enums.ZoneStatus;
+import com.lemon.enums.StrategyType;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
@@ -15,14 +15,14 @@ public class UserPrivacyForm {
      */
     @NotBlank
     @NotNull
-    private ZoneStatus zoneStatus;
+    private StrategyType zoneStatus;
 
 
-    public ZoneStatus getZoneStatus() {
+    public StrategyType getZoneStatus() {
         return zoneStatus;
     }
 
-    public void setZoneStatus(ZoneStatus zoneStatus) {
+    public void setZoneStatus(StrategyType zoneStatus) {
         this.zoneStatus = zoneStatus;
     }
 }

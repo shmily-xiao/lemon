@@ -3,20 +3,22 @@ package com.lemon.enums;
 import com.lemon.framework.enumwrapper.Options;
 
 /**
- * Created by Administrator on 2016/8/11 0011.
+ * Created by simpletour_Jenkin on 2016/8/3.
+ * 用户对自己事件的公开策略
  */
-public enum ContentType implements Options{
-    DREAM("想做的事"),
-    TRIFLES("琐碎的事"),
-    LYRICISM("抒情的话");
+public enum StrategyType implements Options{
+    PUBLIC("公开"),
+    PRIVATE("私有"),
+    FRIENDSHIP("对好友可见");
 
     private String remark;
 
-    ContentType(){}
+    StrategyType(){}
 
-    ContentType(String remark){
+    StrategyType(String remark){
         this.remark = remark;
     }
+
 
     @Override
     public String getName() {
