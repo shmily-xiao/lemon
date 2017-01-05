@@ -1,5 +1,6 @@
 package com.lemon.controller.lemon;
 
+import com.lemon.annotation.UserLoginValidation;
 import com.lemon.controller.BaseController;
 import com.lemon.form.AjaxResponse;
 import com.lemon.manager.user.HeadUserInfoManager;
@@ -54,13 +55,11 @@ public class LemonController extends BaseController{
         return "lemon/home/home";
     }
 
+    @UserLoginValidation
     @RequestMapping(value = "/lemon/lemons/add")
     public String addLemons(Model model, HttpServletRequest request){
-
-//        //todo 登录验证
-        if (!isUserLoginIn(request)) return "redirect:/lemon/account/login";
         HeadUserInfoView userInfoView = headUserInfoManager.getUserView(request);
-
+        model.addAttribute("headUserInfoView",userInfoView);
 
         return "lemon/lemons/add";
     }
