@@ -40,7 +40,7 @@ public class Content extends BaseDomain implements IContent {
     /**
      * 是否删除了
      */
-    private Boolean del;
+    private Boolean del = Boolean.FALSE;
 
     @Override
     public String getDescription() {
