@@ -1,14 +1,17 @@
-package com.lemon.controller.lemon;
+package com.lemon.controller.lemonContents;
 
 import com.lemon.annotation.UserLoginValidation;
 import com.lemon.controller.BaseController;
 import com.lemon.form.AjaxResponse;
+import com.lemon.form.lemonContents.LemonContentsAddForm;
 import com.lemon.manager.lemon.LemonContentsManager;
 import com.lemon.manager.user.HeadUserInfoManager;
+import com.lemon.pojo.constants.LemonConstants;
 import com.lemon.view.lemon.add.LemonAddView;
 import com.lemon.view.user.HeadUserInfoView;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -73,9 +76,10 @@ public class LemonContentsController extends BaseController{
 
     @ResponseBody
     @RequestMapping(value = "/lemon/lemons/add",method = RequestMethod.POST)
-    public AjaxResponse ajaxAddLemons(HttpServletRequest request){
-        //todo 登录验证
-
+    public AjaxResponse ajaxAddLemons(@RequestBody LemonContentsAddForm form, HttpServletRequest request){
+        if (!super.isUserLoginIn(request)){
+            return AjaxResponse.fail().msg("用户没有登录").url(LemonConstants.LOGIN_URL);
+        }
 
 
         return AjaxResponse.fail();

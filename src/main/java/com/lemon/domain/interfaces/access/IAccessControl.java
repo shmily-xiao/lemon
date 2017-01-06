@@ -1,6 +1,7 @@
 package com.lemon.domain.interfaces.access;
 
 import com.lemon.domain.interfaces.ibase.ICreatedTime;
+import com.lemon.enums.StrategyType;
 
 /**
  * Created by simpletour_Jenkin on 2016/8/18.
@@ -16,7 +17,7 @@ public interface IAccessControl extends ICreatedTime {
     void setRowTable(String rowTable);
 
     // 策略，对于内容和user来说，内容应该是不一样的
-    String getStrategy();
-    void setStrategy(String strategy);
+    StrategyType getStrategy();
+    void setStrategy(StrategyType strategy);
 
 }

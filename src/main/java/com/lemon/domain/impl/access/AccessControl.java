@@ -2,6 +2,7 @@ package com.lemon.domain.impl.access;
 
 import com.lemon.domain.impl.BaseDomain;
 import com.lemon.domain.interfaces.access.IAccessControl;
+import com.lemon.enums.StrategyType;
 
 /**
  * Created by simpletour_Jenkin on 2016/8/22.
@@ -21,12 +22,12 @@ public class AccessControl extends BaseDomain implements IAccessControl {
     /**
      * 策略，对于内容和user来说，内容应该是不一样的
      */
-    private String strategy;
+    private StrategyType strategy;
 
     public AccessControl() {
     }
 
-    public AccessControl(Long rowId, String rowTable, String strategy) {
+    public AccessControl(Long rowId, String rowTable, StrategyType strategy) {
         this.rowId = rowId;
         this.rowTable = rowTable;
         this.strategy = strategy;
@@ -53,12 +54,12 @@ public class AccessControl extends BaseDomain implements IAccessControl {
     }
 
     @Override
-    public String getStrategy() {
+    public StrategyType getStrategy() {
         return strategy;
     }
 
     @Override
-    public void setStrategy(String strategy) {
+    public void setStrategy(StrategyType strategy) {
         this.strategy = strategy;
     }
 }

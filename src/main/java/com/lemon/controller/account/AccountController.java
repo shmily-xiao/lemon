@@ -151,7 +151,7 @@ public class AccountController extends BaseController{
 
 //        session.setAttribute("user.nickname", user.getNickName());
         session.setAttribute(LemonConstants.USER_SEESSION_MOBILE, user.getMobile());
-        session.setAttribute(LemonConstants.USER_SEESSION_MOBILE, user.getId());
+        session.setAttribute(LemonConstants.USER_SEESSION_ID, user.getId());
 
         //// TODO: 2016/8/3 首页 url
         return AjaxResponse.ok().url("/lemon/lemons/test");

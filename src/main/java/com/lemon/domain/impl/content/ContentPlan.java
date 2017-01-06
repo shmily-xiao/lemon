@@ -19,7 +19,7 @@ public class ContentPlan extends BaseDomain implements IContentPlan {
     /**
      * 是否完成
      */
-    private Boolean finished;
+    private Boolean finished = Boolean.FALSE;
 
     /**
      * 希望完成的时间

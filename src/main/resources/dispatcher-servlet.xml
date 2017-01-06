@@ -9,24 +9,24 @@
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
    <!--过滤器！！-->
     <!--<context:component-scan base-package="com.demo"/>-->
-    <!--<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/**"/> &lt;!&ndash;这里如果写/*就只会过滤类似“/user，/login”这样的地址如果写的是/**就会过滤所有的地址例如“/./././.”&ndash;&gt;-->
-            <!--<mvc:exclude-mapping path="/lemon/account/register"/>-->
-            <!--<mvc:exclude-mapping path="/js/**"/>-->
-            <!--<mvc:exclude-mapping path="/mp/**"/>-->
-            <!--<mvc:exclude-mapping path="/css/**"/>-->
-            <!--<mvc:exclude-mapping path="/img/**"/>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/> <!--这里如果写/*就只会过滤类似“/user，/login”这样的地址如果写的是/**就会过滤所有的地址例如“/./././.”-->
+            <mvc:exclude-mapping path="/lemon/account/register"/>
+            <mvc:exclude-mapping path="/js/**"/>
+            <mvc:exclude-mapping path="/mp/**"/>
+            <mvc:exclude-mapping path="/css/**"/>
+            <mvc:exclude-mapping path="/img/**"/>
             <!--<mvc:exclude-mapping path="/lemon/image/**"/>-->
-            <!--<bean class="com.lemon.interceptor.validator.UserLoginValidatorInterceptor"/>-->
-        <!--</mvc:interceptor>-->
+            <bean class="com.lemon.interceptor.validator.UserLoginValidatorInterceptor"/>
+        </mvc:interceptor>
         <!--&lt;!&ndash;<mvc:interceptor>&ndash;&gt;-->
             <!--&lt;!&ndash;<mvc:mapping path="/**"/>&ndash;&gt;-->
             <!--&lt;!&ndash;<mvc:exclude-mapping path="/login"/>&ndash;&gt;-->
             <!--&lt;!&ndash;<mvc:exclude-mapping path="/register"/>&ndash;&gt;-->
             <!--&lt;!&ndash;<bean class="com.demo.filter.SessionFilter"/>&ndash;&gt;-->
         <!--&lt;!&ndash;</mvc:interceptor>&ndash;&gt;-->
-    <!--</mvc:interceptors>-->
+    </mvc:interceptors>
 
     <!--<context:component-scan base-package="com.demo"/>-->
     <!--<mvc:interceptors>-->

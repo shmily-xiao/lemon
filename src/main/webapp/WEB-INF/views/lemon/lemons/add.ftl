@@ -10,6 +10,7 @@
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/js/webuploader/webuploader.css"/>
     <!-- 可选的Bootstrap主题文件（一般不使用） -->
     <link src="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></link>
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
@@ -30,31 +31,6 @@
             background-color: #DEDEDE;
             border-color: #e7e7e7;
         }
-        .webuploader-pick {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-            background: #00b7ee;
-            padding: 10px 15px;
-            color: #fff;
-            text-align: center;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        .webuploader-pick-hover {
-            background: #00a2d4;
-        }
-
-        .webuploader-pick-disable {
-            opacity: 0.6;
-            pointer-events:none;
-        }
-        .webuploader-element-invisible {
-            position: absolute !important;
-            clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-            clip: rect(1px,1px,1px,1px);
-        }
-
     </style>
 </head>
 
@@ -70,7 +46,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="avatar"><img src="/img/user48.ico"></a>
+            <#if headUserInfoView.avatar?has_content>
+                <a class="avatar"><img src="${headUserInfoView.avatar}"></a>
+            <#else>
+                <a class="avatar"><img src="/img/user48.ico"></a>
+            </#if>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -81,16 +61,15 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">更多 <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#">敬请期待</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">友情链接</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
+                        <#--<li class="divider"></li>-->
+                        <#--<li class="dropdown-header">友情链接</li>-->
+                        <#--<li><a href="#">Separated link</a></li>-->
                     </ul>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li ><a href="#"><span>成就值：999</span></a></li>
-                <li ><a href="#"><span>等级：新手</span></a></li>
+                <li ><a href="#"><span>成就值：${headUserInfoView.score}</span></a></li>
+                <li ><a href="#"><span>等级：${headUserInfoView.type}</span></a></li>
                 <li class="active"><a href="#">记录<span class="glyphicon glyphicon-plus" style="color: rgb(152, 151, 151); font-size: 6px;"></span></a></li>
                 <li ><a href="#">签到<span class="glyphicon glyphicon-map-marker" style="color: rgb(152, 151, 151); font-size: 6px;"></span></a></li>
             </ul>
@@ -106,11 +85,9 @@
                 <div class="col-md-2 column">
                 </div>
                 <div class="col-md-8 column">
-
                     <div class="col-md-12 column" style="margin-top: 53px;">
                         <form class="bs-example bs-example-form" role="form">
                             <div class="panel panel-default">
-
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-addon">标题</span>
                                     <input type="text" class="form-control" ng-model="postData.title" placeholder="标题">
@@ -122,10 +99,12 @@
                                 </div>
                             </div>
                             <div class="col-md-12 column" style="height: 105px;">
-                                <div  style="position: relative;margin-top:10px;box-sizing:border-box;height:80.5px;width:100px;cursor:pointer;background:url(/img/img_add.png) no-repeat center;background-size:contain;">
-                                    <label for="upload" style="display:block;width:100%;height:100%"></label>
-                                    <input type="file" id="upload" name="image" ng-model="image" class="webuploader-element-invisible" multiple="multiple" accept="image/gif,image/jpg,image/jpeg,image/bmp,image/png">
+                                <div style="position: relative;margin-top:10px;box-sizing:border-box;height:80.5px;width:100px;cursor:pointer;background:url(/img/img_add.png) no-repeat center;background-size:contain;">
+                                    <#--<label for="upload" style="display:block;width:100%;height:100%"></label>-->
+                                    <#--<input type="file" id="upload" name="image" ng-model="image" class="webuploader-element-invisible" multiple="multiple" accept="image/gif,image/jpg,image/jpeg,image/bmp,image/png">-->
+                                    <div ng-show="postData.images.length &lt; 2" id="upload"></div>
                                 </div>
+                                <#--<div ng-show="postData.images.length &lt; 9" class="img_add"></div>-->
                             </div>
 
                             <div class="btn-group">
@@ -143,7 +122,7 @@
                                 <div class="col-md-6 column" style="margin-top: 4px; margin-bottom: 4px;" >
                                 <div class="input-group input-group-md">
                                     <span class="input-group-addon">完成时间</span>
-                                    <input style="height: 34px;width: 151px;" type="text" value="" id="datetimepicker" ng-model="postData.finishedTime" data-date-format="yyyy-mm-dd hh:ii">
+                                    <input style="height: 34px;width: 151px;" type="text" value="" readOnly="true" id="datetimepicker" ng-model="postData.finishedTime" data-date-format="yyyy-mm-dd hh:ii">
                                     </input>
                                 </div>
                                 </div>
@@ -171,11 +150,9 @@
                             </div>
                             <div class="col-md-10 column"></div>
                             <div class="col-md-2 column" style="text-align: right;">
-                                <button type="submit" class="btn btn-default">发表记录</button>
+                                <button type="button" class="btn btn-default" ng-click="addLemon($event)">发表记录</button>
                             </div>
                         </form>
-
-
                     </div>
                 </div>
                 <div class="col-md-2 column">
@@ -200,6 +177,7 @@
     });
 </script>
 <script src="/js/angular.min.js"></script>
+<script type="text/javascript" src="/js/webuploader/webuploader.html5only.min.js"></script>
 <script>
     function generateMixed(n) {
         var jschars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -218,51 +196,71 @@
             finishedTime:'',
             contentsType:'DREAM',
             needMessage:'false',
-            strategyType:'PUBLIC'
+            strategyType:'PUBLIC',
+            images:[]
         };
-        (function uploadDetailImage(){
-            var uploader = WebUploader.create({
-                auto: true,
-                // 文件接收服务端。
-                server: '/simpletour/images/app_product',
-                // 选择文件的按钮。可选。
-                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-                pick: angular.element('#upload'),
-                formData: {"randomCode": generateMixed(16)},
-                duplicate : true,
-                // 只允许选择图片文件。
-                accept: {
-                    title: 'Images',
-                    extensions: 'png,jpg,jpeg',//'gif,jpg,jpeg,bmp,png',
-                    mimeTypes: 'image/png,image/jpg,image/jpeg'//'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
-                },
-                fileSingleSizeLimit: 1 * 1024 * 1024
-            });
-            uploader.on('uploadStart',function(){
-                $scope.disabled = true;
-                $scope.$apply();
-            });
-            uploader.on( 'uploadSuccess', function( file , response) {
-                if(response.code == 0){
-                    $scope.postData.images = response.data.saveHost+ response.data.savePath + '/' + response.data.saveName;
-                    $scope.$apply();
-                }else{
-                    alert.alert({
-                        message: response.msg || '上传失败,请重试',
-                        type: 'fail',
-                        delay: '3'
-                    })
+        $scope.addLemon = function (event) {
+            if ($scope.postData.images.length>2){
+                alert("图片上传超过上限");
+            }
+            $http.post('/lemon/lemons/add', $scope.postData).success(function (data) {
+                if (data.code == 0) {
+                    top.location.href = data.url;
+                } else if (data.code == 2) {
+                    $scope.empty = true;
+                }else {
+                    alert("网络异常");
                 }
+            }).error(function () {
+                alert("网络异常");
             });
-            uploader.on('error',function() {
-                alert('error!')
-            });
-            //删除图片
-            $scope.delDetailImg = function(){
-                $scope.postData.images = '';
-            };
-        })();
+        };
 
+
+
+        //--------------------------------------------------------//
+        //-------------------- 图片上传的插件 ----------------------//
+        //--------------------------start-------------------------//
+        var uploader = WebUploader.create({
+            auto: true,
+            // 文件接收服务端。
+            server: '/lemon/image/add',
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick: angular.element('#upload'),
+            formData: {"randomCode": generateMixed(16)},
+            duplicate : true,
+            // 只允许选择图片文件。
+            accept: {
+                title: 'Images',
+                extensions: 'png,jpg,jpeg',//'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/png,image/jpg,image/jpeg'//'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+            },
+            //限制文件的大小
+            fileSingleSizeLimit: 5 * 1024 * 1024
+        });
+        uploader.on('uploadStart',function(){
+            $scope.disabled = true;
+            $scope.$apply();
+        });
+        uploader.on( 'uploadSuccess', function( file , response) {
+            if(response.code == 0){
+                $scope.postData.images.push(response.data);
+                $scope.$apply();
+            }else{
+                alert(response.msg);
+            }
+        });
+        uploader.on('error',function() {
+            alert('error!')
+        });
+        //删除图片
+        $scope.delDetailImg = function(){
+            $scope.postData.images = '';
+        };
+        //-------------------------end----------------------------//
+        //-------------------- 图片上传的插件 ----------------------//
+        //--------------------------------------------------------//
     }]);
 </script>
 
