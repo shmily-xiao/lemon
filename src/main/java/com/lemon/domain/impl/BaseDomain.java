@@ -9,7 +9,7 @@ import java.util.Date;
 public class BaseDomain{
     protected Long id;
 
-    protected LocalDateTime createdTime;
+    protected LocalDateTime createdTime = LocalDateTime.now();
 
     public Long getId() {
         return id;
