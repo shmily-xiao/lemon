@@ -70,7 +70,7 @@ public class UserServiceImpl extends BaseServiceImpl<User,BaseQuery> implements 
         }
         userAccountDao.insert(new UserAccount(newUser.get().getId(),user.getAccount(), AccountType.SYSTEM_DEFAULT));
 
-        AccessControl accessControl = new AccessControl(newUser.get().getId(), AccessControlRowTableType.USER.name(), StrategyType.PUBLIC.name());
+        AccessControl accessControl = new AccessControl(newUser.get().getId(), AccessControlRowTableType.USER.name(), StrategyType.PUBLIC);
 
         Optional<AccessControl> newAccessControl = accessControlDao.insert(accessControl) != 0 ? Optional.of(accessControl):Optional.empty();
 

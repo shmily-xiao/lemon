@@ -24,8 +24,8 @@ public class UserLoginValidatorInterceptor extends BaseInterceptor{
             return true;
         }
         Long userId = (Long) session.getAttribute(LemonConstants.USER_SEESSION_ID);
-        String mobile = (String) session.getAttribute(LemonConstants.USER_SEESSION_MOBILE);
-        if (userId != null && mobile != null && !mobile.isEmpty()){
+        String account = (String) session.getAttribute(LemonConstants.USER_SEESSION_ACCOUNT);
+        if (userId != null && account != null && !account.isEmpty()){
             return true;
         }
 //        // 当前访问的地址

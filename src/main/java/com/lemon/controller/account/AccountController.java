@@ -88,7 +88,7 @@ public class AccountController extends BaseController{
         cookiesService.insertCookies(accountManager.createCookies(session,response,newUser.get()));//登陆成功后就会抛出用户ID和用户名
 
 //        session.setAttribute("user.nickname", user.getNickName());
-        session.setAttribute(LemonConstants.USER_SEESSION_MOBILE, user.getMobile());
+        session.setAttribute(LemonConstants.USER_SEESSION_ACCOUNT, user.getAccount());
         session.setAttribute(LemonConstants.USER_SEESSION_ID, user.getId());
 
         //todo 首页，或者是个人中心 url
@@ -150,7 +150,7 @@ public class AccountController extends BaseController{
         cookiesService.updateCookies(cookies);
 
 //        session.setAttribute("user.nickname", user.getNickName());
-        session.setAttribute(LemonConstants.USER_SEESSION_MOBILE, user.getMobile());
+        session.setAttribute(LemonConstants.USER_SEESSION_ACCOUNT, user.getAccount());
         session.setAttribute(LemonConstants.USER_SEESSION_ID, user.getId());
 
         //// TODO: 2016/8/3 首页 url

@@ -19,22 +19,22 @@ public class BaseController {
      * @return 登陆了返回true
      */
     protected Boolean isUserLoginIn(HttpServletRequest request){
-        String mobile = (String) request.getSession().getAttribute(LemonConstants.USER_SEESSION_MOBILE);
+        String mobile = (String) request.getSession().getAttribute(LemonConstants.USER_SEESSION_ACCOUNT);
         Long userId = (Long) request.getSession().getAttribute(LemonConstants.USER_SEESSION_ID);
         return StringUtils.notEmpty(mobile) && userId!=null;
     }
 
-    /**
-     * 得到用户的手机号码
-     * @param request
-     * @return
-     */
-    protected String getUserInfoMobile(HttpServletRequest request){
-        if (isUserLoginIn(request)){
-            return (String)request.getSession().getAttribute(LemonConstants.USER_SEESSION_MOBILE);
-        }
-        return "";
-    }
+//    /**
+//     * 得到用户的手机号码
+//     * @param request
+//     * @return
+//     */
+//    protected String getUserInfoMobile(HttpServletRequest request){
+//        if (isUserLoginIn(request)){
+//            return (String)request.getSession().getAttribute(LemonConstants.USER_SEESSION_ACCOUNT);
+//        }
+//        return "";
+//    }
 
     /**
      * 得到用户的用户ID

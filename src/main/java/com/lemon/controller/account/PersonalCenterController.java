@@ -47,7 +47,7 @@ public class PersonalCenterController extends BaseController{
     @RequestMapping(value = "/lemon/personal/center")
     public String personalCenter(Model model, HttpServletRequest request){
         HttpSession session = request.getSession();
-        String account = (String)session.getAttribute(LemonConstants.USER_SEESSION_MOBILE);
+        String account = (String)session.getAttribute(LemonConstants.USER_SEESSION_ACCOUNT);
         if (account == null || account.isEmpty()) return "redirect:/account/login";
 
         model.addAttribute("user",new UserView(userService.findUserByAccount(account).get()));
@@ -70,7 +70,7 @@ public class PersonalCenterController extends BaseController{
 
         if (result.hasErrors()) return AjaxResponse.fail().msg("保存失败").reason("数据表单没有填写完全");
         HttpSession session = request.getSession();
-        String account = (String)session.getAttribute(LemonConstants.USER_SEESSION_MOBILE);
+        String account = (String)session.getAttribute(LemonConstants.USER_SEESSION_ACCOUNT);
         if (account == null || account.isEmpty()) return AjaxResponse.fail().reason("用户没有登录").url("/account/login");
 
         // 理论上应该不会有错 // TODO: 2016/8/15 这个地方需要更改，form中属性是要更改的，其他的保留数据库数据
@@ -101,7 +101,7 @@ public class PersonalCenterController extends BaseController{
         if (result.hasErrors()) return AjaxResponse.fail().msg("保存失败").reason("数据表单没有填写完全");
 
         HttpSession session = request.getSession();
-        String account = (String)session.getAttribute(LemonConstants.USER_SEESSION_MOBILE);
+        String account = (String)session.getAttribute(LemonConstants.USER_SEESSION_ACCOUNT);
         if (account == null || account.isEmpty()) return AjaxResponse.fail().reason("用户没有登录").url("/account/login");
 
         // 理论上应该不会有错
@@ -130,7 +130,7 @@ public class PersonalCenterController extends BaseController{
         if (result.hasErrors()) return AjaxResponse.fail().msg("修改失败").reason("数据表单没有填写完全");
 
         HttpSession session = request.getSession();
-        String account = (String)session.getAttribute(LemonConstants.USER_SEESSION_MOBILE);
+        String account = (String)session.getAttribute(LemonConstants.USER_SEESSION_ACCOUNT);
         if (account == null || account.isEmpty()) return AjaxResponse.fail().reason("用户没有登录").url("/account/login");
 
         // 理论上应该不会有错
