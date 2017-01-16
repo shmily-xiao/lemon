@@ -22,7 +22,10 @@ public class LemonContentsElementView {
     private Integer leftTime;
 
     // 图片的链接
-    private String imageUrl;
+    private List<String> imageUrl;
+
+    // 标题
+    private String title;
 
     // 描述
     private String description;
@@ -91,11 +94,11 @@ public class LemonContentsElementView {
         this.finishedTime = finishedTime;
     }
 
-    public String getImageUrl() {
+    public List<String> getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public void setImageUrl(List<String> imageUrl) {
         this.imageUrl = imageUrl;
     }
 
@@ -137,5 +140,13 @@ public class LemonContentsElementView {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

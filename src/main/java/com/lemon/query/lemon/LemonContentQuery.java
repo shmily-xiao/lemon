@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * Created by simpletour_Jenkin on 2016/7/29.
  */
-public class LemonQuery extends BaseQuery{
+public class LemonContentQuery extends BaseQuery{
     /**
      * 是否完成了
      */
@@ -49,10 +49,10 @@ public class LemonQuery extends BaseQuery{
     private Boolean isPublic;
 
 
-    public LemonQuery() {
+    public LemonContentQuery() {
     }
 
-    public LemonQuery(String description, Date expectTime, Boolean finished, Date finishedTime, Integer level, String name, Long userId, Boolean isPublic) {
+    public LemonContentQuery(String description, Date expectTime, Boolean finished, Date finishedTime, Integer level, String name, Long userId, Boolean isPublic) {
         this.description = description;
         this.expectTime = expectTime;
         this.finished = finished;
@@ -64,10 +64,13 @@ public class LemonQuery extends BaseQuery{
     }
 
     // 第一个参数是指要开始的地方，第二个参数是指每页显示多少条数据；
-    public LemonQuery(Integer index, Integer size){
+    public LemonContentQuery(Integer index, Integer size){
         this.offset = index * size - 1;
         this.size = size;
 
+    }
+    public LemonContentQuery(Long userId){
+        this.userId = userId;
     }
 
     public String getDescription() {

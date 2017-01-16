@@ -43,7 +43,7 @@ public class LemonContentsController extends BaseController{
     @RequestMapping(value = "/lemon/lemons/all")
     public String lemonsHome(HttpServletRequest request, Model model){
 
-//        List<Content> lemons = lemonService.findByPage(new LemonQuery(1,10));
+
 
         return "lemon/home/home";
     }
@@ -63,8 +63,6 @@ public class LemonContentsController extends BaseController{
 
         Long userId = super.getUserInfoUserID(request);
 
-
-//        List<Content> lemons = lemonService.findByPage(new LemonQuery(1,10));
 
         return "lemon/home/home";
     }

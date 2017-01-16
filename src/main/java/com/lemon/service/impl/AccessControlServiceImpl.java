@@ -5,7 +5,8 @@ import com.lemon.dao.IBaseDao;
 import com.lemon.domain.impl.access.AccessControl;
 import com.lemon.query.BaseQuery;
 import com.lemon.service.IAccessControlService;
-import org.jvnet.hk2.annotations.Service;
+import org.springframework.stereotype.Service;
+
 
 import javax.annotation.Resource;
 

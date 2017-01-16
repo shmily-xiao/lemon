@@ -387,4 +387,26 @@ public final class DateUtils {
 
         return Integer.parseInt(String.valueOf(between_days));
     }
+
+
+    /**
+     * 格式化为 2017年1月16日 17点50分
+     * @param time
+     * @return
+     */
+    public static String yearMonthDayTime(LocalDateTime time){
+        return time.getYear()+"年"+time.getMonthValue()+"月"+
+                time.getDayOfMonth()+"日 "+time.getHour()+"点"+time.getMinute()+"分";
+    }
+
+    /**
+     * 格式化为 2017年1月16日 17点50分
+     * @param time
+     * @return
+     */
+    public static String yearMonthDay(LocalDateTime time){
+        return time.getYear()+"年"+time.getMonthValue()+"月"+ time.getDayOfMonth()+"日";
+    }
+
+
 }
