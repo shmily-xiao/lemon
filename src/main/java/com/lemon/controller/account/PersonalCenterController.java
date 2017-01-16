@@ -1,5 +1,6 @@
 package com.lemon.controller.account;
 
+import com.lemon.annotation.UserLoginValidation;
 import com.lemon.controller.BaseController;
 import com.lemon.domain.impl.user.User;
 import com.lemon.form.AjaxResponse;
@@ -44,6 +45,7 @@ public class PersonalCenterController extends BaseController{
      * @param request
      * @return
      */
+    @UserLoginValidation
     @RequestMapping(value = "/lemon/personal/center")
     public String personalCenter(Model model, HttpServletRequest request){
         HttpSession session = request.getSession();

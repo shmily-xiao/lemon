@@ -35,11 +35,12 @@ public class LemonContentsController extends BaseController{
 
     /**
      * 首页
+     * 所有人都可以看的，类似于微博
      * @param request
      * @param model
      * @return
      */
-    @RequestMapping(value = "/lemon/lemons")
+    @RequestMapping(value = "/lemon/lemons/all")
     public String lemonsHome(HttpServletRequest request, Model model){
 
 //        List<Content> lemons = lemonService.findByPage(new LemonQuery(1,10));
@@ -48,13 +49,20 @@ public class LemonContentsController extends BaseController{
     }
 
     /**
+     *
      * 首页
+     * 只能看到自己的和好友的内容，类似于微信的朋友圈
+     *
      * @param request
      * @param model
      * @return
      */
-    @RequestMapping(value = "/lemon/lemons/test")
-    public String homeLemonsTest(HttpServletRequest request, Model model){
+    @UserLoginValidation
+    @RequestMapping(value = "/lemon/lemons")
+    public String homeLemonsFriend(HttpServletRequest request, Model model){
+
+        Long userId = super.getUserInfoUserID(request);
+
 
 //        List<Content> lemons = lemonService.findByPage(new LemonQuery(1,10));
 
