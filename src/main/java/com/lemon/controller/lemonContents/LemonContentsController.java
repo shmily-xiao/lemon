@@ -7,6 +7,7 @@ import com.lemon.form.lemonContents.LemonContentsAddForm;
 import com.lemon.manager.lemon.LemonContentsManager;
 import com.lemon.manager.user.HeadUserInfoManager;
 import com.lemon.pojo.constants.LemonConstants;
+import com.lemon.service.IContentService;
 import com.lemon.view.lemon.add.LemonAddView;
 import com.lemon.view.user.HeadUserInfoView;
 import org.springframework.stereotype.Controller;
@@ -26,9 +27,6 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class LemonContentsController extends BaseController{
 
-//    @Resource
-//    private IContentService lemonService;
-//
     @Resource
     private HeadUserInfoManager headUserInfoManager;
 
@@ -80,9 +78,9 @@ public class LemonContentsController extends BaseController{
         if (!super.isUserLoginIn(request)){
             return AjaxResponse.fail().msg("用户没有登录").url(LemonConstants.LOGIN_URL);
         }
+        Boolean addSuccess = lemonContentsManager.addContent(form,super.getUserInfoUserID(request));
 
-
-        return AjaxResponse.fail();
+        return addSuccess?AjaxResponse.ok().url("/lemon/lemons/test"):AjaxResponse.fail();
     }
 
 
