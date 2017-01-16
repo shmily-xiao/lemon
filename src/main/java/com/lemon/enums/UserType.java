@@ -5,7 +5,7 @@ package com.lemon.enums;
  * 标示用户的等级
  */
 public enum UserType {
-    NEWBIE("幼稚园小朋友",0L,0L),
+    NEWBIE("幼稚园小朋友",0L,50L),
     KINDERGARTEN_MIN("幼儿园小班小朋友",50L,50L),
     KINDERGARTEN_MID("幼儿园中班班小朋友",100L,100L),
     KINDERGARTEN_MAX("幼儿园大班小朋友",200L,150L),
@@ -42,9 +42,21 @@ public enum UserType {
         this.empiricalValue = empiricalValue;
     }
 
-    public static UserType findUserType(Long score){
 
-        return null;
+    /**
+     * 通过分数来查找对应的类型
+     * @param score
+     * @return
+     */
+    public static UserType findUserType(Long score){
+        for (UserType userType : UserType.values()){
+            if (userType.getScore()<=score && score<(userType.getScore()+userType.getEmpiricalValue())){
+                return userType;
+            }else if (userType.getScore() >= 3950L){
+                return UserType.ACADEMICIAN;
+            }
+        }
+        return UserType.DEFAULT;
     }
 
     public String getValue() {
@@ -53,5 +65,9 @@ public enum UserType {
 
     public Long getScore() {
         return score;
+    }
+
+    public Long getEmpiricalValue() {
+        return empiricalValue;
     }
 }

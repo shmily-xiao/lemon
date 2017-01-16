@@ -7,8 +7,8 @@ import com.lemon.framework.enumwrapper.Options;
  */
 public enum ContentType implements Options{
     DREAM("想做的事",10L),
-    TRIFLES("琐碎的事",5L),
-    LYRICISM("抒情的话",2L);
+    TRIFLES("琐碎的事",2L),
+    LYRICISM("抒情的话",5L);
 
     private String remark;
 

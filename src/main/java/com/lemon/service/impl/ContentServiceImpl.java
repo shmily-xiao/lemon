@@ -8,6 +8,7 @@ import com.lemon.domain.impl.content.ContentPlan;
 import com.lemon.domain.impl.user.UserRecord;
 import com.lemon.domain.interfaces.access.IAccessControl;
 import com.lemon.domain.interfaces.user.IUserRecord;
+import com.lemon.enums.UserType;
 import com.lemon.exception.BaseSystemException;
 import com.lemon.framework.enumwrapper.Option;
 import com.lemon.query.BaseQuery;
@@ -82,13 +83,10 @@ public class ContentServiceImpl extends BaseServiceImpl<Content,BaseQuery> imple
             UserRecord userRecord = userRecords.get(0);
             Long score = userRecord.getScore()+lemonContentAddBo.getContentsType().getScore();
             userRecord.setScore(score);
-
+            userRecord.setType(UserType.findUserType(score));
         }
 
-
-
-
-        return null;
+        return Boolean.TRUE;
     }
 
     /**

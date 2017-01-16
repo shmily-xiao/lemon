@@ -99,10 +99,16 @@
                                 </div>
                             </div>
                             <div class="col-md-12 column" style="height: 105px;">
+                                <div style="float:left;margin-top: 10px;" class="img_box" ng-mouseenter="picShow = true" ng-mouseleave="picShow = false" ng-cloak="" ng-repeat="pic in postData.images">
+                                    <div class="img_box_hidden">
+                                        <img style="height: 80.5px;width: 100px;" ng-src="{{pic}}"/>
+                                    </div>
+                                    <div class="del_img" ng-click="delDetailImg($index)" ng-show="picShow"></div>
+                                </div>
                                 <div style="position: relative;margin-top:10px;box-sizing:border-box;height:80.5px;width:100px;cursor:pointer;background:url(/img/img_add.png) no-repeat center;background-size:contain;">
                                     <#--<label for="upload" style="display:block;width:100%;height:100%"></label>-->
                                     <#--<input type="file" id="upload" name="image" ng-model="image" class="webuploader-element-invisible" multiple="multiple" accept="image/gif,image/jpg,image/jpeg,image/bmp,image/png">-->
-                                    <div ng-show="postData.images.length &lt; 2" id="upload"></div>
+                                        <div ng-show="postData.images.length &lt; 2" id="upload"></div>
                                 </div>
                                 <#--<div ng-show="postData.images.length &lt; 9" class="img_add"></div>-->
                             </div>
@@ -245,6 +251,7 @@
         });
         uploader.on( 'uploadSuccess', function( file , response) {
             if(response.code == 0){
+                $scope.postData.images=[];//只能添加一张照片
                 $scope.postData.images.push(response.data);
                 $scope.$apply();
             }else{
@@ -255,8 +262,8 @@
             alert('error!')
         });
         //删除图片
-        $scope.delDetailImg = function(){
-            $scope.postData.images = '';
+        $scope.delDetailImg = function(index){
+            $scope.postData.images.splice(index,1);
         };
         //-------------------------end----------------------------//
         //-------------------- 图片上传的插件 ----------------------//
