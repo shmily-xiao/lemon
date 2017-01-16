@@ -68,6 +68,7 @@ public class AccountController extends BaseController{
             return AjaxResponse.fail().msg("注册失败").reason("用户没有提交数据");
         }
 
+        // 使用手机号注册的时候会生成两个账号
         Optional<User> userOptional = userService.findUserByAccount(userForm.getMobile());
         if (userOptional.isPresent()) {
             return AjaxResponse.fail().msg("注册失败").reason("该手机号已经注册过了");
@@ -75,6 +76,7 @@ public class AccountController extends BaseController{
 
         String salt = SequenceUtils.generateAlphaNun(5); //生成salt
         String password = Md5.messageDigest(userForm.getPassword() + salt);
+        // 系统默认的账号
         String account = SequenceUtils.generateAlpha(4) + userForm.getMobile();
         // 昵称默认是 account
         User user = new User(account, account, password, salt, SignupType.MOBILE);
@@ -129,11 +131,13 @@ public class AccountController extends BaseController{
             return AjaxResponse.fail().msg("登录失败").reason("用户没有提交任何数据");
         }
 
+        // 手机号和默认的系统账号都可以登录，使用qq登录之后也可以利用qq号登录
         Optional<User> userOptional = userService.findUserByAccount(userForm.getMobile());
         if (!userOptional.isPresent()){
             return AjaxResponse.fail().msg("登录失败").reason("用户不存在");
         }
 
+        // 账号是否还是可用的状态
         if (!Boolean.TRUE.toString().equals(userOptional.get().getStatus())){
             return AjaxResponse.fail().msg("登录失败").reason("用户账号不可用,请与管理员联系");
         }
