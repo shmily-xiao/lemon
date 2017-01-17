@@ -41,7 +41,7 @@ public class OssController extends BaseController{
     private String aliyunOssHostUrl;
 
 
-    @RequestMapping(value = "lemon/image/add/test")
+//    @RequestMapping(value = "lemon/image/add/test")
     public String test(){
         return "lemon/oss/index";
     }
@@ -64,13 +64,13 @@ public class OssController extends BaseController{
         String objectKeyName = userId+System.currentTimeMillis()+suffix;
         try {
             // 上传文件
-//            ossClient.putObject(bucketName,objectKeyName, file.getInputStream());
-//        }catch (IOException e){
-//            e.printStackTrace();
-//            return AjaxResponse.fail().reason("上传文件异常，请联系管理员1350468513@qq.com").msg("文件不合法");
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            return AjaxResponse.fail();
+            ossClient.putObject(bucketName,objectKeyName, file.getInputStream());
+        }catch (IOException e){
+            e.printStackTrace();
+            return AjaxResponse.fail().reason("上传文件异常，请联系管理员1350468513@qq.com").msg("文件不合法");
+        }catch (Exception e){
+            e.printStackTrace();
+            return AjaxResponse.fail();
         }finally {
             // 关闭client
             ossClient.shutdown();

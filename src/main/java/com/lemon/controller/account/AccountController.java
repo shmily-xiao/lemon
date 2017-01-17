@@ -93,8 +93,8 @@ public class AccountController extends BaseController{
         session.setAttribute(LemonConstants.USER_SEESSION_ACCOUNT, user.getAccount());
         session.setAttribute(LemonConstants.USER_SEESSION_ID, user.getId());
 
-        //todo 首页，或者是个人中心 url
-        return AjaxResponse.ok().url("/lemon/lemons/test");
+        // 跳转首页（朋友圈）
+        return AjaxResponse.ok().url("/lemon/lemons/friends");
     }
 
 
@@ -157,8 +157,8 @@ public class AccountController extends BaseController{
         session.setAttribute(LemonConstants.USER_SEESSION_ACCOUNT, user.getAccount());
         session.setAttribute(LemonConstants.USER_SEESSION_ID, user.getId());
 
-        //// TODO: 2016/8/3 首页 url
-        return AjaxResponse.ok().url("/lemon/lemons/test");
+        //首页（朋友圈）
+        return AjaxResponse.ok().url("/lemon/lemons/friends");
 
     }
 

@@ -1,5 +1,6 @@
 package com.lemon.query.friendship;
 
+import com.lemon.enums.FriendType;
 import com.lemon.query.BaseQuery;
 
 /**
@@ -17,14 +18,25 @@ public class FriendshipQuery extends BaseQuery {
     private Long friendId;
 
     /**
-     * 朋友的类型，普通，特别关注
-     */
-    private String type;
-
-    /**
      * 用户对好友的分类
      */
     private String group;
+
+    /**
+     * 朋友的类型，普通，特别关注
+     */
+    private FriendType type;
+
+    /**
+     * 用户对好友的分组
+     */
+    private Long friendGroupId;
+
+    /**
+     * 用户这条信息对好友的公开策略
+     */
+    private Long accessControlId;
+
 
     public Long getFriendId() {
         return friendId;
@@ -42,19 +54,35 @@ public class FriendshipQuery extends BaseQuery {
         this.group = group;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public Long getUserId() {
         return userId;
     }
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public FriendType getType() {
+        return type;
+    }
+
+    public void setType(FriendType type) {
+        this.type = type;
+    }
+
+    public Long getFriendGroupId() {
+        return friendGroupId;
+    }
+
+    public void setFriendGroupId(Long friendGroupId) {
+        this.friendGroupId = friendGroupId;
+    }
+
+    public Long getAccessControlId() {
+        return accessControlId;
+    }
+
+    public void setAccessControlId(Long accessControlId) {
+        this.accessControlId = accessControlId;
     }
 }

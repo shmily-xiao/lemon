@@ -1,7 +1,9 @@
 package com.lemon.query.content;
 
+import com.lemon.enums.ContentType;
 import com.lemon.query.BaseQuery;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -9,14 +11,9 @@ import java.util.Date;
  */
 public class LemonContentQuery extends BaseQuery{
     /**
-     * 是否完成了
-     */
-    private Boolean finished;
-
-    /**
      * 要完成的事情的标题
      */
-    private String name;
+    private String title;
 
     /**
      * 对这件事情的大概描述
@@ -24,43 +21,27 @@ public class LemonContentQuery extends BaseQuery{
     private String description;
 
     /**
-     * 自己定的大概的完成时间
+     * 图片，可能有多个,所以这里存取的时候都应该是一个json，方便以后扩展
      */
-    private Date expectTime;
+    private String images;
 
     /**
-     * 完成的时间
+     * 这件事情的等级,有 梦想 、 琐事 、 抒情 等
      */
-    private Date finishedTime;
+    private ContentType type;
 
     /**
-     * 用户自己定义的等级
-     */
-    private Integer level;
-
-    /**
-     * 谁来创建的
+     * 这件事情由谁来创建
      */
     private Long userId;
 
     /**
-     * 此条记录是否公开
+     * 是否删除了
      */
-    private Boolean isPublic;
+    private Boolean del;
 
 
     public LemonContentQuery() {
-    }
-
-    public LemonContentQuery(String description, Date expectTime, Boolean finished, Date finishedTime, Integer level, String name, Long userId, Boolean isPublic) {
-        this.description = description;
-        this.expectTime = expectTime;
-        this.finished = finished;
-        this.finishedTime = finishedTime;
-        this.level = level;
-        this.name = name;
-        this.userId = userId;
-        this.isPublic = isPublic;
     }
 
     // 第一个参数是指要开始的地方，第二个参数是指每页显示多少条数据；
@@ -81,44 +62,28 @@ public class LemonContentQuery extends BaseQuery{
         this.description = description;
     }
 
-    public Date getExpectTime() {
-        return expectTime;
+    public String getTitle() {
+        return title;
     }
 
-    public void setExpectTime(Date expectTime) {
-        this.expectTime = expectTime;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public Boolean getFinished() {
-        return finished;
+    public String getImages() {
+        return images;
     }
 
-    public void setFinished(Boolean finished) {
-        this.finished = finished;
+    public void setImages(String images) {
+        this.images = images;
     }
 
-    public Date getFinishedTime() {
-        return finishedTime;
+    public ContentType getType() {
+        return type;
     }
 
-    public void setFinishedTime(Date finishedTime) {
-        this.finishedTime = finishedTime;
-    }
-
-    public Integer getLevel() {
-        return level;
-    }
-
-    public void setLevel(Integer level) {
-        this.level = level;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setType(ContentType type) {
+        this.type = type;
     }
 
     public Long getUserId() {
@@ -129,11 +94,11 @@ public class LemonContentQuery extends BaseQuery{
         this.userId = userId;
     }
 
-    public Boolean getPublic() {
-        return isPublic;
+    public Boolean getDel() {
+        return del;
     }
 
-    public void setPublic(Boolean aPublic) {
-        isPublic = aPublic;
+    public void setDel(Boolean del) {
+        this.del = del;
     }
 }

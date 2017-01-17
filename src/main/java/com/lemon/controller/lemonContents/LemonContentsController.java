@@ -65,9 +65,26 @@ public class LemonContentsController extends BaseController{
 
         Long userId = super.getUserInfoUserID(request);
         List<LemonContentsElementView> lemonContentsWithFriend = lemonContentsManager.findLemonContentsWithFriend(userId);
+        HeadUserInfoView userInfoView = headUserInfoManager.getUserView(request);
 
+        model.addAttribute("headUserInfoView",userInfoView);
         model.addAttribute("lemonContents",lemonContentsWithFriend);
         return "lemon/home/friends/home";
+    }
+
+    /**
+     * 我的发布
+     * 只看自己的发布的内容
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/lemon/lemons/myself")
+    public String myLemons(HttpServletRequest request, Model model){
+
+
+
+        return "lemon/home/myself/home";
     }
 
     /**
