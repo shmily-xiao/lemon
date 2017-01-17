@@ -1,4 +1,4 @@
-package com.lemon.query.lemon;
+package com.lemon.query.content;
 
 import com.lemon.query.BaseQuery;
 

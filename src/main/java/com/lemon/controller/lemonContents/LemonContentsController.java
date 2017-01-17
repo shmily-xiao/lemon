@@ -9,6 +9,7 @@ import com.lemon.manager.user.HeadUserInfoManager;
 import com.lemon.pojo.constants.LemonConstants;
 import com.lemon.service.IContentService;
 import com.lemon.view.lemon.add.LemonAddView;
+import com.lemon.view.lemon.contents.LemonContentsElementView;
 import com.lemon.view.user.HeadUserInfoView;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by simpletour_Jenkin on 2016/8/10.
@@ -40,12 +42,12 @@ public class LemonContentsController extends BaseController{
      * @param model
      * @return
      */
-    @RequestMapping(value = "/lemon/lemons/all")
+//    @RequestMapping(value = "/lemon/lemons/all")
     public String lemonsHome(HttpServletRequest request, Model model){
 
 
 
-        return "lemon/home/home";
+        return "lemon/home/all/home";
     }
 
     /**
@@ -58,15 +60,22 @@ public class LemonContentsController extends BaseController{
      * @return
      */
     @UserLoginValidation
-    @RequestMapping(value = "/lemon/lemons")
+    @RequestMapping(value = "/lemon/lemons/friends")
     public String homeLemonsFriend(HttpServletRequest request, Model model){
 
         Long userId = super.getUserInfoUserID(request);
+        List<LemonContentsElementView> lemonContentsWithFriend = lemonContentsManager.findLemonContentsWithFriend(userId);
 
-
-        return "lemon/home/home";
+        model.addAttribute("lemonContents",lemonContentsWithFriend);
+        return "lemon/home/friends/home";
     }
 
+    /**
+     * 进入添加内容页面
+     * @param model
+     * @param request
+     * @return
+     */
     @UserLoginValidation
     @RequestMapping(value = "/lemon/lemons/add")
     public String addLemons(Model model, HttpServletRequest request){
@@ -78,6 +87,13 @@ public class LemonContentsController extends BaseController{
         return "lemon/lemons/add";
     }
 
+    /**
+     *
+     * 异步添加内容
+     * @param form
+     * @param request
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/lemon/lemons/add",method = RequestMethod.POST)
     public AjaxResponse ajaxAddLemons(@RequestBody LemonContentsAddForm form, HttpServletRequest request){

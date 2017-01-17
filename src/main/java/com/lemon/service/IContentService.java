@@ -4,6 +4,8 @@ import com.lemon.domain.impl.content.Content;
 import com.lemon.query.BaseQuery;
 import com.lemon.service.bo.lemonContent.LemonContentAddBo;
 
+import java.util.List;
+
 /**
  * Created by simpletour_Jenkin on 2016/7/29.
  */
@@ -18,4 +20,11 @@ public interface IContentService extends IBaseService<Content,BaseQuery> {
      * @return
      */
     public Boolean addLemonContent(LemonContentAddBo lemonContentAddBo);
+
+    /**
+     * 查找用户相关的所有的content记录
+     * @param userId
+     * @return
+     */
+    public List<Content> findContentsByUserId(Long userId);
 }

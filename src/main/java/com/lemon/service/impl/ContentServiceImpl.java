@@ -12,6 +12,7 @@ import com.lemon.enums.UserType;
 import com.lemon.exception.BaseSystemException;
 import com.lemon.framework.enumwrapper.Option;
 import com.lemon.query.BaseQuery;
+import com.lemon.query.content.LemonContentQuery;
 import com.lemon.query.user.UserRecordQuery;
 import com.lemon.service.IContentService;
 import com.lemon.service.bo.lemonContent.LemonContentAddBo;
@@ -21,7 +22,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -87,6 +90,14 @@ public class ContentServiceImpl extends BaseServiceImpl<Content,BaseQuery> imple
         }
 
         return Boolean.TRUE;
+    }
+
+    @Override
+    public List<Content> findContentsByUserId(Long userId) {
+        LemonContentQuery query = new LemonContentQuery();
+        query.setUserId(userId);
+        List<Content>contents = contentDao.findEntities(query);
+        return contents!=null&&!contents.isEmpty() ? contents : Collections.emptyList();
     }
 
     /**
