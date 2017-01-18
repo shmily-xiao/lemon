@@ -42,7 +42,7 @@
 
   <div class="container">
       <#list lemonContents as lemonContent>
-        <div class="row clearfix" style="margin-top: 15px;border-top: 1px solid rgba(129, 138, 135, 0.57);padding: 5px;">
+        <div class="row clearfix" style="margin-top: 15px;border-top: 1px solid rgba(129, 138, 135, 0.57);padding: 5px;margin-bottom: 16px;">
           <div class="col-md-1 column">
           </div>
           <div class="col-md-10 column">
@@ -63,7 +63,7 @@
                           <div class="col-md-4 column">
                               <#if lemonContent.finishedTime?has_content>
                                   <p>完成时间：${lemonContent.finishedTime}</p>
-                              <#elseif lemonContent.leftTime?has_content>
+                              <#elseif lemonContent.leftTime?has_content && (lemonContent.leftTime >= 0)>
                                   <p>剩余时间：${lemonContent.leftTime}天</p>
                               <#else>
                                   <p>未完成</p>

@@ -10,6 +10,7 @@ import com.lemon.pojo.constants.LemonConstants;
 import com.lemon.service.IContentService;
 import com.lemon.view.lemon.add.LemonAddView;
 import com.lemon.view.lemon.contents.LemonContentsElementView;
+import com.lemon.view.lemon.contents.PersonalCenterContentsView;
 import com.lemon.view.user.HeadUserInfoView;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -86,7 +87,7 @@ public class LemonContentsController extends BaseController{
         Long userId = super.getUserInfoUserID(request);
         HeadUserInfoView userInfoView = headUserInfoManager.getUserView(request);
 
-        List<LemonContentsElementView> lemonContentsHimself = lemonContentsManager.findLemonContentsHimself(userId);
+        List<PersonalCenterContentsView> lemonContentsHimself = lemonContentsManager.findLemonContentsHimself(userId);
 
         model.addAttribute("headUserInfoView",userInfoView);
         model.addAttribute("lemonContents",lemonContentsHimself);

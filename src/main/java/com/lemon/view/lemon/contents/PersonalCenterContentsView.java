@@ -16,7 +16,7 @@ public class PersonalCenterContentsView {
     private String finishedTime;
 
     // 剩余时间（天）
-    private Integer leftTime;
+    private Integer leftTime=-1;
 
     // 图片的链接
     private List<String> imageUrl;

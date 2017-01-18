@@ -1,6 +1,7 @@
 package com.lemon.manager.lemon;
 
 import com.lemon.convertor.ConvertorResult;
+import com.lemon.convertor.content.ContentDomainToFriendHomeViewConvertor;
 import com.lemon.domain.impl.access.AccessControl;
 import com.lemon.domain.impl.content.Content;
 import com.lemon.domain.impl.content.ContentPlan;
@@ -13,7 +14,6 @@ import com.lemon.form.lemonContents.LemonContentsAddForm;
 import com.lemon.framework.enumwrapper.EnumWrapper;
 import com.lemon.framework.enumwrapper.Option;
 import com.lemon.query.access.AccessControlQuery;
-import com.lemon.query.content.InteractionQuery;
 import com.lemon.query.friendship.FriendshipQuery;
 import com.lemon.query.content.LemonContentQuery;
 import com.lemon.service.*;
@@ -21,6 +21,7 @@ import com.lemon.service.bo.lemonContent.LemonContentAddBo;
 import com.lemon.utils.BeanLocator;
 import com.lemon.view.lemon.add.LemonAddView;
 import com.lemon.view.lemon.contents.LemonContentsElementView;
+import com.lemon.view.lemon.contents.PersonalCenterContentsView;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -95,7 +96,7 @@ public class LemonContentsManager {
      *            B.查看好友内容的时候，需要排除掉好友设置为私有的内容
      * 3.查找Interaction表中的数据，发现那些收藏和点赞的
      *
-     * @see com.lemon.convertor.content.ContentDomainToViewConvertor
+     * @see ContentDomainToFriendHomeViewConvertor
      *
      * @param userId
      * @return
@@ -134,7 +135,7 @@ public class LemonContentsManager {
                 .map(content -> {
                     Optional<ContentPlan> contentPlan = contentPlanService.findByContentId(content.getId());
                     List<Interaction> interactions = interactionService.findByContentId(content.getId());
-                    ConvertorResult convertorResult = (ConvertorResult)BeanLocator.findBeanByName("ContentDomainToView_Convertor");
+                    ConvertorResult convertorResult = (ConvertorResult)BeanLocator.findBeanByName("ContentDomainToFriendHomeView_Convertor");
                     return (LemonContentsElementView)convertorResult.getResult(content,contentPlan.get(),interactions,userOptional.get());
                 })
                 .collect(Collectors.toList());
@@ -144,17 +145,18 @@ public class LemonContentsManager {
      * 登录用户的所有的发布内容，只有登录用户自己的
      * 1.查找用户的发布的所有内容
      *
-     * @see com.lemon.convertor.content.ContentDomainToViewConvertor
+     * @see com.lemon.convertor.content.ContentDomainToPersonalCenterViewConvertor
      *
      * @param userId
      * @return
      */
-    public List<LemonContentsElementView> findLemonContentsHimself(Long userId){
+    public List<PersonalCenterContentsView> findLemonContentsHimself(Long userId){
         List<Content> contents = contentService.findContentsByUserId(userId);
         return contents.stream()
                 .map(content -> {
-                    ConvertorResult convertorResult = (ConvertorResult) BeanLocator.findBeanByName("ContentDomainToView_Convertor");
-                    return (LemonContentsElementView)convertorResult.getResult(content);
+                    Optional<ContentPlan> contentPlan = contentPlanService.findByContentId(content.getId());
+                    ConvertorResult convertorResult = (ConvertorResult) BeanLocator.findBeanByName("ContentDomainToPersonalCenterView_Convertor");
+                    return (PersonalCenterContentsView)convertorResult.getResult(content,contentPlan.get());
                 }).collect(Collectors.toList());
     }
 

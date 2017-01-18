@@ -21,8 +21,8 @@ import java.util.stream.Collectors;
 /**
  * Created by simpletour_Jenkin on 2017/1/16.
  */
-@Component("ContentDomainToView_Convertor")
-public class ContentDomainToViewConvertor implements ConvertorResult<LemonContentsElementView>{
+@Component("ContentDomainToFriendHomeView_Convertor")
+public class ContentDomainToFriendHomeViewConvertor implements ConvertorResult<LemonContentsElementView>{
     @Override
     public LemonContentsElementView getResult(Object... obj) {
         Content content = null;
@@ -72,7 +72,7 @@ public class ContentDomainToViewConvertor implements ConvertorResult<LemonConten
             if (contentPlan.getExpectTime().compareTo(LocalDateTime.now()) > 0) {
                 Long time = Timestamp.valueOf(contentPlan.getExpectTime()).getTime() - Timestamp.valueOf(LocalDateTime.now()).getTime();
                 Long days = time / (1000L * 60 * 60 * 24);
-                if (days > 0) {
+                if (days >= 0) {
                     view.setLeftTime(days.intValue());
                 }
             }
