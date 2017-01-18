@@ -30,6 +30,12 @@
               background-color: #DEDEDE;
               border-color: #e7e7e7;
           }
+          a.red{
+              color: red;
+          }
+          a.gray{
+            color:rgb(152, 151, 151)
+          }
       </style>
   </head>
 
@@ -104,12 +110,12 @@
                           <div class="col-md-4 column">
                           </div>
                           <div class="col-md-4 column">
-                              <a href=""
-                                 ng-click="likeStatusClick($event,${lemonContent.likeStatus},${lemonContent.id})"
-                                 style="color:<#if lemonContent.likeStatus=="true">rgb(255, 0, 0)<#else>rgb(152, 151, 151)</#if>;">
-                                  <span class="glyphicon glyphicon-thumbs-up"
-                                        style="color: <#if lemonContent.likeStatus=="true">rgb(255, 0, 0)<#else>rgb(152, 151, 151)</#if>; font-size: 6px;"></span>
-                                  &nbsp;点赞(${lemonContent.likeCount})</a>
+                              <a href="" data-status="${lemonContent.likeStatus}"
+                                 ng-click="likeStatusClick($event,${lemonContent.id})"
+                                 class="<#if lemonContent.likeStatus=="true">red<#else>gray</#if>">
+                                  <span class="glyphicon glyphicon-thumbs-up <#if lemonContent.likeStatus=="true">red<#else>gray</#if>"
+                                        style="font-size: 6px;"></span>
+                                  <span data-counts="${lemonContent.likeCount}">点赞(${lemonContent.likeCount})</span></a>
                               <#--<a href="#"><span>评论</span></a>-->
                               &nbsp;&nbsp;
                               <a href=""
@@ -137,11 +143,12 @@
 
           // todo 有问题
           // 点赞
-          $scope.likeStatusClick = function (event,likeStatus,contentId) {
+          $scope.likeStatusClick = function (event,contentId) {
 //              if ($scope.likeStatus==''){
 //                  $scope.likeStatus = likeStatus;
 //              }
-              if (likeStatus){
+              var likeStatus = angular.element(event.currentTarget).attr('data-status');
+              if (likeStatus == 'true'){
                   $scope.likeStatus = "false";
               }else {
                   $scope.likeStatus = "true";
@@ -151,7 +158,18 @@
               $http.post(url).success(function (data) {
                   if (data.code == 0) {
                       // 应该去更改颜色的和数量的
-                      alert(data.msg);
+                      var counts = angular.element(event.currentTarget).find('span').eq(1).attr('data-counts');
+                      if(likeStatus == 'true') {
+                          angular.element(event.currentTarget).removeClass('red').addClass('gray');
+                          angular.element(event.currentTarget).attr('data-status',$scope.likeStatus);
+                          angular.element(event.currentTarget).find('span').removeClass('red').addClass('gray');
+                          angular.element(event.currentTarget).find('span').eq(1).attr('data-counts',(+counts-1)).text('点赞('+(+counts-1)+')');
+                      } else {
+                          angular.element(event.currentTarget).removeClass('gray').addClass('red');
+                          angular.element(event.currentTarget).attr('data-status',$scope.likeStatus);
+                          angular.element(event.currentTarget).find('span').removeClass('gray').addClass('red');
+                          angular.element(event.currentTarget).find('span').eq(1).attr('data-counts',(+counts+1)).text('点赞('+(+counts+1)+')');
+                      }
                   } else if (data.code == 1) {
                       alert(data.msg);
                   }else {
