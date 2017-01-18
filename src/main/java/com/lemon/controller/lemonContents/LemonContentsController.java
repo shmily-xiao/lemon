@@ -1,5 +1,6 @@
 package com.lemon.controller.lemonContents;
 
+import com.alibaba.fastjson.JSON;
 import com.lemon.annotation.UserLoginValidation;
 import com.lemon.controller.BaseController;
 import com.lemon.form.AjaxResponse;
@@ -69,7 +70,7 @@ public class LemonContentsController extends BaseController{
         HeadUserInfoView userInfoView = headUserInfoManager.getUserView(request);
 
         model.addAttribute("headUserInfoView",userInfoView);
-        model.addAttribute("lemonContents",lemonContentsWithFriend);
+        model.addAttribute("lemonContents", JSON.toJSONString(lemonContentsWithFriend));
         return "lemon/home/friends/home";
     }
 

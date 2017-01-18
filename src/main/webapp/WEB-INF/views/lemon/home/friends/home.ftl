@@ -47,8 +47,9 @@
   <!-- header end -->
 
   <div class="container">
-      <#list lemonContents as lemonContent>
-        <div class="row clearfix" style="margin-top: 15px;border-top: 1px solid rgba(129, 138, 135, 0.57);padding: 5px;margin-bottom: 16px;">
+      <#--<#list lemonContents as lemonContent>-->
+        <div class="row clearfix" style="margin-top: 15px;border-top: 1px solid rgba(129, 138, 135, 0.57);padding: 5px;margin-bottom: 16px;"
+             ng-repeat="lemonContent in lemonContents">
           <div class="col-md-1 column">
           </div>
           <div class="col-md-10 column">
@@ -59,49 +60,40 @@
                   <div class="col-md-11 column">
                       <div class="row clearfix" style="margin-top: 12px;margin-left: 2px;">
                           <div class="col-md-4 column">
-                              <p>昵称：${lemonContent.nickName}</p>
+                              <p>昵称：{{lemonContent.nickName}}</p>
                           </div>
                           <div class="col-md-4 column">
-                              <p>创建时间：${lemonContent.createTime}</p>
+                              <p>创建时间：{{lemonContent.createTime}}</p>
                           </div>
 
-                          <#if lemonContent.type == "DREAM">
-                          <div class="col-md-4 column">
-                              <#if lemonContent.finishedTime?has_content>
-                                  <p>完成时间：${lemonContent.finishedTime}</p>
-                              <#elseif lemonContent.leftTime?has_content && (lemonContent.leftTime >= 0)>
-                                  <p>剩余时间：${lemonContent.leftTime}天</p>
-                              <#else>
-                                  <p>未完成</p>
-                              </#if>
+                          <div class="col-md-4 column" ng-if="lemonContent.type == 'DREAM'">
+
+                                  <p ng-if="lemonContent.finishedTime!=null">完成时间：{{lemonContent.finishedTime}}</p>
+                                  <p ng-if="lemonContent.leftTime!=null&&lemonContent.leftTime>=0">剩余时间：{{lemonContent.leftTime}}天</p>
+                                  <p ng-if="lemonContent.finishedTime==null&&lemonContent.leftTime==null">未完成</p>
+
                           </div>
-                          </#if>
                       </div>
                     <div class="col-md-12 column" style="margin-top: 0px;">
-                        <#if !lemonContent.imageUrl?has_content>
-                        <h2>
-                            ${lemonContent.title}
-                        </h2>
-                        <p>
-                            ${lemonContent.description}
+                        <div  class="col-md-12 column" ng-if="lemonContent.imageUrl==null || lemonContent.imageUrl.length==0" style="margin-left: -14px">
+                        <h3 ng-bind="lemonContent.title">
+                        </h3>
+                        <p ng-bind="lemonContent.description">
                         </p>
-                        <#else >
-                        <div class="row">
+                        </div>
+                        <div class="row" ng-if="lemonContent.imageUrl!=null && lemonContent.imageUrl.length!=0">
                             <div class="col-md-12">
                                 <div class="thumbnail">
-                                    <img src="${lemonContent.imageUrl[0]}" />
+                                    <img src="{{lemonContent.imageUrl[0]}}" />
                                     <div class="caption">
-                                        <h3>
-                                        ${lemonContent.title}
+                                        <h3 ng-bind="lemonContent.title">
                                         </h3>
-                                        <p>
-                                        ${lemonContent.description}
+                                        <p ng-bind="lemonContent.description">
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        </#if>
                     </div>
                       <div class="row clearfix">
                           <div class="col-md-4 column">
@@ -110,20 +102,20 @@
                           <div class="col-md-4 column">
                           </div>
                           <div class="col-md-4 column">
-                              <a href="" data-status="${lemonContent.likeStatus}"
-                                 ng-click="likeStatusClick($event,${lemonContent.id})"
-                                 class="<#if lemonContent.likeStatus=="true">red<#else>gray</#if>">
-                                  <span class="glyphicon glyphicon-thumbs-up <#if lemonContent.likeStatus=="true">red<#else>gray</#if>"
+                              <a href="" data-status="{{lemonContent.likeStatus}}"
+                                 ng-click="likeStatusClick($event,lemonContent.id)"
+                                 ng-class="{'true':'red','false':'gray'}[{{lemonContent.likeStatus=='true'}}]">
+                                  <span class="glyphicon glyphicon-thumbs-up" ng-class="{'true':'red','false':'gray'}[{{lemonContent.likeStatus=='true'}}]"
                                         style="font-size: 6px;"></span>
-                                  <span data-counts="${lemonContent.likeCount}">点赞(${lemonContent.likeCount})</span></a>
+                                  <span data-counts="{{lemonContent.likeCount}}">点赞({{lemonContent.likeCount}})</span></a>
                               <#--<a href="#"><span>评论</span></a>-->
                               &nbsp;&nbsp;
-                              <a href=""
-                                 ng-click="collectStatusClick($event,${lemonContent.collectStatus},${lemonContent.id})"
-                                 style="color: <#if lemonContent.collectStatus=="true">rgb(255, 0, 0)<#else>rgb(152, 151, 151)</#if>;">
-                                  <span class="glyphicon glyphicon-heart"
-                                        style="color: <#if lemonContent.collectStatus=="true">rgb(255, 0, 0)<#else>rgb(152, 151, 151)</#if>; font-size: 6px;"> </span>
-                                  &nbsp;收藏(${lemonContent.collectCount})</a>
+                              <#--<a href=""-->
+                                 <#--ng-click="collectStatusClick($event,${lemonContent.collectStatus},${lemonContent.id})"-->
+                                 <#--style="color: <#if lemonContent.collectStatus=="true">rgb(255, 0, 0)<#else>rgb(152, 151, 151)</#if>;">-->
+                                  <#--<span class="glyphicon glyphicon-heart"-->
+                                        <#--style="color: <#if lemonContent.collectStatus=="true">rgb(255, 0, 0)<#else>rgb(152, 151, 151)</#if>; font-size: 6px;"> </span>-->
+                                  <#--&nbsp;收藏(${lemonContent.collectCount})</a>-->
                           </div>
                       </div>
                   </div>
@@ -132,12 +124,13 @@
           <div class="col-md-1 column">
           </div>
       </div>
-      </#list>
+      <#--</#list>-->
   </div>
   <script src="/js/angular.min.js"></script>
   <script>
       var app = angular.module('myApp', []);
       app.controller('lemonsFriend',['$scope','$http',function($scope,$http) {
+          $scope.lemonContents = ${lemonContents}||[];
           $scope.collectStatus = '';
           $scope.likeStatus = '';
 
