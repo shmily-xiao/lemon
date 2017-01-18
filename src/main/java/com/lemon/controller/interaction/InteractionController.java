@@ -12,6 +12,8 @@ import com.lemon.service.IInteractionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +39,8 @@ public class InteractionController extends BaseController{
      * @param request
      * @return
      */
-    @RequestMapping(value = "/lemon/lemons/{type:COLLECT|LIKE}/{contentId:\\d+}/{status:true|false}")
+    @ResponseBody
+    @RequestMapping(value = "/lemon/lemons/{type:COLLECT|LIKE}/{contentId:\\d+}/{status:true|false}",method = RequestMethod.POST)
     public AjaxResponse interaction(@PathVariable InteractionType type, @PathVariable Long contentId, @PathVariable Boolean status, HttpServletRequest request){
         if (!super.isUserLoginIn(request)){
             return AjaxResponse.fail().msg("用户没有登录").url(LemonConstants.LOGIN_URL);
@@ -46,17 +49,17 @@ public class InteractionController extends BaseController{
         Long userId = super.getUserInfoUserID(request);
         query.setContentId(contentId);
         query.setUserId(userId);
-        query.setAction(type);
+        query.setAction(type.name());
         Optional<Interaction> interactionOld = interactionService.findOne(query);
         // 说明已经点赞或者是收藏过了
         if (interactionOld.isPresent()){
             // 如果是true说明是再一次收藏或者是再一次喜欢
             if (status){
-                return AjaxResponse.fail().msg(type.getValue()+"失败").reason("已经"+type.getValue()+"过了，无需再一次"+type.getValue());
+                return AjaxResponse.fail().msg("已经"+type.getValue()+"过了，无需再一次"+type.getValue());
             }else {
                 // 说明是取消收藏或者是取消喜欢，于是删除记录
                 interactionService.delete(interactionOld.get().getId());
-                return AjaxResponse.ok().msg(type.getValue()+"成功");
+                return AjaxResponse.ok().msg(type.getValue()+"取消成功");
             }
         }else {
             // 没有记录说明是第一次操作，没有收藏或者是没有喜欢
@@ -73,7 +76,7 @@ public class InteractionController extends BaseController{
                     return AjaxResponse.fail().msg(type.getValue()+"失败，内容不存在");
                 }
             }else {
-                return AjaxResponse.fail().msg(type.getValue()+"失败").reason("您还未"+type.getValue()+"过此内容");
+                return AjaxResponse.fail().msg("您还未"+type.getValue()+"过此内容");
             }
         }
     }

@@ -21,7 +21,9 @@ public class InteractionQuery extends BaseQuery{
     /**
      * 点赞 和 收藏 ，，行为的类型
      */
-    private InteractionType action;
+    // 2017-1-18 原来数是InteractionType
+    // 报错：com.lemon.enums.InteractionType and java.lang.String
+    private String action;
 
     public Long getUserId() {
         return userId;
@@ -39,11 +41,11 @@ public class InteractionQuery extends BaseQuery{
         this.contentId = contentId;
     }
 
-    public InteractionType getAction() {
+    public String getAction() {
         return action;
     }
 
-    public void setAction(InteractionType action) {
+    public void setAction(String action) {
         this.action = action;
     }
 }

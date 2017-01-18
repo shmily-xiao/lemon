@@ -6,6 +6,7 @@ import com.lemon.domain.impl.content.Content;
 import com.lemon.domain.impl.content.ContentPlan;
 import com.lemon.domain.impl.content.Interaction;
 import com.lemon.domain.impl.friend.Friendship;
+import com.lemon.domain.impl.user.User;
 import com.lemon.enums.ContentType;
 import com.lemon.enums.StrategyType;
 import com.lemon.form.lemonContents.LemonContentsAddForm;
@@ -52,6 +53,8 @@ public class LemonContentsManager {
     @Resource
     private IAccessControlService accessControlService;
 
+    @Resource
+    private IUserService userService;
     /**
      * 初始化添加页面的数据
      * @return
@@ -126,12 +129,13 @@ public class LemonContentsManager {
 
 
         // 组装
+        Optional<User> userOptional = userService.find(userId);
         return contentList.stream()
                 .map(content -> {
                     Optional<ContentPlan> contentPlan = contentPlanService.findByContentId(content.getId());
                     List<Interaction> interactions = interactionService.findByContentId(content.getId());
                     ConvertorResult convertorResult = (ConvertorResult)BeanLocator.findBeanByName("ContentDomainToView_Convertor");
-                    return (LemonContentsElementView)convertorResult.getResult(content,contentPlan,interactions);
+                    return (LemonContentsElementView)convertorResult.getResult(content,contentPlan.get(),interactions,userOptional.get());
                 })
                 .collect(Collectors.toList());
     }

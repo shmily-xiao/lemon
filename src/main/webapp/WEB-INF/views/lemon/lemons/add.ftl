@@ -38,7 +38,7 @@
 
 <!--header-->
 <#assign currentPage = "add">
-<#include "/views/lemon/common/head.ftl">
+<#include "/lemon/common/head.ftl">
 <!--header end-->
 
 

@@ -33,7 +33,7 @@
       </style>
   </head>
 
-  <body>
+  <body ng-app="myApp" ng-controller="lemonsFriend">
 
   <!-- header -->
   <#assign currentPage = "friendsHomepage">
@@ -58,6 +58,8 @@
                           <div class="col-md-4 column">
                               <p>创建时间：${lemonContent.createTime}</p>
                           </div>
+
+                          <#if lemonContent.type == "DREAM">
                           <div class="col-md-4 column">
                               <#if lemonContent.finishedTime?has_content>
                                   <p>完成时间：${lemonContent.finishedTime}</p>
@@ -67,9 +69,10 @@
                                   <p>未完成</p>
                               </#if>
                           </div>
+                          </#if>
                       </div>
-                    <div class="col-md-12 column" style="margin-top: -12px;">
-                        <#if lemonContent.imageUrl.empty>
+                    <div class="col-md-12 column" style="margin-top: 0px;">
+                        <#if !lemonContent.imageUrl?has_content>
                         <h2>
                             ${lemonContent.title}
                         </h2>
@@ -93,9 +96,7 @@
                             </div>
                         </div>
                         </#if>
-
                     </div>
-
                       <div class="row clearfix">
                           <div class="col-md-4 column">
 
@@ -103,10 +104,20 @@
                           <div class="col-md-4 column">
                           </div>
                           <div class="col-md-4 column">
-                              <a href="#" style="color: rgb(152, 151, 151);"><span class="glyphicon glyphicon-thumbs-up" style="color: rgb(152, 151, 151); font-size: 6px;"> </span>&nbsp;点赞(${lemonContent.likeCount})</a>
+                              <a href=""
+                                 ng-click="likeStatusClick($event,${lemonContent.likeStatus},${lemonContent.id})"
+                                 style="color:<#if lemonContent.likeStatus=="true">rgb(255, 0, 0)<#else>rgb(152, 151, 151)</#if>;">
+                                  <span class="glyphicon glyphicon-thumbs-up"
+                                        style="color: <#if lemonContent.likeStatus=="true">rgb(255, 0, 0)<#else>rgb(152, 151, 151)</#if>; font-size: 6px;"></span>
+                                  &nbsp;点赞(${lemonContent.likeCount})</a>
                               <#--<a href="#"><span>评论</span></a>-->
                               &nbsp;&nbsp;
-                              <a href="#" style="color: rgb(152, 151, 151);"><span class="glyphicon glyphicon-heart" style="color: rgb(152, 151, 151); font-size: 6px;"> </span>&nbsp;收藏(${lemonContent.collectCount})</a>
+                              <a href=""
+                                 ng-click="collectStatusClick($event,${lemonContent.collectStatus},${lemonContent.id})"
+                                 style="color: <#if lemonContent.collectStatus=="true">rgb(255, 0, 0)<#else>rgb(152, 151, 151)</#if>;">
+                                  <span class="glyphicon glyphicon-heart"
+                                        style="color: <#if lemonContent.collectStatus=="true">rgb(255, 0, 0)<#else>rgb(152, 151, 151)</#if>; font-size: 6px;"> </span>
+                                  &nbsp;收藏(${lemonContent.collectCount})</a>
                           </div>
                       </div>
                   </div>
@@ -117,6 +128,65 @@
       </div>
       </#list>
   </div>
+  <script src="/js/angular.min.js"></script>
+  <script>
+      var app = angular.module('myApp', []);
+      app.controller('lemonsFriend',['$scope','$http',function($scope,$http) {
+          $scope.collectStatus = '';
+          $scope.likeStatus = '';
 
+          // todo 有问题
+          // 点赞
+          $scope.likeStatusClick = function (event,likeStatus,contentId) {
+//              if ($scope.likeStatus==''){
+//                  $scope.likeStatus = likeStatus;
+//              }
+              if (likeStatus){
+                  $scope.likeStatus = "false";
+              }else {
+                  $scope.likeStatus = "true";
+              }
+              var url = "/lemon/lemons/LIKE/" + contentId+"/"+ $scope.likeStatus;
+
+              $http.post(url).success(function (data) {
+                  if (data.code == 0) {
+                      // 应该去更改颜色的和数量的
+                      alert(data.msg);
+                  } else if (data.code == 1) {
+                      alert(data.msg);
+                  }else {
+                      alert("网络异常");
+                  }
+              }).error(function () {
+                  alert("网络异常");
+              });
+
+          };
+          // 收藏
+          $scope.collectStatusClick = function (event,collectStatus,contentId) {
+              if (collectStatus){
+                  $scope.collectStatus = "false";
+              }else {
+                  $scope.collectStatus = "true";
+              }
+              var url = "/lemon/lemons/COLLECT/" + contentId+"/"+ $scope.collectStatus;
+
+              $http.post(url).success(function (data) {
+                  if (data.code == 0) {
+                      // 应该去更改颜色的和数量的
+                      alert(data.msg);
+                  } else if (data.code == 1) {
+                      alert(data.msg);
+                  }else {
+                      alert("网络异常");
+                  }
+              }).error(function () {
+                  alert("网络异常");
+              });
+
+          };
+
+      }]);
+  </script>
   </body>
 </html>

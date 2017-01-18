@@ -400,7 +400,7 @@ public final class DateUtils {
     }
 
     /**
-     * 格式化为 2017年1月16日 17点50分
+     * 格式化为 2017年1月16日
      * @param time
      * @return
      */

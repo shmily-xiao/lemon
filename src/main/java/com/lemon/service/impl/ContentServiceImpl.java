@@ -143,6 +143,7 @@ public class ContentServiceImpl extends BaseServiceImpl<Content,BaseQuery> imple
         contentPlan.setExpectTime(bo.getFinishedTime());
         contentPlan.setRemind(bo.getNeedMessage());
         contentPlan.setUserId(bo.getUserId());
+        contentPlan.setFinishedTime(null);
         return contentPlan;
     }
 

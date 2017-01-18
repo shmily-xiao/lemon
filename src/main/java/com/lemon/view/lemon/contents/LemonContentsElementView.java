@@ -6,6 +6,9 @@ import java.util.List;
  * Created by simpletour_Jenkin on 2016/8/16.
  */
 public class LemonContentsElementView {
+    // id
+    private Long id;
+
     // 头像
     private String avatar;
 
@@ -31,19 +34,28 @@ public class LemonContentsElementView {
     private String description;
 
     // 点赞
-    private Long likeCount;
+    private Long likeCount=0L;
 
     // 评论
     private List<String> comment;
 
     // 收藏
-    private Long collectCount;
+    private Long collectCount=0L;
 
     // 用户的分组
     private List<String> userGroups;
 
     // 用户的id
     private Long userId;
+
+    // 登录用户对这条记录是否喜欢过，有为true
+    private String likeStatus="false";
+
+    // 登录用户对这条记录是否收藏过，有为true
+    private String collectStatus="false";
+
+    // 内容的类型
+    private String type;
 
 
     public String getAvatar() {
@@ -148,5 +160,37 @@ public class LemonContentsElementView {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getLikeStatus() {
+        return likeStatus;
+    }
+
+    public void setLikeStatus(String likeStatus) {
+        this.likeStatus = likeStatus;
+    }
+
+    public String getCollectStatus() {
+        return collectStatus;
+    }
+
+    public void setCollectStatus(String collectStatus) {
+        this.collectStatus = collectStatus;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

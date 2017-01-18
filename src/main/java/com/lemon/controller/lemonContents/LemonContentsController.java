@@ -79,10 +79,17 @@ public class LemonContentsController extends BaseController{
      * @param model
      * @return
      */
+    @UserLoginValidation
     @RequestMapping(value = "/lemon/lemons/myself")
     public String myLemons(HttpServletRequest request, Model model){
 
+        Long userId = super.getUserInfoUserID(request);
+        HeadUserInfoView userInfoView = headUserInfoManager.getUserView(request);
 
+        List<LemonContentsElementView> lemonContentsHimself = lemonContentsManager.findLemonContentsHimself(userId);
+
+        model.addAttribute("headUserInfoView",userInfoView);
+        model.addAttribute("lemonContents",lemonContentsHimself);
 
         return "lemon/home/myself/home";
     }
@@ -119,7 +126,7 @@ public class LemonContentsController extends BaseController{
         }
         Boolean addSuccess = lemonContentsManager.addContent(form,super.getUserInfoUserID(request));
 
-        return addSuccess?AjaxResponse.ok().url("/lemon/lemons/test"):AjaxResponse.fail();
+        return addSuccess?AjaxResponse.ok().url("/lemon/lemons/friends"):AjaxResponse.fail();
     }
 
 
