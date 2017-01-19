@@ -26,10 +26,10 @@ import java.util.List;
 
 /**
  * Created by simpletour_Jenkin on 2016/8/10.
- * 首页，个人中心
+ * 首页(朋友圈)
  */
 @Controller
-public class LemonContentsController extends BaseController{
+public class HomeWithFriendsContentsController extends BaseController{
 
     @Resource
     private HeadUserInfoManager headUserInfoManager;
@@ -72,28 +72,6 @@ public class LemonContentsController extends BaseController{
         model.addAttribute("headUserInfoView",userInfoView);
         model.addAttribute("lemonContents", JSON.toJSONString(lemonContentsWithFriend));
         return "lemon/home/friends/home";
-    }
-
-    /**
-     * 我的发布
-     * 只看自己的发布的内容
-     * @param request
-     * @param model
-     * @return
-     */
-    @UserLoginValidation
-    @RequestMapping(value = "/lemon/lemons/myself")
-    public String myLemons(HttpServletRequest request, Model model){
-
-        Long userId = super.getUserInfoUserID(request);
-        HeadUserInfoView userInfoView = headUserInfoManager.getUserView(request);
-
-        List<PersonalCenterContentsView> lemonContentsHimself = lemonContentsManager.findLemonContentsHimself(userId);
-
-        model.addAttribute("headUserInfoView",userInfoView);
-        model.addAttribute("lemonContents",lemonContentsHimself);
-
-        return "lemon/home/myself/home";
     }
 
     /**

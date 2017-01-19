@@ -116,8 +116,10 @@
                           </div>
                           <div class="col-md-4 column">
                               <a href="#" style="color: rgb(52, 58, 68);font-weight: bold;font-size: inherit;">&nbsp;完成</a>
+                              <#if lemonContent.status=="WILLEXPIRE">
                               &nbsp;&nbsp;
                               <a href="#" style="color: rgb(52, 58, 68);font-weight: bold;font-size: inherit;">&nbsp;延期</a>
+                              </#if>
                               &nbsp;&nbsp;
                               <a href="#" style="color: rgb(52, 58, 68);font-weight: bold;font-size: inherit;">&nbsp;放弃</a>
                           </div>

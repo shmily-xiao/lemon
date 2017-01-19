@@ -42,6 +42,7 @@
             <if test="images != null and images != ''"> AND images = #{images}</if>
             <if test="del != null"> AND del = #{del}</if>
         </where>
+        ORDER BY created_time DESC;
     </select>
 
 

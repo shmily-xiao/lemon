@@ -59,7 +59,8 @@
           <div class="col-md-10 column">
               <div class="row clearfix">
                   <div class="col-md-1 column">
-                      <img alt="140x140" src="/img/user64.ico" />
+                      <img alt="140x140" src="{{lemonContent.avatar}}" ng-if="lemonContent.avatar!=null&&lemonContent.avatar!=''" ng-cloak=""/>
+                      <img alt="140x140" src="/img/user64.ico" ng-if="lemonContent.avatar==null||lemonContent.avatar==''" ng-cloak=""/>
                   </div>
                   <div class="col-md-11 column">
                       <div class="row clearfix" style="margin-top: 12px;margin-left: 2px;">
