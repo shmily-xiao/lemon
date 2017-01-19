@@ -33,7 +33,7 @@
     </style>
 </head>
 
-<body>
+<body ng-app="myApp" ng-controller="friends">
 
 <!--header-->
 <#assign currentPage = "friends">
@@ -42,6 +42,8 @@
 
 
 <div class="container">
+    <div class="col-md-12 column" style="margin-top: 20px;">
+        <h4>bjb</h4>
     <div class="row clearfix" style="margin-top: 15px;border-top: 1px solid rgba(129, 138, 135, 0.57);padding: 5px;">
         <div class="col-md-12 column">
         </div>
@@ -212,7 +214,9 @@
         </div>
         </div>
     </div>
+    </div>
 </div>
+<script src="/js/angular.min.js"></script>
 
 </body>
 </html>
