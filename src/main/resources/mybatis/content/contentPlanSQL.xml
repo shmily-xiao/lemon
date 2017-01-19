@@ -81,13 +81,12 @@
     <update id="update">
         UPDATE content_plan
         <set>
-            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
-            <if test="contentId != null and contentId != ''"> AND content_id = #{contentId}</if>
-            <if test="finished != null "> AND finished = #{finished}</if>
-            <if test="expectTime != null and expectTime != ''"> AND expect_time = #{expectTime}</if>
-            <if test="finishedTime != null and finishedTime != ''"> AND finished_time = #{finishedTime}</if>
-            <if test="remind != null "> AND remind = #{remind}</if>
-            <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
+            <if test="contentId != null and contentId != ''">  content_id = #{contentId}</if>
+            <if test="finished != null "> , finished = #{finished}</if>
+            <if test="expectTime != null and expectTime != ''"> , expect_time = #{expectTime}</if>
+            <if test="finishedTime != null and finishedTime != ''"> , finished_time = #{finishedTime}</if>
+            <if test="remind != null "> , remind = #{remind}</if>
+            <if test="userId != null and userId != ''"> , user_id = #{userId}</if>
         </set>
         WHERE id = #{id};
     </update>

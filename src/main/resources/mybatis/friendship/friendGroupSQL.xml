@@ -65,8 +65,8 @@
         UPDATE friend_group
         <set>
             <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
-            <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
-            <if test="groupName != null and groupName != ''"> AND group_name = #{groupName}</if>
+            <if test="userId != null and userId != ''"> , user_id = #{userId}</if>
+            <if test="groupName != null and groupName != ''"> , group_name = #{groupName}</if>
         </set>
         WHERE id = #{id};
     </update>

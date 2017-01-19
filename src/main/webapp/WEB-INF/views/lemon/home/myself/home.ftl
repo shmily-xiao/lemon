@@ -45,31 +45,25 @@
           </div>
           <div class="col-md-10 column">
               <div class="row clearfix">
-                  <div class="col-md-1 column">
-
-                      <div class="col-md-4 column">
-                          <#if lemonContent.type =="DREAM">
-                              <#if lemonContent.status=="FINISHED">
-                              <span class="glyphicon glyphicon-ok" style="margin-top: 13px;color: rgb(0, 185, 0); font-size: 28px;"></span>
-                              <#elseif lemonContent.status=="FAILED">
-                                  <span class="glyphicon glyphicon-remove" style="margin-top: 13px;color: rgb(0, 0, 0); font-size: 28px;"></span>
-                              <#elseif lemonContent.status=="WILLEXPIRE">
-                                  <span class="glyphicon glyphicon-warning-sign" style="margin-top: 13px;color: rgb(255, 0, 0); font-size: 28px;"></span>
-                              <#else>
-                                  <span class="glyphicon glyphicon-repeat" style="margin-top: 13px;color: rgb(0, 172, 255); font-size: 28px;"></span>
-                              </#if>
-                          </#if>
-                      </div>
-
-                  </div>
                   <div class="col-md-11 column">
                       <div class="row clearfix" style="margin-top: 12px;margin-left: 2px;">
-
                           <#if lemonContent.type !="DREAM">
-                              <div class="col-md-8 column"></div>
+                              <div class="col-md-8 column">
                           <#else>
-                              <div class="col-md-4 column"></div>
+                              <div class="col-md-4 column">
                           </#if>
+                          <#if lemonContent.type =="DREAM">
+                              <#if lemonContent.status=="FINISHED">
+                                  <span class="glyphicon glyphicon-ok" style="color: rgb(0, 185, 0); font-size: 17px;"> &nbsp;已完成</span>
+                              <#elseif lemonContent.status=="FAILED">
+                                  <span class="glyphicon glyphicon-remove" style="color: rgb(0, 0, 0); font-size: 17px;"> &nbsp;失败</span>
+                              <#elseif lemonContent.status=="WILLEXPIRE">
+                                  <span class="glyphicon glyphicon-warning-sign" style="color: rgb(255, 0, 0); font-size: 17px;"> &nbsp;即将到期</span>
+                              <#else>
+                                  <span class="glyphicon glyphicon-repeat" style="color: rgb(0, 172, 255); font-size: 17px;"> &nbsp;正在进行</span>
+                              </#if>
+                          </#if>
+                            </div>
                           <div class="col-md-4 column">
                               <p>创建时间：${lemonContent.createTime}</p>
                           </div>

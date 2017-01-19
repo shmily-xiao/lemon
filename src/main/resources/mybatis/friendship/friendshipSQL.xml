@@ -77,13 +77,12 @@
     <select id="count" resultMap="friendshipResultMap">
         SELECT count(*) FROM friendship
         <where>
-            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
-            <if test="id !=null  and id != ''">and id = #{id}</if>
-            <if test="userId != null and userId != ''">and user_id = #{userId}</if>
-            <if test="friendId != null and friendId != ''">and friend_id = #{friendId}</if>
-            <if test="type != null and type != ''">and type = #{type}</if>
-            <if test="friendGroupId != null and friendGroupId != ''">and friend_group_id = #{friendGroupId}</if>
-            <if test="accessControlId != null and accessControlId != ''">and access_control_id = #{accessControlId}</if>
+            <if test="id !=null  and id != ''"> id = #{id}</if>
+            <if test="userId != null and userId != ''">, user_id = #{userId}</if>
+            <if test="friendId != null and friendId != ''">, friend_id = #{friendId}</if>
+            <if test="type != null and type != ''">, type = #{type}</if>
+            <if test="friendGroupId != null and friendGroupId != ''">, friend_group_id = #{friendGroupId}</if>
+            <if test="accessControlId != null and accessControlId != ''">, access_control_id = #{accessControlId}</if>
         </where>
     </select>
 </mapper>

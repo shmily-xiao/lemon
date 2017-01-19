@@ -23,8 +23,8 @@
     <select id="findByPage" resultMap="userRecordResultMap">
         SELECT * FROM  user_record
         <where>
-            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
-            <if test="type != null and type != ''"> AND type = #{type}</if>
+            <if test="createdTime != null"> created_time = #{createdTime}</if>
+            <if test="type != null"> AND type = #{type}</if>
             <if test="score != null and score != ''"> AND score = #{score}</if>
             <if test="smsCount != null and smsCount != ''"> AND sms_count = #{smsCount}</if>
             <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
@@ -36,8 +36,8 @@
     <select id="findEntities" resultMap="userRecordResultMap">
         SELECT * FROM  user_record
         <where>
-            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
-            <if test="type != null and type != ''"> AND type = #{type}</if>
+            <if test="createdTime != null"> created_time = #{createdTime}</if>
+            <if test="type != null"> AND type = #{type}</if>
             <if test="score != null and score != ''"> AND score = #{score}</if>
             <if test="smsCount != null and smsCount != ''"> AND sms_count = #{smsCount}</if>
             <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
@@ -49,8 +49,8 @@
     <select id="count" resultMap="userRecordResultMap">
         SELECT count(*) FROM  user_record
         <where>
-            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
-            <if test="type != null and type != ''"> AND type = #{type}</if>
+            <if test="createdTime != null"> created_time = #{createdTime}</if>
+            <if test="type != null"> AND type = #{type}</if>
             <if test="score != null and score != ''"> AND score = #{score}</if>
             <if test="smsCount != null and smsCount != ''"> AND sms_count = #{smsCount}</if>
             <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
@@ -65,8 +65,8 @@
     <delete id="delete">
         DELETE FROM user_record
         <where>
-            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
-            <if test="type != null and type != ''"> AND type = #{type}</if>
+            <if test="createdTime != null"> created_time = #{createdTime}</if>
+            <if test="type != null"> AND type = #{type}</if>
             <if test="score != null and score != ''"> AND score = #{score}</if>
             <if test="smsCount != null and smsCount != ''"> AND sms_count = #{smsCount}</if>
             <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
@@ -77,12 +77,11 @@
     <update id="update">
         UPDATE user_record
         <set>
-            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
-            <if test="type != null and type != ''"> AND type = #{type}</if>
-            <if test="score != null and score != ''"> AND score = #{score}</if>
-            <if test="smsCount != null and smsCount != ''"> AND sms_count = #{smsCount}</if>
-            <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
-            <if test="accessControlId != null and accessControlId != ''"> AND access_control_id = #{accessControlId}</if>
+            <if test="type != null">type = #{type}</if>
+            <if test="score != null and score != ''"> , score = #{score}</if>
+            <if test="smsCount != null and smsCount != ''"> , sms_count = #{smsCount}</if>
+            <if test="userId != null and userId != ''"> , user_id = #{userId}</if>
+            <if test="accessControlId != null and accessControlId != ''"> , access_control_id = #{accessControlId}</if>
         </set>
         WHERE id = #{id};
     </update>

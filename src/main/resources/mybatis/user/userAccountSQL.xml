@@ -30,8 +30,8 @@
         UPDATE user_account
         <set>
             <if test="userId != null and userId != ''">user_id = #{userId}</if>
-            <if test="account != null and account != ''">and account = #{account}</if>
-            <if test="type != null and type != ''">and type = #{type}</if>
+            <if test="account != null and account != ''">, account = #{account}</if>
+            <if test="type != null and type != ''">, type = #{type}</if>
         </set>
         WHERE id = #{id};
     </update>

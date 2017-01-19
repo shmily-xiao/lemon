@@ -78,12 +78,12 @@
     <update id="update">
         UPDATE content
          <set>
-             <if test="title != null and title != ''"> AND title = #{title}</if>
-             <if test="description != null and description != ''"> AND description = #{description}</if>
-             <if test="type != null and type != ''"> AND type = #{type}</if>
-             <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
-             <if test="images != null and images != ''"> AND images = #{images}</if>
-             <if test="del != null"> AND del = #{del}</if>
+             <if test="title != null and title != ''">  title = #{title}</if>
+             <if test="description != null and description != ''"> , description = #{description}</if>
+             <if test="type != null and type != ''"> , type = #{type}</if>
+             <if test="userId != null and userId != ''"> , user_id = #{userId}</if>
+             <if test="images != null and images != ''"> , images = #{images}</if>
+             <if test="del != null"> , del = #{del}</if>
          </set>
         WHERE id = #{id};
     </update>

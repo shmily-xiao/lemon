@@ -36,6 +36,10 @@
           a.gray{
             color:rgb(152, 151, 151)
           }
+          /*为了不闪烁*/
+          [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+              display: none !important;
+          }
       </style>
   </head>
 
@@ -60,16 +64,16 @@
                   <div class="col-md-11 column">
                       <div class="row clearfix" style="margin-top: 12px;margin-left: 2px;">
                           <div class="col-md-4 column">
-                              <p>昵称：{{lemonContent.nickName}}</p>
+                              <p>昵称：<span ng-bind="lemonContent.nickName"></span></p>
                           </div>
                           <div class="col-md-4 column">
-                              <p>创建时间：{{lemonContent.createTime}}</p>
+                              <p>创建时间：<span ng-bind="lemonContent.createTime"></span></p>
                           </div>
 
-                          <div class="col-md-4 column" ng-if="lemonContent.type == 'DREAM'">
+                          <div class="col-md-4 column" ng-if="lemonContent.type == 'DREAM'" ng-cloak="">
 
-                                  <p ng-if="lemonContent.finishedTime!=null">完成时间：{{lemonContent.finishedTime}}</p>
-                                  <p ng-if="lemonContent.leftTime!=null&&lemonContent.leftTime>=0">剩余时间：{{lemonContent.leftTime}}天</p>
+                              <p ng-if="lemonContent.finishedTime!=null">完成时间：<span ng-bind="lemonContent.finishedTime"></span></p>
+                              <p ng-if="lemonContent.leftTime!=null&&lemonContent.leftTime>=0">剩余时间：<span ng-bind="lemonContent.leftTime"></span>天</p>
                                   <p ng-if="lemonContent.finishedTime==null&&lemonContent.leftTime==null">未完成</p>
 
                           </div>
@@ -102,20 +106,18 @@
                           <div class="col-md-4 column">
                           </div>
                           <div class="col-md-4 column">
-                              <a href="" data-status="{{lemonContent.likeStatus}}"
+                              <a href=""
                                  ng-click="likeStatusClick($event,lemonContent.id)"
-                                 ng-class="{'true':'red','false':'gray'}[{{lemonContent.likeStatus=='true'}}]">
-                                  <span class="glyphicon glyphicon-thumbs-up" ng-class="{'true':'red','false':'gray'}[{{lemonContent.likeStatus=='true'}}]"
-                                        style="font-size: 6px;"></span>
-                                  <span data-counts="{{lemonContent.likeCount}}">点赞({{lemonContent.likeCount}})</span></a>
+                                 ng-class="{'red':lemonContent.likeStatus=='true','gray':lemonContent.likeStatus!='true'}" >
+                                  <span class="glyphicon glyphicon-thumbs-up" style="font-size: 6px;"></span>
+                                  <span >点赞(<span ng-bind="lemonContent.likeCount"></span>)</span></a>
                               <#--<a href="#"><span>评论</span></a>-->
                               &nbsp;&nbsp;
-                              <#--<a href=""-->
-                                 <#--ng-click="collectStatusClick($event,${lemonContent.collectStatus},${lemonContent.id})"-->
-                                 <#--style="color: <#if lemonContent.collectStatus=="true">rgb(255, 0, 0)<#else>rgb(152, 151, 151)</#if>;">-->
-                                  <#--<span class="glyphicon glyphicon-heart"-->
-                                        <#--style="color: <#if lemonContent.collectStatus=="true">rgb(255, 0, 0)<#else>rgb(152, 151, 151)</#if>; font-size: 6px;"> </span>-->
-                                  <#--&nbsp;收藏(${lemonContent.collectCount})</a>-->
+                              <a href=""
+                                 ng-click="collectStatusClick($event,lemonContent.id)"
+                                 ng-class="{'red':lemonContent.collectStatus=='true','gray':lemonContent.collectStatus!='true'}">
+                                  <span class="glyphicon glyphicon-heart" style="font-size: 6px;"> </span>
+                                  &nbsp;收藏(<span ng-bind="lemonContent.collectCount"></span>)</a>
                           </div>
                       </div>
                   </div>
@@ -131,37 +133,24 @@
       var app = angular.module('myApp', []);
       app.controller('lemonsFriend',['$scope','$http',function($scope,$http) {
           $scope.lemonContents = ${lemonContents}||[];
-          $scope.collectStatus = '';
-          $scope.likeStatus = '';
 
-          // todo 有问题
           // 点赞
           $scope.likeStatusClick = function (event,contentId) {
-//              if ($scope.likeStatus==''){
-//                  $scope.likeStatus = likeStatus;
-//              }
-              var likeStatus = angular.element(event.currentTarget).attr('data-status');
-              if (likeStatus == 'true'){
-                  $scope.likeStatus = "false";
+              var _this = this;
+              var likeStatus = this.lemonContent.likeStatus;
+              if (likeStatus=='true'){
+                  likeStatus='false';
               }else {
-                  $scope.likeStatus = "true";
+                  likeStatus='true';
               }
-              var url = "/lemon/lemons/LIKE/" + contentId+"/"+ $scope.likeStatus;
-
+              var url = "/lemon/lemons/LIKE/" + contentId+"/"+ likeStatus;
               $http.post(url).success(function (data) {
                   if (data.code == 0) {
-                      // 应该去更改颜色的和数量的
-                      var counts = angular.element(event.currentTarget).find('span').eq(1).attr('data-counts');
-                      if(likeStatus == 'true') {
-                          angular.element(event.currentTarget).removeClass('red').addClass('gray');
-                          angular.element(event.currentTarget).attr('data-status',$scope.likeStatus);
-                          angular.element(event.currentTarget).find('span').removeClass('red').addClass('gray');
-                          angular.element(event.currentTarget).find('span').eq(1).attr('data-counts',(+counts-1)).text('点赞('+(+counts-1)+')');
-                      } else {
-                          angular.element(event.currentTarget).removeClass('gray').addClass('red');
-                          angular.element(event.currentTarget).attr('data-status',$scope.likeStatus);
-                          angular.element(event.currentTarget).find('span').removeClass('gray').addClass('red');
-                          angular.element(event.currentTarget).find('span').eq(1).attr('data-counts',(+counts+1)).text('点赞('+(+counts+1)+')');
+                      _this.lemonContent.likeStatus = likeStatus;
+                      if (likeStatus=='true'){
+                          _this.lemonContent.likeCount = _this.lemonContent.likeCount+1;
+                      }else {
+                          _this.lemonContent.likeCount = _this.lemonContent.likeCount-1;
                       }
                   } else if (data.code == 1) {
                       alert(data.msg);
@@ -174,18 +163,23 @@
 
           };
           // 收藏
-          $scope.collectStatusClick = function (event,collectStatus,contentId) {
-              if (collectStatus){
-                  $scope.collectStatus = "false";
+          $scope.collectStatusClick = function (event,contentId) {
+              var _this = this;
+              var collectStatus = this.lemonContent.collectStatus;
+              if (collectStatus=='true'){
+                  collectStatus='false';
               }else {
-                  $scope.collectStatus = "true";
+                  collectStatus='true';
               }
-              var url = "/lemon/lemons/COLLECT/" + contentId+"/"+ $scope.collectStatus;
-
+              var url = "/lemon/lemons/COLLECT/" + contentId+"/"+ collectStatus;
               $http.post(url).success(function (data) {
                   if (data.code == 0) {
-                      // 应该去更改颜色的和数量的
-                      alert(data.msg);
+                      _this.lemonContent.collectStatus = collectStatus;
+                      if (collectStatus=='true'){
+                          _this.lemonContent.collectCount = _this.lemonContent.collectCount+1;
+                      }else {
+                          _this.lemonContent.collectCount = _this.lemonContent.collectCount-1;
+                      }
                   } else if (data.code == 1) {
                       alert(data.msg);
                   }else {
@@ -194,7 +188,6 @@
               }).error(function () {
                   alert("网络异常");
               });
-
           };
 
       }]);

@@ -78,7 +78,7 @@ public class ContentServiceImpl extends BaseServiceImpl<Content,BaseQuery> imple
         AccessControl control = this.initAccessControl(content,lemonContentAddBo);
         accessControlDao.insert(control);
 
-        // UserRecord表记录
+        // 更新UserRecord表记录，第一条记录是在注册的时候就已经插入了
         UserRecordQuery recordQuery  = new UserRecordQuery();
         recordQuery.setUserId(content.getUserId());
         List<UserRecord> userRecords =  userRecordDao.findEntities(recordQuery);
@@ -87,6 +87,7 @@ public class ContentServiceImpl extends BaseServiceImpl<Content,BaseQuery> imple
             Long score = userRecord.getScore()+lemonContentAddBo.getContentsType().getScore();
             userRecord.setScore(score);
             userRecord.setType(UserType.findUserType(score));
+            userRecordDao.update(userRecord);
         }
 
         return Boolean.TRUE;

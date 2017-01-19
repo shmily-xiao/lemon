@@ -68,10 +68,9 @@
     <update id="update">
         UPDATE access_control
         <set>
-            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
-            <if test="rowId != null and rowId != ''"> AND row_id = #{rowId}</if>
-            <if test="rowTable != null and rowTable != ''"> AND row_table = #{rowTable}</if>
-            <if test="strategy != null and strategy != ''"> AND strategy = #{strategy}</if>
+            <if test="rowId != null and rowId != ''">row_id = #{rowId}</if>
+            <if test="rowTable != null and rowTable != ''"> ,row_table = #{rowTable}</if>
+            <if test="strategy != null and strategy != ''"> ,strategy = #{strategy}</if>
         </set>
         WHERE id = #{id};
     </update>

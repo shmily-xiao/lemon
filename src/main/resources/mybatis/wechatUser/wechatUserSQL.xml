@@ -35,11 +35,11 @@
         UPDATE wechat_user
         <set>
             <if test="mobile != null and mobile != ''">mobile = #{mobile}</if>
-            <if test="openId != null and openId != ''">and open_id = #{openId}</if>
-            <if test="referrer != null and referrer != ''">and referrer = #{referrer}</if>
-            <if test="referrerType != null and referrerType != ''">and referrer_type = #{referrerType}</if>
-            <if test="status != null and status != ''">and status = #{status}</if>
-            <if test="userId != null and userId != ''">and user_id = #{userId}</if>
+            <if test="openId != null and openId != ''">, open_id = #{openId}</if>
+            <if test="referrer != null and referrer != ''">, referrer = #{referrer}</if>
+            <if test="referrerType != null and referrerType != ''">, referrer_type = #{referrerType}</if>
+            <if test="status != null and status != ''">, status = #{status}</if>
+            <if test="userId != null and userId != ''">, user_id = #{userId}</if>
         </set>
         WHERE id = #{id};
     </update>

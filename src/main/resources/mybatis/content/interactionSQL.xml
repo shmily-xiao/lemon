@@ -68,10 +68,9 @@
     <update id="update">
         UPDATE interaction
         <set>
-            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
-            <if test="contentId != null and contentId != ''"> AND content_id = #{contentId}</if>
-            <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
-            <if test="action != null and action != ''"> AND action = #{action}</if>
+            <if test="contentId != null and contentId != ''"> content_id = #{contentId}</if>
+            <if test="userId != null and userId != ''"> , user_id = #{userId}</if>
+            <if test="action != null and action != ''"> , action = #{action}</if>
         </set>
         WHERE id = #{id};
     </update>
