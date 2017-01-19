@@ -7,15 +7,15 @@ public class FriendElementView {
 
     private Long id;
 
-    private String nickName;
+    private String nickName="";
 
-    private String sex;
+    private String sex="未知";
 
-    private String birthday;
+    private String birthday="未填写";
 
-    private String profile;
+    private String profile="ta很懒什么也没有留下。";
 
-    private String avatar;
+    private String avatar="/img/ship.jpg";
 
     public Long getId() {
         return id;

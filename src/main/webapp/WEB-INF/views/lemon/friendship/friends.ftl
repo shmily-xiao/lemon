@@ -46,6 +46,41 @@
 
 
 <div class="container">
+    <div class="col-md-12 column">
+        <div class="col-md-6 column">
+            <div style="margin-top: 20px;margin-bottom: 20px;">
+                <form class="bs-example bs-example-form" role="form">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="account" placeholder="好友搜索">
+                        <span class="input-group-addon" style="cursor:pointer" ng-click="searchUser(event)">
+                            <span class="glyphicon glyphicon-search" style="color: rgb(152, 151, 151); font-size: 15px;">搜索</span>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix" style="padding: 5px;">
+        <div class="col-md-12 column">
+        </div>
+            <div class="col-md-12 column" ng-if="successStatus=='true'" ng-cloak="">
+                <div class="col-md-6 column">
+                    <div class="col-md-6 column">
+                        <div class="thumbnail">
+                            <img  src="/img/ship.jpg" class="img-rounded">
+                        </div>
+                    </div>
+                    <div  class="col-md-6 column">
+                        <p >昵称：<span ng-bind="friendView.nickName"></span></p>
+                        <p >性别：<span ng-bind="friendView.sex"></span></p>
+                        <p >生日：<span ng-bind="friendView.birthday"></span></p>
+                        <p >简介：<span ng-bind="friendView.profile"></span></p>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
     <div class="col-md-12 column" style="margin-top: 20px;" ng-repeat="groupView in friendGroupsViews" ng-cloak="">
         <h4 ng-bind="groupView.groupName"></h4>
         <div class="row clearfix" style="margin-top: 15px;border-top: 1px solid rgba(129, 138, 135, 0.57);padding: 5px;">
@@ -55,14 +90,14 @@
                 <div class="col-md-4 column" ng-repeat="friend in groupView.elementViewList" ng-cloak=" ">
                     <div class="col-md-7 column">
                         <div class="thumbnail">
-                            <img src="{{friend.avatar}}" class="img-rounded">
+                            <img ng-src="friend.avatar"class="img-rounded">
                         </div>
-                        <div  class="col-md-5 column">
-                            <p ng-bind="friend.nickName"></p>
-                            <p ng-bind="friend.sex"></p>
-                            <p >生日：<span ng-bind="friend.birthday"></span></p>
-                            <p ng-bind="friend.profile"></p>
-                        </div>
+                    </div>
+                    <div  class="col-md-5 column">
+                        <p ng-bind="friend.nickName"></p>
+                        <p>性别：<span ng-bind="friend.sex"></span></p>
+                        <p>生日：<span ng-bind="friend.birthday"></span></p>
+                        <p>简介：<span ng-bind="friend.profile"></span></p>
                     </div>
                 </div>
             </div>
@@ -74,6 +109,26 @@
     var app = angular.module('myApp', []);
     app.controller('friends',['$scope','$http',function($scope,$http) {
         $scope.friendGrouds = ${friendGroupsViews}||[];
+        $scope.account='';
+        $scope.successStatus='false';
+
+        $scope.searchUser = function($event) {
+            if ($scope.account==''){
+                alert('需要填写账户再搜索！');
+                return;
+            }
+            var url = '/lemon/search/user/'+$scope.account;
+            $http.post(url).success(function(data) {
+                if(data.code==0){
+                    $scope.friendView = JSON.parse(data.data);
+                    $scope.successStatus='true';
+                }else if(data.code == 1){
+                    alert(data.reason);
+                }
+            }).error(function(){
+                alert('网络异常，请重试');
+            })
+        };
     }]);
 </script>
 </body>

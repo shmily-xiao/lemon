@@ -8,6 +8,8 @@ import com.lemon.service.IFriendGroupService;
 import com.lemon.service.IFriendshipService;
 import com.lemon.service.IUserService;
 import com.lemon.utils.BeanLocator;
+import com.lemon.utils.DateUtils;
+import com.lemon.utils.StringUtils;
 import com.lemon.view.friends.FriendElementView;
 import com.lemon.view.friends.FriendsGroupView;
 import org.springframework.stereotype.Component;
@@ -36,6 +38,8 @@ public class FriendsManager {
     /**
      * 返回用户的分组信息
      * @param userId
+     *
+     * @see com.lemon.convertor.friends.FriendshipDomainToViewConvertor
      * @return
      */
     public List<FriendsGroupView> initFriendsGroup(Long userId){
@@ -51,5 +55,23 @@ public class FriendsManager {
                             return (FriendElementView)convertorResult.getResult(friendship,userOptional.get());
                         }).collect(Collectors.toList()))
                 ).collect(Collectors.toList());
+    }
+
+    public FriendElementView initSearchUser(User user){
+        FriendElementView elementView = new FriendElementView();
+        if (StringUtils.notEmpty(user.getAvatar())) {
+            elementView.setAvatar(user.getAvatar());
+        }
+        if (user.getBirthday()!= null) {
+            elementView.setBirthday(DateUtils.yearMonthDay(user.getBirthday().atStartOfDay()));
+        }
+        elementView.setNickName(user.getNickName());
+        if (StringUtils.notEmpty(user.getProfile())) {
+            elementView.setProfile(user.getProfile());
+        }
+        if (user.getGender()!=null) {
+            elementView.setSex(user.getGender().getValue());
+        }
+        return elementView;
     }
 }

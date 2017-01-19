@@ -6,7 +6,6 @@ import com.lemon.manager.lemon.LemonContentsManager;
 import com.lemon.manager.user.HeadUserInfoManager;
 import com.lemon.view.lemon.contents.PersonalCenterContentsView;
 import com.lemon.view.user.HeadUserInfoView;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +39,7 @@ public class HomeWithHimselfContentsController extends BaseController{
     public String myLemons(Long userId,HttpServletRequest request, Model model){
 
         Long searchUserId = super.getUserInfoUserID(request);
+        Boolean currentUser = searchUserId.equals(userId);
         if (userId!=null && userId !=0)
             searchUserId = userId;
         HeadUserInfoView userInfoView = headUserInfoManager.getUserView(request);
@@ -48,6 +48,7 @@ public class HomeWithHimselfContentsController extends BaseController{
 
         model.addAttribute("headUserInfoView",userInfoView);
         model.addAttribute("lemonContents",lemonContentsHimself);
+        model.addAttribute("currentUser",currentUser);
 
         return "lemon/home/myself/home";
     }
