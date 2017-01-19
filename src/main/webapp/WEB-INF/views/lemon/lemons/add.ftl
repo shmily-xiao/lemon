@@ -89,14 +89,14 @@
 
                                 </div>
                                 </div>
-                                <div class="col-md-6 column" style="margin-top: 4px; margin-bottom: 4px;" >
+                                <div class="col-md-6 column" style="margin-top: 4px; margin-bottom: 4px;" ng-show="postData.contentsType=='DREAM'||postData.contentsType=='TRIFLES'">
                                 <div class="input-group input-group-md">
                                     <span class="input-group-addon">完成时间</span>
                                     <input style="height: 34px;width: 151px;" type="text" value="" readOnly="true" id="datetimepicker" ng-model="postData.finishedTime" data-date-format="yyyy-mm-dd hh:ii">
                                     </input>
                                 </div>
                                 </div>
-                                <div class="col-md-6 column">
+                                <div class="col-md-6 column" ng-show="postData.contentsType=='DREAM'">
                                     <div class="input-group input-group-md" style="margin-top: 10px; float: left">
                                         短息提醒
                                     </div>
@@ -163,7 +163,7 @@
         $scope.postData={
             title:'',
             content:'',
-            finishedTime:'',
+            finishedTime:'2017-01-01 00:00',
             contentsType:'DREAM',
             needMessage:'false',
             strategyType:'PUBLIC',

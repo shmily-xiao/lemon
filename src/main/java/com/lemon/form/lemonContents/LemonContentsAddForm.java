@@ -4,7 +4,6 @@ import com.lemon.enums.ContentType;
 import com.lemon.enums.StrategyType;
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -19,7 +18,6 @@ public class LemonContentsAddForm {
     @NotBlank
     private String content;
     // 完成的时间
-    @NotBlank
     private String finishedTime;
     // 内容的类型
     private ContentType contentsType;

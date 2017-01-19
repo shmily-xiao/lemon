@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>首页</title>
+    <title>好友</title>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
@@ -30,6 +30,10 @@
             background-color: #DEDEDE;
             border-color: #e7e7e7;
         }
+        /*为了不闪烁*/
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -42,181 +46,35 @@
 
 
 <div class="container">
-    <div class="col-md-12 column" style="margin-top: 20px;">
-        <h4>bjb</h4>
-    <div class="row clearfix" style="margin-top: 15px;border-top: 1px solid rgba(129, 138, 135, 0.57);padding: 5px;">
-        <div class="col-md-12 column">
-        </div>
-        <div class="col-md-12 column">
-            <div class="col-md-4 column">
-                <div class="col-md-7 column">
-                    <div class="thumbnail">
-                        <a href="/lemon/lemons/friends"> <img src="/img/ship.jpg" class="img-rounded"></a>
+    <div class="col-md-12 column" style="margin-top: 20px;" ng-repeat="groupView in friendGroupsViews" ng-cloak="">
+        <h4 ng-bind="groupView.groupName"></h4>
+        <div class="row clearfix" style="margin-top: 15px;border-top: 1px solid rgba(129, 138, 135, 0.57);padding: 5px;">
+            <div class="col-md-12 column">
+            </div>
+            <div class="col-md-12 column">
+                <div class="col-md-4 column" ng-repeat="friend in groupView.elementViewList" ng-cloak=" ">
+                    <div class="col-md-7 column">
+                        <div class="thumbnail">
+                            <img src="{{friend.avatar}}" class="img-rounded">
+                        </div>
+                        <div  class="col-md-5 column">
+                            <p ng-bind="friend.nickName"></p>
+                            <p ng-bind="friend.sex"></p>
+                            <p >生日：<span ng-bind="friend.birthday"></span></p>
+                            <p ng-bind="friend.profile"></p>
+                        </div>
                     </div>
                 </div>
-                <div  class="col-md-5 column">
-                    <p >nickName4</p>
-                    <p >男</p>
-                    <p >生日：2017-7-8</p>
-                    <p>
-                        是一个分布式的版本控制系统是一个系统是一。
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4 column">
-                <div class="col-md-7 column">
-                    <div class="thumbnail">
-                        <img src="/img/ship.jpg" class="img-rounded">
-                    </div>
-                </div>
-                <div  class="col-md-5 column">
-                    <p >nickName5</p>
-                    <p >男</p>
-                    <p >生日：2017-7-8</p>
-                    <p>
-                        ta很懒没有填写任何内容。
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4 column" >
-                <div class="col-md-7 column">
-                    <div class="thumbnail">
-                        <img src="/img/ship.jpg" class="img-rounded">
-                    </div>
-                </div>
-                <div  class="col-md-5 column">
-                    <p >nickName6</p>
-                    <p >男</p>
-                    <p >生日：2017-7-8</p>
-                    <p>
-                        是一个分布式的版本控制系统是一个系统是一。
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4 column" >
-                <div class="col-md-7 column">
-                    <div class="thumbnail">
-                        <img src="/img/ship.jpg" class="img-rounded">
-                    </div>
-                </div>
-                <div  class="col-md-5 column">
-                    <p >nickName7</p>
-                    <p >男</p>
-                    <p >生日：2017-7-8</p>
-                    <p>
-                        ta很懒没有填写任何内容。
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4 column" >
-                <div class="col-md-7 column">
-                    <div class="thumbnail">
-                        <img src="/img/ship.jpg" class="img-rounded">
-                    </div>
-                </div>
-                <div  class="col-md-5 column">
-                    <p >nickName8</p>
-                    <p >男</p>
-                    <p >生日：2017-7-8</p>
-                    <p>
-                        是一个分布式的版本控制系统是一个系统是一。
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4 column" >
-                <div class="col-md-7 column">
-                    <div class="thumbnail">
-                        <img src="/img/ship.jpg" class="img-rounded">
-                    </div>
-                </div>
-                <div  class="col-md-5 column">
-                    <p >nickName8</p>
-                    <p >男</p>
-                    <p >生日：2017-7-8</p>
-                    <p>
-                        是一个分布式的版本控制系统是一个系统是一。
-                    </p>
-                </div>
-            </div><div class="col-md-4 column" >
-            <div class="col-md-7 column">
-                <div class="thumbnail">
-                    <img src="/img/ship.jpg" class="img-rounded">
-                </div>
-            </div>
-            <div  class="col-md-5 column">
-                <p >nickName8</p>
-                <p >男</p>
-                <p >生日：2017-7-8</p>
-                <p>
-                    是一个分布式的版本控制系统是一个系统是一。
-                </p>
             </div>
         </div>
-            <div class="col-md-4 column" >
-            <div class="col-md-7 column">
-                <div class="thumbnail">
-                    <img src="/img/ship.jpg" class="img-rounded">
-                </div>
-            </div>
-            <div  class="col-md-5 column">
-                <p >nickName8</p>
-                <p >男</p>
-                <p >生日：2017-7-8</p>
-                <p>
-                    是一个分布式的版本控制系统是一个系统是一。
-                </p>
-            </div>
-            </div>
-            <div class="col-md-4 column">
-                <div class="col-md-7 column">
-                    <div class="thumbnail">
-                        <img src="/img/ship.jpg" class="img-rounded">
-                    </div>
-                </div>
-                <div  class="col-md-5 column">
-                    <p >nickName4</p>
-                    <p >男</p>
-                    <p >生日：2017-7-8</p>
-                    <p>
-                        是一个分布式的版本控制系统是一个系统是一。
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4 column">
-                <div class="col-md-7 column">
-                    <div class="thumbnail">
-                        <img src="/img/ship.jpg" class="img-rounded">
-                    </div>
-                </div>
-                <div  class="col-md-5 column">
-                    <p >nickName4</p>
-                    <p >男</p>
-                    <p >生日：2017-7-8</p>
-                    <p>
-                        是一个分布式的版本控制系统是一个系统是一。
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4 column">
-            <div class="col-md-7 column">
-                <div class="thumbnail">
-                    <img src="/img/ship.jpg" class="img-rounded">
-                </div>
-            </div>
-            <div  class="col-md-5 column">
-                <p >nickName4</p>
-                <p >男</p>
-                <p >生日：2017-7-8</p>
-                <p>
-                    是一个分布式的版本控制系统是一个系统是一。
-                </p>
-            </div>
-        </div>
-        </div>
-    </div>
     </div>
 </div>
 <script src="/js/angular.min.js"></script>
-
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('friends',['$scope','$http',function($scope,$http) {
+        $scope.friendGrouds = ${friendGroupsViews}||[];
+    }]);
+</script>
 </body>
 </html>

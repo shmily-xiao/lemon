@@ -19,7 +19,7 @@ public class FriendshipDomainToViewConvertor implements ConvertorResult<FriendEl
         User user = (User)obj[1];
         FriendElementView friendElementView = new FriendElementView();
 
-        friendElementView.setAvator(user.getAvatar());
+        friendElementView.setAvatar(user.getAvatar());
         if (user.getBirthday()!=null) {
             friendElementView.setBirthday(DateUtils.yearMonthDay(user.getBirthday().atStartOfDay()));
         }

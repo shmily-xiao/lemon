@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="home-forms" data-login="False">
-                    <form id="home-login-form" method="post" class="home-login-form home-form-content" name="login" action="/account/login" ng-style="{'display':loginStyle}">
+                    <form id="home-login-form" method="post" class="home-login-form home-form-content" name="login" action="/lemon/account/login" ng-style="{'display':loginStyle}">
 
                         <div class="col-md-4 col-sm-6 home-login-form-icon">
                             <img src="/img/user48.ico" style="margin-top: 4px; margin-left: 12px;">
@@ -163,7 +163,7 @@
                     <!--  -->
 
 
-                    <form id="home-signup-form" class="home-signup-form home-form-content" name="signup" method="post" action="/account/register" ng-style="{'display':signupStyle}">
+                    <form id="home-signup-form" class="home-signup-form home-form-content" name="signup" method="post" action="/lemon/account/register" ng-style="{'display':signupStyle}">
                         <input type='text' style='display:none' />
                         <input type='password' style='display:none' />
                         <input type='password' style='position:absolute; top:-2000px;'/>

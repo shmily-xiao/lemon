@@ -8,10 +8,8 @@ import com.lemon.form.lemonContents.LemonContentsAddForm;
 import com.lemon.manager.lemon.LemonContentsManager;
 import com.lemon.manager.user.HeadUserInfoManager;
 import com.lemon.pojo.constants.LemonConstants;
-import com.lemon.service.IContentService;
 import com.lemon.view.lemon.add.LemonAddView;
 import com.lemon.view.lemon.contents.LemonContentsElementView;
-import com.lemon.view.lemon.contents.PersonalCenterContentsView;
 import com.lemon.view.user.HeadUserInfoView;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -108,8 +106,6 @@ public class HomeWithFriendsContentsController extends BaseController{
 
         return addSuccess?AjaxResponse.ok().url("/lemon/lemons/friends"):AjaxResponse.fail();
     }
-
-
 
 
 

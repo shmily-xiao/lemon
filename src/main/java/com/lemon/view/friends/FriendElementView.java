@@ -15,7 +15,7 @@ public class FriendElementView {
 
     private String profile;
 
-    private String avator;
+    private String avatar;
 
     public Long getId() {
         return id;
@@ -57,11 +57,11 @@ public class FriendElementView {
         this.profile = profile;
     }
 
-    public String getAvator() {
-        return avator;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setAvator(String avator) {
-        this.avator = avator;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

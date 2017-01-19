@@ -14,8 +14,8 @@ import com.lemon.form.lemonContents.LemonContentsAddForm;
 import com.lemon.framework.enumwrapper.EnumWrapper;
 import com.lemon.framework.enumwrapper.Option;
 import com.lemon.query.access.AccessControlQuery;
-import com.lemon.query.friendship.FriendshipQuery;
 import com.lemon.query.content.LemonContentQuery;
+import com.lemon.query.friendship.FriendshipQuery;
 import com.lemon.service.*;
 import com.lemon.service.bo.lemonContent.LemonContentAddBo;
 import com.lemon.utils.BeanLocator;
@@ -127,7 +127,6 @@ public class LemonContentsManager {
                 })
                 .collect(Collectors.toList());
         contentList.addAll(friendContents);
-
 
         // 组装
         Optional<User> userOptional = userService.find(userId);

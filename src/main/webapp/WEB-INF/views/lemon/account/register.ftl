@@ -27,8 +27,8 @@
 
 <div class="collapse navbar-collapse" id="menu-content">
     <ul class="nav navbar-nav navbar-right">
-        <li><a href="/account/login">登录</a></li>
-        <li><a href="/account/register">注册</a></li>
+        <li><a href="/lemon/account/login">登录</a></li>
+        <li><a href="/lemon/account/register">注册</a></li>
 
     </ul>
 </div>
@@ -46,7 +46,7 @@
                 <div class="panel-body">
                     <!--panel body开始-->
                     <div class="row ">
-                        <form method="post" name="signup" action="/account/register" class="col-md-8 col-md-offset-2 signup-action">
+                        <form method="post" name="signup" action="/lemon/account/register" class="col-md-8 col-md-offset-2 signup-action">
                             <!--signup action开始-->
                             <#--<input type="hidden" name="csrfmiddlewaretoken" value="tE0wbJECnGxg4yslkSRxwuldjNC99sfB">-->
                             <input type="text" style="display:none">
@@ -112,7 +112,7 @@
                         </form>
                         <!--signup action结束-->
                         <div class="col-md-8 col-md-offset-2 signup-intro">
-                            <p class="text-center">已经拥有账号?<a href="/account/login">点此登录</a></p>
+                            <p class="text-center">已经拥有账号?<a href="/lemon/account/login">点此登录</a></p>
                         </div>
                     </div>
                 </div>
@@ -148,7 +148,7 @@
                    return;
                }
                $scope.isValid=true;
-               $http.post('/account/register',{mobile:$scope.mobile,password:hex_md5($scope.password)}).success(function(data) {
+               $http.post('/lemon/account/register',{mobile:$scope.mobile,password:hex_md5($scope.password)}).success(function(data) {
                    if(data.code==0){
                        location.href = data.url;
                    }else if(data.code == 1){

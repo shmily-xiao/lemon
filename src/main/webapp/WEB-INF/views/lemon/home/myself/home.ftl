@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>首页</title>
+    <title>我的发布</title>
       <!-- 新 Bootstrap 核心 CSS 文件 -->
       <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
@@ -30,10 +30,14 @@
               background-color: #DEDEDE;
               border-color: #e7e7e7;
           }
+          /*为了不闪烁*/
+          [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+              display: none !important;
+          }
       </style>
   </head>
 
-  <body>
+  <body ng-app="myApp" ng-controller="myselfContents">
 
   <#assign currentPage = "myselfPage">
   <#include "/lemon/common/head.ftl">
@@ -128,10 +132,16 @@
                   </div>
               </div>
           </div>
-
       </div>
       </#list>
   </div>
+          <script src="/js/angular.min.js"></script>
+          <script>
+              var app = angular.module('myApp', []);
+              app.controller('myselfContents',['$scope','$http',function($scope,$http) {
+
+              }]);
+          </script>
 
   </body>
 </html>

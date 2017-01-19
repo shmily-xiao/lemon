@@ -1,14 +1,10 @@
 package com.lemon.controller.friendship;
 
+import com.alibaba.fastjson.JSON;
 import com.lemon.annotation.UserLoginValidation;
 import com.lemon.controller.BaseController;
-import com.lemon.domain.impl.friend.FriendGroup;
-import com.lemon.domain.impl.friend.Friendship;
-import com.lemon.domain.interfaces.friend.IFriendGroup;
 import com.lemon.manager.friends.FriendsManager;
 import com.lemon.manager.user.HeadUserInfoManager;
-import com.lemon.service.IFriendGroupService;
-import com.lemon.service.IFriendshipService;
 import com.lemon.view.friends.FriendsGroupView;
 import com.lemon.view.user.HeadUserInfoView;
 import org.springframework.stereotype.Controller;
@@ -37,10 +33,12 @@ public class FriendShipController extends BaseController{
     @UserLoginValidation
     public String friends(@PathVariable Long userId, HttpServletRequest request, Model model){
 
-        List<FriendsGroupView> friendsGroupViews = friendsManager.initFriendsGroup(userId);
+        List<FriendsGroupView> friendGroupsViews = friendsManager.initFriendsGroup(userId);
         HeadUserInfoView userInfoView = headUserInfoManager.getUserView(request);
 
         model.addAttribute("headUserInfoView",userInfoView);
+        model.addAttribute("friendGroupsViews", JSON.toJSONString(friendGroupsViews));
+
         return "/lemon/friendship/friends";
     }
 }

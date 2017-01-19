@@ -3,6 +3,7 @@ package com.lemon.convertor.content;
 import com.lemon.convertor.ConvertorResult;
 import com.lemon.form.lemonContents.LemonContentsAddForm;
 import com.lemon.service.bo.lemonContent.LemonContentAddBo;
+import com.lemon.utils.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -26,7 +27,9 @@ public class ContentFormToBoConvertor implements ConvertorResult<LemonContentAdd
         addBo.setTitle(form.getTitle());
         // 2016-04-11T10:00
         // LocalDateTime.parse("2016-04-11 10:00".replace(" ","T"));
-        addBo.setFinishedTime(LocalDateTime.parse(form.getFinishedTime().replace(" ","T")));
+        if (StringUtils.notEmpty(form.getFinishedTime())) {
+            addBo.setFinishedTime(LocalDateTime.parse(form.getFinishedTime().replace(" ", "T")));
+        }
         addBo.setUserId(userId);
 
         return addBo;

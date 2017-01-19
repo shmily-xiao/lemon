@@ -31,8 +31,8 @@
 
 <div class="collapse navbar-collapse" id="menu-content">
     <ul class="nav navbar-nav navbar-right">
-        <li><a href="/account/login">登录</a></li>
-        <li><a href="/account/register">注册</a></li>
+        <li><a href="/lemon/account/login">登录</a></li>
+        <li><a href="/lemon/account/register">注册</a></li>
 
     </ul>
 </div>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="row ">
-                        <form method="post" action="/account/login" name="login" class="col-md-8 col-md-offset-2 login-action">
+                        <form method="post" action="/lemon/account/login" name="login" class="col-md-8 col-md-offset-2 login-action">
                             <!--login action开始-->
                             <div class="form-group form-group-lg center-block " id="login-account">
                                 <p>账号</p>
@@ -96,17 +96,15 @@
                             <p>
                                 <a href="/auth/forget/?k=DhRNzw">忘记密码?</a>
                                 或
-                                <a href="/account/register">创建新账号</a>
+                                <a href="/lemon/account/register">创建新账号</a>
 
 
                             </p>
-                                <div class="login-wechat" data-expire_seconds="300">
-                                    <a class="btn btn-default text-center hidden-xs" style="margin-top: 8px;" data-toggle="modal" data-target="#wechat-login-qr">
-                                        <img src="/img/qq16w.ico" style="margin-top: -5px; margin-right: 4px;"/>QQ登录
-                                    </a>
-                                </div>
-
-
+                            <div class="login-wechat" data-expire_seconds="300">
+                                <a class="btn btn-default text-center hidden-xs" style="margin-top: 8px;" data-toggle="modal" data-target="#wechat-login-qr">
+                                    <img src="/img/qq16w.ico" style="margin-top: -5px; margin-right: 4px;"/>QQ登录
+                                </a>
+                            </div>
 
                             <div class="modal fade" id="wechat-login-qr" tabindex="-1" role="dialog" aria-labelledby="requestlabel">
                                 <div class="modal-dialog" role="document">
@@ -162,7 +160,7 @@
                 if ($scope.password == '') $scope.login.password.$invalid=true;
                 return;
             }
-            $http.post('/account/login',{mobile:$scope.mobile,password:hex_md5($scope.password)}).success(function(data) {
+            $http.post('/lemon/account/login',{mobile:$scope.mobile,password:hex_md5($scope.password)}).success(function(data) {
                 if(data.code==0){
                     location.href = data.url;
                 }else if(data.code == 1){
