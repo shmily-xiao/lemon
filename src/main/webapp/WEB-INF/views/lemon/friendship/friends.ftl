@@ -65,8 +65,22 @@
         </div>
             <div class="col-md-12 column" ng-if="successStatus=='true'" ng-cloak="">
                 <div class="col-md-6 column">
+                    <div class="col-md-2 column hidden-xs">
+                        <div class="btn-group-vertical">
+                            <button type="button" class="btn btn-default">添加</button>
+                            <button type="button" class="btn btn-default">查看</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 column">
+                        <div class="btn-group-vertical">
+                            <button type="button" class="btn btn-default">添加</button>
+                            <button type="button" class="btn btn-default">查看</button>
+                        </div>
+                    </div>
+
+
                     <div class="col-md-4 column">
-                        <div class="thumbnail">
+                        <div class="thumbnail" ng-click="addOrLookUser(event)" style="cursor:pointer">
                             <img ng-src="{{friendView.avatar}}" class="img-rounded">
                         </div>
                     </div>
@@ -78,7 +92,6 @@
                     </div>
                 </div>
             </div>
-
     </div>
 
     <div class="col-md-12 column" style="margin-top: 20px;" ng-repeat="groupView in friendGroupsViews" ng-cloak="">
@@ -106,6 +119,9 @@
 </div>
 <script src="/js/angular.min.js"></script>
 <script>
+    $(function () { $(".popover-options a").popover({html : true });});
+</script>
+<script>
     var app = angular.module('myApp', []);
     app.controller('friends',['$scope','$http',function($scope,$http) {
         $scope.friendGrouds = ${friendGroupsViews}||[];
@@ -129,6 +145,10 @@
                 alert('网络异常，请重试');
             })
         };
+        $scope.addOrLookUser = function($event) {
+//            angular.element('data-toggle').popover();
+//            this.popover({html : true });
+        }
     }]);
 </script>
 </body>
