@@ -15,7 +15,7 @@ public class FriendElementView {
 
     private String profile="ta很懒什么也没有留下。";
 
-    private String avatar="/img/ship.jpg";
+    private String avatar="/img/defaultAvatarGray.png";
 
     public Long getId() {
         return id;

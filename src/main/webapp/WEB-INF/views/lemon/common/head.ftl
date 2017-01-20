@@ -9,9 +9,9 @@
                 <span class="icon-bar"></span>
             </button>
         <#if headUserInfoView.avatar?has_content>
-            <a class="avatar"><img src="${headUserInfoView.avatar}"></a>
+            <a class="avatar"><img style="height: 48px;width: 48px; border-radius: 48px;overflow: hidden;" src="${headUserInfoView.avatar}"></a>
         <#else>
-            <a class="avatar"><img src="/img/user48.ico"></a>
+            <a class="avatar"><img style="height: 48px;width: 48px; border-radius: 48px;overflow: hidden;" src="/img/defaultAvatarGray.png"></a>
         </#if>
         </div>
         <div id="navbar" class="navbar-collapse collapse">

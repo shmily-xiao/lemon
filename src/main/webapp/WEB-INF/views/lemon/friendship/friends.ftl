@@ -65,9 +65,9 @@
         </div>
             <div class="col-md-12 column" ng-if="successStatus=='true'" ng-cloak="">
                 <div class="col-md-6 column">
-                    <div class="col-md-6 column">
+                    <div class="col-md-4 column">
                         <div class="thumbnail">
-                            <img  src="/img/ship.jpg" class="img-rounded">
+                            <img ng-src="{{friendView.avatar}}" class="img-rounded">
                         </div>
                     </div>
                     <div  class="col-md-6 column">

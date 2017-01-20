@@ -40,6 +40,7 @@
           [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
               display: none !important;
           }
+
       </style>
   </head>
 
@@ -53,14 +54,18 @@
   <div class="container">
       <#--<#list lemonContents as lemonContent>-->
         <div class="row clearfix" style="margin-top: 15px;border-top: 1px solid rgba(129, 138, 135, 0.57);padding: 5px;margin-bottom: 16px;"
-             ng-repeat="lemonContent in lemonContents">
+             ng-repeat="lemonContent in lemonContents" ng-cloak="">
           <div class="col-md-1 column">
           </div>
           <div class="col-md-10 column">
               <div class="row clearfix">
                   <div class="col-md-1 column">
-                      <img alt="140x140" src="{{lemonContent.avatar}}" ng-if="lemonContent.avatar!=null&&lemonContent.avatar!=''" ng-cloak=""/>
-                      <img alt="140x140" src="/img/user64.ico" ng-if="lemonContent.avatar==null||lemonContent.avatar==''" ng-cloak=""/>
+                      <img style="margin-top: 10px;height: 40px;width: 40px;margin-left: 15px;"
+                           ng-src="{{lemonContent.avatar}}"
+                           ng-if="lemonContent.avatar!=null&&lemonContent.avatar!=''" ng-cloak=""/>
+                      <img style="margin-top: 10px;height: 40px;width: 40px;margin-left: 15px;"
+                           src="/img/defaultAvatarGray.png"
+                           ng-if="lemonContent.avatar==null||lemonContent.avatar==''" ng-cloak=""/>
                   </div>
                   <div class="col-md-11 column">
                       <div class="row clearfix" style="margin-top: 12px;margin-left: 2px;">
