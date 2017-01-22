@@ -15,7 +15,7 @@ public class FriendGroup extends BaseDomain implements IFriendGroup{
     private Long userId;
 
     /**
-     * 用户的分组名字
+     * 用户的分组名字,会有一个默认分组 “我的好友”
      */
     private String groupName;
 

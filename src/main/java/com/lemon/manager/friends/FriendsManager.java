@@ -57,6 +57,11 @@ public class FriendsManager {
                 ).collect(Collectors.toList());
     }
 
+    /**
+     * 精确查找用户
+     * @param user
+     * @return
+     */
     public FriendElementView initSearchUser(User user){
         FriendElementView elementView = new FriendElementView();
         if (StringUtils.notEmpty(user.getAvatar())) {
@@ -74,5 +79,13 @@ public class FriendsManager {
         }
         elementView.setId(user.getId());
         return elementView;
+    }
+
+    public Boolean addFriend(Long currentUser,Long addUserId){
+        Friendship friendship = new Friendship();
+        friendship.setUserId(currentUser);
+        friendship.setFriendId(addUserId);
+//        friendship.setType();
+        return Boolean.FALSE;
     }
 }

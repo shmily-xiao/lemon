@@ -30,7 +30,7 @@ public class Friendship extends BaseDomain implements IFriendship{
     private Long friendGroupId;
 
     /**
-     * 用户这条信息对好友的公开策略
+     * 用户这条信息对好友的公开策略，默认是公开的
      */
     private Long accessControlId;
 

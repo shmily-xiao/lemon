@@ -65,12 +65,12 @@ public class FriendShipController extends BaseController{
     }
 
     @ResponseBody
-    @RequestMapping(value = "/lemon/friends/add/{userId:\\d+}")
-    public AjaxResponse addUser(@PathVariable Long userId, HttpServletRequest request){
+    @RequestMapping(value = "/lemon/friends/add/{addUserId:\\d+}")
+    public AjaxResponse addUser(@PathVariable Long addUserId, HttpServletRequest request){
         if (!super.isUserLoginIn(request)){
             return AjaxResponse.fail().msg("您还没有登录").url(LemonConstants.LOGIN_URL);
         }
-        Optional<User> userOptional = userService.find(userId);
+        Optional<User> userOptional = userService.find(addUserId);
         if (!userOptional.isPresent()){
             return AjaxResponse.fail().msg("您添加的用户不存在！");
         }
