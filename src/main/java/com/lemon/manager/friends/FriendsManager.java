@@ -4,6 +4,7 @@ import com.lemon.convertor.ConvertorResult;
 import com.lemon.domain.impl.friend.FriendGroup;
 import com.lemon.domain.impl.friend.Friendship;
 import com.lemon.domain.impl.user.User;
+import com.lemon.query.friendship.FriendshipQuery;
 import com.lemon.service.IFriendGroupService;
 import com.lemon.service.IFriendshipService;
 import com.lemon.service.IUserService;
@@ -81,11 +82,21 @@ public class FriendsManager {
         return elementView;
     }
 
-    public Boolean addFriend(Long currentUser,Long addUserId){
-        Friendship friendship = new Friendship();
-        friendship.setUserId(currentUser);
-        friendship.setFriendId(addUserId);
-//        friendship.setType();
-        return Boolean.FALSE;
+    /**
+     *
+     * @param currentUser
+     * @param addUserId
+     * @return
+     */
+    public String addFriend(Long currentUser,Long addUserId){
+        FriendshipQuery query = new FriendshipQuery();
+        query.setUserId(currentUser);
+        query.setFriendId(addUserId);
+        Optional<Friendship> friendshipOptional = friendshipService.findOne(query);
+        if (friendshipOptional.isPresent()){
+            return "您已经添加此用户为好友了！";
+        }
+        friendshipService.addFriend(currentUser,addUserId);
+        return null;
     }
 }

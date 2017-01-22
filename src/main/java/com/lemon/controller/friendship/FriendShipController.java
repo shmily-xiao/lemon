@@ -74,8 +74,7 @@ public class FriendShipController extends BaseController{
         if (!userOptional.isPresent()){
             return AjaxResponse.fail().msg("您添加的用户不存在！");
         }
-        return AjaxResponse.ok();
+        String msg = friendsManager.addFriend(super.getUserInfoUserID(request),addUserId);
+        return msg==null?AjaxResponse.ok().msg("添加成功"):AjaxResponse.fail().msg(msg);
     }
-
-
 }

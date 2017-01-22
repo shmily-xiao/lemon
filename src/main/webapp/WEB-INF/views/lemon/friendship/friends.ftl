@@ -193,16 +193,15 @@
         $scope.ok = function ($event) {
             var url='/lemon/friends/add/'+$scope.friendView.id;
 //
-        $http.post(url).success(function (data) {
-            ngDialog.closeAll('modalContent.html');
-            alert(data.msg);
-        }).error(function () {
-            ngDialog.closeAll('modalContent.html');
-            alert("网络异常");
-        });
-
-
+            $http.post(url).success(function (data) {
+                ngDialog.closeAll('modalContent.html');
+                alert(data.msg);
+            }).error(function () {
+                ngDialog.closeAll('modalContent.html');
+                alert("网络异常");
+            });
         };
+
         $scope.cancel = function ($event) {
             ngDialog.closeAll('modalContent.html');
         };

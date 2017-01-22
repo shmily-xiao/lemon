@@ -15,7 +15,7 @@ public class AccessControl extends BaseDomain implements IAccessControl {
     private Long rowId;
 
     /**
-     * 外键的表"content" "userRecord"
+     * 外键的表"content" ,"userRecord","friendship"
      */
     private String rowTable;
 
