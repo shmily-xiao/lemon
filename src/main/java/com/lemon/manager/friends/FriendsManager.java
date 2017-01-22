@@ -72,6 +72,7 @@ public class FriendsManager {
         if (user.getGender()!=null) {
             elementView.setSex(user.getGender().getValue());
         }
+        elementView.setId(user.getId());
         return elementView;
     }
 }
