@@ -147,6 +147,7 @@
     </div>
     <div class="dialog_footer" style="text-align:center">
         <div class="ops">
+            <button ng-click="cancel($event)">取&nbsp;&nbsp;消</button>
         </div>
     </div>
 </script>
@@ -182,20 +183,16 @@
 
         // 添加好友
         $scope.addUser = function(e) {
-            ngDialog.open({
+           $scope.addUserDialog = ngDialog.open({
                 template: 'modalContent.html',
                 className:'ngdialog-theme-default ngdialog-theme-custom',
                 controller:'modalController',
-                scope:$scope
+                scope:$scope,
+                disableAnimation: true
             });
         };
         $scope.bodyScroll = function (status) {
             $(document.body).css({'overflow': status});
-        };
-
-        $scope.ok = function () {
-            alert("asdasfasf");
-
         };
     }]);
     //区域弹出框controller
@@ -204,17 +201,27 @@
             var url='/lemon/friends/add/'+$scope.friendView.userId;
 
             $http.post(url).success(function (data) {
-                ngDialog.closeAll('modalContent.html');
-                $scope.myMsg = data.msg;
+                var _scope = $scope.$parent;
+                $scope.closeThisDialog('modalContent.html');
+                _scope.myMsg = data.msg;
                 ngDialog.open({
                     template: 'status.html',
                     className:'ngdialog-theme-default ngdialog-theme-custom',
                     controller:'status',
-                    scope:$scope
+                    scope:_scope,
+                    disableAnimation: true
                 });
             }).error(function () {
-                ngDialog.closeAll('modalContent.html');
-                alert("网络异常");
+                var _scope = $scope.$parent;
+                $scope.closeThisDialog('modalContent.html');
+                _scope.myMsg = "网络异常";
+                ngDialog.open({
+                    template: 'status.html',
+                    className:'ngdialog-theme-default ngdialog-theme-custom',
+                    controller:'status',
+                    scope:_scope,
+                    disableAnimation: true
+                });
             });
         };
 
@@ -225,7 +232,9 @@
 
     //区域弹出框controller
     app.controller('status', function ($scope,ngDialog,$http) {
-
+        $scope.cancel = function ($event) {
+            ngDialog.closeAll('status.html');
+        };
     });
 
 
