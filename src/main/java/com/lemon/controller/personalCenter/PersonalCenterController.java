@@ -1,4 +1,4 @@
-package com.lemon.controller.account;
+package com.lemon.controller.personalCenter;
 
 import com.lemon.annotation.UserLoginValidation;
 import com.lemon.controller.BaseController;
@@ -8,10 +8,12 @@ import com.lemon.form.user.UserInformationForm;
 import com.lemon.form.user.UserPasswordModifyForm;
 import com.lemon.form.user.UserPrivacyForm;
 import com.lemon.framework.mapping.excutor.MappingExcutor;
+import com.lemon.manager.user.HeadUserInfoManager;
 import com.lemon.pojo.constants.LemonConstants;
 import com.lemon.query.user.UserQuery;
 import com.lemon.service.IUserService;
 import com.lemon.utils.Md5;
+import com.lemon.view.user.HeadUserInfoView;
 import com.lemon.view.user.UserView;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +39,9 @@ public class PersonalCenterController extends BaseController{
     @Resource
     private IUserService userService;
 
+    @Resource
+    private HeadUserInfoManager headUserInfoManager;
+
     /**
      *
      * 个人中心 设置 的访问
@@ -52,9 +57,12 @@ public class PersonalCenterController extends BaseController{
         String account = (String)session.getAttribute(LemonConstants.USER_SEESSION_ACCOUNT);
         if (account == null || account.isEmpty()) return "redirect:/account/login";
 
+        HeadUserInfoView userInfoView = headUserInfoManager.getUserView(request);
+
+        model.addAttribute("headUserInfoView",userInfoView);
         model.addAttribute("user",new UserView(userService.findUserByAccount(account).get()));
 
-        return "";
+        return "/lemon/setting/setting";
     }
 
     /**
