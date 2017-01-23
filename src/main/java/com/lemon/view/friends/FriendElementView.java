@@ -17,6 +17,8 @@ public class FriendElementView {
 
     private String avatar="/img/defaultAvatarGray.png";
 
+    private Long userId;
+
     public Long getId() {
         return id;
     }
@@ -63,5 +65,13 @@ public class FriendElementView {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

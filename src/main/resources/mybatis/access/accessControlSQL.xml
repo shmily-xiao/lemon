@@ -25,7 +25,7 @@
             <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
             <if test="rowId != null and rowId != ''"> AND row_id = #{rowId}</if>
             <if test="rowTable != null and rowTable != ''"> AND row_table = #{rowTable}</if>
-            <if test="strategy != null and strategy != ''"> AND strategy = #{strategy}</if>
+            <if test="strategy != null"> AND strategy = #{strategy}</if>
         </where>
         LIMIT #{offset},#{size}
     </select>
@@ -36,7 +36,7 @@
             <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
             <if test="rowId != null and rowId != ''"> AND row_id = #{rowId}</if>
             <if test="rowTable != null and rowTable != ''"> AND row_table = #{rowTable}</if>
-            <if test="strategy != null and strategy != ''"> AND strategy = #{strategy}</if>
+            <if test="strategy != null"> AND strategy = #{strategy}</if>
         </where>
     </select>
 
@@ -47,7 +47,7 @@
             <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
             <if test="rowId != null and rowId != ''"> AND row_id = #{rowId}</if>
             <if test="rowTable != null and rowTable != ''"> AND row_table = #{rowTable}</if>
-            <if test="strategy != null and strategy != ''"> AND strategy = #{strategy}</if>
+            <if test="strategy != null"> AND strategy = #{strategy}</if>
         </where>
     </select>
 
@@ -61,7 +61,7 @@
             <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
             <if test="rowId != null and rowId != ''"> AND row_id = #{rowId}</if>
             <if test="rowTable != null and rowTable != ''"> AND row_table = #{rowTable}</if>
-            <if test="strategy != null and strategy != ''"> AND strategy = #{strategy}</if>
+            <if test="strategy != null"> AND strategy = #{strategy}</if>
         </where>
     </delete>
 
@@ -70,7 +70,7 @@
         <set>
             <if test="rowId != null and rowId != ''">row_id = #{rowId}</if>
             <if test="rowTable != null and rowTable != ''"> ,row_table = #{rowTable}</if>
-            <if test="strategy != null and strategy != ''"> ,strategy = #{strategy}</if>
+            <if test="strategy != null"> ,strategy = #{strategy}</if>
         </set>
         WHERE id = #{id};
     </update>

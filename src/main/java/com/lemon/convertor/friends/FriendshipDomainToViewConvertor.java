@@ -19,14 +19,17 @@ public class FriendshipDomainToViewConvertor implements ConvertorResult<FriendEl
         User user = (User)obj[1];
         FriendElementView friendElementView = new FriendElementView();
 
-        friendElementView.setAvatar(user.getAvatar());
+        if (StringUtils.notEmpty(user.getAvatar()))
+            friendElementView.setAvatar(user.getAvatar());
         if (user.getBirthday()!=null) {
             friendElementView.setBirthday(DateUtils.yearMonthDay(user.getBirthday().atStartOfDay()));
         }
         friendElementView.setId(friendship.getId());
+        friendElementView.setUserId(user.getId());
         friendElementView.setNickName(user.getNickName());
         friendElementView.setProfile(StringUtils.notEmpty(user.getProfile())?user.getProfile():"ta很懒没有填写任何内容。");
-        friendElementView.setSex(user.getGender().getValue());
+        if (user.getGender()!=null)
+            friendElementView.setSex(user.getGender().getValue());
 
         return friendElementView;
     }

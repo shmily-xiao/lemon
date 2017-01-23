@@ -16,6 +16,12 @@ public class AccessControl extends BaseDomain implements IAccessControl {
 
     /**
      * 外键的表"content" ,"userRecord","friendship"
+     *
+     * 权限的范围从上至下依次扩大：
+     * content ：的策略是对单个内容而言的，拥有最小内容的管理权限
+     * friendship：的策略是针对好友的，比如某些内容屏蔽某一位好友
+     * userRecord:  的策略是对用户整个内容而言的，如果设为私有，相当于空间被锁定，除了自己任何人不能看
+     *
      */
     private String rowTable;
 

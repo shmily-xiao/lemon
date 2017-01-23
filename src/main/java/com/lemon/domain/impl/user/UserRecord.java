@@ -30,7 +30,7 @@ public class UserRecord extends BaseDomain implements IUserRecord {
     private Long userId;
 
     /**
-     * 用户对好友的公开策略
+     * 用户对所有好友的公开策略
      */
     private Long accessControlId;
 

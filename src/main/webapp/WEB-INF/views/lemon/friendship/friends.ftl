@@ -78,7 +78,7 @@
                 <div class="col-md-6 column">
                     <div class="col-sm-2 column">
                         <button type="button" class="btn btn-default" ng-click="addUser(event)">添加</button>
-                        <button type="button" class="btn btn-default" ng-click="lookUser(event)">查看</button>
+                        <a href="/lemon/lemons/{{friendView.userId}}/friend/contents" ><button type="button" class="btn btn-default">查看</button></a>
                     </div>
 
 
@@ -96,8 +96,8 @@
                 </div>
             </div>
     </div>
-
-    <div class="col-md-12 column" style="margin-top: 20px;" ng-repeat="groupView in friendGroupsViews" ng-cloak="">
+    <div class="row clearfix" style="padding: 5px;">
+        <div class="col-md-12 column" style="margin-top: 20px;" ng-repeat="groupView in friendGrouds" ng-cloak="">
         <h4 ng-bind="groupView.groupName"></h4>
         <div class="row clearfix" style="margin-top: 15px;border-top: 1px solid rgba(129, 138, 135, 0.57);padding: 5px;">
             <div class="col-md-12 column">
@@ -105,9 +105,11 @@
             <div class="col-md-12 column">
                 <div class="col-md-4 column" ng-repeat="friend in groupView.elementViewList" ng-cloak=" ">
                     <div class="col-md-7 column">
-                        <div class="thumbnail">
-                            <img ng-src="friend.avatar"class="img-rounded">
-                        </div>
+                        <a href="/lemon/lemons/{{friend.userId}}/friend/contents">
+                            <div class="thumbnail">
+                                <img ng-src="{{friend.avatar}}" class="img-rounded">
+                            </div>
+                        </a>
                     </div>
                     <div  class="col-md-5 column">
                         <p ng-bind="friend.nickName"></p>
@@ -117,6 +119,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 </div>
@@ -131,6 +134,19 @@
         <div class="ops">
             <button ng-click="cancel($event)">取&nbsp;&nbsp;消</button>
             <button ng-click="ok($event)">添&nbsp;&nbsp;加</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="status.html">
+    <div class="col-md-12 column">
+        <h4 style="text-align:center">添加状态</h4>
+    </div>
+    <div class="col-md-12 column">
+        <p style="text-align:center"><span ng-bind="myMsg"></span></p>
+    </div>
+    <div class="dialog_footer" style="text-align:center">
+        <div class="ops">
         </div>
     </div>
 </script>
@@ -163,10 +179,6 @@
                 alert('网络异常，请重试');
             })
         };
-        // 查看
-        $scope.lookUser = function ($event) {
-
-        };
 
         // 添加好友
         $scope.addUser = function(e) {
@@ -188,14 +200,18 @@
     }]);
     //区域弹出框controller
     app.controller('modalController', function ($scope,ngDialog,$http) {
-
-//
         $scope.ok = function ($event) {
-            var url='/lemon/friends/add/'+$scope.friendView.id;
-//
+            var url='/lemon/friends/add/'+$scope.friendView.userId;
+
             $http.post(url).success(function (data) {
                 ngDialog.closeAll('modalContent.html');
-                alert(data.msg);
+                $scope.myMsg = data.msg;
+                ngDialog.open({
+                    template: 'status.html',
+                    className:'ngdialog-theme-default ngdialog-theme-custom',
+                    controller:'status',
+                    scope:$scope
+                });
             }).error(function () {
                 ngDialog.closeAll('modalContent.html');
                 alert("网络异常");
@@ -206,6 +222,13 @@
             ngDialog.closeAll('modalContent.html');
         };
     });
+
+    //区域弹出框controller
+    app.controller('status', function ($scope,ngDialog,$http) {
+
+    });
+
+
 </script>
 </body>
 </html>

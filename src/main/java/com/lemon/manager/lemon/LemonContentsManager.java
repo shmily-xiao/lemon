@@ -8,6 +8,7 @@ import com.lemon.domain.impl.content.ContentPlan;
 import com.lemon.domain.impl.content.Interaction;
 import com.lemon.domain.impl.friend.Friendship;
 import com.lemon.domain.impl.user.User;
+import com.lemon.domain.impl.user.UserRecord;
 import com.lemon.enums.ContentType;
 import com.lemon.enums.StrategyType;
 import com.lemon.form.lemonContents.LemonContentsAddForm;
@@ -27,10 +28,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -56,6 +54,10 @@ public class LemonContentsManager {
 
     @Resource
     private IUserService userService;
+
+    @Resource
+    private IUserRecordService userRecordService;
+
     /**
      * 初始化添加页面的数据
      * @return
@@ -158,6 +160,97 @@ public class LemonContentsManager {
                     return (PersonalCenterContentsView)convertorResult.getResult(content,contentPlan.get());
                 }).collect(Collectors.toList());
     }
+
+
+    /**
+     * 只看好友的发布的内容
+     * 1.当查看好友的内容的时候有一个限制，不能查看到好友设为私有的内容
+     * 2.不能看到好友对其设置了的特定权限的内容，比如：好友主动屏蔽了当前用户，指定其不可见
+     *
+     * content ：的策略是对单个内容而言的，拥有最小内容的管理权限
+     * friendship：的策略是针对好友的，比如某些内容屏蔽某一位好友
+     * userRecord:  的策略是对用户整个内容而言的，如果设为私有，相当于空间被锁定，除了自己任何人不能看
+     *
+     * @param friendId
+     * @param currentUserId
+     * @return
+     */
+    public List<PersonalCenterContentsView> lookFriendContent(Long friendId,Long currentUserId){
+        if (friendId == null || currentUserId == null) return Collections.emptyList();
+
+        // 如果用户将自己空间锁定了看不到任何内容
+        if (userRecordService.isUserPrivateHisAllContents(friendId)){
+            return Collections.emptyList();
+        }
+
+        FriendshipQuery query = new FriendshipQuery();
+        query.setUserId(friendId);
+        query.setFriendId(currentUserId);
+        Optional<Friendship> friendship = friendshipService.findOne(query);
+        // 如果本身不是好友,最多可以看到两条公开的数据
+        if (!friendship.isPresent()){
+            return this.lookStrangerContents(friendId);
+        }
+        // 如果是好友的时候
+        Long accessControlId = friendship.get().getAccessControlId();
+        Optional<AccessControl> accessControl = accessControlService.find(accessControlId);
+        // 如果权限记录中没有，说明是数据出了问题
+        if (!accessControl.isPresent()){
+            return Collections.emptyList();
+        }
+        // 如果用户对当前用户是隐藏了的（对其设为私有），也是看不到任何内容的
+        if (StrategyType.PRIVATE.equals(accessControl.get().getStrategy())){
+            return Collections.emptyList();
+        }
+
+        // 如果是好友，看不到好友将内容设为私密的记录且看不到，其他的可以看到
+        return this.lookStrangerContents(friendId);
+
+    }
+
+    /**
+     * 查看陌生人的内容只能看到最多两条公开的数据
+     *
+     * @param strangerUserId
+     * @return
+     */
+    private List<PersonalCenterContentsView> lookStrangerContents(Long strangerUserId){
+        List<PersonalCenterContentsView> lemonContentsHimself = this.findLemonContentsHimself(strangerUserId);
+        return lemonContentsHimself.stream()
+                .filter(view -> {
+                    // 过滤，只保留公开的内容
+                    AccessControlQuery query = new AccessControlQuery();
+                    query.setRowId(view.getId());
+                    query.setRowTable("content");
+                    query.setStrategy(StrategyType.PUBLIC);
+                    return accessControlService.findOne(query).isPresent();
+                })
+                .limit(2)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 如果是好友，看不到好友将内容设为私密的记录且看不到，其他的可以看到
+     * @param friendUserId
+     * @return
+     */
+    private List<PersonalCenterContentsView> lookFriendContents(Long friendUserId){
+        List<PersonalCenterContentsView> lemonContentsFriend = this.findLemonContentsHimself(friendUserId);
+        return lemonContentsFriend.stream()
+                .filter(view -> {
+                    // 过滤掉私有的数据内容
+                    AccessControlQuery query = new AccessControlQuery();
+                    query.setRowId(view.getId());
+                    query.setRowTable("content");
+                    query.setStrategy(StrategyType.PRIVATE);
+                    return !accessControlService.findOne(query).isPresent();
+                })
+                .collect(Collectors.toList());
+    }
+
+
+
+
 
 
 

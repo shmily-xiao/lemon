@@ -112,7 +112,7 @@
                         </#if>
                     </div>
 
-                      <#if lemonContent.type =="DREAM" && (lemonContent.status=="WILLEXPIRE"||lemonContent.status=="DOING")>
+                      <#if lemonContent.type =="DREAM" && (lemonContent.status=="WILLEXPIRE"||lemonContent.status=="DOING") && isCurrentUser=='true'>
                       <div class="row clearfix">
                           <div class="col-md-4 column">
                           </div>

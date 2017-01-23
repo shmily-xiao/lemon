@@ -78,17 +78,20 @@ public class FriendsManager {
         if (user.getGender()!=null) {
             elementView.setSex(user.getGender().getValue());
         }
-        elementView.setId(user.getId());
+        elementView.setUserId(user.getId());
         return elementView;
     }
 
     /**
-     *
+     * 添加用户
      * @param currentUser
      * @param addUserId
      * @return
      */
     public String addFriend(Long currentUser,Long addUserId){
+        if (currentUser.equals(addUserId)){
+            return "您不能添加您自己为好友!";
+        }
         FriendshipQuery query = new FriendshipQuery();
         query.setUserId(currentUser);
         query.setFriendId(addUserId);

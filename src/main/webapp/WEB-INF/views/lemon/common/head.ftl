@@ -17,7 +17,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li <#if currentPage=="friendsHomepage">class="active"</#if>><a href="/lemon/lemons/friends">首页</a></li>
-                <li <#if currentPage=="myselfPage">class="active"</#if>><a href="/lemon/lemons/myself">我的发布</a></li>
+                <li <#if currentPage=="myselfPage">class="active"</#if>><a href="/lemon/lemons/myself"><#if isCurrentUser=='true'>我的发布<#else>查看我的发布</#if></a></li>
                 <li <#if currentPage=="friends">class="active"</#if>><a href="/lemon/${headUserInfoView.id}/friends">好友</a></li>
                 <li <#if currentPage=="others">class="dropdown active"</#if> class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">更多 <span class="caret"></span></a>

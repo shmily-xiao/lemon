@@ -38,6 +38,13 @@ public class FriendShipController extends BaseController{
     @Resource
     private IUserService userService;
 
+    /**
+     * 查看自己的好友
+     * @param userId
+     * @param request
+     * @param model
+     * @return
+     */
     @UserLoginValidation
     @RequestMapping(value = "/lemon/{userId:\\d+}/friends")
     public String friends(@PathVariable Long userId, HttpServletRequest request, Model model){
@@ -51,6 +58,12 @@ public class FriendShipController extends BaseController{
         return "/lemon/friendship/friends";
     }
 
+    /**
+     * 搜索用户
+     * @param account
+     * @param request
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/lemon/search/user/{account}")
     public AjaxResponse searchUser(@PathVariable String account, HttpServletRequest request){
@@ -64,6 +77,12 @@ public class FriendShipController extends BaseController{
         return AjaxResponse.ok().data(JSON.toJSONString(friendsManager.initSearchUser(user.get())));
     }
 
+    /**
+     * 添加用户
+     * @param addUserId
+     * @param request
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/lemon/friends/add/{addUserId:\\d+}")
     public AjaxResponse addUser(@PathVariable Long addUserId, HttpServletRequest request){
