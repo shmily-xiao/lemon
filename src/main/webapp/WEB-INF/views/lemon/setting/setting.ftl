@@ -12,7 +12,7 @@
     <!--日历插件css-->
     <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
-    <!--上传插件样式-->
+    <!--上传图片插件样式-->
     <link rel="stylesheet" type="text/css" href="/js/webuploader/webuploader.css"/>
 
     <!-- 可选的Bootstrap主题文件（一般不使用） -->
@@ -27,10 +27,27 @@
     <!--日历插件js-->
     <script type="text/javascript" src="/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap-datetimepicker.zh-CN.js"></script>
+
+    <script src="/js/angular.min.js"></script>
+    <!--上传图片插件Js-->
+    <script type="text/javascript" src="/js/webuploader/webuploader.html5only.min.js"></script>
+
     <style>
         /*为了不闪烁*/
         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
             display: none !important;
+        }
+        .list-group-item.active{
+            background-color: #98bbde;
+            border: none;
+        }
+        .starter-template {
+            padding: 40px 15px;
+            text-align: center;
+        }
+        .navbar-default {
+            background-color: #DEDEDE;
+            border-color: #e7e7e7;
         }
     </style>
 </head>
@@ -45,29 +62,29 @@
 <div class="container">
     <div class="row" style="margin-top: 100px;padding: 5px;margin-bottom: 16px;">
         <div class="col-md-3 column">
-        <div class="col left-column">
+            <div class="col left-column">
             <div class="design" id="leftcolumn">
                 <div class="sidebar-box gallery-list">
                     <ul class="list-group">
-                        <li class="list-group-item" style="text-align:center;color: black;">
+                        <li class="list-group-item" ng-class="{'active':!modifyDataStyle}" ng-cloak="" style="text-align:center;color: black;">
                             <!-- 利用data-target指定URL -->
-                            <button class="menu-item-left" >
+                            <button class="menu-item-left"  ng-click="modifyData(event)">
                                 <span>修改资料</span>
                             </button>
                         </li>
-                        <li class="list-group-item" style="text-align:center;color: black;">
-                            <button class="menu-item-left" >
+                        <li class="list-group-item" ng-class="{'active':!modifyPasswordStyle}" ng-cloak="" style="text-align:center;color: black;" >
+                            <button class="menu-item-left" ng-click="modifyPassword(event)">
                                 <span>修改密码</span>
                             </button>
                         </li>
-                        <li class="list-group-item" style="text-align:center;color: black;">
+                        <li class="list-group-item" ng-class="{'active':!modifyPrivacyStyle}" ng-cloak="" style="text-align:center;color: black;" >
                             <!-- 利用data-target指定URL -->
-                            <button class="menu-item-left" >
+                            <button class="menu-item-left" ng-click="modifyPrivacy(event)" >
                                 <span>隐私设置</span>
                             </button>
                         </li>
-                        <li class="list-group-item" style="text-align:center;color: black;">
-                            <button class="menu-item-left" style="width: 72px;">
+                        <li class="list-group-item" ng-class="{'active':!feedbackStyle}" ng-cloak="" style="text-align:center;color: black;" >
+                            <button class="menu-item-left" style="width: 72px;" ng-click="feedback(event)">
                                 <span>反馈</span>
                             </button>
                         </li>
@@ -76,54 +93,80 @@
             </div>
         </div>
         </div>
-        <div class="col-md-9 column" style="display: none">
+        <div class="col-md-9 column" style="{{modifyDataStyle}}" ng-cloak="">
             <div class="col-md-12 column">
                 <div class="col-md-3 column">
-                    <div style="float:left;margin-top: 10px;" class="img_box" ng-mouseenter="picShow = true" ng-mouseleave="picShow = false" ng-cloak="" ng-repeat="pic in postData.images">
-                        <div class="img_box_hidden">
-                            <img style="height: 80.5px;width: 100px;" ng-src="{{pic}}"/>
+                    <div style="float:left;margin-top: 10px;" class="img_box" ng-mouseenter="picShow = true" ng-mouseleave="picShow = false" ng-cloak="">
+                        <div ng-hide="modifyDataPostData.avatar==''">
+                            <img style="height: 80.5px;width: 100px;" ng-src="{{modifyDataPostData.avatar}}"/>
                         </div>
                         <div class="del_img" ng-click="delDetailImg($index)" ng-show="picShow"></div>
                     </div>
-                    <div style="position: relative;margin-top:10px;box-sizing:border-box;height:80.5px;width:100px;cursor:pointer;background:url(/img/img_add.png) no-repeat center;background-size:contain;">
-                    <#--<label for="upload" style="display:block;width:100%;height:100%"></label>-->
-                    <#--<input type="file" id="upload" name="image" ng-model="image" class="webuploader-element-invisible" multiple="multiple" accept="image/gif,image/jpg,image/jpeg,image/bmp,image/png">-->
-                        <div ng-show="postData.images.length &lt; 2" id="upload"></div>
+                    <div style="margin-bottom: 14px;position: relative;margin-top:10px;box-sizing:border-box;height:80.5px;width:100px;cursor:pointer;background:url(/img/img_add.png) no-repeat center;background-size:contain;">
+                        <div id="upload"></div>
                     </div>
                     <div style="margin-left: 35px; margin-top: 5px;margin-bottom: 5px"><span>头像</span></div>
                 </div>
                 <div class="col-md-6 column">
+                    <div id="account_error" class="line-alert text-danger" ng-cloak ng-class="{'hidden':!(modifyDataPostData.nickname.$invalid)}">
+                        <span class="error line-alert text-danger" >昵称字数为2到10个</span>
+                    </div>
                     <div class="input-group" style="margin-bottom: 9px">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button">
                                 昵称
                             </button>
                         </span>
-                        <input type="text" class="form-control" style="width: 250px;">
+                        <input type="text" class="form-control"
+                               name="nickname"
+                               ng-model="modifyDataPostData.nickname"
+                               ng-trim='false'
+                               ng-minlength=2
+                               ng-maxlength=10
+                               placeholder="请输入昵称" />
                     </div><!-- /input-group -->
+                    <div id="account_error" class="line-alert text-danger" ng-cloak ng-class="{'hidden':!(modifyDataPostData.name.$invalid)}">
+                        <span class="error line-alert text-danger" >名字填写不正确</span>
+                    </div>
                     <div class="input-group" style="margin-bottom: 9px">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button">
                                 名字
                             </button>
                         </span>
-                        <input type="text" class="form-control" style="width: 250px;">
+                        <input type="text" class="form-control"
+                               ng-model="modifyDataPostData.name"
+                               ng-trim='false'
+                               ng-minlength=2
+                               ng-maxlength=10
+                               placeholder="请输入您的姓名" >
                     </div><!-- /input-group -->
+                    <div id="account_error" class="line-alert text-danger" ng-cloak ng-class="{'hidden':!(modifyDataPostData.gender.$invalid)}">
+                        <span class="error line-alert text-danger" >请选择性别</span>
+                    </div>
                     <div style="margin-bottom: 9px;">
                         <div class="input-group input-group-md" style="margin-top: 10px; float: left">
                             性别
                         </div>
                         <label class="checkbox-inline" style="margin-top: 10px;">
-                            <input type="radio" name="sex" ng-model="postData.sex"  value="true" > 男
+                            <input type="radio" name="sex" ng-model="modifyDataPostData.gender"  value="Male" > 男
                         </label>
                         <label class="checkbox-inline" style="margin-top: 10px;">
-                            <input type="radio" name="sex" ng-model="postData.sex"  value="false" checked> 女
+                            <input type="radio" name="sex" ng-model="modifyDataPostData.gender"  value="Female"> 女
                         </label>
+                    </div>
+                    <div id="account_error" class="line-alert text-danger" ng-cloak ng-class="{'hidden':(modifyDataPostData.birthday.$valid)}">
+                        <span class="error line-alert text-danger" >请选择生日</span>
                     </div>
                     <div class="input-group input-group-md" style="margin-bottom: 9px;">
                         <span class="input-group-addon">生日</span>
-                        <input style="height: 34px;width: 250px; text-align:center" type="text" value="" readOnly="true" id="datetimepicker" ng-model="postData.finishedTime" data-date-format="yyyy-mm-dd">
+                        <input class="form-control" style="text-align:center"
+                               type="text" value="" readOnly="true" id="datetimepicker"
+                               ng-model="modifyDataPostData.birthday" data-date-format="yyyy-mm-dd">
                         </input>
+                    </div>
+                    <div id="account_error" class="line-alert text-danger" ng-cloak ng-class="{'hidden':(modifyDataPostData.email.$error.email)}">
+                        <span class="error line-alert text-danger" >请输入正确的邮箱地址，这将用于找回您的密码</span>
                     </div>
                     <div class="input-group" style="margin-bottom: 9px">
                         <span class="input-group-btn">
@@ -131,45 +174,53 @@
                                 邮箱
                             </button>
                         </span>
-                        <input type="text" class="form-control" style="width: 250px;">
+                        <input type="text" class="form-control" ng-model="modifyDataPostData.email" placeholder="请输入您的邮箱">
                     </div><!-- /input-group -->
-
+                    <form>
+                    <p>sdfsdf:{{$scope.modifyDataPostData.profile.$valid}}</p>
+                    <p>sdfsdf:{{!$scope.modifyDataPostData.profile.$valid}}</p>
+                    <div id="account_error" class="line-alert text-danger" ng-cloak="" ng-show="!modifyDataPostData.profile.$valid">
+                        <span class="error line-alert text-danger" >不超过30个字符</span>
+                    </div>
                     <div class="input-group" style="margin-bottom: 9px">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button">
                                 简介
                             </button>
                         </span>
-                        <input type="text" class="form-control" style="width: 250px;">
+                        <input type="text" class="form-control" ng-model="modifyDataPostData.profile"
+                               ng-maxlength=3
+                               placeholder="请输入您的简介" required/>
                     </div><!-- /input-group -->
+                    </form>
                 </div>
 
             </div>
             <div class="col-md-12 column">
                 <div class="col-md-10 column"></div>
                 <div class="col-md-2 column" style="text-align: right;">
-                    <button type="button" class="btn btn-default" >更&nbsp;&nbsp;新</button>
+                    <button type="button" class="btn btn-default" ng-click="updateModifyData(event)">更&nbsp;&nbsp;新</button>
                 </div>
             </div>
         </div>
-        <div class="col-md-9 column" style="display: none">
+        <div class="col-md-9 column" style="{{modifyPasswordStyle}}" ng-cloak="">
             <div class="col-md-12 column">
                 <div class="col-md-6 column">
                     <div class="input-group" style="margin-bottom: 9px">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原密码
+                                &nbsp;&nbsp;&nbsp;&nbsp;原密码
                             </button>
                         </span>
-                        <input type="text" class="form-control" style="width: 250px;">
+                        <input type="text" class="form-control" ng-model="modifyPasswordData.oldPassword">
                     </div><!-- /input-group -->
                     <div class="input-group" style="margin-bottom: 9px">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;新密码
+                                &nbsp;&nbsp;&nbsp;&nbsp;新密码
                             </button>
                         </span>
-                        <input type="text" class="form-control" style="width: 250px;">
+                        <input type="text" class="form-control" ng-model="modifyPasswordData.newPassword">
                     </div><!-- /input-group -->
                     <div class="input-group" style="margin-bottom: 9px">
                         <span class="input-group-btn">
@@ -177,7 +228,7 @@
                                 确认密码
                             </button>
                         </span>
-                        <input type="text" class="form-control" style="width: 250px;">
+                        <input type="text" class="form-control" ng-model="modifyPasswordData.newPasswordConfirm">
                     </div><!-- /input-group -->
 
                 </div>
@@ -190,15 +241,15 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9 column" style="display: none">
+        <div class="col-md-9 column" style="{{modifyPrivacyStyle}}" ng-cloak="">
             <div class="col-md-12 column">
                 <div class="col-md-6 column">
                     <div class="input-group" style="margin-bottom: 9px">
                         <span class="input-group-addon">内容查看权限</span>
-                        <select style="height: 34px;width: 151px;">
-                            <option value="public" >公开</option>
-                            <option value="private" >关闭</option>
-                            <option value="friend" >对好友可见</option>
+                        <select style="height: 34px;width: 151px;" ng-model="modifyPrivacyPostData.zoneStatus">
+                            <option value="PUBLIC" >公开</option>
+                            <option value="PRIVATE" >关闭</option>
+                            <option value="FRIENDSHIP" >对好友可见</option>
                         </select>
                     </div><!-- /input-group -->
 
@@ -212,12 +263,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9 column">
+        <div class="col-md-9 column" style="{{feedbackStyle}}" ng-cloak="">
             <div class="col-md-12 column">
                 <div class="col-md-6 column">
                     <div class="panel-body">
                         <div class="form-group">
-                            <textarea class="form-control"  rows="10" style="resize:none;"
+                            <textarea class="form-control"  ng-model="feedbackPostData.content" rows="10" style="resize:none;"
                                       placeholder="在这里写下您宝贵的意见并且留下联系方式，或者发邮件到wangzaijun1234@126.com。我将尽快与您联系。"></textarea>
                         </div>
                     </div>
@@ -261,8 +312,6 @@
         autoclose:true
     });
 </script>
-<script src="/js/angular.min.js"></script>
-<script type="text/javascript" src="/js/webuploader/webuploader.html5only.min.js"></script>
 <script>
     function generateMixed(n) {
         var jschars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -275,8 +324,71 @@
     }
     var app = angular.module('myApp', []);
     app.controller('personalCenter',['$scope','$http',function($scope,$http) {
+        $scope.picShow=false;
+        $scope.modifyDataPostData={
+            avatar:'',
+            gender:'',
+            name:'',
+            nickname:'',
+            birthday:'',
+            email:'',
+            profile:''
+        };
+
+        $scope.modifyPasswordPostData={
+            oldPassword:'',
+            newPassword:'',
+            newPasswordConfirm:''
+        };
 
 
+        $scope.modifyPrivacyPostData={
+            zoneStatus:'PUBLIC'
+        };
+
+        $scope.feedbackPostData={
+            content:''
+        };
+
+        $scope.modifyDataStyle = '';
+        $scope.modifyPasswordStyle = 'display:none';
+        $scope.modifyPrivacyStyle = 'display:none';
+        $scope.feedbackStyle = 'display:none';
+
+        $scope.modifyData = function(event){
+            $scope.modifyDataStyle = '';
+            $scope.modifyPasswordStyle = 'display:none';
+            $scope.modifyPrivacyStyle = 'display:none';
+            $scope.feedbackStyle = 'display:none';
+        };
+        $scope.modifyPassword = function(event){
+
+            $scope.modifyDataStyle = 'display:none';
+            $scope.modifyPasswordStyle = '';
+            $scope.modifyPrivacyStyle = 'display:none';
+            $scope.feedbackStyle = 'display:none';
+        };
+        $scope.modifyPrivacy = function(event){
+            $scope.modifyDataStyle = 'display:none';
+            $scope.modifyPasswordStyle = 'display:none';
+            $scope.modifyPrivacyStyle = '';
+            $scope.feedbackStyle = 'display:none';
+        };
+        $scope.feedback = function(event){
+            $scope.modifyDataStyle = 'display:none';
+            $scope.modifyPasswordStyle = 'display:none';
+            $scope.modifyPrivacyStyle = 'display:none';
+            $scope.feedbackStyle = '';
+        };
+
+        $scope.updateModifyData = function(event){
+
+            $http.post('/lemon/personal/center/modify/information',$scope.modifyDataPostData).success(function(data){
+
+            }).error(function(){
+
+            });
+        }
 
         //--------------------------------------------------------//
         //-------------------- 图片上传的插件 ----------------------//
@@ -305,15 +417,14 @@
         });
         uploader.on( 'uploadSuccess', function( file , response) {
             if(response.code == 0){
-                $scope.postData.images=[];//只能添加一张照片
-                $scope.postData.images.push(response.data);
+                $scope.modifyDataPostData.avatar = response.data;
                 $scope.$apply();
             }else{
                 alert(response.msg);
             }
         });
         uploader.on('error',function() {
-            alert('error!')
+            alert('不支持的图片!')
         });
         //删除图片
         $scope.delDetailImg = function(index){
