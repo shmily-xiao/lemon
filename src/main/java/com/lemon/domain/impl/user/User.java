@@ -79,30 +79,10 @@ public class User extends BaseDomain implements IUser {
      */
     private String status = "true";
 
-//    /**
-//     * 用户的类型，或者是等级,默认为 新手
-//     */
-//    private UserType type = UserType.NEWBIE;
-
-//    /**
-//     * 成就值，得分
-//     */
-//    private Long score = 0L;
-//
-//    /**
-//     * 用户是否公开自己的事件，或者是只能好友可见
-//     */
-//    private ZoneStatus zoneStatus = ZoneStatus.PUBLIC;
-
     /**
      * 注册类型，最初是手机号、和qq号
      */
     private SignupType signupType;
-
-//    /**
-//     * 短信的条数
-//     */
-//    private Long smsCount;
 
     /**
      * 是否可以更改账号

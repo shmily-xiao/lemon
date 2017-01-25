@@ -19,6 +19,7 @@ public class UserInformationForm extends BaseForm{
      * 头像
      */
     @MappingRule
+    @NotBlank
     private String avatar;
 
     /**
@@ -56,6 +57,8 @@ public class UserInformationForm extends BaseForm{
      * 邮箱
      */
     @MappingRule
+    @NotNull
+    @NotBlank
     private String email;
 
     /**

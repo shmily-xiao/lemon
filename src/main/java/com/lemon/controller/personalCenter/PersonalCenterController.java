@@ -4,6 +4,7 @@ import com.lemon.annotation.UserLoginValidation;
 import com.lemon.controller.BaseController;
 import com.lemon.domain.impl.user.User;
 import com.lemon.form.AjaxResponse;
+import com.lemon.form.feedback.FeedbackForm;
 import com.lemon.form.user.UserInformationForm;
 import com.lemon.form.user.UserPasswordModifyForm;
 import com.lemon.form.user.UserPrivacyForm;
@@ -83,8 +84,11 @@ public class PersonalCenterController extends BaseController{
         String account = (String)session.getAttribute(LemonConstants.USER_SEESSION_ACCOUNT);
         if (account == null || account.isEmpty()) return AjaxResponse.fail().reason("用户没有登录").url("/account/login");
 
-        // 理论上应该不会有错 // TODO: 2016/8/15 这个地方需要更改，form中属性是要更改的，其他的保留数据库数据
+        // 理论上应该不会有错
         Optional<User> user = userService.findUserByAccount(account);
+        if (!user.isPresent()) return AjaxResponse.fail().msg("保存失0败");
+
+        // form中属性是要更改的，其他的保留数据库数据
         User newUser = MappingExcutor.map(userForm);
         newUser.setId(user.get().getId());
 
@@ -92,7 +96,6 @@ public class PersonalCenterController extends BaseController{
         if (!newUserOptional.isPresent()){
             return AjaxResponse.fail().msg("更新失败").reason("网络错误");
         }
-
         return AjaxResponse.ok();
     }
 
@@ -108,11 +111,11 @@ public class PersonalCenterController extends BaseController{
     @ResponseBody
     @RequestMapping(value = "/lemon/personal/center/modify/privacy")
     public AjaxResponse updateUserPrivacy(@RequestBody @Valid UserPrivacyForm form, BindingResult result, HttpServletRequest request){
-        if (result.hasErrors()) return AjaxResponse.fail().msg("保存失败").reason("数据表单没有填写完全");
+        if (result.hasErrors()) return AjaxResponse.fail().msg("保存失败,数据表单没有填写完全").reason("数据表单没有填写完全");
 
         HttpSession session = request.getSession();
         String account = (String)session.getAttribute(LemonConstants.USER_SEESSION_ACCOUNT);
-        if (account == null || account.isEmpty()) return AjaxResponse.fail().reason("用户没有登录").url("/account/login");
+        if (account == null || account.isEmpty()) return AjaxResponse.fail().msg("用户没有登录").reason("用户没有登录").url("/account/login");
 
         // 理论上应该不会有错
         Optional<User> user = userService.findUserByAccount(account);
@@ -141,12 +144,12 @@ public class PersonalCenterController extends BaseController{
 
         HttpSession session = request.getSession();
         String account = (String)session.getAttribute(LemonConstants.USER_SEESSION_ACCOUNT);
-        if (account == null || account.isEmpty()) return AjaxResponse.fail().reason("用户没有登录").url("/account/login");
+        if (account == null || account.isEmpty()) return AjaxResponse.fail().msg("用户没有登录").reason("用户没有登录").url("/account/login");
 
         // 理论上应该不会有错
         Optional<User> user = userService.findUserByAccount(account);
         if (!user.get().getPassword().equals(Md5.messageDigest(form.getOldPassword() + user.get().getSalt()))){
-            return AjaxResponse.fail().msg("修改失败").reason("原密码不正确");
+            return AjaxResponse.fail().msg("修改失败,原密码不正确");
         }
 
         user.get().setPassword(Md5.messageDigest(form.getNewPassword() + user.get().getSalt()));
@@ -158,8 +161,29 @@ public class PersonalCenterController extends BaseController{
     }
 
 
+    /**
+     *
+     * @param feedbackForm
+     * @param request
+     * @return
+     */
     @ResponseBody
-    @RequestMapping("/lemon/personal/send/auth/code/{mobile:^1[3|4|5|7|8]\\d{9}$}")
+    @RequestMapping("/lemon/feedback")
+    public AjaxResponse sendEmail(@RequestBody @Valid FeedbackForm feedbackForm, HttpServletRequest request,BindingResult result){
+        if (result.hasErrors()) return AjaxResponse.fail().msg("修改失败").reason("数据表单没有填写完全");
+
+        HttpSession session = request.getSession();
+        String account = (String)session.getAttribute(LemonConstants.USER_SEESSION_ACCOUNT);
+        if (account == null || account.isEmpty()) return AjaxResponse.fail().msg("用户没有登录").reason("用户没有登录").url("/account/login");
+
+
+
+        return AjaxResponse.fail();
+    }
+
+// 发送验证码
+    //    @ResponseBody
+//    @RequestMapping("/lemon/personal/send/auth/code/{mobile:^1[3|4|5|7|8]\\d{9}$}")
     public AjaxResponse sendAuthCode(@PathVariable String mobile){
 
         return AjaxResponse.fail();
