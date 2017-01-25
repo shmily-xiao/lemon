@@ -3,16 +3,20 @@ package com.lemon.controller.personalCenter;
 import com.lemon.annotation.UserLoginValidation;
 import com.lemon.controller.BaseController;
 import com.lemon.convertor.ConvertorResult;
+import com.lemon.domain.impl.access.AccessControl;
 import com.lemon.domain.impl.user.User;
+import com.lemon.domain.impl.user.UserRecord;
 import com.lemon.form.AjaxResponse;
 import com.lemon.form.feedback.FeedbackForm;
 import com.lemon.form.user.UserInformationForm;
 import com.lemon.form.user.UserPasswordModifyForm;
 import com.lemon.form.user.UserPrivacyForm;
-import com.lemon.framework.mapping.excutor.MappingExcutor;
+import com.lemon.manager.email.EmailManager;
 import com.lemon.manager.user.HeadUserInfoManager;
 import com.lemon.pojo.constants.LemonConstants;
 import com.lemon.query.user.UserQuery;
+import com.lemon.service.IAccessControlService;
+import com.lemon.service.IUserRecordService;
 import com.lemon.service.IUserService;
 import com.lemon.utils.BeanLocator;
 import com.lemon.utils.Md5;
@@ -43,7 +47,16 @@ public class PersonalCenterController extends BaseController{
     private IUserService userService;
 
     @Resource
+    private IUserRecordService userRecordService;
+
+    @Resource
+    private IAccessControlService accessControlService;
+
+    @Resource
     private HeadUserInfoManager headUserInfoManager;
+
+    @Resource
+    private EmailManager emailManager;
 
     /**
      *
@@ -90,7 +103,7 @@ public class PersonalCenterController extends BaseController{
 
         // 理论上应该不会有错
         Optional<User> user = userService.findUserByAccount(account);
-        if (!user.isPresent()) return AjaxResponse.fail().msg("保存失0败");
+        if (!user.isPresent()) return AjaxResponse.fail().msg("用户不存在");
 
         // form中属性是要更改的，其他的保留数据库数据
 //        User newUser = MappingExcutor.map(userForm);
@@ -125,11 +138,13 @@ public class PersonalCenterController extends BaseController{
 
         // 理论上应该不会有错
         Optional<User> user = userService.findUserByAccount(account);
+        if (!user.isPresent()) return AjaxResponse.fail().msg("用户不存在");
+        Optional<UserRecord> userRecord = userRecordService.findUserRecordByUserId(user.get().getId());
+        Optional<AccessControl> accessControl = accessControlService.find(userRecord.get().getAccessControlId());
+        accessControl.get().setStrategy(form.getZoneStatus());
         // 更新空间的隐私设置
-//        user.get().setZoneStatus(form.getZoneStatus());
-
-        Optional<User> newUserOptional = userService.update(user.get());
-        if (!newUserOptional.isPresent()){
+        Optional<AccessControl> update = accessControlService.update(accessControl.get());
+        if (!update.isPresent()){
             return AjaxResponse.fail().msg("更新失败").reason("网络错误");
         }
 
@@ -154,6 +169,7 @@ public class PersonalCenterController extends BaseController{
 
         // 理论上应该不会有错
         Optional<User> user = userService.findUserByAccount(account);
+        if (!user.isPresent()) return AjaxResponse.fail().msg("用户不存在");
         if (!user.get().getPassword().equals(Md5.messageDigest(form.getOldPassword() + user.get().getSalt()))){
             return AjaxResponse.fail().msg("修改失败,原密码不正确");
         }
@@ -168,7 +184,7 @@ public class PersonalCenterController extends BaseController{
 
 
     /**
-     *
+     * 用户的反馈
      * @param feedbackForm
      * @param request
      * @return
@@ -182,9 +198,8 @@ public class PersonalCenterController extends BaseController{
         String account = (String)session.getAttribute(LemonConstants.USER_SEESSION_ACCOUNT);
         if (account == null || account.isEmpty()) return AjaxResponse.fail().msg("用户没有登录").reason("用户没有登录").url("/account/login");
 
-
-
-        return AjaxResponse.fail();
+        emailManager.sendFeedbackMail(feedbackForm.getContent(),account);
+        return AjaxResponse.ok().msg("返回已发送，谢谢您的支持");
     }
 
 // 发送验证码
@@ -210,5 +225,4 @@ public class PersonalCenterController extends BaseController{
         }
         return user;
     }
-
 }

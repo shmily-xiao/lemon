@@ -293,7 +293,7 @@
         <div class="col-md-12 column">
             <div class="col-md-10 column"></div>
             <div class="col-md-2 column" style="text-align: right;">
-                <button type="button" class="btn btn-default" >提&nbsp;&nbsp;交</button>
+                <button type="button" class="btn btn-default" ng-click="sendFeedbackPostData(event)">提&nbsp;&nbsp;交</button>
             </div>
         </div>
     </div>
@@ -443,7 +443,7 @@
             if ($scope.feedbackPostData.content==''){
                 alert("没有填写内容哦");
             }
-            $http.post('/lemon/personal/center/modify/privacy',$scope.modifyPrivacyPostData).success(function(data){
+            $http.post('/lemon/feedback',$scope.feedbackPostData).success(function(data){
                 alert(data.msg);
             }).error(function(){
                 alert("网络异常，请稍后再试！");

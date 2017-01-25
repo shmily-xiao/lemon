@@ -3,11 +3,8 @@ package com.lemon.domain.interfaces.user;
 import com.lemon.domain.interfaces.ibase.IName;
 import com.lemon.enums.GenderType;
 import com.lemon.enums.SignupType;
-import com.lemon.enums.UserType;
-import com.lemon.enums.ZoneStatus;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * Created by simpletour_Jenkin on 2016/7/27.

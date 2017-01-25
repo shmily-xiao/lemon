@@ -1,7 +1,6 @@
 package com.lemon.form.user;
 
 import com.lemon.enums.StrategyType;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
 
@@ -13,7 +12,6 @@ public class UserPrivacyForm {
     /**
      * 设置是否公开自己的空间
      */
-    @NotBlank
     @NotNull
     private StrategyType zoneStatus;
 

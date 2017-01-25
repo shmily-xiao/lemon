@@ -279,6 +279,12 @@
         </dependency>
         <!--Jersey spring-->
 
+        <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4</version>
+        </dependency>
         <!-- 阿里云oss-->
         <dependency>
             <groupId>com.aliyun.oss</groupId>
