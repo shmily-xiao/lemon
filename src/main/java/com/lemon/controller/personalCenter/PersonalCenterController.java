@@ -2,6 +2,7 @@ package com.lemon.controller.personalCenter;
 
 import com.lemon.annotation.UserLoginValidation;
 import com.lemon.controller.BaseController;
+import com.lemon.convertor.ConvertorResult;
 import com.lemon.domain.impl.user.User;
 import com.lemon.form.AjaxResponse;
 import com.lemon.form.feedback.FeedbackForm;
@@ -13,6 +14,7 @@ import com.lemon.manager.user.HeadUserInfoManager;
 import com.lemon.pojo.constants.LemonConstants;
 import com.lemon.query.user.UserQuery;
 import com.lemon.service.IUserService;
+import com.lemon.utils.BeanLocator;
 import com.lemon.utils.Md5;
 import com.lemon.view.user.HeadUserInfoView;
 import com.lemon.view.user.UserView;
@@ -74,6 +76,8 @@ public class PersonalCenterController extends BaseController{
      * @param result
      * @param request
      * @return
+     *
+     * @see com.lemon.convertor.user.UpdateUserInformationConvertor
      */
     @ResponseBody
     @RequestMapping(value = "/lemon/personal/center/modify/information")
@@ -89,14 +93,16 @@ public class PersonalCenterController extends BaseController{
         if (!user.isPresent()) return AjaxResponse.fail().msg("保存失0败");
 
         // form中属性是要更改的，其他的保留数据库数据
-        User newUser = MappingExcutor.map(userForm);
-        newUser.setId(user.get().getId());
+//        User newUser = MappingExcutor.map(userForm);
+//        newUser.setId(user.get().getId());
+        ConvertorResult convertorResult = (ConvertorResult) BeanLocator.findBeanByName("UpdateUserInformation_Convertor");
+        User newUser = (User) convertorResult.getResult(user.get(),userForm);
 
         Optional<User> newUserOptional = userService.update(newUser);
         if (!newUserOptional.isPresent()){
             return AjaxResponse.fail().msg("更新失败").reason("网络错误");
         }
-        return AjaxResponse.ok();
+        return AjaxResponse.ok().msg("更新成功！");
     }
 
 
