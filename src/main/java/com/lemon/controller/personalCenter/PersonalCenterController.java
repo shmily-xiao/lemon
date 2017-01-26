@@ -198,8 +198,10 @@ public class PersonalCenterController extends BaseController{
         String account = (String)session.getAttribute(LemonConstants.USER_SEESSION_ACCOUNT);
         if (account == null || account.isEmpty()) return AjaxResponse.fail().msg("用户没有登录").reason("用户没有登录").url("/account/login");
 
-        emailManager.sendFeedbackMail(feedbackForm.getContent(),account);
+        emailManager.sendEmail(feedbackForm.getContent(),account);
+
         return AjaxResponse.ok().msg("返回已发送，谢谢您的支持");
+
     }
 
 // 发送验证码

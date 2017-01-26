@@ -28,4 +28,15 @@
         <!--<property name="accessKey" value="${oss4springmvc.accessKey}" />-->
         <!--<property name="bucket" value="${oss4springmvc.bucket}" />-->
     <!--</bean>-->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="${mail.smtp.host}"></property>
+        <property name="javaMailProperties" >
+            <props>
+                <prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
+                <prop key="mail.smtp.timeout">${mail.smtp.timeout}</prop>
+            </props>
+        </property>
+        <property name="username" value="${mail.smtp.username}"></property>
+        <property name="password" value="${mail.smtp.password}"></property>
+    </bean>
 </beans>
