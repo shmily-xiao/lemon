@@ -77,7 +77,7 @@
             <div class="col-md-12 column" ng-if="successStatus=='true'" ng-cloak="">
                 <div class="col-md-6 column">
                     <div class="col-sm-2 column">
-                        <button type="button" class="btn btn-default" ng-click="addUser(event)">添加</button>
+                        <button type="button" class="btn btn-default" ng-click="addUser(event)">关注</button>
                         <a href="/lemon/lemons/{{friendView.userId}}/friend/contents" ><button type="button" class="btn btn-default">查看</button></a>
                     </div>
 
