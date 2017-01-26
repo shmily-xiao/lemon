@@ -178,7 +178,6 @@
                         </span>
                         <input type="text" class="form-control"
                                ng-model="modifyDataPostData.email"
-                               ng-pattern="/^[A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/"
                                placeholder="请输入您的邮箱"/>
                     </div><!-- /input-group -->
                     <div id="account_error" class="line-alert text-danger" ng-cloak="" ng-class="{'hidden':(modifyDataPostData.profile)}">
@@ -213,7 +212,7 @@
                                 &nbsp;&nbsp;&nbsp;&nbsp;原密码
                             </button>
                         </span>
-                        <input class="form-control" ng-model="modifyPasswordData.oldPassword"
+                        <input class="form-control" ng-model="modifyPasswordPostData.oldPassword"
                                ng-minlength=8
                                ng-maxlength=100
                                type="password"/>
@@ -224,17 +223,17 @@
                                 &nbsp;&nbsp;&nbsp;&nbsp;新密码
                             </button>
                         </span>
-                        <input class="form-control" ng-model="modifyPasswordData.newPassword"
+                        <input class="form-control" ng-model="modifyPasswordPostData.newPassword"
                                ng-minlength=8
                                ng-maxlength=100
                                type="password"/>
                     </div><!-- /input-group -->
                     <div id="account_error" class="line-alert text-danger"
-                         ng-cloak ng-class="{'hidden':(modifyPasswordData.newPassword==modifyPasswordData.newPasswordConfirm)}">
+                         ng-cloak ng-class="{'hidden':(modifyPasswordPostData.newPassword==modifyPasswordPostData.newPasswordConfirm)}">
                         <span class="error line-alert text-danger" >两次密码不同</span>
                     </div>
                     <div id="account_error" class="line-alert text-danger"
-                         ng-cloak ng-class="{'hidden':(modifyPasswordData.newPasswordConfirm.length<8||modifyPasswordData.newPasswordConfirm.length>100)}">
+                         ng-cloak ng-class="{'hidden':!(modifyPasswordPostData.newPasswordConfirm.length<8||modifyPasswordPostData.newPasswordConfirm.length>100)}">
                         <span class="error line-alert text-danger" >密码至少8位数且不能超过100位</span>
                     </div>
                     <div class="input-group" style="margin-bottom: 9px">
@@ -243,7 +242,8 @@
                                 确认密码
                             </button>
                         </span>
-                        <input class="form-control" ng-model="modifyPasswordData.newPasswordConfirm"
+                        <input class="form-control" ng-model="modifyPasswordPostData.newPasswordConfirm"
+                               name="password"
                                type="password" />
                     </div><!-- /input-group -->
 
@@ -416,11 +416,14 @@
                 alert("两次输入的密码不一致");
                 return;
             }
-            $scope.modifyPasswordPostData.oldPassword=hex_md5($scope.modifyPasswordPostData.oldPassword.trim());
-            $scope.modifyPasswordPostData.newPassword=hex_md5($scope.modifyPasswordPostData.newPassword.trim());
-            $scope.modifyPasswordPostData.newPasswordConfirm=hex_md5($scope.modifyPasswordPostData.newPasswordConfirm.trim());
+            $scope.password={
+                oldPassword:'',
+                newPassword:''
+            };
+            $scope.password.oldPassword=hex_md5($scope.modifyPasswordPostData.oldPassword.trim());
+            $scope.password.newPassword=hex_md5($scope.modifyPasswordPostData.newPassword.trim());
 
-            $http.post('/lemon/personal/center/modify/password',$scope.modifyPasswordPostData).success(function(data){
+            $http.post('/lemon/personal/center/modify/password',$scope.password).success(function(data){
                 alert(data.msg);
             }).error(function(){
                 alert("网络异常，请稍后再试！");

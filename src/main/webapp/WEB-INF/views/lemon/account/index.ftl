@@ -124,7 +124,7 @@
                         <label></label>
                         <button ng-click="loginSubmit($event)" type="button" class="btn btn-primary btn-lg btn-block btn-primary home-log-signup-action">登录</button>
                         <div class="home-login-wechat" data-expire_seconds=300>
-                            <a class="btn btn-default" data-toggle="modal" data-target="#wechat-login-qr" onclick="toQQLogin()">
+                            <a class="btn btn-default" data-toggle="modal" data-target="#wechat-login-qr">
                                 <img src="/img/qq16w.ico" style="margin-top: -3px; margin-right: 3px;"/>QQ登录
                             </a>
                         </div>

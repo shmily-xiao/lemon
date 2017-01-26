@@ -148,7 +148,7 @@ public class PersonalCenterController extends BaseController{
             return AjaxResponse.fail().msg("更新失败").reason("网络错误");
         }
 
-        return AjaxResponse.ok();
+        return AjaxResponse.ok().msg("更新成功!");
     }
 
     /**
@@ -179,7 +179,7 @@ public class PersonalCenterController extends BaseController{
         if (!newUser.isPresent()){
             return AjaxResponse.fail().msg("更新失败").reason("网络错误");
         }
-        return AjaxResponse.ok();
+        return AjaxResponse.ok().msg("更新成功!");
     }
 
 

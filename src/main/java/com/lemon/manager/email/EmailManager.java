@@ -23,7 +23,7 @@ public class EmailManager {
     private JavaMailSender javaMailSender;
 
     public void sendEmail(String msg,String account){
-        String emails = "981189841@qq.com";
+        String emails = "wangzaijun1234@126.com";
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setSubject("账号为："+account+"用户的反馈");
         simpleMailMessage.setFrom("1350468513@qq.com");

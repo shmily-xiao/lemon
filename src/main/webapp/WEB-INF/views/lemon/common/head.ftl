@@ -23,6 +23,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">更多 <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="/lemon/personal/center">个人中心</a></li>
+                        <li><a href="/lemon/aboutus">网站介绍</a></li>
                     <#--<li class="divider"></li>-->
                     <#--<li class="dropdown-header">友情链接</li>-->
                     <#--<li><a href="#">Separated link</a></li>-->

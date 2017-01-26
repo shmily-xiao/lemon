@@ -26,7 +26,6 @@ public class UserInformationForm extends BaseForm{
      * 性别
      */
     @NotNull
-    @NotBlank
     @MappingRule
     private GenderType gender;
 
