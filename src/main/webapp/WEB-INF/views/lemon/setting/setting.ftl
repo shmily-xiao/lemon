@@ -339,13 +339,13 @@
     app.controller('personalCenter',['$scope','$http',function($scope,$http) {
         $scope.picShow=false;
         $scope.modifyDataPostData={
-            avatar:'',
-            gender:'',
-            name:'',
-            nickname:'',
-            birthday:'',
-            email:'',
-            profile:''
+            avatar:'${user.avatar}'||'',
+            gender:'${user.gender}'||'',
+            name:'${user.name}'||'',
+            nickname:'${user.nickName}'||'',
+            birthday:'1998-01-15',
+            email:'${user.email}'||'',
+            profile:'${user.profile}'||''
         };
 
         $scope.modifyPasswordPostData={
