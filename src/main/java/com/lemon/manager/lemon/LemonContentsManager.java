@@ -131,9 +131,10 @@ public class LemonContentsManager {
         contentList.addAll(friendContents);
 
         // 组装
-        Optional<User> userOptional = userService.find(userId);
+
         return contentList.stream()
                 .map(content -> {
+                    Optional<User> userOptional = userService.find(content.getUserId());
                     Optional<ContentPlan> contentPlan = contentPlanService.findByContentId(content.getId());
                     List<Interaction> interactions = interactionService.findByContentId(content.getId());
                     ConvertorResult convertorResult = (ConvertorResult)BeanLocator.findBeanByName("ContentDomainToFriendHomeView_Convertor");
