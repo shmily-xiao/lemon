@@ -6,26 +6,20 @@ import com.lemon.domain.impl.access.AccessControl;
 import com.lemon.domain.impl.content.Content;
 import com.lemon.domain.impl.content.ContentPlan;
 import com.lemon.domain.impl.user.UserRecord;
-import com.lemon.domain.interfaces.access.IAccessControl;
-import com.lemon.domain.interfaces.user.IUserRecord;
 import com.lemon.enums.UserType;
 import com.lemon.exception.BaseSystemException;
-import com.lemon.framework.enumwrapper.Option;
 import com.lemon.query.BaseQuery;
 import com.lemon.query.content.LemonContentQuery;
 import com.lemon.query.user.UserRecordQuery;
 import com.lemon.service.IContentService;
 import com.lemon.service.bo.lemonContent.LemonContentAddBo;
 import com.lemon.utils.StringUtils;
-import javassist.bytecode.annotation.BooleanMemberValue;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 /**
  * Created by simpletour_Jenkin on 2016/7/29.
@@ -98,7 +92,8 @@ public class ContentServiceImpl extends BaseServiceImpl<Content,BaseQuery> imple
         LemonContentQuery query = new LemonContentQuery();
         query.setUserId(userId);
         List<Content>contents = contentDao.findEntities(query);
-        return contents!=null&&!contents.isEmpty() ? contents : Collections.emptyList();
+        // Collections.emptyList() this may be call UnsupportedOperationException
+        return contents!=null&&!contents.isEmpty() ? contents : new ArrayList<>();
     }
 
     /**
