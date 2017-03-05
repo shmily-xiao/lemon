@@ -10,6 +10,7 @@ import com.lemon.domain.impl.friend.Friendship;
 import com.lemon.enums.FriendType;
 import com.lemon.enums.StrategyType;
 import com.lemon.query.BaseQuery;
+import com.lemon.query.friendship.FriendGroupQuery;
 import com.lemon.query.friendship.FriendshipQuery;
 import com.lemon.service.IFriendshipService;
 import org.springframework.stereotype.Service;
@@ -49,18 +50,28 @@ public class FriendshipServiceImpl  extends BaseServiceImpl<Friendship,BaseQuery
     @Transactional
     public Boolean addFriend(Long currentUser, Long addUserId) {
 
-        // 插入分组
-        FriendGroup friendGroup = new FriendGroup();
-        friendGroup.setGroupName("我的好友");
-        friendGroup.setUserId(currentUser);
-        friendGroupDao.insert(friendGroup);
+        // 当分组不存的时候才插入分组
+        Long friendGroupId = 0L;
+        FriendGroupQuery query = new FriendGroupQuery();
+        query.setGroupName("我的好友");
+        query.setUserId(currentUser);
+        List<FriendGroup> groups = friendGroupDao.findEntities(query);
+        if (groups==null || groups.isEmpty()) {
+            FriendGroup friendGroup = new FriendGroup();
+            friendGroup.setGroupName("我的好友");
+            friendGroup.setUserId(currentUser);
+            friendGroupDao.insert(friendGroup);
+            friendGroupId = friendGroup.getId();
+        }else {
+            friendGroupId = groups.get(0).getId();
+        }
 
         // 插入朋友的记录，但是少了策略的id
         Friendship friendship = new Friendship();
         friendship.setUserId(currentUser);
         friendship.setFriendId(addUserId);
         friendship.setType(FriendType.GENERAL);
-        friendship.setFriendGroupId(friendGroup.getId());
+        friendship.setFriendGroupId(friendGroupId);
         friendshipDao.insert(friendship);
 
         // 插入策略的，就是当前用户对好友的公开策略
