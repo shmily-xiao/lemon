@@ -64,7 +64,6 @@
     <select id="findEntities" resultMap="friendshipResultMap">
         SELECT * FROM friendship
         <where>
-            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
             <if test="id !=null  and id != ''">and id = #{id}</if>
             <if test="userId != null and userId != ''">and user_id = #{userId}</if>
             <if test="friendId != null and friendId != ''">and friend_id = #{friendId}</if>

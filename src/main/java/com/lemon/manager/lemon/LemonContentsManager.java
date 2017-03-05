@@ -8,7 +8,6 @@ import com.lemon.domain.impl.content.ContentPlan;
 import com.lemon.domain.impl.content.Interaction;
 import com.lemon.domain.impl.friend.Friendship;
 import com.lemon.domain.impl.user.User;
-import com.lemon.domain.impl.user.UserRecord;
 import com.lemon.enums.ContentType;
 import com.lemon.enums.StrategyType;
 import com.lemon.form.lemonContents.LemonContentsAddForm;
@@ -129,6 +128,7 @@ public class LemonContentsManager {
                 })
                 .collect(Collectors.toList());
         contentList.addAll(friendContents);
+        contentList = contentList.stream().sorted(Comparator.comparing(Content::getCreatedTime).reversed()).collect(Collectors.toList());
 
         // 组装
 
@@ -205,7 +205,7 @@ public class LemonContentsManager {
         }
 
         // 如果是好友，看不到好友将内容设为私密的记录且看不到，其他的可以看到
-        return this.lookStrangerContents(friendId);
+        return this.lookFriendContents(friendId);
 
     }
 
