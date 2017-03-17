@@ -138,7 +138,7 @@ public class LemonContentsManager {
                     Optional<ContentPlan> contentPlan = contentPlanService.findByContentId(content.getId());
                     List<Interaction> interactions = interactionService.findByContentId(content.getId());
                     ConvertorResult convertorResult = (ConvertorResult)BeanLocator.findBeanByName("ContentDomainToFriendHomeView_Convertor");
-                    return (LemonContentsElementView)convertorResult.getResult(content,contentPlan.get(),interactions,userOptional.get());
+                    return (LemonContentsElementView)convertorResult.getResult(content,contentPlan.get(),interactions,userOptional.get(),userId);
                 })
                 .collect(Collectors.toList());
     }

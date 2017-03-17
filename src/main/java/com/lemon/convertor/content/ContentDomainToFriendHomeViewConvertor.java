@@ -41,6 +41,7 @@ public class ContentDomainToFriendHomeViewConvertor implements ConvertorResult<L
         if (obj[3]!=null) {
            user = (User) obj[3];
         }
+        Long currentUserId = (Long) obj[4];
 
         LemonContentsElementView view = new LemonContentsElementView();
 
@@ -91,8 +92,8 @@ public class ContentDomainToFriendHomeViewConvertor implements ConvertorResult<L
                 view.setCollectCount(Long.valueOf(interactionsCollect.size() + ""));
             }
             if (user!=null) {
-                view.setLikeStatus(this.isIncludeCurrentUserId(interactionsLike, user.getId()).toString());
-                view.setCollectStatus(this.isIncludeCurrentUserId(interactionsCollect,user.getId()).toString());
+                view.setLikeStatus(this.isIncludeCurrentUserId(interactionsLike, currentUserId).toString());
+                view.setCollectStatus(this.isIncludeCurrentUserId(interactionsCollect, currentUserId).toString());
             }
         }
 
