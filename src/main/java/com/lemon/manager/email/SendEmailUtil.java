@@ -2,61 +2,44 @@ package com.lemon.manager.email;
 
 import com.sun.mail.util.MailSSLSocketFactory;
 import me.chanjar.weixin.common.util.StringUtils;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.annotation.Resource;
 import javax.mail.*;
 import javax.mail.internet.*;
-import java.io.IOException;
-import java.io.InputStream;
 import java.security.GeneralSecurityException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 /**
  * Created by simpletour_Jenkin on 2017/1/26.
+ *
+ * 发邮件工具类
  */
+@Component
 public class SendEmailUtil {
 
 
     private MimeMessage message;
 
-    private String mailHost = "";
-    private String mailPort = "";
-    private String mailProtocol = "";
-    private String sender_username = "";
-    private String sender_password = "";
+    @Value("${mail.smtp.host}")
+    private String mailHost;
+    @Value("${mail.smtp.port}")
+    private String mailPort;
+    @Value("${mail.smtp.protocol}")
+    private String mailProtocol;
+    @Value("${mail.smtp.username}")
+    private String sender_username;
+    @Value("${mail.smtp.password}")
+    private String sender_password;
+    @Value("${mail.receiveUser}")
+    private String receiveUser;
+    @Value("${mail.smtp.nickName}")
+    private String nickName;
 
     private Properties properties = new Properties();
 
-    /*
-     * 初始化方法
-     */
-    public SendEmailUtil(boolean debug) {
-        InputStream in = ClassLoader
-                .getSystemResourceAsStream("email.properties");
-        try {
-            properties.load(in);
-            this.mailHost = properties.getProperty("mail.smtp.host");
-            this.mailPort = properties.getProperty("mail.smtp.port");
-            this.mailProtocol = properties.getProperty("mail.smtp.protocol");
-            this.sender_username = properties
-                    .getProperty("mail.sender.username");
-            this.sender_password = properties
-                    .getProperty("mail.sender.password");
-        } catch (IOException e) {
-            System.out.println("读取默认参数文件异常，请重试!");
 
-        }
-
-    }
 
     /**
      * 用户名密码验证，需要实现抽象类Authenticator的抽象方法PasswordAuthentication，
@@ -78,6 +61,17 @@ public class SendEmailUtil {
     }
 
     /**
+     *
+     * @param subject 邮件主题
+     * @param sendHtml 邮件内容
+     * @return
+     */
+    public boolean sendEmail(String subject,  String sendHtml ){
+
+        return sendEmail(subject,nickName,sendHtml,receiveUser);
+    }
+
+    /**
      * 指定发送邮件
      *
      * @param subject
@@ -85,7 +79,7 @@ public class SendEmailUtil {
      * @param sendHtml
      *            邮件内容
      * @param sender_nickName
-     *            发送邮件人地址
+     *            发送邮件人显示名称
      * @param receiveUser
      *            收件人列表，以","分割
      * @param filePath
@@ -209,25 +203,25 @@ public class SendEmailUtil {
 
     public static void main(String[] args) {
 
-//        String subject = "测试";
-//        String nickName = "风中思絮";
-//        String sendHtml = "<p class='color:red'>由于下雨，周末不加班！</p>";
-//
-//        String receiveUser = "wangzaijun1234@126.com";
-////      String receiveUser = "xxx@qq.com";
-//
-////        List<String> filePath = new ArrayList();
-////      filePath.add("D:\\JAVAStudy\\bpm学习\\SVN地址.txt");
-////        filePath.add("D:\\JAVAStudy\\学习进度\\学习目标及目标.txt");
-////      filePath.add("D:\\JAVAStudy\\bpm学习\\BPM配置文档(1).docx");
-////        filePath.add("D:\\JAVAStudy\\bpm学习\\OA\\任务分配.png");
-////      filePath.add("D:\\JAVAStudy\\微信支付.rar");
-//
-//        SendEmailUtil sendEmail = new SendEmailUtil(true);
-//        long time1=System.currentTimeMillis();
-//        boolean  isSend = sendEmail.sendEmail(subject, nickName, sendHtml, receiveUser);
-//        long time2=System.currentTimeMillis();
-//        System.err.println("sendEmail spend time:"+(time2-time1));
+        String subject = "测试";
+        String nickName = "风中思絮";
+        String sendHtml = "<p class='color:red'>由于下雨，周末不加班！</p>";
+
+        String receiveUser = "wangzaijun1234@126.com";
+//      String receiveUser = "xxx@qq.com";
+
+//        List<String> filePath = new ArrayList();
+//      filePath.add("D:\\JAVAStudy\\bpm学习\\SVN地址.txt");
+//        filePath.add("D:\\JAVAStudy\\学习进度\\学习目标及目标.txt");
+//      filePath.add("D:\\JAVAStudy\\bpm学习\\BPM配置文档(1).docx");
+//        filePath.add("D:\\JAVAStudy\\bpm学习\\OA\\任务分配.png");
+//      filePath.add("D:\\JAVAStudy\\微信支付.rar");
+
+        SendEmailUtil sendEmail = new SendEmailUtil();
+        long time1=System.currentTimeMillis();
+        boolean  isSend = sendEmail.sendEmail(subject, nickName, sendHtml, receiveUser);
+        long time2=System.currentTimeMillis();
+        System.err.println("sendEmail spend time:"+(time2-time1));
 
 
     }
