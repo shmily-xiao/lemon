@@ -200,7 +200,7 @@ public class PersonalCenterController extends BaseController{
 
         emailManager.sendEmail(feedbackForm.getContent(),account);
 
-        return AjaxResponse.ok().msg("返回已发送，谢谢您的支持");
+        return AjaxResponse.ok().msg("反馈已发送，谢谢您的支持");
 
     }
 
