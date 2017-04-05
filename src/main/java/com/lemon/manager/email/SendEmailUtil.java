@@ -36,6 +36,8 @@ public class SendEmailUtil {
     private String receiveUser;
     @Value("${mail.smtp.nickName}")
     private String nickName;
+    @Value("${isDebug}")
+    private Boolean debug;
 
     private Properties properties = new Properties();
 
@@ -111,7 +113,7 @@ public class SendEmailUtil {
         prop.put("mail.smtp.ssl.socketFactory", sf);
         Session session = Session.getDefaultInstance(prop, new MyAuthenricator(
                 sender_username, sender_password));
-        session.setDebug(true);// 开启DEBUG模式,在控制台中或日志中有日志信息显示，也就是可以从控制台中看一下服务器的响应信息；
+        session.setDebug(debug);// 开启DEBUG模式,在控制台中或日志中有日志信息显示，也就是可以从控制台中看一下服务器的响应信息；
         message = new MimeMessage(session);
         try {
             InternetAddress from;
