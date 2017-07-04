@@ -15,6 +15,11 @@ public class EmailManager {
     @Resource
     private SendEmailUtil sendEmailUtil;
 
+    /**
+     *
+     * @param msg
+     * @param account
+     */
     public void sendEmail(String msg,String account){
 //        String emails = "wangzaijun1234@126.com";
 //        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
@@ -25,6 +30,17 @@ public class EmailManager {
 //        sendEmailUtil.send(simpleMailMessage);
         sendEmailUtil.sendEmail(account,msg);
 
+    }
+
+    /**
+     *
+     * @param subject  主题
+     * @param content  内容
+     * @param displayName  显示名字
+     * @param receiveUser  接收人
+     */
+    public void sendRemindEmail2User(String subject, String content, String displayName, String receiveUser){
+        sendEmailUtil.sendEmail(subject, displayName, content, receiveUser);
     }
 
 }

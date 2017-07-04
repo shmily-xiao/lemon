@@ -21,6 +21,7 @@
         <property name="maxUploadSize" value="1000000" />
     </bean>
 
+
     <!--&lt;!&ndash; 阿里云OSS 文件上传 &ndash;&gt;-->
     <!--<bean class="com.belerweb.oss4springmvc.OssService">-->
         <!--<property name="endpoint" value="${oss4springmvc.endpoint}" />-->
