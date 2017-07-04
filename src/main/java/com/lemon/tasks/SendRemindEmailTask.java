@@ -28,9 +28,6 @@ import java.util.stream.Collectors;
 public class SendRemindEmailTask {
 
     @Resource
-    private LemonContentsManager lemonContentsManager;
-
-    @Resource
     private IContentPlanService contentPlanService;
 
     @Resource
@@ -44,7 +41,7 @@ public class SendRemindEmailTask {
     public void sendEmail(){
         ContentPlanQuery contentPlanQuery = new ContentPlanQuery();
         contentPlanQuery.setFinished(Boolean.FALSE);
-        contentPlanQuery.setRemind(Boolean.FALSE);
+        contentPlanQuery.setRemind(Boolean.TRUE);
         List<ContentPlan> contentPlans = contentPlanService.findList(contentPlanQuery);
         contentPlans.stream()
                 // 保留还没有过期的

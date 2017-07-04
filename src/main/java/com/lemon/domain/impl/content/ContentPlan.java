@@ -32,7 +32,7 @@ public class ContentPlan extends BaseDomain implements IContentPlan {
     private LocalDateTime finishedTime;
 
     /**
-     * 是否需要发短信
+     * 是否需要发邮件
      */
     private Boolean remind;
 

@@ -98,7 +98,7 @@
                                 </div>
                                 <div class="col-md-6 column" ng-show="postData.contentsType=='DREAM'">
                                     <div class="input-group input-group-md" style="margin-top: 10px; float: left">
-                                        短息提醒
+                                        邮件提醒
                                     </div>
                                     <label class="checkbox-inline" style="margin-top: 10px;">
                                         <input type="radio" name="needMessage" ng-model="postData.needMessage"  value="true" > 需要
