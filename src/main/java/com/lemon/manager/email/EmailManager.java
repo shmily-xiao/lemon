@@ -23,7 +23,7 @@ public class EmailManager {
 //        simpleMailMessage.setText(msg);
 //        simpleMailMessage.setTo(emails.split(","));
 //        sendEmailUtil.send(simpleMailMessage);
-        sendEmailUtil.sendEmail("账号为："+account+"用户的反馈",msg);
+        sendEmailUtil.sendEmail(account,msg);
 
     }
 
