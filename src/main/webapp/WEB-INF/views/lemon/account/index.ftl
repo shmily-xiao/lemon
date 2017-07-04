@@ -53,10 +53,15 @@
         <div class="container">
             <div class="collapse navbar-collapse" id="index-nav-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li style="margin-top: 15px;"><a href="/lemon/account/login" style="color: #202020;">登录</a></li>
+                    <#--<li style="margin-top: 15px;"><a href="/lemon/account/login" style="color: #202020;">登录</a></li>-->
+                    <#--<li>-->
+                        <#--<a href="/lemon/account/register">-->
+                            <#--<button class="btn navbar-btn btn-primary " style="color: #202020;border: 1px solid #202020;">注册</button>-->
+                        <#--</a>-->
+                    <#--<li>-->
                     <li>
-                        <a href="/lemon/account/register">
-                            <button class="btn navbar-btn btn-primary " style="color: #202020;border: 1px solid #202020;">注册</button>
+                        <a href="/lemon/aboutus">
+                            <button class="btn navbar-btn btn-primary " style="color: #202020;border: 1px solid #202020;">网站介绍</button>
                         </a>
                     <li>
                 </ul>
@@ -215,6 +220,7 @@
             <div class="col-md-12">
                 <a href="/lemon/account/register" class="btn btn-lg center-block index-quick-signup">注册</a>
                 <a href="/lemon/account/login" class="btn btn-lg center-block index-quick-login" style="border: 1px solid rgba(199, 191, 191, 0.56);color: #404040;">登录</a>
+                <a href="/lemon/aboutus" class="btn btn-lg center-block index-quick-login" style="border: 1px solid rgba(199, 191, 191, 0.56);color: #404040;margin-top: 15px;">网站介绍</a>
             </div>
         </div>
     </div>

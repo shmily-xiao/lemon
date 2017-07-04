@@ -1,6 +1,5 @@
 package com.lemon.controller.aboutus;
 
-import com.lemon.annotation.UserLoginValidation;
 import com.lemon.controller.BaseController;
 import com.lemon.manager.user.HeadUserInfoManager;
 import com.lemon.view.user.HeadUserInfoView;
@@ -20,7 +19,7 @@ public class AboutUsController extends BaseController {
     @Resource
     private HeadUserInfoManager headUserInfoManager;
 
-    @UserLoginValidation
+
     @RequestMapping(value = "/lemon/aboutus", method = RequestMethod.GET)
     public String aboutUs(Model model, HttpServletRequest request) {
         HeadUserInfoView userInfoView = headUserInfoManager.getUserView(request);
