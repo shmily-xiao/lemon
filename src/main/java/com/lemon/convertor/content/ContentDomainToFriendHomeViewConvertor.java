@@ -69,8 +69,7 @@ public class ContentDomainToFriendHomeViewConvertor implements ConvertorResult<L
         if (contentPlan!=null) {
             if (contentPlan.getFinishedTime() != null && contentPlan.getFinished()) {
                 view.setFinishedTime(DateUtils.yearMonthDay(contentPlan.getFinishedTime()));
-            }
-            if (contentPlan.getExpectTime().compareTo(LocalDateTime.now()) > 0) {
+            } else if (contentPlan.getExpectTime().compareTo(LocalDateTime.now()) > 0) {
                 Long time = Timestamp.valueOf(contentPlan.getExpectTime()).getTime() - Timestamp.valueOf(LocalDateTime.now()).getTime();
                 Long days = time / (1000L * 60 * 60 * 24);
                 if (days >= 0) {
