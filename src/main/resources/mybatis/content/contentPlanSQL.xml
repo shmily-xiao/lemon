@@ -23,11 +23,11 @@
     <select id="findByPage" resultMap="contentPlanResultMap">
         SELECT * FROM  content_plan
         <where>
-            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
+            <if test="createdTime != null"> created_time = #{createdTime}</if>
             <if test="contentId != null and contentId != ''"> AND content_id = #{contentId}</if>
             <if test="finished != null "> AND finished = #{finished}</if>
-            <if test="expectTime != null and expectTime != ''"> AND expect_time = #{expectTime}</if>
-            <if test="finishedTime != null and finishedTime != ''"> AND finished_time = #{finishedTime}</if>
+            <if test="expectTime != null "> AND expect_time = #{expectTime}</if>
+            <if test="finishedTime != null"> AND finished_time = #{finishedTime}</if>
             <if test="remind != null "> AND remind = #{remind}</if>
             <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
         </where>
@@ -37,11 +37,11 @@
     <select id="findEntities" resultMap="contentPlanResultMap">
         SELECT * FROM  content_plan
         <where>
-            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
+            <if test="createdTime != null "> created_time = #{createdTime}</if>
             <if test="contentId != null and contentId != ''"> AND content_id = #{contentId}</if>
             <if test="finished != null "> AND finished = #{finished}</if>
-            <if test="expectTime != null and expectTime != ''"> AND expect_time = #{expectTime}</if>
-            <if test="finishedTime != null and finishedTime != ''"> AND finished_time = #{finishedTime}</if>
+            <if test="expectTime != null "> AND expect_time = #{expectTime}</if>
+            <if test="finishedTime != null "> AND finished_time = #{finishedTime}</if>
             <if test="remind != null "> AND remind = #{remind}</if>
             <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
         </where>
@@ -51,11 +51,11 @@
     <select id="count" resultMap="contentPlanResultMap">
         SELECT count(*) FROM  content_plan
         <where>
-            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
+            <if test="createdTime != null"> created_time = #{createdTime}</if>
             <if test="contentId != null and contentId != ''"> AND content_id = #{contentId}</if>
             <if test="finished != null "> AND finished = #{finished}</if>
-            <if test="expectTime != null and expectTime != ''"> AND expect_time = #{expectTime}</if>
-            <if test="finishedTime != null and finishedTime != ''"> AND finished_time = #{finishedTime}</if>
+            <if test="expectTime != null "> AND expect_time = #{expectTime}</if>
+            <if test="finishedTime != null"> AND finished_time = #{finishedTime}</if>
             <if test="remind != null "> AND remind = #{remind}</if>
             <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
         </where>
@@ -68,11 +68,11 @@
     <delete id="delete">
         DELETE FROM content_plan
         <where>
-            <if test="createdTime != null and createdTime != ''"> created_time = #{createdTime}</if>
+            <if test="createdTime != null "> created_time = #{createdTime}</if>
             <if test="contentId != null and contentId != ''"> AND content_id = #{contentId}</if>
             <if test="finished != null "> AND finished = #{finished}</if>
-            <if test="expectTime != null and expectTime != ''"> AND expect_time = #{expectTime}</if>
-            <if test="finishedTime != null and finishedTime != ''"> AND finished_time = #{finishedTime}</if>
+            <if test="expectTime != null "> AND expect_time = #{expectTime}</if>
+            <if test="finishedTime != null "> AND finished_time = #{finishedTime}</if>
             <if test="remind != null "> AND remind = #{remind}</if>
             <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
         </where>
@@ -83,8 +83,8 @@
         <set>
             <if test="contentId != null and contentId != ''">  content_id = #{contentId}</if>
             <if test="finished != null "> , finished = #{finished}</if>
-            <if test="expectTime != null and expectTime != ''"> , expect_time = #{expectTime}</if>
-            <if test="finishedTime != null and finishedTime != ''"> , finished_time = #{finishedTime}</if>
+            <if test="expectTime != null "> , expect_time = #{expectTime}</if>
+            <if test="finishedTime != null "> , finished_time = #{finishedTime}</if>
             <if test="remind != null "> , remind = #{remind}</if>
             <if test="userId != null and userId != ''"> , user_id = #{userId}</if>
         </set>

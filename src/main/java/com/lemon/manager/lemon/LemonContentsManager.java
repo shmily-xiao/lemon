@@ -26,6 +26,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -209,6 +210,32 @@ public class LemonContentsManager {
 
     }
 
+
+    /**
+     * 更新用户的完成状态
+     * @param contentId
+     * @param userId
+     * @return
+     */
+    public Boolean finishedTheContentPlan(Long contentId, Long userId){
+        Optional<ContentPlan> contentPlanOptional = contentPlanService.findByContentId(contentId);
+        // 找不到返回失败
+        if (!contentPlanOptional.isPresent())  return Boolean.FALSE;
+        ContentPlan contentPlan = contentPlanOptional.get();
+        // 已经完成了返回成功
+        if (contentPlan.getFinished()) return Boolean.TRUE;
+        // 用户不对返回失败
+        if (!contentPlan.getUserId().equals(userId)) return Boolean.FALSE;
+
+        contentPlan.setFinished(Boolean.TRUE);
+        contentPlan.setFinishedTime(LocalDateTime.now());
+        Optional<ContentPlan> newContentPlan = contentPlanService.update(contentPlan);
+
+        if (!newContentPlan.isPresent()) return Boolean.FALSE;
+        return Boolean.TRUE;
+    }
+
+
     /**
      * 查看陌生人的内容只能看到最多两条公开的数据
      *
@@ -248,11 +275,6 @@ public class LemonContentsManager {
                 })
                 .collect(Collectors.toList());
     }
-
-
-
-
-
 
 
     public static void main(String[] args) {

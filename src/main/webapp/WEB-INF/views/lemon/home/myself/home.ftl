@@ -119,7 +119,7 @@
                           <div class="col-md-4 column">
                           </div>
                           <div class="col-md-4 column">
-                              <a href="#" style="color: rgb(52, 58, 68);font-weight: bold;font-size: inherit;">&nbsp;完成</a>
+                              <a href="#" ng-click="finishContent(event,${lemonContent.id})" style="color: rgb(52, 58, 68);font-weight: bold;font-size: inherit;">&nbsp;完成</a>
                               <#if lemonContent.status=="WILLEXPIRE">
                               &nbsp;&nbsp;
                               <a href="#" style="color: rgb(52, 58, 68);font-weight: bold;font-size: inherit;">&nbsp;延期</a>
@@ -140,6 +140,19 @@
               var app = angular.module('myApp', []);
               app.controller('myselfContents',['$scope','$http',function($scope,$http) {
 
+                  $scope.finishContent = function($event, contentId) {
+                      var url = '/lemon/finish/'+ contentId;
+                      $http.post(url).success(function(data) {
+                          if(data.code==0){
+                              alert("修改成功");
+                              window.location.reload();
+                          }else{
+                              alert("修改失败");
+                          }
+                      }).error(function(){
+                          alert('网络异常，请重试');
+                      })
+                  };
               }]);
           </script>
 
