@@ -23,13 +23,13 @@ public class UpdateUserInformationConvertor implements ConvertorResult<User>{
             user.setEmail(form.getEmail());
         }
         if (StringUtils.notEmpty(form.getName())){
-            user.setName(form.getName());
+            user.setName(StringUtils.replaceHtmlSpecialsToString(form.getName()));
         }
         if (StringUtils.notEmpty(form.getNickName())){
-            user.setNickName(form.getNickName());
+            user.setNickName(StringUtils.replaceHtmlSpecialsToString(form.getNickName()));
         }
         if (StringUtils.notEmpty(form.getProfile())){
-            user.setProfile(form.getProfile());
+            user.setProfile(StringUtils.replaceHtmlSpecialsToString(form.getProfile()));
         }
         if (form.getBirthday() != null){
             user.setBirthday(form.getBirthday());

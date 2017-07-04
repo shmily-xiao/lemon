@@ -161,6 +161,18 @@ public class StringUtils {
         return str;
     }
 
+    /**
+     * @param str
+     * @return
+     */
+    public static String replaceHtmlSpecialsToString(String str) {
+        str = str.replaceAll(">", "&gt;");
+        str = str.replaceAll("<", "&lt;");
+        str = str.replaceAll("\"", "&quot;");
+        str = str.replaceAll("-", "&mdash;");
+        return str;
+    }
+
 
     /**
      * 替换文本中的空白
