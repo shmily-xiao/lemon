@@ -2,14 +2,9 @@ package com.lemon.tasks;
 
 import com.lemon.domain.impl.content.ContentPlan;
 import com.lemon.domain.impl.user.User;
-import com.lemon.domain.impl.user.UserAccount;
-import com.lemon.domain.interfaces.user.IUserAccount;
 import com.lemon.manager.email.EmailManager;
-import com.lemon.manager.lemon.LemonContentsManager;
 import com.lemon.query.content.ContentPlanQuery;
 import com.lemon.service.IContentPlanService;
-import com.lemon.service.IContentService;
-import com.lemon.service.IUserAccountService;
 import com.lemon.service.IUserService;
 import com.lemon.utils.StringUtils;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -19,7 +14,6 @@ import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Created by wangzaijun on 2017/7/4.
@@ -58,8 +52,6 @@ public class SendRemindEmailTask {
                         emailManager.sendRemindEmail2User(subject, content, displayName, receiveUser);
                     }
                 });
-
-        System.out.println("sdfsdfsdfds");
 
     }
 
