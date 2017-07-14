@@ -11,6 +11,7 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.springframework>4.1.1.RELEASE</org.springframework>
+        <rocketmq.version>4.1.0-incubating</rocketmq.version>
     </properties>
     <build>
         <pluginManagement>
@@ -90,6 +91,11 @@
                     <groupId>org.apache.logging.log4j</groupId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>${rocketmq.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
