@@ -87,6 +87,10 @@ public class StringUtils {
         return s != null && !s.trim().equals("");
     }
 
+    public static boolean isEmpty(final String s) {
+        return !notEmpty(s);
+    }
+
     /**
      * @param bytes
      * @return

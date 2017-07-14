@@ -46,6 +46,7 @@
                 <value>classpath:db.properties</value>
                 <value>classpath:aliyunoss.properties</value>
                 <value>classpath:email.properties</value>
+                <value>classpath:/config/rocketmq.properties</value>
             </list>
         </property>
         <property name="fileEncoding" value="utf-8"/>
