@@ -5,15 +5,15 @@ import com.lemon.manager.email.EmailManager;
 import com.lemon.pojo.mq.MQ;
 import com.lemon.rocketmq.bo.MessageBO;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
-import org.apache.rocketmq.client.consumer.listener.*;
-import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
+import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.InitBinder;
 
 import javax.annotation.Resource;
 import javax.inject.Singleton;
@@ -56,12 +56,12 @@ public class SendEmailConsumer implements InitializingBean {
                         String subject = "小懒萌管家提醒";
                         String content = emailManager.getContent(messageBO.getEmail());
                         String displayName = "www.lemon-xiao.xin";
-                        emailManager.sendRemindEmail2User(subject, content, displayName, messageBO.getEmail());
+//                        emailManager.sendRemindEmail2User(subject, content, displayName, messageBO.getEmail());
                     } else if (MQ.BIRTHDAY_EMAIL_TAG.equals(msg.getTags())){
                         String subject = "小懒萌的生日祝福";
                         String content = emailManager.getBirthdayContent();
                         String displayName = "www.lemon-xiao.xin";
-                        emailManager.sendRemindEmail2User(subject, content, displayName, messageBO.getEmail());
+//                        emailManager.sendRemindEmail2User(subject, content, displayName, messageBO.getEmail());
                     }
                 }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;

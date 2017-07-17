@@ -86,7 +86,24 @@ public class EmailManager {
             return "小懒萌等着一天好久了呢。生日快乐哦！。 \n 梦想一定要有哦，万一不小心实现了呢。";
         }
         JSONObject jsonObject = JSONObject.fromObject(string);
-        return (String) jsonObject.get("summary");
+        String summary =  (String) jsonObject.get("summary");
+        StringBuffer sb = new StringBuffer();
+        sb.append("\n")
+                .append("小懒萌听说你今天的幸运星座是")
+                .append(jsonObject.get("QFriend"))
+                .append("哦，快去把他（她）活捉过来为你庆祝生日吧。")
+                .append("\n")
+                .append("小懒萌还听说，你今天的幸运颜色是")
+                .append(jsonObject.get("color"))
+                .append("哦。")
+                .append("\n")
+                .append("小懒萌昨日夜观天象为主人祈福啦，求得一签，签上说： \n")
+                .append("      ")
+                .append(summary)
+                .append("\n\n\n\n\n")
+                .append("小懒萌等着一天好久了呢。小懒萌祝你生日快乐哦！")
+                .append("\nwww.lemon-xiao.xin");
+        return sb.toString();
     }
 
 }
