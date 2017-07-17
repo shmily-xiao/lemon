@@ -343,7 +343,7 @@
             gender:'${user.gender}'||'',
             name:'${user.name}'||'',
             nickname:'${user.nickName}'||'',
-            birthday:'1998-01-15',
+            birthday:'${user.birthday}'||'1992-09-24',
             email:'${user.email}'||'',
             profile:'${user.profile}'||''
         };

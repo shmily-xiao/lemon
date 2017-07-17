@@ -1,11 +1,8 @@
 package com.lemon.view.user;
 
 
-import com.lemon.domain.impl.BaseDomain;
 import com.lemon.domain.impl.user.User;
 import com.lemon.view.BaseView;
-
-import java.util.Date;
 
 /**
  * Created by Administrator on 2016/8/8 0008.
@@ -34,6 +31,7 @@ public class UserView  extends BaseView{
     /**
      * 生日
      */
+    private String birthday;
     private Integer year;
     private Integer month;
     private Integer day;
@@ -87,11 +85,13 @@ public class UserView  extends BaseView{
             this.year = user.getBirthday().getYear();
             this.month = user.getBirthday().getMonthValue();
             this.day = user.getBirthday().getDayOfMonth();
+            this.birthday = this.year + "-" + this.month + "-" + this.day;
         }
         this.mobile = user.getMobile();
         this.qqNo = user.getQqNo();
         this.email = user.getEmail();
         this.profile = user.getProfile();
+
 //        this.type = user.getType().getValue();
 //        this.score = user.getScore();
 //        this.zoneStatus = user.getZoneStatus().getValue();
@@ -207,5 +207,13 @@ public class UserView  extends BaseView{
 
     public void setZoneStatus(String zoneStatus) {
         this.zoneStatus = zoneStatus;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 }
