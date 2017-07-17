@@ -17,10 +17,10 @@ public class ConstellationAPI {
     public static final String DEF_CHATSET = "UTF-8";
     public static final int DEF_CONN_TIMEOUT = 30000;
     public static final int DEF_READ_TIMEOUT = 30000;
-    public static String userAgent =  "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.66 Safari/537.36";
+    public static String userAgent =  "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 UBrowser/6.1.2716.5 Safari/537.36";
 
-    //配置您申请的KEY todo
-    public static final String APPKEY ="*************************";
+    //配置您申请的KEY
+    public static final String APPKEY ="6e8bc084f6356ccbf54063e9880419ff";
 
     public static String  getRequest1(String consName){
         return getRequest1(consName, "today");
