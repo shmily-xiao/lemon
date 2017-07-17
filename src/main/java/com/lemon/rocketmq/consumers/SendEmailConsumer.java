@@ -1,15 +1,74 @@
 package com.lemon.rocketmq.consumers;
 
+import com.alibaba.fastjson.JSON;
+import com.lemon.manager.email.EmailManager;
+import com.lemon.pojo.mq.MQ;
+import com.lemon.rocketmq.bo.MessageBO;
+import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
+import org.apache.rocketmq.client.consumer.listener.*;
+import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
+import org.apache.rocketmq.common.message.MessageExt;
+import org.apache.rocketmq.remoting.common.RemotingHelper;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.InitBinder;
+
+import javax.annotation.Resource;
+import javax.inject.Singleton;
+import java.util.List;
+
 /**
  * Created by wangzaijun on 2017/7/14.
  */
+@Singleton
+@Component
+public class SendEmailConsumer implements InitializingBean {
 
-public class SendEmailConsumer {
+    @Value("${mq.name.server}")
+    private String nameServer;
 
-    public void sendEmailConsumer(){
+    @Resource
+    private EmailManager emailManager;
 
-        // todo
-        // test
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        DefaultMQPushConsumer consumer= new DefaultMQPushConsumer("sendDreamEmail" + MQ.CONSUMER_POSTFIX);
+        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
+        consumer.subscribe(MQ.SEND_EMAIL_TOPIC, MQ.DREAM_EMAIL_TAG + " || " + MQ.BIRTHDAY_EMAIL_TAG);
+        consumer.setNamesrvAddr(this.nameServer);
+        consumer.registerMessageListener(new MessageListenerConcurrently() {
+            @Override
+            public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
+                MessageExt msg = msgs.get(0);
+                if (MQ.SEND_EMAIL_TOPIC.equals(msg.getTopic())){
+                    MessageBO messageBO;
+                    try {
+                        String json = new String(msg.getBody(), RemotingHelper.DEFAULT_CHARSET);
+                        messageBO = JSON.parseObject(json, MessageBO.class);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+                    }
+                    if (MQ.DREAM_EMAIL_TAG.equals(msg.getTags())){
+
+                        String subject = "小懒萌管家提醒";
+                        String content = emailManager.getContent(messageBO.getEmail());
+                        String displayName = "www.lemon-xiao.xin";
+                        emailManager.sendRemindEmail2User(subject, content, displayName, messageBO.getEmail());
+                    } else if (MQ.BIRTHDAY_EMAIL_TAG.equals(msg.getTags())){
+                        String subject = "小懒萌的生日祝福";
+                        String content = emailManager.getBirthdayContent();
+                        String displayName = "www.lemon-xiao.xin";
+                        emailManager.sendRemindEmail2User(subject, content, displayName, messageBO.getEmail());
+                    }
+                }
+                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+            }
+        });
+
+        consumer.start();
+        System.out.println("Consumer is started");
     }
-
 }

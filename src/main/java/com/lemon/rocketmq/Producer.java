@@ -1,5 +1,6 @@
 package com.lemon.rocketmq;
 
+import com.lemon.pojo.mq.MQ;
 import com.lemon.utils.StringUtils;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
@@ -9,26 +10,32 @@ import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Singleton;
+
 /**
  * Created by wangzaijun on 2017/7/14.
  */
 @Component
+@Singleton
 public class Producer {
+
 
     /**
      * 发送消息到 rocketmq 中
-     * @param nameServer "send_task_email"
-     * @param topic      "SendEmail"
-     * @param tags       ContentType.DREAM.getValue()
-     * @param message    传送给消息队列的内容
+     * @param nameServer     "send_task_email"
+     * @param producerGroupName
+     * @param topic          "SendEmailTopic"
+     * @param tags           "dreamEmail""birthdayEmail"
+     * @param message         传送给消息队列的内容 json 字符串 {"email":"xxx@ss.com","theme":"ssss"}
+     * @return
      * @throws MQClientException
      */
-    public Boolean sendMessage(String nameServer, String producerGroup, String topic,String tags, String message) throws MQClientException {
+    public Boolean sendMessage(String nameServer, String producerGroupName, String topic,String tags, String message) throws MQClientException {
 
         if (StringUtils.isEmpty(message)){
             return Boolean.FALSE;
         }
-        DefaultMQProducer producer = new DefaultMQProducer(producerGroup+"_PRODUCER");
+        DefaultMQProducer producer = new DefaultMQProducer(producerGroupName+ MQ.PRODUCER_POSTFIX);
         producer.setProducerGroup(nameServer);
         producer.start();
         try {
