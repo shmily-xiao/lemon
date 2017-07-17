@@ -9,6 +9,7 @@ public class SendEmailConsumer {
     public void sendEmailConsumer(){
 
         // todo
+        // test
     }
 
 }
