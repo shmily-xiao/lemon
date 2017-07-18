@@ -1,7 +1,10 @@
 package com.lemon.rocketmq;
 
+import com.alibaba.fastjson.JSON;
 import com.lemon.pojo.mq.MQ;
+import com.lemon.rocketmq.bo.MessageBO;
 import com.lemon.utils.StringUtils;
+import net.sf.json.JSONObject;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;
@@ -15,15 +18,15 @@ import javax.inject.Singleton;
 /**
  * Created by wangzaijun on 2017/7/14.
  */
-@Component
-@Singleton
+//@Component
+//@Singleton
 public class Producer {
 
 
     /**
      * 发送消息到 rocketmq 中
-     * @param nameServer     "send_task_email"
-     * @param producerGroupName
+     * @param nameServer        "192.168.199.129:9876"
+     * @param producerGroupName "send_task_email"
      * @param topic          "SendEmailTopic"
      * @param tags           "dreamEmail""birthdayEmail"
      * @param message         传送给消息队列的内容 json 字符串 {"email":"xxx@ss.com","theme":"ssss"}
@@ -36,7 +39,7 @@ public class Producer {
             return Boolean.FALSE;
         }
         DefaultMQProducer producer = new DefaultMQProducer(producerGroupName+ MQ.PRODUCER_POSTFIX);
-        producer.setProducerGroup(nameServer);
+        producer.setNamesrvAddr(nameServer);
         producer.start();
         try {
             Message msg = new Message(topic, tags, message.getBytes(RemotingHelper.DEFAULT_CHARSET));
@@ -65,7 +68,19 @@ public class Producer {
 
     public static void main(String[] args) {
         Producer producer = new Producer();
-        String string = producer.test();
-        System.out.println(string);
+
+//        String string = producer.test();
+//        System.out.println(string);
+        String nameSvr = "192.168.199.129:9876";
+        String producerGroupName = "test";
+        String topic = MQ.SEND_EMAIL_TOPIC;
+        String tags = MQ.BIRTHDAY_EMAIL_TAG;
+        MessageBO  messageBO = new MessageBO("wangzaijun1234@126.com","birthday");
+        String message = JSON.toJSONString(messageBO);
+        try {
+            producer.sendMessage(nameSvr, producerGroupName, topic, tags, message);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

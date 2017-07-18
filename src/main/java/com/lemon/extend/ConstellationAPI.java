@@ -12,6 +12,8 @@ import java.util.Map;
 
 /**
  * Created by wangzaijun on 2017/7/17.
+ *
+ * 获取星座的内容
  */
 public class ConstellationAPI {
     public static final String DEF_CHATSET = "UTF-8";
