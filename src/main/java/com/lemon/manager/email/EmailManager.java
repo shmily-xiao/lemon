@@ -69,7 +69,7 @@ public class EmailManager {
             case 3:
                 return "小朋友，你是不是在偷懒呢？ 你主题为 " + theme + "的任务都还没有完成哦。你再不回来完成它，小懒萌以后就不理你了。哼~~ \n www.lemon-xiao.xin";
             case 4:
-                return "你还记得你和小懒萌之间的约定么？你说你会完成 " + theme +" ，可是现在你是不是已经抛弃小懒萌了~，小懒萌还在那里等着你呢。\n www.lemon-xiao.xin";
+                return "你还记得你和小懒萌之间的约定么？你说你会完成 " + theme +" ，可是现在你是不是已经抛弃小懒萌了~，小懒萌还在这里等着你呢。\n www.lemon-xiao.xin";
             case 5:
                 return  "啦啦啦~ 小懒萌出现啦。 我是来提醒你还有未完成的任务哦。 小懒萌最讨厌不守信用的人了~。你不听话，我就要把你按在凳子上“啪啪”打屁股。 \n www.lemon-xiao.xin";
         }
@@ -88,19 +88,21 @@ public class EmailManager {
         JSONObject jsonObject = JSONObject.fromObject(string);
         String summary =  (String) jsonObject.get("summary");
         StringBuffer sb = new StringBuffer();
-        sb.append("\n")
-                .append("小懒萌听说你今天的幸运星座是")
-                .append(jsonObject.get("QFriend"))
-                .append("哦，快去把他（她）活捉过来为你庆祝生日吧。")
+        sb.append("主人你好：")
                 .append("\n")
-                .append("小懒萌还听说，你今天的幸运颜色是")
+                .append("小懒萌听说你今天的幸运星座是 ")
+                .append(jsonObject.get("QFriend"))
+                .append(" 哦，快去把他（她）活捉过来为你庆祝生日吧。")
+                .append("\n")
+                .append("小懒萌还听说，你今天的幸运颜色是 ")
                 .append(jsonObject.get("color"))
-                .append("哦。")
+                .append(" 哦。")
                 .append("\n")
                 .append("小懒萌昨日夜观天象为主人祈福啦，求得一签，签上说： \n")
-                .append("      ")
+                .append("   ")
                 .append(summary)
-                .append("\n\n\n\n\n")
+                .append("\n不管是好是坏，主人做自己的时候最可爱了呢。么么哒~~")
+                .append("\n\n\n")
                 .append("小懒萌等着一天好久了呢。小懒萌祝你生日快乐哦！")
                 .append("\nwww.lemon-xiao.xin");
         return sb.toString();

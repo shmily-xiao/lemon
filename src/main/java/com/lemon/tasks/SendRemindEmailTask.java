@@ -1,16 +1,25 @@
 package com.lemon.tasks;
 
+import com.alibaba.fastjson.JSON;
+import com.lemon.domain.impl.content.Content;
 import com.lemon.domain.impl.content.ContentPlan;
 import com.lemon.domain.impl.user.User;
 import com.lemon.manager.email.EmailManager;
+import com.lemon.pojo.mq.MQ;
 import com.lemon.query.content.ContentPlanQuery;
+import com.lemon.query.user.UserQuery;
+import com.lemon.rocketmq.Producer;
+import com.lemon.rocketmq.bo.MessageBO;
 import com.lemon.service.IContentPlanService;
+import com.lemon.service.IContentService;
 import com.lemon.service.IUserService;
 import com.lemon.utils.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -28,11 +37,17 @@ public class SendRemindEmailTask {
     private IUserService userService;
 
     @Resource
-    private EmailManager emailManager;
+    private IContentService contentService;
+
+    @Resource
+    private Producer producer;
+
+    @Value("${mq.name.server}")
+    private String nameServer;
 
     // 每天的0点运行
     @Scheduled(cron="0 0 0 * * *")
-    public void sendEmail(){
+    public void sendDreamEmail(){
         ContentPlanQuery contentPlanQuery = new ContentPlanQuery();
         contentPlanQuery.setFinished(Boolean.FALSE);
         contentPlanQuery.setRemind(Boolean.TRUE);
@@ -45,14 +60,45 @@ public class SendRemindEmailTask {
                 .forEach(contentPlan -> {
                     Optional<User> userOptional = userService.find(contentPlan.getUserId());
                     if (userOptional.isPresent() && StringUtils.notEmpty(userOptional.get().getEmail())){
-                        String subject = "小懒萌管家提醒";
-                        String content = "您计划的任务还有一天就到期了，您是否已经完成了呢？回来完成它吧，小懒萌想你了。";
-                        String displayName = "www.lemon-xiao.xin";
-                        String receiveUser = userOptional.get().getEmail();
-                        emailManager.sendRemindEmail2User(subject, content, displayName, receiveUser);
+                        Optional<Content> contentOptional = contentService.find(contentPlan.getContentId());
+                        if (contentOptional.isPresent()) {
+                            String producerGroupName = "send_dream_email";
+                            String topic = MQ.SEND_EMAIL_TOPIC;
+                            String tags = MQ.DREAM_EMAIL_TAG;
+                            MessageBO messageBO = new MessageBO(userOptional.get().getEmail(), contentOptional.get().getTitle());
+                            String message = JSON.toJSONString(messageBO);
+                            try {
+                                producer.sendMessage(nameServer, producerGroupName, topic, tags, message);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
                 });
+    }
 
+    // 每天的早上七点执行
+    @Scheduled(cron = "0 0 7 * * *")
+    public void sendBirthdayEmail(){
+        UserQuery userQuery = new UserQuery();
+        userQuery.setBirthday(LocalDate.now());
+        List<User> userList = userService.findList(userQuery);
+        userList.stream()
+                .filter(user -> StringUtils.notEmpty(user.getEmail()) && user.getBirthday() != null)
+                .forEach(
+                user -> {
+                    String producerGroupName = "send_dream_email";
+                    String topic = MQ.SEND_EMAIL_TOPIC;
+                    String tags = MQ.BIRTHDAY_EMAIL_TAG;
+                    MessageBO messageBO = new MessageBO(user.getEmail(), "birthday");
+                    String message = JSON.toJSONString(messageBO);
+                    try {
+                        producer.sendMessage(nameServer, producerGroupName, topic, tags, message);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+        );
     }
 
 }

@@ -1,6 +1,7 @@
 package com.lemon.extend;
 
 
+import com.alibaba.fastjson.JSON;
 import net.sf.json.JSONObject;
 
 import java.io.*;
@@ -41,7 +42,7 @@ public class ConstellationAPI {
             result = net(url, params, "GET");
             JSONObject object = JSONObject.fromObject(result);
             if(object.getInt("error_code")==0){
-                return (String)object.get("result");
+                return result;
             }else{
                 System.out.println(object.get("error_code")+":"+object.get("reason"));
             }

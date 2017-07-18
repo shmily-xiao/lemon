@@ -18,8 +18,8 @@ import javax.inject.Singleton;
 /**
  * Created by wangzaijun on 2017/7/14.
  */
-//@Component
-//@Singleton
+@Component
+@Singleton
 public class Producer {
 
 
@@ -50,6 +50,7 @@ public class Producer {
             return Boolean.FALSE;
         }finally {
             producer.shutdown();
+            System.out.println("producer run for a while");
         }
     }
 
@@ -71,7 +72,7 @@ public class Producer {
 
 //        String string = producer.test();
 //        System.out.println(string);
-        String nameSvr = "192.168.199.129:9876";
+        String nameSvr = "127.0.0.1:9876";
         String producerGroupName = "test";
         String topic = MQ.SEND_EMAIL_TOPIC;
         String tags = MQ.BIRTHDAY_EMAIL_TAG;
