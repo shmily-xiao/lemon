@@ -88,22 +88,22 @@ public class EmailManager {
         JSONObject jsonObject = JSONObject.fromObject(string);
         String summary =  (String) jsonObject.get("summary");
         StringBuffer sb = new StringBuffer();
-        sb.append("主人你好：")
+        sb.append("主人您好：")
                 .append("\n")
-                .append("小懒萌听说你今天的幸运星座是 ")
+                .append("小懒萌听说您今天的幸运星座是")
                 .append(jsonObject.get("QFriend"))
-                .append(" 哦，快去把他（她）活捉过来为你庆祝生日吧。")
+                .append("，快去把他（她）活捉过来为你庆祝生日吧。")
                 .append("\n")
-                .append("小懒萌还听说，你今天的幸运颜色是 ")
+                .append("小懒萌还听说，你今天的幸运颜色是")
                 .append(jsonObject.get("color"))
-                .append(" 哦。")
+                .append("哦。")
                 .append("\n")
                 .append("小懒萌昨日夜观天象为主人祈福啦，求得一签，签上说： \n")
                 .append("   ")
                 .append(summary)
-                .append("\n不管是好是坏，主人做自己的时候最可爱了呢。么么哒~~")
-                .append("\n\n\n")
-                .append("小懒萌等着一天好久了呢。小懒萌祝你生日快乐哦！")
+                .append("\n\n 不管是好是坏，主人做自己的时候最可爱了呢。减肥什么的，等吃饱了再说！么么哒~~")
+                .append("\n\n")
+                .append("小懒萌等着一天好久了呢。小懒萌祝您生日快乐哦！")
                 .append("\nwww.lemon-xiao.xin");
         return sb.toString();
     }

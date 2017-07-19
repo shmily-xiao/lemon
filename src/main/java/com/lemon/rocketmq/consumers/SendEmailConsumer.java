@@ -56,11 +56,13 @@ public class SendEmailConsumer implements InitializingBean {
                         String subject = "小懒萌管家提醒";
                         String content = emailManager.getContent(messageBO.getTheme());
                         String displayName = "www.lemon-xiao.xin";
+//                        System.out.println(content);
                         emailManager.sendRemindEmail2User(subject, content, displayName, messageBO.getEmail());
                     } else if (MQ.BIRTHDAY_EMAIL_TAG.equals(msg.getTags())){
                         String subject = "小懒萌的生日祝福";
                         String content = emailManager.getBirthdayContent();
                         String displayName = "www.lemon-xiao.xin";
+//                        System.out.println(content);
                         emailManager.sendRemindEmail2User(subject, content, displayName, messageBO.getEmail());
                     }
                 }
