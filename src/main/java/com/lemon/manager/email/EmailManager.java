@@ -2,6 +2,7 @@ package com.lemon.manager.email;
 
 import com.lemon.enums.ConstellationEnums;
 import com.lemon.extend.ConstellationAPI;
+import com.lemon.utils.SequenceUtils;
 import com.lemon.utils.StringUtils;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Component;
@@ -76,6 +77,10 @@ public class EmailManager {
         return "啦啦啦~ 小懒萌出现啦。 我是来提醒你还有未完成的任务哦。 小懒萌最讨厌不守信用的人了~。你不听话，我就要把你按在凳子上“啪啪”打屁股。 \n www.lemon-xiao.xin";
     }
 
+    /**
+     * 生日祝福
+     * @return
+     */
     public String getBirthdayContent(){
         LocalDate now = LocalDate.now();
         int month = now.getMonthValue();
@@ -106,6 +111,25 @@ public class EmailManager {
                 .append("小懒萌等着一天好久了呢。小懒萌祝您生日快乐哦！")
                 .append("\nwww.lemon-xiao.xin");
         return sb.toString();
+    }
+
+    /**
+     * 获取验证码，并将验证码存入到数据库中
+     * @return
+     */
+    public String getAuthCodeContent(){
+        String num = SequenceUtils.generateNum(8);
+
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append("小懒萌的用户您好：\n")
+                .append("\n 这是您验证码： ")
+                .append(num)
+                .append(" 。如果不是您本人操作，请不要泄露验证码。")
+                .append("\n外婆说只要向你要验证码的人都是坏人，千万不要相信他（她）啦！")
+                .append("\n\n愿你每天都能保持微笑，不论好坏，每天进步一点点就是最大的收获。")
+                .append("\nwww.lemon-xiao.xin");
+
+        return stringBuffer.toString();
     }
 
 }

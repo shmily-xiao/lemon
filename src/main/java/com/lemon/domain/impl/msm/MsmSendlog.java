@@ -14,7 +14,7 @@ public class MsmSendlog extends BaseDomain implements IMsmSendlog {
     private String authCode;
 
     /**
-     * 手机号
+     * 手机号 / 邮箱
      */
     private String mobile;
 
@@ -24,7 +24,7 @@ public class MsmSendlog extends BaseDomain implements IMsmSendlog {
     private String reason;
 
     /**
-     * 发送短信的状态
+     * 发送短信的状态  成功（SUCCESS）/失败（FAILED）
      */
     private String status;
 

@@ -1,29 +1,35 @@
 package com.lemon.controller.account;
 
+import com.alibaba.fastjson.JSON;
 import com.lemon.controller.BaseController;
 import com.lemon.domain.impl.Cookies;
+import com.lemon.domain.impl.msm.MsmSendlog;
 import com.lemon.domain.impl.user.User;
 import com.lemon.enums.SignupType;
 import com.lemon.form.AjaxResponse;
 import com.lemon.form.user.UserAccountForm;
 import com.lemon.manager.account.AccountManager;
 import com.lemon.pojo.constants.LemonConstants;
+import com.lemon.pojo.mq.MQ;
+import com.lemon.rocketmq.Producer;
+import com.lemon.rocketmq.bo.MessageBO;
 import com.lemon.service.ICookiesService;
+import com.lemon.service.IMsmSendlogService;
 import com.lemon.service.IUserService;
 import com.lemon.utils.Md5;
 import com.lemon.utils.SequenceUtils;
+import com.lemon.utils.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
@@ -42,6 +48,15 @@ public class AccountController extends BaseController{
 
     @Resource
     private AccountManager accountManager;
+
+    @Resource
+    private Producer producer;
+
+    @Value("${mq.name.server}")
+    private String nameServer;
+
+    @Resource
+    private IMsmSendlogService msmSendlogService;
 
     /**
      * 注册页面
@@ -160,6 +175,50 @@ public class AccountController extends BaseController{
         //首页（朋友圈）
         return AjaxResponse.ok().url("/lemon/lemons/friends");
 
+    }
+
+    /**
+     * 发送验证码到用户的邮箱中，改密码
+     * @param account
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/lemon/account/forget",method = RequestMethod.GET)
+    private AjaxResponse sendAuthCodeEmail(@RequestParam String account, HttpServletRequest request){
+
+        Optional<User> userOptional = userService.findUserByAccount(account);
+        if (!userOptional.isPresent()){
+            return AjaxResponse.fail().msg("您输入的"+account+"账户不存在哦！");
+        }
+        String email = userOptional.get().getEmail();
+        if (StringUtils.isEmpty(email)){
+            return AjaxResponse.fail().msg("您要找回的账户没有添加邮箱号码，无法使用密码找回功能!");
+        }
+        if (!"true".equals(userOptional.get().getStatus())){
+            return AjaxResponse.fail().msg("您的账户存在问题哦，请联系管理员 wangzaijun1234@126.com");
+        }
+        // 检查记录是否有一条最新的日志
+        Optional<MsmSendlog> sendlogOptional = msmSendlogService.getTheAuthCodeByMobile(email);
+        if (sendlogOptional.isPresent()) {
+            LocalDateTime oldTime = sendlogOptional.get().getCreatedTime().plusMinutes(30);
+            if (oldTime.isAfter(LocalDateTime.now())){
+                return AjaxResponse.fail().msg("验证码已经发送至您的邮箱请注意查收！");
+            }
+        }
+
+        String producerGroupName = "send_forget_pwd_email";
+        String topic = MQ.SEND_EMAIL_TOPIC;
+        String tags = MQ.FORGET_PWD_EMAIL_TAG;
+        MessageBO messageBO = new MessageBO(email, userOptional.get().getNickName());
+        String message = JSON.toJSONString(messageBO);
+        try {
+            producer.sendMessage(nameServer, producerGroupName, topic, tags, message);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return AjaxResponse.fail().msg("网络异常，请联系管理员 wangzaijun1234@126.com");
+        }
+        return AjaxResponse.ok();
     }
 
 }

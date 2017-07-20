@@ -87,7 +87,7 @@ public class SendRemindEmailTask {
                 .filter(user -> StringUtils.notEmpty(user.getEmail()) && user.getBirthday() != null)
                 .forEach(
                 user -> {
-                    String producerGroupName = "send_dream_email";
+                    String producerGroupName = "send_birthday_email";
                     String topic = MQ.SEND_EMAIL_TOPIC;
                     String tags = MQ.BIRTHDAY_EMAIL_TAG;
                     MessageBO messageBO = new MessageBO(user.getEmail(), "birthday");

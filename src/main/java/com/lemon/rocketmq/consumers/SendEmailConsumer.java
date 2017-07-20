@@ -36,7 +36,7 @@ public class SendEmailConsumer implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         DefaultMQPushConsumer consumer= new DefaultMQPushConsumer("sendDreamEmail" + MQ.CONSUMER_POSTFIX);
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
-        consumer.subscribe(MQ.SEND_EMAIL_TOPIC, MQ.DREAM_EMAIL_TAG + " || " + MQ.BIRTHDAY_EMAIL_TAG);
+        consumer.subscribe(MQ.SEND_EMAIL_TOPIC, MQ.DREAM_EMAIL_TAG + " || " + MQ.BIRTHDAY_EMAIL_TAG + " || " + MQ.FORGET_PWD_EMAIL_TAG);
         consumer.setNamesrvAddr(this.nameServer);
         consumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
@@ -64,6 +64,10 @@ public class SendEmailConsumer implements InitializingBean {
                         String displayName = "www.lemon-xiao.xin";
 //                        System.out.println(content);
                         emailManager.sendRemindEmail2User(subject, content, displayName, messageBO.getEmail());
+                    } else if (MQ.FORGET_PWD_EMAIL_TAG.equals(msg.getTags())){
+                        String subject = "小懒萌发来的验证码";
+                        String content = emailManager.getAuthCodeContent();
+                        String displayName = "www.lemon-xiao.xin";
                     }
                 }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
