@@ -80,6 +80,21 @@ public class UserQuery extends BaseQuery {
      */
     private String zoneStatus;
 
+    /**
+     * 系统账号
+     */
+    private String account;
+
+    /**
+     * 个人简介
+     */
+    private String profile;
+
+    /**
+     * 是否可以更改账号
+     */
+    private Boolean modifyAvailable;
+
     public UserQuery(){}
 
     public UserQuery(String mobile){
@@ -201,5 +216,29 @@ public class UserQuery extends BaseQuery {
 
     public void setZoneStatus(String zoneStatus) {
         this.zoneStatus = zoneStatus;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
+
+    public Boolean getModifyAvailable() {
+        return modifyAvailable;
+    }
+
+    public void setModifyAvailable(Boolean modifyAvailable) {
+        this.modifyAvailable = modifyAvailable;
     }
 }
