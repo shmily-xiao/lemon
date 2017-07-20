@@ -1,7 +1,9 @@
 package com.lemon.manager.email;
 
+import com.lemon.domain.impl.msm.MsmSendlog;
 import com.lemon.enums.ConstellationEnums;
 import com.lemon.extend.ConstellationAPI;
+import com.lemon.service.IMsmSendlogService;
 import com.lemon.utils.SequenceUtils;
 import com.lemon.utils.StringUtils;
 import net.sf.json.JSONObject;
@@ -21,6 +23,9 @@ public class EmailManager {
 
     @Resource
     private SendEmailUtil sendEmailUtil;
+
+    @Resource
+    private IMsmSendlogService msmSendlogService;
 
     /**
      *
@@ -114,17 +119,28 @@ public class EmailManager {
     }
 
     /**
-     * 获取验证码，并将验证码存入到数据库中
-     * @return
+     * 获取验证码，
+     * 并将验证码存入到数据库中
+     * @return  拼接好的字符串
      */
-    public String getAuthCodeContent(){
-        String num = SequenceUtils.generateNum(8);
+    public String getAuthCodeContent(String email, String userId){
+        String num = SequenceUtils.generateAlphaNun(16);
+
+        MsmSendlog msmSendlog = new MsmSendlog();
+        msmSendlog.setAuthCode(num);
+        msmSendlog.setMobile(email);
+        msmSendlog.setReason(userId);
+        msmSendlog.setStatus("SUCCESS");
+        msmSendlogService.insert(msmSendlog);
 
         StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append("小懒萌的用户您好：\n")
+        stringBuffer
+                .append("小懒萌的用户您好：\n")
                 .append("\n 这是您验证码： ")
                 .append(num)
-                .append(" 。如果不是您本人操作，请不要泄露验证码。")
+                .append(" 。如果不是您本人操作，请不要泄露验证码。这将是您重置密码的凭证，有效时长为30分钟。")
+                .append("点此链接重置密码(http://www.lemon-xiao.xin/lemon/account/reset")
+                .append("?userId=").append(userId).append("&authCode=").append(num).append(")")
                 .append("\n外婆说只要向你要验证码的人都是坏人，千万不要相信他（她）啦！")
                 .append("\n\n愿你每天都能保持微笑，不论好坏，每天进步一点点就是最大的收获。")
                 .append("\nwww.lemon-xiao.xin");

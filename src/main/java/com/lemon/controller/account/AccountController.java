@@ -21,6 +21,7 @@ import com.lemon.utils.SequenceUtils;
 import com.lemon.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,11 +53,13 @@ public class AccountController extends BaseController{
     @Resource
     private Producer producer;
 
+    @Resource
+    private IMsmSendlogService msmSendlogService;
+
+
     @Value("${mq.name.server}")
     private String nameServer;
 
-    @Resource
-    private IMsmSendlogService msmSendlogService;
 
     /**
      * 注册页面
@@ -185,7 +188,7 @@ public class AccountController extends BaseController{
      */
     @ResponseBody
     @RequestMapping(value = "/lemon/account/forget",method = RequestMethod.GET)
-    private AjaxResponse sendAuthCodeEmail(@RequestParam String account, HttpServletRequest request){
+    public AjaxResponse sendAuthCodeEmail(@RequestParam String account, HttpServletRequest request){
 
         Optional<User> userOptional = userService.findUserByAccount(account);
         if (!userOptional.isPresent()){
@@ -201,6 +204,7 @@ public class AccountController extends BaseController{
         // 检查记录是否有一条最新的日志
         Optional<MsmSendlog> sendlogOptional = msmSendlogService.getTheAuthCodeByMobile(email);
         if (sendlogOptional.isPresent()) {
+            // 有效性为30分钟
             LocalDateTime oldTime = sendlogOptional.get().getCreatedTime().plusMinutes(30);
             if (oldTime.isAfter(LocalDateTime.now())){
                 return AjaxResponse.fail().msg("验证码已经发送至您的邮箱请注意查收！");
@@ -210,7 +214,7 @@ public class AccountController extends BaseController{
         String producerGroupName = "send_forget_pwd_email";
         String topic = MQ.SEND_EMAIL_TOPIC;
         String tags = MQ.FORGET_PWD_EMAIL_TAG;
-        MessageBO messageBO = new MessageBO(email, userOptional.get().getNickName());
+        MessageBO messageBO = new MessageBO(email, userOptional.get().getId().toString());
         String message = JSON.toJSONString(messageBO);
         try {
             producer.sendMessage(nameServer, producerGroupName, topic, tags, message);
@@ -220,5 +224,7 @@ public class AccountController extends BaseController{
         }
         return AjaxResponse.ok();
     }
+
+
 
 }

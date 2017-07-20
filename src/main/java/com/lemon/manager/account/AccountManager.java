@@ -2,8 +2,10 @@ package com.lemon.manager.account;
 
 import com.lemon.domain.impl.Cookies;
 import com.lemon.domain.impl.user.User;
+import com.lemon.service.IUserAccountService;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

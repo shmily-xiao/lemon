@@ -51,6 +51,7 @@ public class SendEmailConsumer implements InitializingBean {
                         e.printStackTrace();
                         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
                     }
+
                     if (MQ.DREAM_EMAIL_TAG.equals(msg.getTags())){
 
                         String subject = "小懒萌管家提醒";
@@ -66,7 +67,7 @@ public class SendEmailConsumer implements InitializingBean {
                         emailManager.sendRemindEmail2User(subject, content, displayName, messageBO.getEmail());
                     } else if (MQ.FORGET_PWD_EMAIL_TAG.equals(msg.getTags())){
                         String subject = "小懒萌发来的验证码";
-                        String content = emailManager.getAuthCodeContent();
+                        String content = emailManager.getAuthCodeContent(messageBO.getEmail(), messageBO.getTheme());
                         String displayName = "www.lemon-xiao.xin";
                     }
                 }

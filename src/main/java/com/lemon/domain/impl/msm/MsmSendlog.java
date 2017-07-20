@@ -19,7 +19,7 @@ public class MsmSendlog extends BaseDomain implements IMsmSendlog {
     private String mobile;
 
     /**
-     * 如果失败了的理由
+     * 如果失败了的理由,没有失败就是放的 用户的id
      */
     private String reason;
 

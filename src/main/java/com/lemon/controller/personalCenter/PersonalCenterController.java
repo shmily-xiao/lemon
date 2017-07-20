@@ -4,6 +4,7 @@ import com.lemon.annotation.UserLoginValidation;
 import com.lemon.controller.BaseController;
 import com.lemon.convertor.ConvertorResult;
 import com.lemon.domain.impl.access.AccessControl;
+import com.lemon.domain.impl.msm.MsmSendlog;
 import com.lemon.domain.impl.user.User;
 import com.lemon.domain.impl.user.UserRecord;
 import com.lemon.form.AjaxResponse;
@@ -11,11 +12,13 @@ import com.lemon.form.feedback.FeedbackForm;
 import com.lemon.form.user.UserInformationForm;
 import com.lemon.form.user.UserPasswordModifyForm;
 import com.lemon.form.user.UserPrivacyForm;
+import com.lemon.form.user.UserResetPasswordForm;
 import com.lemon.manager.email.EmailManager;
 import com.lemon.manager.user.HeadUserInfoManager;
 import com.lemon.pojo.constants.LemonConstants;
 import com.lemon.query.user.UserQuery;
 import com.lemon.service.IAccessControlService;
+import com.lemon.service.IMsmSendlogService;
 import com.lemon.service.IUserRecordService;
 import com.lemon.service.IUserService;
 import com.lemon.utils.BeanLocator;
@@ -25,15 +28,13 @@ import com.lemon.view.user.UserView;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
@@ -57,6 +58,9 @@ public class PersonalCenterController extends BaseController{
 
     @Resource
     private EmailManager emailManager;
+
+    @Resource
+    private IMsmSendlogService msmSendlogService;
 
     /**
      *
@@ -202,6 +206,59 @@ public class PersonalCenterController extends BaseController{
 
         return AjaxResponse.ok().msg("反馈已发送，谢谢您的支持");
 
+    }
+
+    /**
+     * 修改密码
+     * @param userId
+     * @param authCode
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/lemon/account/reset", method = RequestMethod.GET)
+    public String getModifyPassword(@RequestParam Long userId, String authCode, Model model){
+
+        Optional<User> userOptional = userService.find(userId);
+        if (!userOptional.isPresent()){
+            return "redirect:/lemon/account/login";
+        }
+        model.addAttribute("userId",userId);
+        model.addAttribute("authCode", authCode);
+        return "/lemon/account/resetPwd";
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/lemon/account/reset", method = RequestMethod.POST)
+    public AjaxResponse modifyPassword(@RequestBody @Valid  UserResetPasswordForm form, BindingResult result){
+        if (result.hasErrors()){
+            return AjaxResponse.fail().msg("表单数据不正确！");
+        }
+
+        Optional<User> userOptional = userService.find(form.getUserId());
+        if (!userOptional.isPresent()){
+            return AjaxResponse.fail().msg("用户不存在");
+        }
+        Optional<MsmSendlog> sendlogOptional = msmSendlogService.getTheAuthCodeByMobile(userOptional.get().getEmail());
+
+        if (!sendlogOptional.isPresent()){
+            return AjaxResponse.fail().msg("修改失败");
+        }
+        LocalDateTime oldTime = sendlogOptional.get().getCreatedTime().plusMinutes(30);
+        if (oldTime.isBefore(LocalDateTime.now())){
+            return AjaxResponse.fail().msg("您的验证码已经过期");
+        }
+        if (!sendlogOptional.get().getAuthCode().equals(form.getAuthCode())){
+            return AjaxResponse.fail().msg("您的验证码不正确");
+        }
+        User user = userOptional.get();
+        user.setPassword(Md5.messageDigest(form.getNewPassword() + user.getSalt()));
+        Optional<User> newUser = userService.update(user);
+
+        if (!newUser.isPresent()){
+            return AjaxResponse.fail().msg("更新失败").reason("网络错误");
+        }
+        return AjaxResponse.ok().msg("更新成功!").url("/lemon/account/login");
     }
 
 // 发送验证码
