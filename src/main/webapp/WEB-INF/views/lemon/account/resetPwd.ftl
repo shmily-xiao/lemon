@@ -116,7 +116,7 @@
 
     app.controller('resetPwd',['$scope','$http',function($scope,$http) {
         $scope.authCode= '${authCode}' || '';
-        $scope.password='';
+        $scope.newPassword='';
         $scope.confirmPassword='';
         $scope.userId = ${userId};
 
@@ -129,7 +129,7 @@
                 return;
             }
             var url = "/lemon/account/reset";
-            $http.post(url, {userId: $scope.userId,authCode:$scope.authCode,newPassword:$scope.mobile,password:hex_md5($scope.password)}).success(function(data) {
+            $http.post(url, {userId: $scope.userId,authCode:$scope.authCode,newPassword:hex_md5($scope.password)}).success(function(data) {
                 if(data.code==0){
                     location.href = data.url;
                 }else {
