@@ -52,24 +52,25 @@ public class SendEmailConsumer implements InitializingBean {
                         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
                     }
 
-                    if (MQ.DREAM_EMAIL_TAG.equals(msg.getTags())){
+                    String subject = "";
+                    String content = "";
+                    String displayName = "www.lemon-xiao.xin";
 
-                        String subject = "小懒萌管家提醒";
-                        String content = emailManager.getContent(messageBO.getTheme());
-                        String displayName = "www.lemon-xiao.xin";
-//                        System.out.println(content);
-                        emailManager.sendRemindEmail2User(subject, content, displayName, messageBO.getEmail());
+                    if (MQ.DREAM_EMAIL_TAG.equals(msg.getTags())){
+                        subject = "小懒萌管家提醒";
+                        content = emailManager.getContent(messageBO.getTheme());
+
                     } else if (MQ.BIRTHDAY_EMAIL_TAG.equals(msg.getTags())){
-                        String subject = "小懒萌的生日祝福";
-                        String content = emailManager.getBirthdayContent();
-                        String displayName = "www.lemon-xiao.xin";
-//                        System.out.println(content);
-                        emailManager.sendRemindEmail2User(subject, content, displayName, messageBO.getEmail());
+                        subject = "小懒萌的生日祝福";
+                        content = emailManager.getBirthdayContent();
+
                     } else if (MQ.FORGET_PWD_EMAIL_TAG.equals(msg.getTags())){
-                        String subject = "小懒萌发来的验证码";
-                        String content = emailManager.getAuthCodeContent(messageBO.getEmail(), messageBO.getTheme());
-                        String displayName = "www.lemon-xiao.xin";
+                        subject = "小懒萌发来的验证码";
+                        content = emailManager.getAuthCodeContent(messageBO.getEmail(), messageBO.getTheme());
+
                     }
+                    emailManager.sendRemindEmail2User(subject, content, displayName, messageBO.getEmail());
+
                 }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
