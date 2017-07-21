@@ -12,9 +12,9 @@
 
 
     <title>
-        从自己想做的第一件事开始
+        小懒萌
     </title>
-    <link rel="shortcut icon" href="/img/gift.jpg" type="image/png">
+    <link rel="shortcut icon" href="/img/butterfly.png" type="image/png">
     <!--  css -->
 
     <link href="/css/bootstrap.2183d05f5a0a.css" rel="stylesheet" />

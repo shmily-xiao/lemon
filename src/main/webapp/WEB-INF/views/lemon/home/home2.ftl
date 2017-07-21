@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
-    <link rel="shortcut icon" href="/img/gift.jpg" type="image/png">
+    <link rel="shortcut icon" href="/img/butterfly.png" type="image/png">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.min.js"></script>
