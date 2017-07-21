@@ -70,6 +70,7 @@ public class SendEmailConsumer implements InitializingBean {
 
                     }
                     emailManager.sendRemindEmail2User(subject, content, displayName, messageBO.getEmail());
+                    System.out.println("send email consumer is running for one time");
 
                 }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;

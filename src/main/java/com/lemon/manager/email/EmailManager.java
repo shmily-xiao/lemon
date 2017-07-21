@@ -128,18 +128,23 @@ public class EmailManager {
     public String getAuthCodeContent(String email, String userId){
         String num = SequenceUtils.generateAlphaNun(16);
 
+        MsmSendlog msmSendlog = new MsmSendlog();
+        msmSendlog.setAuthCode(num);
+        msmSendlog.setMobile(email);
+        msmSendlog.setReason(userId);
+        msmSendlog.setStatus("SUCCESS");
+
         Optional<MsmSendlog> sendlogOptional = msmSendlogService.getTheAuthCodeByMobile(email);
         if (sendlogOptional.isPresent()) {
             // 有效性为30分钟
             LocalDateTime oldTime = sendlogOptional.get().getCreatedTime().plusMinutes(30);
             if (oldTime.isBefore(LocalDateTime.now())){
-                MsmSendlog msmSendlog = new MsmSendlog();
-                msmSendlog.setAuthCode(num);
-                msmSendlog.setMobile(email);
-                msmSendlog.setReason(userId);
-                msmSendlog.setStatus("SUCCESS");
                 msmSendlogService.insert(msmSendlog);
+            }else {
+                num = sendlogOptional.get().getAuthCode();
             }
+        }else {
+            msmSendlogService.insert(msmSendlog);
         }
 
         StringBuffer stringBuffer = new StringBuffer();
