@@ -89,7 +89,7 @@
     var app = angular.module('myApp', []);
 
     app.controller('forgetPwd',['$scope','$http',function($scope,$http) {
-        $scope.authKey= '${authKey}' || '';
+        $scope.authCode= '${authKey}' || '';
         $scope.account='';
 
         $scope.forgetPwdSubmit = function($event) {
@@ -98,7 +98,7 @@
             }
 
             var url = "/lemon/account/forget";
-            $http.post(url, {authKey: $scope.authKey,account:$scope.authCode}).success(function(data) {
+            $http.post(url, {account: $scope.account,authKey:$scope.authCode}).success(function(data) {
                 if(data.code==0){
                     alert(data.msg);;
                 }else {

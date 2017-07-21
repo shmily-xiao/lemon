@@ -183,7 +183,7 @@ public class AccountController extends BaseController{
 
     @RequestMapping(value = "/lemon/account/forget", method = RequestMethod.GET)
     public String forgetPwd(HttpServletRequest request, Model model){
-        String alphaNun = SequenceUtils.generateAlphaNun(4);
+        String alphaNun = SequenceUtils.generateAlphaNun(8);
 
         HttpSession session = request.getSession();
         session.setAttribute(LemonConstants.AUTH_KEY,alphaNun);
@@ -218,7 +218,7 @@ public class AccountController extends BaseController{
         }
         String email = userOptional.get().getEmail();
         if (StringUtils.isEmpty(email)){
-            return AjaxResponse.fail().msg("您要找回的账户没有添加邮箱号码，无法使用密码找回功能!");
+            return AjaxResponse.fail().msg("您要找回的账户没有添加邮箱，无法使用密码找回功能！");
         }
         if (!"true".equals(userOptional.get().getStatus())){
             return AjaxResponse.fail().msg("您的账户存在问题哦，请联系管理员 wangzaijun1234@126.com");
