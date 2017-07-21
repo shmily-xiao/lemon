@@ -8,4 +8,6 @@ public class LemonConstants {
     public static String USER_SEESSION_ID = "user.id";
     public static String LOGIN_URL = "/lemon/account/login";
 
+    public static String AUTH_KEY = "authKey";
+
 }

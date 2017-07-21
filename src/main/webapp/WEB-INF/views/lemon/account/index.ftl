@@ -134,7 +134,7 @@
                             </a>
                         </div>
 
-                        <a class="index-pwd-forget" href="#">忘记密码?</a>
+                        <a class="index-pwd-forget" href="/lemon/account/forget">忘记密码?</a>
                     </form>
 
                     <div class="modal fade" id="wechat-login-qr" tabindex="-1" role="dialog" aria-labelledby="requestlabel">

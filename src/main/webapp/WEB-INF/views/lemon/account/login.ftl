@@ -94,7 +94,7 @@
                             </div>
                             <input ng-click="loginSubmit($event)" class="btn btn-primary btn-lg  btn-block login-action-button" value="登录"/>
                             <p>
-                                <a href="#">忘记密码?</a>
+                                <a href="/lemon/account/forget">忘记密码?</a>
                                 或
                                 <a href="/lemon/account/register">创建新账号</a>
 

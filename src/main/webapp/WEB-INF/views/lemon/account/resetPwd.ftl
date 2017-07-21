@@ -58,7 +58,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="row ">
-                        <form method="post" action="/lemon/account/login" name="resetPwd" class="col-md-8 col-md-offset-2 login-action">
+                        <form method="post" action="/lemon/account/reset" name="resetPwd" class="col-md-8 col-md-offset-2 login-action">
                             <!--login action开始-->
                             <div class="form-group form-group-lg center-block " id="login-account">
                                 <p>验证码</p>

@@ -8,6 +8,7 @@ import com.lemon.domain.impl.user.User;
 import com.lemon.enums.SignupType;
 import com.lemon.form.AjaxResponse;
 import com.lemon.form.user.UserAccountForm;
+import com.lemon.form.user.UserSendAuthCodeEmailForm;
 import com.lemon.manager.account.AccountManager;
 import com.lemon.pojo.constants.LemonConstants;
 import com.lemon.pojo.mq.MQ;
@@ -180,19 +181,40 @@ public class AccountController extends BaseController{
 
     }
 
+    @RequestMapping(value = "/lemon/account/forget", method = RequestMethod.GET)
+    public String forgetPwd(HttpServletRequest request, Model model){
+        String alphaNun = SequenceUtils.generateAlphaNun(4);
+
+        HttpSession session = request.getSession();
+        session.setAttribute(LemonConstants.AUTH_KEY,alphaNun);
+
+        model.addAttribute("authKey", alphaNun);
+        return "/lemon/account/forgetPwd";
+    }
+
     /**
      * 发送验证码到用户的邮箱中，改密码
-     * @param account
+     * @param form
+     * @param result
      * @param request
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/lemon/account/forget",method = RequestMethod.GET)
-    public AjaxResponse sendAuthCodeEmail(@RequestParam String account, HttpServletRequest request){
+    @RequestMapping(value = "/lemon/account/forget",method = RequestMethod.POST)
+    public AjaxResponse sendAuthCodeEmail(@RequestBody @Valid UserSendAuthCodeEmailForm form, BindingResult result, HttpServletRequest request){
 
-        Optional<User> userOptional = userService.findUserByAccount(account);
+        if (result.hasErrors()){
+            return AjaxResponse.fail().msg("表单数据不完整，发送邮件失败！");
+        }
+        HttpSession session = request.getSession();
+        String authKey = (String) session.getAttribute(LemonConstants.AUTH_KEY);
+        if (StringUtils.isEmpty(authKey) || !authKey.equals(form.getAuthKey())){
+            return AjaxResponse.fail().msg("非法数据请求！");
+        }
+
+        Optional<User> userOptional = userService.findUserByAccount(form.getAccount());
         if (!userOptional.isPresent()){
-            return AjaxResponse.fail().msg("您输入的"+account+"账户不存在哦！");
+            return AjaxResponse.fail().msg("您输入的"+form.getAccount()+"账户不存在哦！");
         }
         String email = userOptional.get().getEmail();
         if (StringUtils.isEmpty(email)){
@@ -222,7 +244,7 @@ public class AccountController extends BaseController{
             e.printStackTrace();
             return AjaxResponse.fail().msg("网络异常，请联系管理员 wangzaijun1234@126.com");
         }
-        return AjaxResponse.ok();
+        return AjaxResponse.ok().msg("邮件已经发送到您的邮箱中，请登录邮箱，完成后续操作。");
     }
 
 
