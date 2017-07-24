@@ -34,7 +34,7 @@ public class SendEmailConsumer implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        DefaultMQPushConsumer consumer= new DefaultMQPushConsumer("sendDreamEmail" + MQ.CONSUMER_POSTFIX);
+        DefaultMQPushConsumer consumer= new DefaultMQPushConsumer("sendEmail" + MQ.CONSUMER_POSTFIX);
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
         consumer.subscribe(MQ.SEND_EMAIL_TOPIC, MQ.DREAM_EMAIL_TAG + " || " + MQ.BIRTHDAY_EMAIL_TAG + " || " + MQ.FORGET_PWD_EMAIL_TAG);
         consumer.setNamesrvAddr(this.nameServer);
